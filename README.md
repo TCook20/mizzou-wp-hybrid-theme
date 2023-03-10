@@ -27,9 +27,6 @@ Table of Contents
 -   Post Types
     -   Posts: Used to populate news stories
     -   Pages
-    -   Staff
--   Custom Taxonomy
-    -   Staff Type
 -   ACF Options Pages
     -   Themes Settings: Restricted to Site Admins
     -   Footer: Contact information, footer theme
