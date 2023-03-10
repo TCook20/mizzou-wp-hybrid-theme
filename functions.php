@@ -3,7 +3,7 @@
  * Functions and Definitions
  *
  * @package WordPress
- * @subpackage Base Theme
+ * @subpackage Mizzou Base Theme
  * @category theme
  * @category functions
  * @category Timber
@@ -11,6 +11,11 @@
  * @copyright 2022 Curators of the University of Missouri
  */
 
+/**
+ * If you are installing Timber as a Composer dependency in your theme, you'll need this block
+ * to load your dependencies and initialize Timber. If you are using Timber via the WordPress.org
+ * plug-in, you can safely delete this block.
+ */
 // Timber is required: http://upstatement.com/timber.
 if ( ! class_exists( 'Timber' ) ) {
 	add_action(
@@ -19,11 +24,12 @@ if ( ! class_exists( 'Timber' ) ) {
 			printf( '<div class="error"><p>Timber not activated. Make sure you <a href="%s">activate the Mizzou Blocks plugin</a>.</p></div>', esc_url( admin_url( 'plugins.php#mizzou-blocks' ) ) );
 		}
 	);
+
 	return;
 }
 
 /**
- * We're going to configure our theme inside of a subclass of Timber\Site
+ * We're going to configure our theme inside of a subclass of MizzouBlocks
  * You can move this to its own file and include here via php's include("MySite.php")
  */
 class StandardMizzouSite extends MizzouBlocks {
@@ -74,18 +80,38 @@ class StandardMizzouSite extends MizzouBlocks {
 		remove_action( 'wp_head', 'feed_links_extra', 3 );
 		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+		// add_action( 'wp_head', array( $this, 'customMizHead' ) );
+		// add_action( 'wp_head', array( $this, 'mizHeadOpenGraph' ) );
+		// add_action( 'wp_head', array( $this, 'mizHeadTwitter' ) );
+		// add_action( 'wp_head', array( $this, 'mizHeadGTM' ) );
+		// add_action( 'wp_head', array( $this, 'mizHeadGCSE' ) );
+		// add_action( 'wp_head', array( $this, 'mizHeadScripts' ) );
 
-		// Add HTML5 support for gallery and caption shortcodes.
-		add_theme_support( 'html5', array( 'gallery', 'caption' ) );
+		add_action(
+			'after_setup_theme',
+			function () {
+				// Add HTML5 support for gallery and caption shortcodes.
+				add_theme_support( 'html5', array( 'gallery', 'caption', 'style', 'script' ) );
 
-		// Add Responsive Embeds.
-		add_theme_support( 'responsive-embeds' );
+				// Add Responsive Embeds.
+				add_theme_support( 'responsive-embeds' );
 
-		// Add menu support.
-		add_theme_support( 'menus' );
+				// Add menu support.
+				add_theme_support( 'menus' );
 
-		// Add post thumbnail support and set size.
-		add_theme_support( 'post-thumbnails' );
+				// Add post thumbnail support and set size.
+				add_theme_support( 'post-thumbnails' );
+
+				// Theme Supports.
+				add_theme_support( 'automatic-feed-links' );
+				add_theme_support( 'block-templates' );
+				add_theme_support( 'editor-styles' );
+				add_theme_support( 'wp-block-styles' );
+			}
+		);
+
+		// Add Starter Pages.
+		add_action( 'after_switch_theme', array( $this, 'mizStarterPages' ) );
 
 		// Twig additions.
 		add_filter( 'timber/twig', array( $this, 'twigAdditions' ) );
@@ -110,51 +136,53 @@ class StandardMizzouSite extends MizzouBlocks {
 			}
 		);
 
-		// Modify Tiny_MCE init.
-		add_filter( 'tiny_mce_before_init', array( $this, 'customFormatTinyMCE' ) );
+		// Register Scripts and Styles.
+		add_action(
+			'init',
+			function () {
+				$theme      = wp_get_theme( 'mu-hybrid-base' );
+				$ds_version = '3.2';
 
-		// Enqueue scripts and styling.
+				// Register Styles.
+				wp_register_style( 'mizDS-fonts', get_template_directory_uri() . '/assets/css/miz-fonts.css', null, $ds_version );
+				wp_register_style( 'mizDS-base', get_template_directory_uri() . '/assets/css/miz.css', null, $ds_version );
+				wp_register_style( 'mizDS-brand', get_template_directory_uri() . '/assets/css/miz-brand.css', 'mizDS-base', $ds_version );
+				wp_register_style( 'miz-theme', get_template_directory_uri() . '/style.css', null, $theme->get( 'Version' ) );
+				// wp_enqueue_style( 'miz-light', get_template_directory_uri() . '/assets/css/light.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: no-preference), (prefers-color-scheme: light)' );
+				// wp_enqueue_style( 'miz-dark', get_template_directory_uri() . '/assets/css/dark.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: dark)' );
+
+				// Register Scripts.
+				wp_register_script( 'svg4everybody', 'https://jonneal.dev/svg4everybody/svg4everybody.min.js', array(), $theme->get( 'Version' ), false );
+				wp_register_script( 'dropdownJS', get_template_directory_uri() . '/assets/scripts/dropdown.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'expandJS', get_template_directory_uri() . '/assets/scripts/expand.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'primaryNavJS', get_template_directory_uri() . '/assets/scripts/primaryNavigation.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'toggleJS', get_template_directory_uri() . '/assets/scripts/toggle.js', array(), $theme->get( 'Version' ), true );
+			}
+		);
+
+		/* Enqueue Styling and Scripts */
 		add_action(
 			'wp_enqueue_scripts',
 			function () {
-				$theme = wp_get_theme( 'mu-hybrid-base' );
+				wp_enqueue_style( 'miz-theme' );
+				wp_enqueue_style( 'mizDS-base' );
+				wp_enqueue_style( 'mizDS-brand' );
 
-				// Bootstrap.
-				$bootstrap_version = '4.6.0';
-				if ( get_field( 'bs_css', 'option' ) ) {
-					wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@' . $bootstrap_version . '/dist/css/bootstrap.min.css', null, $bootstrap_version, null );
-				}
-				if ( get_field( 'bs_js', 'option' ) ) {
-					wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@' . $bootstrap_version . '/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), $bootstrap_version, true );
-				}
-
-				// CSS.
-				wp_enqueue_style( 'material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', null, null );
-				wp_enqueue_style( 'mizDS-fonts', get_template_directory_uri() . '/assets/css/miz-fonts.css', null, $theme->get( 'Version' ) );
-				wp_enqueue_style( 'mizDS-base', get_template_directory_uri() . '/assets/css/miz.css', null, $theme->get( 'Version' ) );
-				wp_enqueue_style( 'mizDS-brand', get_template_directory_uri() . '/assets/css/miz-brand.css', null, $theme->get( 'Version' ) );
-				wp_enqueue_style( 'hybrid-base', get_template_directory_uri() . '/style.css', null, $theme->get( 'Version' ) );
-				// wp_enqueue_style( 'hybrid-light', get_template_directory_uri() . '/assets/css/light.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: no-preference), (prefers-color-scheme: light)' );
-				// wp_enqueue_style( 'hybrid-dark', get_template_directory_uri() . '/assets/css/dark.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: dark)' );
-
-				// Scripts.
-				wp_enqueue_script( 'hybrid-base', get_template_directory_uri() . '/assets/js/script.js', null, $theme->get( 'Version' ), true );
-				wp_enqueue_script( 'expandJS', get_template_directory_uri() . '/assets/js/expand.js', array(), $theme->get( 'Version' ), true );
-				wp_enqueue_script( 'primaryNavJS', get_template_directory_uri() . '/assets/js/primaryNavigation.js', array(), $theme->get( 'Version' ), true );
+				wp_enqueue_script( 'svg4everybody' );
+				wp_enqueue_script( 'svg', 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js', array(), '2.7.1', false );
 			}
 		);
 
 		// Add Editor Styles.
-		add_theme_support( 'editor-styles' );
 		add_editor_style( '/assets/css/miz.css' );
 		add_editor_style( '/assets/css/miz-brand.css' );
 
 		// Remove emoji support.
 		add_action( 'init', array( $this, 'disableEmoji' ) );
-		add_filter( 'tiny_mce_plugins', array( $this, 'disableTinyMCEEmoji' ) );
 
 		// Setup shortcodes.
 		add_shortcode( 'home_url', array( $this, 'homeURLShortCode' ) );
+		add_shortcode( 'menu', array( $this, 'menuShortCode' ) );
 
 		// Add SVG to mime types.
 		add_filter( 'upload_mimes', array( $this, 'customMimeTypes' ) );
@@ -182,49 +210,94 @@ class StandardMizzouSite extends MizzouBlocks {
 			2
 		);
 
-		// Set allowed blocks.
+		/**
+		 * Add object, embed and iframe to list of allowed html elements in posts
+		 *
+		 * @param array $ary_allowed_post_tags list of allowed html elements and attributes
+		 * @param string $str_context The context for which to retrieve tags. post|strip|data|entities|user_description|pre_user_description
+		 * @return array aryAllowedposttags adjusted list of allowed html elements and attributes
+		 */
 		add_filter(
-			'allowed_block_types_all',
-			function () {
-				$allowed_block_types = array( 'core/block', 'core/audio', 'core/code', 'core/file', 'core/freeform', 'core/group', 'core/heading', 'core/html', 'core/image', 'core/list', 'core/media-text', 'core/paragraph', 'core/quote', 'core/shortcode', 'core/table', 'core/embed', 'core-embed/facebook', 'core-embed/instagram', 'core-embed/twitter', 'core-embed/vimeo', 'core-embed/youtube' );
+			'wp_kses_allowed_html',
+			function ( $ary_allowed_post_tags, $str_context ) {
+				if ( 'post' === $str_context ) {
+					// Adjust allowed post tags to allow objects/embeds.
+					$ary_allowed_post_tags['object'] = array(
+						'height' => array(),
+						'width'  => array(),
+					);
 
-				return $allowed_block_types;
+					$ary_allowed_post_tags['param'] = array(
+						'name'  => array(),
+						'value' => array(),
+					);
+
+					$ary_allowed_post_tags['embed'] = array(
+						'src'               => array(),
+						'type'              => array(),
+						'allowfullscreen'   => array(),
+						'allowscriptaccess' => array(),
+						'height'            => array(),
+						'width'             => array(),
+					);
+
+					$ary_allowed_post_tags['iframe'] = array(
+						'src'               => array(),
+						'scrolling'         => array(),
+						'allowfullscreen'   => array(),
+						'allowscriptaccess' => array(),
+						'height'            => array(),
+						'width'             => array(),
+					);
+				}
+
+				return $ary_allowed_post_tags;
 			},
 			10,
 			2
 		);
 
+		/**
+		 * Block Editor Overrides and Settings
+		*/
 		add_action(
 			'after_setup_theme',
 			function () {
+				add_filter( 'should_load_remote_block_patterns', '__return_false' );
+
+				add_filter(
+					'body_class',
+					function ( $classes ) {
+						$classes[] = 'miz-body';
+						return $classes;
+					}
+				);
+
+				// Removes the default Site Icon as the favicon.
+				remove_action( 'wp_head', 'wp_site_icon', 99 );
+
+				// Remove Core Block Patterns.
 				remove_theme_support( 'core-block-patterns' );
+
+				// Only load block styles of used blocks.
+				add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 			}
 		);
 
+		// Enqueue Editor Scripts/Styles.
 		add_action(
 			'enqueue_block_editor_assets',
 			function () {
-				$theme = wp_get_theme();
-				wp_enqueue_script( 'mizzou-deny-list-blocks', get_template_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), $theme->get( 'Version' ), true );
+				$theme = wp_get_theme( 'mizzou-block-theme' );
 
-				$ds_version = '2.2.0';
-				wp_enqueue_style( 'mizDS-base', get_template_directory_uri() . '/assets/css/miz.css', null, $ds_version );
-				wp_enqueue_style( 'mizDS-brand', get_template_directory_uri() . '/assets/css/miz-brand.css', null, $ds_version );
+				wp_enqueue_style( 'miz-theme' );
+				wp_enqueue_style( 'mizDS-base' );
+				wp_enqueue_style( 'mizDS-brand' );
 			}
 		);
 
-		// Only load block styles of used blocks.
-		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
-
-		if ( class_exists( 'ACF' ) ) {
-			require_once __DIR__ . '/inc/acf/acf-ds-layer-definitions.php';
-			require_once __DIR__ . '/inc/acf/theme-settings.php';
-
-			// ACF is installed and active so we need to remove the disabling of default custom fields.
-			add_filter( 'acf/settings/remove_wp_meta_box', '__return_false' );
-
-			add_filter( 'acf/fields/wysiwyg/toolbars', array( $this, 'acfCustomFormatTinyMCE' ) );
-		}
+		// Set allowed blocks.
+		add_filter( 'allowed_block_types_all', array( $this, 'mizAllowedBlocks' ), 10, 2 );
 
 		// Last User Login.
 		add_action(
@@ -240,6 +313,37 @@ class StandardMizzouSite extends MizzouBlocks {
 			}
 		);
 
+		// Block Patterns.
+		add_action( 'init', array( $this, 'mizCustomPatternCategories' ), 9 );
+
+		// ACF Settings.
+		add_action(
+			'init',
+			function () {
+				$str_ds            = DIRECTORY_SEPARATOR;
+				$str_parent        = get_template_directory();
+				$str_file_location = $str_ds . 'inc' . $str_ds . 'acf' . $str_ds;
+				$str_filename      = 'acf-settings.php';
+				$str_file          = $str_parent . $str_file_location . $str_filename;
+
+				require_once $str_file;
+			}
+		);
+
+		// TinyMCE Settings.
+		add_action(
+			'init',
+			function () {
+				$str_ds            = DIRECTORY_SEPARATOR;
+				$str_parent        = get_template_directory();
+				$str_file_location = $str_ds . 'inc' . $str_ds;
+				$str_filename      = 'tinymce.php';
+				$str_file          = $str_parent . $str_file_location . $str_filename;
+
+				require_once $str_file;
+			}
+		);
+
 		// Continue on.
 		// parent::__construct();
 	}
@@ -248,24 +352,24 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Setup configuration variables for site
 	 *
 	 * @param array $ary_context Parent context variable.
-	 * @return Updated $ary_context
+	 * @return Updated $ary_context.
 	 */
 	public function siteConfiguration( $ary_context ) {
 		// Media Location.
 		$upload_dir                     = wp_upload_dir();
-		$ary_context['site']->media_url = $upload_dir['baseurl'] . '/';
+		$ary_context['site']->mediaUrl = $upload_dir['baseurl'] . '/';
 
 		// Map existing Timber options to aliases.
-		$ary_context['site']->asset_url        = $ary_context['site']->theme->link . '/';
-		// $ary_context['site']->parent_asset_url = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';
-		$ary_context['site']->base_url         = $ary_context['site']->url . '/';
+		$ary_context['site']->assetUrl = $ary_context['site']->theme->link . '/';
+		// $ary_context['site']->ParentThemeURL = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';ParentThemeURL
+		$ary_context['site']->baseURL = $ary_context['site']->url . '/';
 
 		// Standard configuration options.
 		$ary_context['site']->detected_hostname      = $_SERVER['HTTP_HOST'];
-		$ary_context['site']->search_action_path     = '';
+		$ary_context['site']->search_action_path     = 'search';
 		$ary_context['site']->search_enabled         = true;
-		$ary_context['site']->search_field_name      = 's';
-		$ary_context['site']->search_form_field_name = 's';
+		$ary_context['site']->search_field_name      = 'q';
+		$ary_context['site']->search_form_field_name = 'q';
 		$ary_context['site']->viewport               = 'width=device-width, initial-scale=1.0, shrink-to-fit=no';
 		$ary_context['site']->year                   = date( 'Y' );
 
@@ -293,11 +397,12 @@ class StandardMizzouSite extends MizzouBlocks {
 		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 		remove_meta_box( 'health_check_status', 'dashboard', 'normal' );
+		// remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
 		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 	}
 
 	/**
-	 * Custom Post Types
+	 * Change default Post name to News
 	 */
 	public function customPostsName() {
 		$get_post_type              = get_post_type_object( 'post' );
@@ -338,10 +443,362 @@ class StandardMizzouSite extends MizzouBlocks {
 	}
 
 	/**
-	 * Show Meta Boxes
+	 * Starter Content
+	 */
+	public function mizStarterPages() {
+		$starter_pages = array(
+			'home'     => array(
+				'post_type'    => 'page',
+				'post_name'    => 'home',
+				'post_title'   => 'Home',
+				'menu_order'   => -1,
+				'post_content' => '',
+			),
+			'calendar' => array(
+				'post_type'    => 'page',
+				'post_title'   => 'Calendar',
+				'menu_order'   => 0,
+				'post_content' => '<!-- wp:mizzou/events-collection {"count":10,"term":"research"} /-->',
+			),
+			'news'     => array(
+				'post_type'    => 'page',
+				'post_name'    => 'news',
+				'post_title'   => 'News',
+				'menu_order'   => 0,
+				'post_content' => '',
+			),
+			'search'   => array(
+				'post_type'    => 'page',
+				'post_name'    => 'search',
+				'post_title'   => 'Search',
+				'menu_order'   => 0,
+				'post_content' => '<!-- wp:html --><gcse:search gname="sitesearch" queryParameterName="q"></gcse:search><!-- /wp:html -->',
+			),
+		);
+
+		foreach ( $starter_pages as $starter_page ) {
+			if ( is_null( get_page_by_title( $starter_page['post_title'], OBJECT, $starter_page['post_type'] ) ) ) {
+				$ary_page_params = array(
+					'post_title'     => $starter_page['post_title'],
+					'post_status'    => 'publish',
+					'post_type'      => $starter_page['post_type'],
+					'menu_order'     => $starter_page['menu_order'],
+					'comment_status' => 'closed',
+					'ping_status'    => 'closed',
+					'post_content'   => $starter_page['post_content'],
+				);
+
+				wp_insert_post( $ary_page_params );
+			}
+		}
+
+		$homepage = get_page_by_title( 'Home', OBJECT, 'page' );
+		if ( $homepage ) {
+			update_option( 'show_on_front', 'page' );
+			update_option( 'page_on_front', $homepage->ID );
+		}
+	}
+
+	/**
+	 * Set Allowed Blocks
 	 *
-	 * @param str $hidden Hidden Fields.
-	 * @param str $screen Editor Screen.
+	 * @param ary $allowed_block_types Array of allowed block types.
+	 * @return ary $allowed_block_types.
+	 */
+	public function mizAllowedBlocks( $allowed_block_types ) {
+		$wp_block = array( 'core/block' );
+
+		$text_blocks = array(
+			'core/code',
+			'core/column',
+			'core/freeform',
+			'core/heading',
+			'core/list',
+			'core/list-item',
+			'core/paragraph',
+			'core/preformatted',
+			'core/pullquote',
+			'core/quote',
+			'core/table',
+			'core/verse',
+		);
+
+		$media_blocks = array(
+			'core/audio',
+			'core/cover',
+			'core/file',
+			'core/gallery',
+			'core/image',
+			'core/media-text',
+			'core/video',
+		);
+
+		$design_blocks = array(
+			'core/columns',
+			'core/group',
+			'core/home-link',
+			'core/navigation-link',
+			'core/navigation-submenu',
+			'core/separator',
+			'core/spacer',
+			// 'core/more', 'core/nextpage',
+		);
+
+		$widget_blocks = array(
+			'core/archives',
+			'core/calendar',
+			'core/categories',
+			'core/html',
+			'core/latest-posts',
+			'core/page-list',
+			'core/rss',
+			// 'core/search',
+			'core/shortcode',
+			'core/social-link',
+			'core/social-links',
+			'core/tag-cloud',
+		);
+
+		$embed_blocks = array(
+			'core/embed',
+			'core-embed/facebook',
+			'core-embed/instagram',
+			'core-embed/vimeo',
+			'core-embed/youtube',
+		);
+
+		$theme_blocks = array(
+			'core/avatar',
+			'core/loginout',
+			'core/navigation',
+			'core/pattern',
+			'core/post-author',
+			'core/post-author-biography',
+			'core/post-author-name',
+			'core/post-content',
+			'core/post-date',
+			'core/post-excerpt',
+			'core/post-featured-image',
+			'core/post-navigation-link',
+			'core/post-template',
+			'core/post-terms',
+			'core/post-title',
+			'core/query',
+			'core/query-no-results',
+			'core/query-pagination',
+			'core/query-pagination-next',
+			'core/query-pagination-numbers',
+			'core/query-pagination-previous',
+			'core/query-title',
+			'core/read-more',
+			'core/site-logo',
+			'core/site-tagline',
+			'core/site-title',
+			'core/template-part',
+			'core/term-description',
+			// 'core/post-comments-count', 'core/post-comments-form', 'core/post-comments-link', 'core/comment-author-name', 'core/comment-content', 'core/comment-date', 'core/comment-edit-link',
+			// 'core/comment-reply-link', 'core/comments-query-loop', 'core/comments-pagination', 'core/comments-pagination-next', 'core/comments-pagination-numbers', 'core/comments-pagination-previous', 'core/comments-title',
+		);
+
+		return array_unique( array_merge( $wp_block, $text_blocks, $media_blocks, $design_blocks, $widget_blocks, $embed_blocks, $theme_blocks ) );
+	}
+
+	/**
+	 * Set up Custom Head
+	 */
+	public function customMizHead() {
+		// Add favicon.
+		echo ' <!-- Favicon -->' . "<link rel='shortcut icon' href='" . get_template_directory_uri() . "/assets/images/favicons/favicon.ico' />\n";
+
+		// Add in Meta Icons.
+		echo '<!-- Apple Touch Icons -->' .
+		"<link href='" . get_template_directory_uri() . "/assets/images/favicons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'/>\n" .
+		"<meta content='' name='apple-mobile-web-app-title'/>\n" .
+		"<link rel='mask-icon' href='" . get_template_directory_uri() . "/assets/images/favicons/mu-safari-icon.svg' color='black'>";
+
+		echo '<!-- Microsoft Windows 8+ Tiles -->' .
+		"<meta content='' name='application-name'/>\n" .
+		"<meta content='" . get_template_directory_uri() . "/assets/images/favicons/apple-touch-icon.png' name='msapplication-TileImage'/>\n" .
+		"<meta content='#F1B82D' name='msapplication-TileColor'/>";
+
+		// Page Information.
+		if ( is_single() || is_page() ) {
+			if ( get_the_excerpt() ) {
+				echo "<meta name='description' content='" . htmlspecialchars( get_the_excerpt() ) . "'>";
+			} else {
+				echo "<meta name='description' content='" . htmlspecialchars( get_bloginfo( 'description' ) ) . "'>";
+			}
+		} elseif ( is_archive() ) {
+			if ( get_the_archive_description() ) {
+				echo "<meta name='description' content='" . htmlspecialchars( get_the_archive_description() ) . "'>";
+			}
+		} else {
+			echo "<meta name='description' content='" . htmlspecialchars( get_bloginfo( 'description' ) ) . "'>";
+		}
+	}
+
+	/**
+	 * Add Open Graph Metadata to Head
+	 */
+	public function mizHeadOpenGraph() {
+		// Open Graph.
+		echo '<!-- Open Graph -->';
+		echo "<meta property='og:site_name' content='" . htmlspecialchars( get_bloginfo( 'name' ) ) . "' />";
+		if ( is_single() || is_page() ) {
+			echo "<meta property='og:url' content='" . get_the_permalink() . "' />";
+			echo "<meta property='og:title' content='" . htmlspecialchars( get_the_title() ) . "' />";
+
+			if ( get_the_excerpt() ) {
+				echo "<meta property='og:description' content='" . htmlspecialchars( get_the_excerpt() ) . "' />";
+			}
+		} elseif ( is_home() ) {
+			echo "<meta property='og:title' content='" . htmlspecialchars( get_queried_object()->post_title ) . "' />";
+			echo "<meta property='og:description' content='" . htmlspecialchars( get_queried_object()->post_excerpt ) . "' />";
+		} elseif ( is_archive() ) {
+			echo "<meta property='og:url' content='" . htmlspecialchars( get_post_type_archive_link( get_queried_object()->name ) ) . "' />";
+			echo "<meta property='og:title' content='" . htmlspecialchars( get_queried_object()->labels->name ?? get_queried_object()->name ) . "' />";
+
+			if ( get_the_archive_description() ) {
+				echo "<meta property='og:description' content='" . htmlspecialchars( get_the_archive_description() ) . "' />";
+			}
+		}
+
+		if ( get_the_post_thumbnail() ) {
+			echo "<meta property='og:image:url' content='" . get_the_post_thumbnail_url( get_the_ID(), 'full' ) . "' />";
+			echo "<meta property='og:image:alt' content='" . get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) . "' />";
+		} elseif ( get_option( 'options_social_media_image_default' ) ) {
+			echo "<meta property='og:image:url' content='" . wp_get_attachment_image_src( get_option( 'options_social_media_image_default' ), 'full' )[0] . "' />";
+			echo "<meta property='og:image:alt' content='" . get_post_meta( get_option( 'options_social_media_image_default' ), '_wp_attachment_image_alt', true ) . "' />";
+		} else {
+			echo "<meta property='og:image:url' content='" . get_template_directory_uri() . "/assets/images/social/twitter/shared-image.png' />";
+			echo "<meta property='og:image:alt' content='A University of Missouri website' />";
+		}
+		echo '<!-- End Open Graph -->';
+	}
+
+	/**
+	 * Add Twitter Metadata to Head
+	 */
+	public function mizHeadTwitter() {
+		echo '<!-- Twitter Cards -->';
+		echo "<meta property='twitter:card' content='summary' />";
+		echo "<meta property='twitter:site' content='@Mizzou' />";
+		if ( is_single() || is_page() ) {
+			echo "<meta property='twitter:title' content='" . htmlspecialchars( get_the_title() ) . "' />";
+
+			if ( get_the_excerpt() ) {
+				echo "<meta property='twitter:description' content='" . htmlspecialchars( get_the_excerpt() ) . "' />";
+			}
+		} elseif ( is_home() ) {
+			echo "<meta property='twitter:title' content='" . htmlspecialchars( get_queried_object()->post_title ) . "' />";
+			echo "<meta property='twitter:description' content='" . htmlspecialchars( get_queried_object()->post_excerpt ) . "' />";
+		} elseif ( is_archive() ) {
+			echo "<meta property='twitter:title' content='" . htmlspecialchars( get_queried_object()->labels->name ?? get_queried_object()->name ) . "' />";
+
+			if ( get_the_archive_description() ) {
+				echo "<meta property='twitter:description' content='" . htmlspecialchars( get_the_archive_description() ) . "' />";
+			}
+		}
+
+		if ( get_the_post_thumbnail() ) {
+			echo "<meta property='twitter:image' content='" . get_the_post_thumbnail_url( get_the_ID(), 'full' ) . "' />";
+			echo "<meta property='twitter:image:alt' content='" . get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) . "' />";
+		} elseif ( get_option( 'options_social_media_image_default' ) ) {
+			echo "<meta property='twitter:image' content='" . wp_get_attachment_image_src( get_option( 'options_social_media_image_default' ), 'full' )[0] . "' />";
+			echo "<meta property='twitter:image:alt' content='" . get_post_meta( get_option( 'options_social_media_image_default' ), '_wp_attachment_image_alt', true ) . "' />";
+		} else {
+			echo "<meta property='twitter:image' content='" . get_template_directory_uri() . "/assets/images/social/twitter/shared-image.png' />";
+			echo "<meta property='twitter:image:alt' content='A University of Missouri website' />";
+		}
+		echo '<!-- End Twitter Cards -->';
+	}
+
+	/**
+	 * Add Google Tag Manager to Head
+	 */
+	public function mizHeadGTM() {
+		if ( get_option( 'options_google_tag_manager' ) ) {
+			echo '<!-- Google Tag Manager -->' . "\n" .
+			"<script>(function(w,d,s,l,i) {w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','" . get_option( 'options_google_tag_manager' ) . "' );</script>\n" .
+			'<!-- End Google Tag Manager -->';
+		}
+	}
+
+	/**
+	 * Add Google Custom Search to Head
+	 */
+	public function mizHeadGCSE() {
+		if ( get_option( 'options_google_cse_id' ) && ( is_search() || is_page_template( 'template-search' ) ) ) {
+			echo '<!-- Google Custom Search -->' . "\n" .
+			"<script>
+                ( function () {
+                    var cx = '" . get_option( 'options_google_cse_id' ) . "';
+                    var gcse = document.createElement( 'script' );
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName( 'script' )[ 0 ];
+                    s.parentNode.insertBefore( gcse, s );
+                } )();
+            </script>" . "\n" .
+			'<!-- End Google Custom Search -->';
+		}
+	}
+
+	/**
+	 * Add Custom JavaScript to Head
+	 */
+	public function mizHeadScripts() {
+		// SVG.
+		echo '<script>svg4everybody();</script>' . "\n";
+	}
+
+	/**
+	 * Register Custom Categories for Block Patterns
+	 */
+	public function mizCustomPatternCategories() {
+		$block_pattern_categories = array(
+			'footer'  => array(
+				'label'         => __( 'Footer', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+			'general' => array(
+				'label'         => __( 'General', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+			'header'  => array(
+				'label'         => __( 'Header', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+			'layout'  => array(
+				'label'         => __( 'Layout', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+			'layer'   => array(
+				'label'         => __( 'Layer', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+			'page'    => array(
+				'label'         => __( 'Page', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+			'query'   => array(
+				'label'         => __( 'Query', 'mu-hybrid-base' ),
+				'categoryTypes' => array( 'mizzou' ),
+			),
+		);
+
+		foreach ( $block_pattern_categories as $name => $properties ) {
+			register_block_pattern_category( $name, $properties );
+		}
+	}
+
+	/**
+	 * Show Excerpt
+	 *
+	 * @param ary $hidden List of hidden fields.
+	 * @param ary $screen List of screens.
+	 * @return Updated $hidden.
 	 */
 	public function show_hidden_meta_boxes( $hidden, $screen ) {
 		if ( 'post' === $screen->base ) {
@@ -370,8 +827,8 @@ class StandardMizzouSite extends MizzouBlocks {
 	 *
 	 * @param string $str_menu_name Name of menu.
 	 * @return array Associative array with the following properties:
-	 *      - (string) name Name of the menu or empty string
-	 *      - (array) items Collection of TimberMenuItem objects or empty array
+	 *      - (string) name Name of the menu or empty string.
+	 *      - (array) items Collection of Timber\MenuItem objects or empty array.
 	 */
 	public static function getMenu( $str_menu_name ) {
 		$str_menu_title = '';
@@ -397,7 +854,7 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Adds functions or extensions to Twig
 	 *
 	 * @param object $obj_twig Existing Twig object.
-	 * @return object Updated Twig object
+	 * @return object Updated Twig object.
 	 */
 	public function twigAdditions( $obj_twig ) {
 		$obj_twig->addExtension( new Twig\Extension\StringLoaderExtension() );
@@ -414,7 +871,7 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Creates an AP-style date
 	 *
 	 * @param string $str_date Date string.
-	 * @return string Date in AP format
+	 * @return string Date in AP format.
 	 */
 	public function dateToAPStyle( $str_date ) {
 		$str_ap_style_date = '';
@@ -436,7 +893,7 @@ class StandardMizzouSite extends MizzouBlocks {
 	/**
 	 * Flattens a nav item array so it isn't hierarchical
 	 *
-	 * @param array   $ary_menu Associative array of menu items (TimberMenu objects).
+	 * @param array   $ary_menu Associative array of menu items (Timber\Menu objects).
 	 * @param boolean $bool_include_child_links (Optional) Whether to recursively search child links. Defaults to true.
 	 * @return array Menu items without hierarchy.
 	 */
@@ -463,7 +920,7 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Creates a list of URLs used by a menu link and any child links it might have, with infinite depth
 	 *
 	 * @param obj $obj_menu_item Menu item.
-	 * @return array List of URLs
+	 * @return array List of URLs.
 	 */
 	public function menuItemLinkList( $obj_menu_item ) {
 		$ary_link_list = array();
@@ -487,7 +944,7 @@ class StandardMizzouSite extends MizzouBlocks {
 	/**
 	 * Determine previous and next page in navigation
 	 *
-	 * @param array   $ary_menu Collection of TimberMenuItem objects.
+	 * @param array   $ary_menu Collection of Timber\MenuItem objects.
 	 * @param string  $str_current_page Current page url. $ary_menu will be searched for this to determine the previous/next link.
 	 * @param boolean $bool_include_child_links (Optional) Whether to search child links too. Defaults to true.
 	 * @return array With two keys, 'previous' and 'next', containing the menu item array for each.
@@ -527,11 +984,11 @@ class StandardMizzouSite extends MizzouBlocks {
 	/**
 	 * Checks to see if a given URL is present in a menu
 	 *
-	 * @param ary $ary_menu Menu.
-	 * @param str $str_url URL to check.
+	 * @param obj $ary_menu Menu.
+	 * @param str $st_url URL to check.
 	 * @return boolean Whether or not the URL is in the menu.
 	 */
-	public function menuUrlInLinkList( $ary_menu, $str_url ) {
+	public function menuUrlInLinkList( $ary_menu, $st_url ) {
 		$ary_link_list = array();
 
 		foreach ( $ary_menu as $obj_menu_item ) {
@@ -540,306 +997,8 @@ class StandardMizzouSite extends MizzouBlocks {
 
 		$ary_link_list = array_unique( $ary_link_list );
 
-		// Check to see if $str_url is in the list.
-		return in_array( $str_url, $ary_link_list );
-	}
-
-	/**
-	 * Modifications to the TinyMCE editor
-	 *
-	 * @param ary $ary_tiny_mce A list of all TinyMCE settings.
-	 */
-	public function customFormatTinyMCE( $ary_tiny_mce ) {
-		// Setup custom classes.
-		$ary_custom_formats = array(
-			array(
-				'title' => 'Alerts',
-				'items' => array(
-					array(
-						'title'    => 'Error',
-						'selector' => 'p',
-						'classes'  => 'alert alert--error',
-					),
-					array(
-						'title'    => 'Success',
-						'selector' => 'p',
-						'classes'  => 'alert alert--success',
-					),
-					array(
-						'title'    => 'Warning',
-						'selector' => 'p',
-						'classes'  => 'alert alert--warning',
-					),
-					array(
-						'title'    => 'Information',
-						'selector' => 'p',
-						'classes'  => 'alert alert--info',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Buttons',
-				'items' => array(
-					array(
-						'title'    => 'Small Button',
-						'selector' => 'a, button',
-						'classes'  => 'miz-button miz-button--small',
-					),
-					array(
-						'title'    => 'Large Button',
-						'selector' => 'a, button',
-						'classes'  => 'miz-button miz-button--lg',
-					),
-					array(
-						'title'    => 'Primary Button',
-						'selector' => 'a, button',
-						'classes'  => 'miz-button miz-button--primary',
-					),
-					array(
-						'title'    => 'Secondary Button',
-						'selector' => 'a, button',
-						'classes'  => 'miz-button miz-button--secondary',
-					),
-					array(
-						'title'    => 'Ghost Button',
-						'selector' => 'a, button',
-						'classes'  => 'miz-button miz-button--ghost',
-					),
-					array(
-						'title'    => 'Gold Ghost Button',
-						'selector' => 'a, button',
-						'classes'  => 'miz-button miz-button--ghost---gold',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Heading Emulation',
-				'items' => array(
-					array(
-						'title'    => 'Like Heading 1',
-						'selector' => 'h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'like-h1',
-					),
-					array(
-						'title'    => 'Like Heading 2',
-						'selector' => 'h1, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'like-h2',
-					),
-					array(
-						'title'    => 'Like Heading 3',
-						'selector' => 'h1, h2, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'like-h3',
-					),
-					array(
-						'title'    => 'Like Heading 4',
-						'selector' => 'h1, h2, h3, h5, h6, p, li, th, td, div',
-						'classes'  => 'like-h4',
-					),
-					array(
-						'title'    => 'Like Heading 5',
-						'selector' => 'h1, h2, h3, h4, h6, p, li, th, td, div',
-						'classes'  => 'like-h5',
-					),
-					array(
-						'title'    => 'Like Heading 6',
-						'selector' => 'h1, h2, h3, h4, h5, p, li, th, td, div',
-						'classes'  => 'like-h6',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Horizontal Rules',
-				'items' => array(
-					array(
-						'title'    => 'Dashed',
-						'selector' => 'hr',
-						'classes'  => 'hr--dashed',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Indent',
-				'items' => array(
-					array(
-						'title'    => 'Indent',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'indent',
-					),
-					array(
-						'title'    => '2x Indent',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'indent-2x',
-					),
-					array(
-						'title'    => 'Hanging Indent',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'hanging-indent',
-					),
-					array(
-						'title'    => '2x Hanging Indent',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'hanging-indent-2x',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Lists',
-				'items' => array(
-					array(
-						'title'    => 'Spaced',
-						'selector' => 'ul, ol',
-						'classes'  => 'list--spaced',
-					),
-					array(
-						'title'    => 'Unordered - Square',
-						'selector' => 'ul',
-						'classes'  => 'list--square',
-					),
-					array(
-						'title'    => 'Unordered - Disc',
-						'selector' => 'ul',
-						'classes'  => 'list--disc',
-					),
-					array(
-						'title'    => 'Ordered - Decimal (1.)',
-						'selector' => 'ol',
-						'classes'  => 'list--decimal',
-					),
-					array(
-						'title'    => 'Ordered - Lowercase Alpha (a.)',
-						'selector' => 'ol',
-						'classes'  => 'list--lower-alpha',
-					),
-					array(
-						'title'    => 'Ordered - Uppercase Alpha (A.)',
-						'selector' => 'ol',
-						'classes'  => 'list--upper-alpha',
-					),
-					array(
-						'title'    => 'Ordered - Lowercase Roman (i.)',
-						'selector' => 'ol',
-						'classes'  => 'list--lower-roman',
-					),
-					array(
-						'title'    => 'Ordered - Uppercase Roman (I.)',
-						'selector' => 'ol',
-						'classes'  => 'list--upper-roman',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Margins',
-				'items' => array(
-					array(
-						'title'    => 'No Margin',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'no-margin',
-					),
-					array(
-						'title'    => 'Standard Margin',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'margin',
-					),
-					array(
-						'title'    => '2x Margin',
-						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
-						'classes'  => 'margin-2x',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Quotes',
-				'items' => array(
-					array(
-						'title'    => 'Attribution',
-						'selector' => 'p',
-						'classes'  => 'blockquote__attribution',
-					),
-					array(
-						'title'    => 'Hanging Double Quote',
-						'selector' => 'p',
-						'classes'  => 'hanging-double-quote',
-					),
-					array(
-						'title'    => 'Hanging Single Quote',
-						'selector' => 'p',
-						'classes'  => 'hanging-quote',
-					),
-				),
-			),
-
-			array(
-				'title' => 'Text Styles',
-				'items' => array(
-					array(
-						'title'   => 'Bold (Appearance Only)',
-						'inline'  => 'span',
-						'classes' => 'miz-text--bold',
-					),
-					array(
-						'title'   => 'Italic (Appearance Only)',
-						'inline'  => 'span',
-						'classes' => 'miz-text--italic',
-					),
-					array(
-						'title'   => 'All Caps Text (Appearance Only)',
-						'inline'  => 'span',
-						'classes' => 'miz-text--transform-upper',
-					),
-					array(
-						'title'   => 'Small Caps Text (Appearance Only)',
-						'inline'  => 'span',
-						'classes' => 'miz-text--small-caps',
-					),
-					array(
-						'title'   => 'No Word Wrap',
-						'inline'  => 'span',
-						'classes' => 'no-break',
-					),
-					array(
-						'title'    => 'Material Icon',
-						'selector' => 'i',
-						'classes'  => 'miz-icon material-icons',
-					),
-				),
-			),
-		);
-
-		// Prevents formats dropdown from emulating the style each item represents.
-		$ary_tiny_mce['preview_styles'] = 'font-family font-size font-weight text-decoration text-transform background-color color';
-
-		// Insert styles, JSON encoded, into 'style_formats'.
-		$ary_tiny_mce['style_formats'] = json_encode( $ary_custom_formats );
-
-		// Fix block formats.
-		$ary_tiny_mce['block_formats'] = 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6';
-
-		// Customize toolbars.
-		$ary_tiny_mce['toolbar1']             = 'formatselect, styleselect, bold, italic, link, unlink, bullist, numlist, alignleft, aligncenter, alignright, alignjustify, blockquote, outdent, indent, hr, table, pastetext, removeformat, charmap, code, undo, redo, spellchecker, wp_fullscreen';
-		$ary_tiny_mce['toolbar2']             = '';
-		$ary_tiny_mce['wordpress_adv_hidden'] = false;
-
-		return $ary_tiny_mce;
-	}
-
-	/**
-	 * Enable modifications to the TinyMCE editor for ACF wysiwyg editors
-	 *
-	 * @param ary $ary_tiny_mce TinyMCE settings.
-	 */
-	public function acfCustomFormatTinyMCE( $ary_tiny_mce ) {
-		// Customize toolbars.
-		$ary_tiny_mce['Full'][1] = array( 'formatselect', 'styleselect', 'bold', 'italic', 'link', 'unlink', 'bullist', 'numlist', 'blockquote', 'outdent', 'indent', 'hr', 'table', 'pastetext', 'removeformat', 'charmap', 'code', 'undo', 'redo', 'spellchecker', 'wp_fullscreen' );
-		$ary_tiny_mce['Full'][2] = array();
-
-		return $ary_tiny_mce;
+		// Check to see if $st_url is in the list.
+		return in_array( $st_url, $ary_link_list );
 	}
 
 	/**
@@ -856,46 +1015,9 @@ class StandardMizzouSite extends MizzouBlocks {
 	}
 
 	/**
-	 * Remove emoji from TinyMCE
-	 *
-	 * @param array $ary_plugins Plugins list.
-	 * @return array Updated plugin list.
-	 */
-	public function disableTinyMCEEmoji( $ary_plugins ) {
-		return array_diff( $ary_plugins, array( 'wpemoji' ) );
-	}
-
-	/**
 	 * Setup custom taxonomies
 	 */
-	public function customTaxonomies() {
-		// Setup Staff Type taxonomy.
-		register_taxonomy(
-			'staff_type',
-			'staff',
-			array(
-				'labels'            => array(
-					'name'              => 'Staff Type',
-					'singular_name'     => 'Staff Type',
-					'all_items'         => 'All Staff Types',
-					'edit_item'         => 'Edit Staff Type',
-					'view_item'         => 'View Staff Type',
-					'update_item'       => 'Update Staff Type',
-					'add_new_item'      => 'Add New Staff Type',
-					'new_item_name'     => 'New Staff Type',
-					'parent_item'       => 'Parent Staff Type',
-					'parent_item_colon' => 'Parent Staff Type:',
-					'search_items'      => 'Search Staff Types',
-					'not_found'         => 'No Staff Type found.',
-				),
-				'hierarchical'      => true,
-				'show_admin_column' => true,
-				'show_ui'           => true,
-				'query_var'         => true,
-				'rewrite'           => true,
-			)
-		);
-	}
+	public function customTaxonomies() {}
 
 	/**
 	 * Setup custom post types
@@ -908,35 +1030,6 @@ class StandardMizzouSite extends MizzouBlocks {
 				return $response;
 			}
 		);
-
-		// Staff.
-		if ( ! get_option( 'options_disable_staff' ) ) {
-			register_post_type(
-				'staff',
-				array(
-					'labels'        => array(
-						'name'               => __( 'Staff' ),
-						'singular_name'      => __( 'Staff Member' ),
-						'add_new'            => _x( 'Add New', 'staff' ),
-						'add_new_item'       => __( 'Add New Staff Member' ),
-						'edit_item'          => __( 'Edit Staff Member' ),
-						'new_item'           => __( 'New Staff Member' ),
-						'view_item'          => __( 'View Staff Member' ),
-						'search_items'       => __( 'Search Staff Members' ),
-						'not_found'          => __( 'No staff members found' ),
-						'not_found_in_trash' => __( 'No staff members found in Trash' ),
-						'parent_item_colon'  => '',
-						'menu_name'          => 'Staff',
-					),
-					'public'        => true,
-					'has_archive'   => 'staff',
-					'show_in_rest'  => true,
-					'supports'      => array( 'title', 'editor', 'page-attributes', 'thumbnail', 'excerpt', 'author', 'revisions' ),
-					'menu_position' => 9,
-					'menu_icon'     => 'dashicons-groups',
-				)
-			);
-		}
 	}
 
 	/**
@@ -945,7 +1038,7 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Usage:
 	 * [home_url]
 	 *
-	 * @return string Home URL
+	 * @return string Home URL.
 	 */
 	public function homeURLShortCode() {
 		return get_bloginfo( 'url' );
@@ -995,10 +1088,11 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Setup custom sort for staff
 	 */
 	public function customStaffSort() {
-		$orderby_statement = "menu_order DESC, RIGHT(post_title, LOCATE(' ', REVERSE(post_title)) - 1) ASC";
+		$orderby_statement = "menu_order DESC, RIGHT(post_title, LOCATE( ' ', REVERSE(post_title)) - 1) ASC";
 		return $orderby_statement;
 	}
 }
+
 
 // Create object.
 new StandardMizzouSite();
