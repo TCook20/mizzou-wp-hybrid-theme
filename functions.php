@@ -241,7 +241,7 @@ class StandardMizzouSite extends MizzouBlocks {
 		);
 
 		// Continue on.
-		parent::__construct();
+		// parent::__construct();
 	}
 
 	/**
