@@ -20,13 +20,6 @@
 
 {% extends ['ds-base.twig'] %}
 
-{% set content_include_navigation = content_include_navigation|default(true) %}
-{% if option.primary_nav_color %}
-    {% set navigation_modifier_class = ('nav--primary-navigation nav--primary-navigation--' ~ option.primary_nav_color) %}
-{% else %}
-    {% set navigation_modifier_class = navigation_modifier_class|default('nav--primary-navigation') %}
-{% endif %}
-
 {% set bodyOptions = { 'html_id': page.body_id, 'html_class': page.body_class } %}
 
 {% set metaData = {
@@ -38,13 +31,13 @@
     'google': {
         'analytics': option.google_analytics,
         'cse': option.google_cse_id,
-        'tagManager': option.google_tag_manager,
+        'tagManager': option.google_tag_manager_id,
         'searchConsole': option.google_search_console
     },
     'icons': {
-        'color': option.site_icon_color,
-        'apple': option.apple_mask_icon_color,
-        'ms': option.ms_tile_color,
+        'color': option.site_icon_color ?? 'gold',
+        'apple': option.apple_mask_icon_color ?? 'black',
+        'ms': option.ms_tile_color ?? 'black',
         'sprite': metaData.url.asset ~ '/images/miz-sprite.svg'
     },
     'image': page.thumbnail,
