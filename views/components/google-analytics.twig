@@ -1,0 +1,27 @@
+{#
+/**
+ * Google Analytics
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - google_analytics_asset_url: (string) URL of asset directory (CSS, JavaScript, and template images) (optional, see default).
+ * - google_analytics_detected_hostname: (string) Hostname as reported by the server (may be the live or development environment) (see default).
+ * - google_analytics_hostname: (string) Hostname of the live site (see default).
+ */
+#}
+
+{% if ((metaData.url.detected_hostname == metaData.url.hostname) and (metaData.google.analytics)) and not (user) %}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ metaData.google.analytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ metaData.google.analytics }}');
+</script>
+
+{% endif %}

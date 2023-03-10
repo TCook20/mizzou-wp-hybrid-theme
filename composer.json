@@ -1,0 +1,42 @@
+{
+	"name": "mizzou/mu-hybrid-base",
+	"description": "WordPress base theme for MU Sites.",
+	"type": "wordpress-theme",
+	"authors": [
+		{
+			"name": "Travis Cook",
+			"email": "cooktw@missouri.edu"
+		}
+	],
+	"minimum-stability": "dev",
+	"require": {},
+	"require-dev": {
+		"phpcompatibility/php-compatibility": "dev-develop",
+		"phpcsstandards/phpcsutils": "^1.0@dev",
+		"wp-coding-standards/wpcs": "^2.3"
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://packages.missouri.edu/php/"
+		}
+	],
+	"scripts": {
+		"format": "phpcbf --standard=phpcs.xml --report-summary --report-source",
+		"lint": "phpcs --standard=phpcs.xml"
+	},
+	"archive": {
+		"exclude": [
+			".editorconfig",
+			".gitlab-ci.yml",
+			".nvmrc",
+			"src"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": false
+		}
+	}
+}

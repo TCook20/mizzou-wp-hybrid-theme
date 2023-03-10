@@ -1,0 +1,45 @@
+{#
+/**
+ * Alert Template
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2020 Curators of the University of Missouri
+ *
+ * Variables:
+ * - page: (object) Block content (see https://github.com/jarednova/timber/wiki/TimberPost for properties).
+ */
+#}
+{% from "@miz/components/block-message/block-message.twig" with alertOptions only %}
+
+{% set alert_id = alert_id|default(page.post_name) %}
+{% set alert_type = alert_type|default(page.alert_type) %}
+{% set alert_title = alert_title|default(page.title) %}
+{% set alert_date = alert_date|default(false) %}
+{% set alert_time = alert_time|default(false) %}
+{% set alert_content = alert_content|default(page.content) %}
+{% set alert_ext_link = alert_ext_link|default(page.link_external) %}
+
+{% if alert_type %}
+    {% if alert_type == 'error' %}
+        {% set alert_icon = 'error' %}
+    {% elseif alert_type == 'warning' %}
+        {% set alert_icon = 'warning' %}
+    {% elseif alert_type == 'success' %}
+        {% set alert_icon = 'done_outline' %}
+    {% elseif alert_type == 'info' %}
+        {% set alert_icon = 'info' %}
+    {% else %}
+        {% set alert_icon = 'info' %}
+    {% endif %}
+{% endif %}
+
+{% set alertOptions = {
+  "block-message": {
+    "class": "miz-block-message--" ~  alert_type,
+    "title": alert_title|striptags('<em>')|raw,
+    "text": alert_content|raw,
+    "icon": {
+        "name": alert_icon
+    }
+  }
+} %}

@@ -1,0 +1,25 @@
+{#
+/**
+ * Search Form
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - search_form_action_base_url: (string) Base URL for search form action attribute (optional, see default).
+ * - search_form_action_path: (string) Path for search form action attribute (optional, see default).
+ * - search_form_button_text: (string) Button text (optional, see default).
+ * - search_form_id: (string) Id of search form input (optional, see default).
+ * - search_form_label: (string) Label text (optional, see default).
+ * - search_form_modifier_class: (string) A modifier class to apply to the block (optional).
+ * - search_form_name: (string) Name of search form input (optional, see default).
+ * - search_form_placeholder: (string) Placeholder text of search form input (optional, see default).
+ * - search_form_value: (string) Search string (optional).
+ */
+#}
+
+<form class="miz-input-group{% if (search_form_modifier_class) %} {{ search_form_modifier_class }}{% endif %}" method="get" action="{{ search_form_action_base_url }}{{ search_form_action_path }}" role="search" aria-label="Sitewide">
+    <label class="sr-only" for="{{ search_form_id }}">{{ search_form_label }}</label>
+    <input class="miz-input" name="{{ search_form_field_name }}" id="{{ search_form_id }}" data-gname="sitesearch" data-queryParameterName="s" title="search" aria-label="Search input" placeholder="{{ search_form_placeholder }}"{% if (search_form_value) %} value="{{ search_form_value|escape }}"{% endif %} />
+    <button class="miz-button miz-button--icon miz-button--primary miz-button--small miz-button--square-sm miz-input-group__button" type="submit" aria-label="Search button"><i class="miz-icon material-icons miz-icon--button miz-icon--md">search</i></button>
+</form>

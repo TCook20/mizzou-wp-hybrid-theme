@@ -1,0 +1,131 @@
+{#
+/**
+ * News Archive Template
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ */
+#}
+
+{% extends ['site-page.twig', 'page.twig'] %}
+
+{% block content %}
+{{ parent() }}
+
+{% if page.description %}
+<p>{{ page.description|raw }}</p>
+{% endif %}
+
+{% if (news) %}
+  <div id="news-collection" class="miz-grid-columns-2">
+  {% for Card in news %}
+    {% include '/layers/card-news.twig' %}
+  {% endfor %}
+  </div>
+
+  {% if news.pagination %}
+    {% include 'components/navs/navigation-pagination.twig' with { 'pagination_include_numbers': true, 'pagination': news.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+  {% endif %}
+{% endif %}
+{% endblock %}
+
+{% block content_aside %}
+<h3>Browse Archives</h3>
+<div class="accordion-filters" id="archivesFilters">
+  {% if archives.items %}
+  <div class="miz-accordion miz-expand">
+      <button class="miz-accordion__button miz-button miz-button miz-button--primary miz-button--light" data-toggle="collapse" data-target="#collapseDateFilter" aria-expanded="false" aria-controls="collapseDateFilter" id="headingDateFilter" tabindex="0" role="button">By Date <i class="miz-icon miz-icon--sm material-icons"></i></button>
+      <div id="collapseDateFilter" class="miz-accordion__content collapsed" aria-labelledby="headingDateFilter" data-parent="#archivesFilters">
+				<nav role="navigation" {% if (navigation_id) %}id="{{ navigation_id }}" {% endif %}class="navigation--sub-navigation">
+					<div class="nav__container">
+						<ul class="nav__list miz-nav__list">
+							{% for item in archives.items %}
+							<li class="nav__item  miz-nav__list-item">
+								<span class="nav__link miz-nav__link{% if (item.children) %} nav__link--parent{% endif %}">{{ item.name|striptags('<em>')|raw }}</span>
+
+								{% if item.children %}
+								<ul class="nav__list miz-nav__list">
+									{% for child in item.children %}
+									<li class="nav__item  miz-nav__list-item">
+										{% if (page.current_page == child.link) %}<strong class="nav__current-page miz-nav__link">{{ child.name|striptags('<em>')|raw }}</strong>{% else %}<a href="{{ child.link }}" class="nav__link miz-nav__link">{{ child.name|striptags('<em>')|raw }}</a>{% endif %}
+									</li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</nav>
+      </div>
+  </div>
+  {% endif %}
+
+  {% if categories %}
+  <div class="miz-accordion miz-expand">
+		<button class="miz-accordion__button miz-button miz-button miz-button--primary miz-button--light" data-toggle="collapse" data-target="#collapseCategoryFilter" aria-expanded="false" aria-controls="collapseCategoryFilter" id="headingCategoryFilter" tabindex="0" role="button">By Categories <i class="miz-icon miz-icon--sm material-icons"></i></button>
+    <div id="collapseCategoryFilter" class="miz-accordion__content collapsed" aria-labelledby="headingCategoryFilter" data-parent="#archivesFilters">
+			<nav role="navigation" {% if (navigation_id) %}id="{{ navigation_id }}" {% endif %}class="navigation--sub-navigation">
+				<div class="nav__container">
+					<ul class="nav__list miz-nav__list">
+						{% for item in categories %}
+						<li class="nav__item  miz-nav__list-item">
+							{% if (page.current_page == site.link ~ '/category/' ~ item.slug ~ '/') %}
+							<strong class="nav__current-page miz-nav__link">{{ item.name|striptags('<em>')|raw }}</strong>
+							{% else %}
+							<a href="{{ site.link ~ '/category/' ~ item.slug }}" class="nav__link miz-nav__link">{{ item.name|striptags('<em>')|raw }}</a>
+							{% endif %}
+
+							{% if item.children %}
+							<ul class="nav__list miz-nav__list">
+								{% for child in item.children %}
+								<li class="nav__item  miz-nav__list-item">
+									{% if (page.current_page == site.link ~ '/category/' ~ child.slug ~ '/') %}<strong class="nav__current-page miz-nav__link">{{ child.name|striptags('<em>')|raw }}</strong>{% else %}<a href="{{ site.link ~ '/category/' ~ child.slug }}" class="nav__link miz-nav__link">{{ child.name|striptags('<em>')|raw }}</a>{% endif %}
+								</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</nav>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if tags %}
+  <div class="miz-accordion miz-expand">
+		<button class="miz-accordion__button miz-button miz-button miz-button--primary miz-button--light" data-toggle="collapse" data-target="#collapseTagsFilter" aria-expanded="false" aria-controls="collapseTagsFilter" id="headingTagsFilter" tabindex="0" role="button">By Tags <i class="miz-icon miz-icon--sm material-icons"></i></button>
+    <div id="collapseTagsFilter" class="miz-accordion__content collapsed" aria-labelledby="headingTagsFilter" data-parent="#archivesFilters">
+			<nav role="navigation" {% if (navigation_id) %}id="{{ navigation_id }}" {% endif %}class="navigation--sub-navigation">
+				<div class="nav__container">
+					<ul class="nav__list miz-nav__list">
+						{% for item in tags %}
+						<li class="nav__item  miz-nav__list-item">
+							{% if (page.current_page == site.link ~ '/tag/' ~ item.slug ~ '/') %}
+							<strong class="nav__current-page miz-nav__link">{{ item.name|striptags('<em>')|raw }}</strong>
+							{% else %}
+							<a href="{{ site.link ~ '/tag/' ~ item.slug }}" class="nav__link miz-nav__link">{{ item.name|striptags('<em>')|raw }}</a>
+							{% endif %}
+
+							{% if item.children %}
+							<ul class="nav__list miz-nav__list">
+								{% for child in item.children %}
+								<li class="nav__item  miz-nav__list-item">
+									{% if (page.current_page == site.link ~ '/tag/' ~ item.slug ~ '/') %}<strong class="nav__current-page miz-nav__link">{{ child.name|striptags('<em>')|raw }}</strong>{% else %}<a href="{{ site.link ~ '/tag/' ~ child.slug }}" class="nav__link miz-nav__link">{{ child.name|striptags('<em>')|raw }}</a>{% endif %}
+								</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</nav>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

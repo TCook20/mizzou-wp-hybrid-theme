@@ -1,0 +1,42 @@
+{# Set Variables #}
+{% set bigMessageTitle = bigMessageTitle|default(flexgroup.title) %}
+{% set bigMessageContent = bigMessageContent|default(flexgroup.message) %}
+{% set bigMessageButtons = bigMessageButtons|default(flexgroup.buttons) %}
+
+{% set bigMessage = {
+    'title': bigMessageTitle,
+    'content': bigMessageContent,
+    'buttons': bigMessageButtons
+} %}
+
+{# Imports #}
+  {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+{#
+We Need:
+Title
+alignment?
+Message?
+Button/Link 0 --> 2
+
+@todo in big-message it is buttonOptions, in cta is't ButtonOptions, though I guess the specific name doesnt matter
+#}
+<section class="miz-layer miz-layer--brand miz-fill--black-100 miz-decoration miz-decoration__plus miz-decoration__plus--bottom-right miz-main-grid__full">
+    <div class="miz-container">
+        <div class="miz-decoration miz-decoration__corner--top-left">
+            <div class="miz-big-message__frame miz-fill--white">
+                <header class="miz-layer__header miz-layer__header--center">
+                    <h2 class="miz-layer__title">{{ bigMessage.title }}</h2>
+                </header>
+                <div class="miz-layer__content miz-layer__content--center miz-big-message__content">
+                    {{ bigMessage.content }}
+                    {% if bigMessage.buttons is defined and bigMessage.buttons is iterable %}
+                        {% for Button in bigMessage.buttons %}
+                            {% set ButtonOptions = { "class": "miz-button--secondary miz-button--brand", "text": Button.button.title, 'href': Button.button.url} %}
+                            {{ anchorButton( ButtonOptions ) }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,106 @@
+{#
+/**
+ * Navigation Macro
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ */
+
+/**
+ * Start menu output (sets some variables, and then calls navigation_list)
+ *
+ * @param array navigation_items Associative array of link items. See navigation_list below for detailed description.
+ * @param string current_page (Optional) URL or path of the current page.
+ * @param array parent_pages (Optional) Pages that are parents of the current page; useful for highlighting parts of the menu even if the link isn't in the menu itself.
+ * @param boolean hide_unselected_child_links (Optional) If true, will hide child lists if the current_page isn't one of the child links or the parent link. Defaults to true.
+ * @return string List HTML.
+ */
+#}
+{% macro navigation(navigation_items, current_page, parent_pages, hide_unselected_child_links) %}
+{% spaceless %}
+
+{% if (navigation_items is not empty) %}
+{# Determine if the current page is in the menu at all #}
+{% set is_current_page_in_menu = navigation_items|menu_url_in_link_list(current_page) %}
+
+{# Filter parent pages to choose the most recent ancestor that's in the menu #}
+{% set parent_page = '' %}
+{% if (parent_pages is not empty) %}
+{% for current_parent_page in parent_pages %}
+{% if (navigation_items|menu_url_in_link_list(current_parent_page)) and (parent_page == '') %}
+{% set parent_page = current_parent_page %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{# Start the menu builder #}
+{{ _self.navigation_list(navigation_items, current_page, parent_page, hide_unselected_child_links|default(true), is_current_page_in_menu) }}
+
+{% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+{#
+ * Outputs a navigation menu
+ *
+ * @param array navigation_items Associative array of link items. Each item can have the following properties.
+ *      - string link URL of the link.
+ *      - string title Text for the link.
+ *      - array children Child link items (with the same definition). These become nested unordered lists.
+ * @param string current_page (Optional) URL or path of the current page.
+ * @param array parent_page (Optional) Closest parent of the current page that *is* in the menu; useful for highlighting parts of the menu even if the link isn't in the menu itself.
+ * @param boolean hide_unselected_child_links (Optional) If true, will hide child lists if the current_page isn't one of the child links or the parent link. Defaults to true.
+ * @param boolean is_current_page_in_menu (Optional) If true, current_page exists in the overall menu.
+ * @return string List HTML.
+#}
+{% macro navigation_list(navigation_items, current_page, parent_page, hide_unselected_child_links, is_current_page_in_menu) %}
+{% spaceless %}
+
+{% if (navigation_items is not empty) %}
+{% if (current_page_in_menu is null) %}
+{% set current_page_in_menu = navigation_items|menu_url_in_link_list(current_page) %}
+{% endif %}
+
+<ul class="nav__list miz-nav__list">
+    {% for item in navigation_items %}
+    <li class="nav__item miz-nav__list-item {{ item.classes|join(' ') }}">
+        {# Get list of urls for this item (includes children) #}
+        {% set url_list = item|menu_item_link_list %}
+
+        {# Does this item have children that are output? #}
+        {% if (item.children is not empty) and ((not hide_unselected_child_links) or ((hide_unselected_child_links) and ((current_page in url_list) or ((current_page not in url_list) and (parent_page in url_list) and not (current_page_in_menu))))) %}
+            {% set has_children = true %}
+        {% else %}
+            {% set has_children = false %}
+        {% endif %}
+
+        {% if (current_page == item.link) and (current_page not in previously_used_current_pages) %}
+            <strong class="nav__current-page miz-nav__link{% if (has_children) %} nav__current-page--parent{% endif %}">{{ item.title|striptags('<em>')|raw }}</strong>
+        {% elseif 'disabled' in item.classes %}
+            <span class="nav__link miz-nav__link{% if (has_children) %} nav__link--parent{% endif %}">{{ item.title|striptags('<em>')|raw }}</span>
+        {% else %}
+            <a href="{{ item.link|striptags }}" class="nav__link miz-nav__link{% if (has_children) %} nav__link--parent{% endif %}" target="{{ item.is_external ? '_blank' : '_self' }}">{{ item.title|striptags('<em>')|raw }}</a>
+        {% endif %}
+
+        {% if (item.get_children) and ('nav__item--dropdown' in item.classes) %}
+            <ul class="nav__list">
+                {% for child in item.get_children %}
+                <li class="nav__item miz-nav__list-item">
+                    {% if (current_page == child.link) and (current_page not in previously_used_current_pages) %}
+                        <strong class="nav__link miz-nav__link nav__current-page">{{ child.title|striptags('<em>')|raw  }}</strong>
+                    {% else %}
+                        <a href="{{ child.link|striptags }}" class="nav__link miz-nav__link" target="{{ child.is_external ? '_blank' : '_self' }}">{{ child.title|striptags('<em>')|raw  }}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% elseif (has_children) %}
+            {{ _self.navigation(item.get_children, current_page, hide_unselected_child_links, current_page_in_menu) }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endspaceless %}
+{% endmacro %}

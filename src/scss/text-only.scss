@@ -1,0 +1,41 @@
+/**
+ * "Text-only" Stylesheet for Old Browsers
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ */
+
+/* @group Variables */
+
+@import "base/mizzou-variables";
+
+// Disable larger text and inset image media queries (unsupported by browsers we're serving this stylesheet to)
+$query-larger-text: false;
+$query-inset-images: false;
+
+/* @end */
+
+/* @group Other Imports */
+
+@import "base/mizzou-base";
+@import "base/mizzou-text";
+@import "components/mizzou-alerts";
+
+/* @end */
+
+/* @group Basic Styles */
+
+html {
+	background: #fff;
+}
+
+body {
+	padding: 16px;
+}
+
+.skip-to-content {
+	display: block;
+	margin-bottom: 16px;
+}
+
+/* @end */

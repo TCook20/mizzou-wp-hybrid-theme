@@ -1,0 +1,32 @@
+{# Set Variables #}
+{% set linkListTitle = linkListTitle|default(flexgroup.title) %}
+{% set linkListContents = linkListContents|default(flexgroup.links) %}
+{% set linkListOrientation = linkListOrientation|default(flexgroup.orientation) %}
+{% set linkListVariant = linkListVariant|default(flexgroup.variant) %}
+
+{% set linkListIcon = {
+	'name': 'chevron_right',
+	'class': 'miz-text--gold miz-flex-item--push'
+} %}
+
+{% set linkList = {
+    'title': linkListTitle,
+    'content': linkListContents
+} %}
+
+<section class="miz-layer miz-main-grid__full">
+    <div class="miz-container">
+        {% if linkList.title %}
+        <header class="miz-text--center">
+            <h2 class="miz-graphik">{{ linkList.title }}</h2>
+        </header>
+        {% endif %}
+        <ul class="miz-link-list miz-link-list--brand miz-link-list--layer">
+            {% for item in linkList.content %}
+            <li class="miz-link-list__item"><a href="{{ item.link.url }}" class="miz-link-list__link"{% if item.link.target %} target="{{ item.link.target }}"{% endif %}>
+                {{ item.link.title }}{% if linkListIcon.name %} <i class="miz-icon material-icons{% if linkListIcon.class %} {{ linkListIcon.class }}{% endif %}">{{ linkListIcon.name }}</i>{% endif %}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

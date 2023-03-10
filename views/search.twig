@@ -1,0 +1,25 @@
+{#
+/**
+ * Search Results
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - page: (object) Page content (see https://github.com/jarednova/timber/wiki/TimberPost for properties).
+ */
+#}
+
+{% extends ['site-page.twig', 'page.twig'] %}
+
+{% set resultsId = resultsId|default(option.google_cse_id) %}
+
+{% block content %}
+{{ parent() }}
+
+{% if resultsId %}
+<gcse:search gname="sitesearch" queryParameterName="s"></gcse:search>
+{% else %}
+<p>You did not provide a Google Custom Search Engine ID. Please provide one to use the GCSE.</p>
+{% endif %}
+{% endblock %}

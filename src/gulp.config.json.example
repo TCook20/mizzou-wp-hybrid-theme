@@ -1,0 +1,44 @@
+{
+  "sources": {
+    "styles": {
+      "default": {
+        "src": {
+          "path": "./scss/",
+          "glob": "./scss/**/*",
+          "fileGlob": "./scss/*.scss",
+          "watch": ["./scss/**/*.scss"]
+        },
+        "dest": {
+          "path": "./../"
+        },
+        "clean": {
+          "path": ["./../*.css*"]
+        },
+        "settings": {
+          "sassOptions": {
+            "includePaths": [
+              "../node_modules/@mizzou/mizzou-design-system/src/miz/twig/",
+              "../node_modules/@mizzou/mizzou-design-system/src/miz/scss/",
+              "../node_modules/"
+            ]
+          }
+        }
+      }
+    },
+    "twig": {},
+    "images": {
+      "default": {
+        "src": {
+          "path": "./images/",
+          "glob": "./images/**/*",
+          "fileGlob": "./images/**/*",
+          "watch": ["./images/**/*"]
+        },
+        "dest": {
+          "path": "./../assets/images/"
+        },
+        "clean": false
+      }
+    }
+  }
+}

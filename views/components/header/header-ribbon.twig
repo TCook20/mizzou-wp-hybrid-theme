@@ -1,0 +1,49 @@
+{#
+/**
+ * Header (Ribbon Configuration)
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - header_modifier_class: (string) A modifier class to apply to the block (optional).
+ */
+#}
+
+{# Imports #}
+  {% import "@miz/utilities/twig/utils.twig" as utils %}
+  {% import "@miz/utilities/miz.twig" as miz %}
+  {% from "@miz/components/link-list/link-list.twig" import LinkList as linkList %}
+
+{# Parameters #}
+  {% set options = _context ? _context : {} %}
+
+{% set ribbonLinkList = ribbonLinkList|default(site.tactical_navigation.items) %}
+
+<div class="miz-ribbon">
+    {% block ribbon__sig %}
+      <div class="miz-ribbon__signature">
+        {{ miz.sig({}, {reverse: true}) }}
+      </div>
+    {% endblock ribbon__sig %}
+
+    {% block ribbon__linklist %}
+    {% if ribbonLinkList %}
+    <ul class="miz-link-list miz-link-list--inline miz-ribbon__link-list">
+      {% for item in ribbonLinkList %}
+      <li class="miz-link-list__item">
+        <a href="{{ item.link }}" class="miz-link-list__link">{{ item.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endblock ribbon__linklist %}
+
+    {% block ribbon__search %}
+    {% if (option.google_cse_id) %}
+    <div class="miz-ribbon__search">
+        {% include ['components/site-search-form.twig', 'components/input-groups/search-form.twig'] ignore missing %}
+    </div>
+    {% endif %}
+    {% endblock ribbon__search %}
+</div>

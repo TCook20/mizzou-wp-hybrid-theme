@@ -1,0 +1,61 @@
+{# Imports #}
+{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+
+{# Set Variables #}
+{% set ctaTitle = ctaTitle|default(flexgroup.title) %}
+{% set ctaContent = ctaContent|default(flexgroup.content) %}
+{% set ctaButtons = ctaButtons|default(flexgroup.buttons) %}
+{% set ctaVariant = ctaVariant|default(flexgroup.variant) %}
+{% set ctaImage = ctaImage|default(flexgroup.image) %}
+
+{% set cta = {
+    'title': ctaTitle,
+    'content': ctaContent,
+    'buttons': ctaButtons,
+    'variant': ctaVariant,
+    'image': ctaImage
+} %}
+
+{% set VariantOptions = {
+    "section" : "miz-fill--black miz-decoration miz-decoration__plus miz-decoration__plus--top-right",
+    "frame" : "miz-fill--white miz-text--black",
+    "buttonclass" : "miz-button--outline"
+} %}
+{% if cta.variant == "image" and cta.image  %}
+    {% set VariantOptions = VariantOptions|merge({
+        "section" : "\" style=\"background: #F1B82D url('" ~ Image(cta.image).src('full') ~"') center/cover ",
+        "frame" : "miz-fill--white",
+    }) %}
+{% endif %}
+{% if cta.variant == "gold" %}
+    {% set VariantOptions = VariantOptions|merge({
+        "section" : "miz-background-gel--gold",
+        "frame"   : "miz-fill--black",
+        "buttonclass" : "miz-button--ghost-gold"
+    }) %}
+{% endif %}
+
+<section class="miz-layer miz-layer--brand miz-cta-layer miz-main-grid__full {{ VariantOptions.section }}">
+    <div class="miz-container">
+        <div class="miz-cta-frame {{ VariantOptions.frame }}">
+            <header class="miz-layer__header">
+                <h2 class="miz-cta-title">{{ cta.title }}</h2>
+            </header>
+            <div class="miz-layer__content miz-cta-content">
+                <div class="miz-cta-content__body">
+                    {{ cta.content }}
+                </div>
+                {% if cta.buttons is defined and cta.buttons is iterable %}
+                    <div class="miz-cta-content__action">
+                        <div class="miz-cta-button-group">
+                            {% for Button in cta.buttons %}
+                                {% set buttonOptions = { "class": "miz-button--brand " ~ VariantOptions.buttonclass, "text": Button.button.title, 'href': Button.button.url } %}
+                                {{ anchorButton( buttonOptions ) }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

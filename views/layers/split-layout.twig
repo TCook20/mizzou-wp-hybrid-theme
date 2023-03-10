@@ -1,0 +1,72 @@
+{# Defaults #}
+{% set FigureStyle="" %}
+{% set SectionExtras = "" %}
+{% set KickerStyle = "" %}
+{% set TitleStyle = "" %}
+{% set OffsetDivStyle = "" %}
+{% set splitLayoutKicker = splitLayoutKicker|default(flexgroup.kicker) %}
+{% set splitLayoutTitle = splitLayoutTitle|default(flexgroup.title) %}
+{% set splitLayoutVariant = splitLayoutVariant|default(flexgroup.variant) %}
+{% set splitLayoutBackgroundImg = splitLayoutBackgroundImg|default(flexgroup.background_image) %}
+{% set splitLayoutLayoutImg = splitLayoutLayoutImg|default(flexgroup.layout_image) %}
+{% set splitLayoutImg = splitLayoutImg|default(flexgroup.image) %}
+{% set splitLayoutContent = splitLayoutContent|default(flexgroup.message) %}
+{% set splitLayoutButtons = splitLayoutButtons|default(flexgroup.buttons) %}
+
+{# Imports #}
+{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+
+{% if 'black' == splitLayoutVariant %}
+    {% set SectionExtras = " miz-split-layout-layer miz-fill--black" %}
+{% elseif 'image' == splitLayoutVariant and splitLayoutBackgroundImg is defined %}
+    {% set SectionExtras = "\" style=\"background: #000000 url('" ~ Image(splitLayoutBackgroundImg).src('medium') ~ "') top left/cover; "%}
+{% endif %}
+
+{% set SplitLayoutAlign = "" %}
+{% if "right" == splitLayoutLayoutImg %}
+    {% set SplitLayoutAlign = " miz-split-layout--flip" %}
+{% endif %}
+
+{% if 'offset' == splitLayoutVariant %}
+    {% set SplitLayoutAlign = SplitLayoutAlign ~ " miz-split-layout--no-gap" %}
+{% endif %}
+
+<section class="miz-layer miz-layer--brand miz-main-grid__full{{ SectionExtras }}">
+    <div class="miz-container">
+        <div class="miz-split-layout{{ SplitLayoutAlign }}">
+            {% if 'offset' == splitLayoutVariant %}
+            {% if 'right' == splitLayoutLayoutImg %}
+                {% set FigureStyle = " miz-split-layout__offset" %}
+            {% else %}
+                {% set OffsetDivStyle = " miz-split-layout__offset" %}
+            {% endif %}
+            <div class="miz-split-layout__header-content miz-fill--black-100 miz-text--black{{ OffsetDivStyle }}">
+
+                {% else %}
+                    {% set KickerStyle = " miz-text--white" %}
+                    {% set TitleStyle = " miz-text--gold" %}
+                {% endif %}
+                <header class="miz-layer__header miz-split-layout__header">
+                    {% if splitLayoutKicker %}<h2 class="miz-layer__kicker{{ KickerStyle }}">{{ splitLayoutKicker }}</h2>{% endif %}
+                    <h2 class="miz-layer__title {{ TitleStyle }}">{{ splitLayoutTitle }}</h2>
+                </header>
+                <div class="miz-layer__content miz-split-layout__content">
+                    {{ splitLayoutContent }}
+                    {% if splitLayoutButtons is defined and splitLayoutButtons is iterable %}
+                        {% for Button in splitLayoutButtons %}
+                            {% set buttonOptions = { "class": "miz-button miz-button--primary miz-button--brand", "text": Button.button.title, 'href': Button.button.url } %}
+                            {{ anchorButton( buttonOptions ) }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% if 'offset' == splitLayoutVariant %}
+            </div>
+            {% endif %}
+            {% if splitLayoutImg %}
+            <figure class="miz-split-layout__figure{{ FigureStyle }}">
+                <img src="{{ Image(splitLayoutImg).src('large') }}" alt="Image(splitLayoutImg).alt" class="miz-split-layout__image">
+            </figure>
+            {% endif %}
+        </div>
+    </div>
+</section>

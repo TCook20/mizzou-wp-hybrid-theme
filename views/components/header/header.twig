@@ -1,0 +1,55 @@
+{#
+/**
+ * Header (Standard Configuration)
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - header_modifier_class: (string) A modifier class to apply to the block (optional).
+ */
+#}
+
+{% set header_options = _context ? _context : {} %}
+
+{# Variables #}
+  {% set ribbon_options = header_options.ribbon %}
+  {% set masthead_options = header_options.masthead %}
+  {% set navigation_options = header_options.navigationOptions %}
+  {% set nav_items = navigation_options.items %}
+
+{# Defaults #}
+{% set university_signature_modifier_class = '24 reverse' %}
+
+{% set search_form_action_base_url = search_form_action_base_url|default(site.link) %}
+{% set search_form_action_path = search_form_action_path|default(site.search_action_path) %}
+{% set search_form_button_text = search_form_button_text|default('Search') %}
+{% set search_form_id = search_form_id|default('s') %}
+{% set search_form_label = search_form_label|default('Search Site:') %}
+{% set search_form_field_name = search_form_name|default(site.search_field_name) %}
+{% set search_placeholder_term = search_placeholder_term|default('this site') %}
+{% set search_form_placeholder = search_form_placeholder|default('Search ' ~ search_placeholder_term) %}
+
+<header class="miz-header{% if (header_modifier_class) %} {{ header_modifier_class }}{% endif %}">
+    {% block ribbon %}
+    <div class="miz-fill--black">
+        <div class="miz-container">
+            {% include ['components/site-header-ribbon.twig', 'components/header/header-ribbon.twig'] ignore missing %}
+        </div>
+    </div>
+    {% endblock ribbon %}
+
+    {% block masthead %}
+    <div role="banner" class="miz-fill--white">
+        <div class="miz-container">
+            {% include "@miz/components/masthead/masthead.twig" with masthead_options only %}
+        </div>
+    </div>
+    {% endblock masthead %}
+
+	{% block navigation %}
+	<div class="miz-fill--gold">
+		{% include ['@miz-block/primary-nav.twig', 'components/navs/navigation.twig'] ignore missing with nav_items %}
+	</div>
+	{% endblock %}
+</header>

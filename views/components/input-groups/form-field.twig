@@ -1,0 +1,188 @@
+{#
+/**
+ * Form Fields
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - form_field_attribute_cols: (int) Value for the "cols" attribute. Only used for textareas (optional).
+ * - form_field_attribute_disabled: (boolean) Whether to add the "disabled" attribute (optional).
+ * - form_field_attribute_id: (string) Value for the "id" attribute (optional, see default).
+ * - form_field_attribute_maxlength: (int) Value for the "maxlength" attribute. Only used for text fields (optional).
+ * - form_field_attribute_name: (string) Value for the "name" attribute.
+ * - form_field_attribute_placeholder: (string) Value for the "placeholder" attribute (optional).
+ * - form_field_attribute_readonly: (boolean) Whether to add the "readonly" attribute (optional).
+ * - form_field_attribute_rows: (int) Value for the "rows" attribute. Only used for textareas (optional).
+ * - form_field_attribute_size: (int) Value for the "size" attribute. Only used for text fields (optional).
+ * - form_field_attribute_type: (int) Value for the "type" attribute. Only used for text fields (optional).
+ * - form_field_default_width: (boolean) Whether to use a form field's default width. Only used for text fields and textareas (optional).
+ * - form_field_error_message: (string) Error message for the field (optional).
+ * - form_field_error_message_collection: (array) Collection of error messages. Takes precedence if form_field_error_message is unset (optional).
+ * - form_field_help_text: (string) Help text to include with the field (optional).
+ * - form_field_initial_value: (string) Initial value for the field (optional).
+ * - form_field_label: (string) Label for the field.
+ * - form_field_modifier_class: (string) Modifier class to apply to the container (optional).
+ * - form_field_options: (array) Collection for selects, checkbox, and radio button groups (required if one of these types).
+ * - form_field_type: (string) Type of form field to create. Can be 'text', 'password', 'telephone', 'email', 'address', 'city', 'state', 'zip-code', 'textarea', 'select', 'radio-group', 'checkbox-group', or 'file' (optional, see default).
+ * - form_field_value: (string) Value for the form field.
+ * - form_field_value_collection: (array) Collection of form field values. Takes precedence if form_field_value is unset (optional).
+ */
+#}
+
+{# Defaults #}
+{% set form_field_attribute_id = form_field_attribute_id|default(form_field_attribute_name) %}
+{% set form_field_type = form_field_type|default('text') %}
+{% if (form_field_error_message is null) and (form_field_error_message_collection[form_field_attribute_name] is not null) %}
+    {% set form_field_error_message = form_field_error_message_collection[form_field_attribute_name] %}
+{% endif %}
+
+{% if (form_field_value is null) and (form_field_value_collection[form_field_attribute_name] is not null) %}
+    {% set form_field_value = form_field_value_collection[form_field_attribute_name] %}
+{% else %}
+    {% set form_field_value = form_field_initial_value %}
+{% endif %}
+
+<div class="form__field{% if (form_field_error_message) %} form__field--error{% endif %}{% if (form_field_modifier_class) %} {{ form_field_modifier_class }}{% endif %}">
+    <div class="form__field__label">
+        <label for="{{ form_field_attribute_id }}">{% spaceless %}
+            {{ form_field_label|striptags('<em>')|raw }}
+            {% if (form_field_error_message) %}
+            <span class="form__field__error-message">
+                <span class="form__field__error-message__separator"> - </span>
+                {{ form_field_error_message }}
+            </span>
+            {% endif %}
+        {% endspaceless %}</label>
+    </div>
+    <div class="form__field__control">
+        {% spaceless %}
+        {% if (form_field_type == 'text')
+           or (form_field_type == 'date')
+           or (form_field_type == 'password')
+           or (form_field_type == 'telephone')
+           or (form_field_type == 'email')
+           or (form_field_type == 'address')
+           or (form_field_type == 'city')
+           or (form_field_type == 'state')
+           or (form_field_type == 'zip-code') %}
+
+            {# Set form_field_attribute_type #}
+            {% if (form_field_type == 'password') %}
+                {% set form_field_attribute_type = 'password' %}
+            {% elseif (form_field_type == 'telephone') %}
+                {% set form_field_attribute_type = 'tel' %}
+            {% elseif (form_field_type == 'email') %}
+                {% set form_field_attribute_type = 'email' %}
+            {% elseif (form_field_type == 'date') %}
+                {% set form_field_attribute_type = 'date' %}
+            {% else %}
+                {% set form_field_attribute_type = 'text' %}
+            {% endif %}
+
+            <input
+            name="{{ form_field_attribute_name }}"
+            id="{{ form_field_attribute_id }}"
+            type="{{ form_field_attribute_type }}"
+            class="form__field__text{% if (form_field_default_width) %} form__field__text--default-width{% endif %}"
+            value="{{ form_field_value|htmlentities }}"
+            {% if (form_field_attribute_disabled) %}disabled{% endif %}
+            {% if (form_field_attribute_maxlength) %}maxlength="{{ form_field_attribute_maxlength }}"{% endif %}
+            {% if (form_field_attribute_placeholder) %}placeholder="{{ form_field_attribute_placeholder }}"{% endif %}
+            {% if (form_field_attribute_readonly) %}readonly{% endif %}
+            {% if (form_field_attribute_size) %}size="{{ form_field_attribute_size }}"{% endif %}
+            {% if (form_field_type == 'telephone') %}autocorrect="off" autocomplete="tel"{% endif %}
+            {% if (form_field_type == 'email') %}autocapitalize="off" autocorrect="off" autocomplete="email"{% endif %}
+            {% if (form_field_type == 'address') %}autocorrect="off" autocomplete="address-line1"{% endif %}
+            {% if (form_field_type == 'city') %}autocorrect="off" autocomplete="address-level2"{% endif %}
+            {% if (form_field_type == 'state') %}autocorrect="off" autocomplete="address-level2"{% endif %}
+            {% if (form_field_type == 'zip-code') %}pattern="\d*" novalidate autocorrect="off" autocomplete="postal-code"{% endif %}
+            />
+
+        {% elseif (form_field_type == 'textarea') %}
+            <textarea
+            name="{{ form_field_attribute_name }}"
+            id="{{ form_field_attribute_id }}"
+            class="form__field__text{% if (form_field_default_width) %} form__field__text--default-width{% endif %}"
+            {% if (form_field_attribute_cols) %}cols="{{ form_field_attribute_cols }}"{% endif %}
+            {% if (form_field_attribute_disabled) %}disabled{% endif %}
+            {% if (form_field_attribute_placeholder) %}placeholder="{{ form_field_attribute_placeholder }}"{% endif %}
+            {% if (form_field_attribute_readonly) %}readonly{% endif %}
+            {% if (form_field_attribute_rows) %}rows="{{ form_field_attribute_rows }}"{% endif %}
+            >{{ form_field_value|htmlentities }}</textarea>
+
+        {% elseif (form_field_type == 'select') %}
+            <select
+            name="{{ form_field_attribute_name }}"
+            id="{{ form_field_attribute_id }}"
+            class="form__field__select"
+            >
+                {% for option in form_field_options %}{% spaceless %}
+
+                    {# Format options #}
+                    {% if (option is not iterable) %}
+                        {% set option = { 'value': option, 'label': option } %}
+                    {% endif %}
+
+                    <option
+                    value="{{ option.value|htmlentities }}"
+                    {% if (form_field_value|htmlentities == option.value) %}selected{% endif %}
+                    >{{ option.label|striptags|raw }}</option>
+                {% endspaceless %}{% endfor %}
+            </select>
+
+        {% elseif (form_field_type == 'radio-group')
+           or (form_field_type == 'checkbox-group') %}
+            <ul class="form__field__box-list">
+                {% set form_field_original_attribute_name = form_field_attribute_name %}
+                {% set form_field_original_attribute_id = form_field_attribute_id %}
+
+                {% for option in form_field_options %}{% spaceless %}
+
+                {# Format options #}
+                {% if (option is not iterable) %}
+                    {% set option = { 'value': option, 'label': option } %}
+                {% endif %}
+
+                {# Set form_field_attribute_type, form_field_attribute_name, and form_field_attribute_id #}
+                {% if (form_field_type == 'radio-group') %}
+                    {% set form_field_attribute_type = 'radio' %}
+                {% else %}
+                    {% set form_field_attribute_type = 'checkbox' %}
+                    {% set form_field_attribute_name = form_field_original_attribute_name ~ '[' ~ loop.index0 ~ ']' %}
+                    {% set form_field_attribute_id = form_field_original_attribute_id ~ '[' ~ loop.index0 ~ ']' %}
+                {% endif %}
+                {% set form_field_attribute_id = form_field_original_attribute_id ~ '[' ~ loop.index0 ~ ']' %}
+
+                <li class="form__field__box-list__item">
+                    <input
+                    name="{{ form_field_attribute_name }}"
+                    id="{{ form_field_attribute_id }}"
+                    type="{{ form_field_attribute_type }}"
+                    class="form__field__{{ form_field_attribute_type }}"
+                    value="{{ option.value }}"
+                    {% if ((form_field_type == 'checkbox-group') and (form_field_value[loop.index0]|htmlentities == option.value)) or ((form_field_type == 'radio-group') and (form_field_value|htmlentities == option.value)) %}checked{% endif %}
+                    />
+                    <label for="{{ form_field_attribute_id }}">{{ option.label|striptags('<em>')|raw }}</label>
+                </li>
+                {% endspaceless %}{% endfor %}
+            </ul>
+
+        {% elseif (form_field_type == 'file') %}
+            <input
+            name="{{ form_field_attribute_name }}"
+            id="{{ form_field_attribute_id }}"
+            type="file"
+            class="form__field__file"
+            {% if (form_field_attribute_disabled) %}disabled="{{ form_field_attribute_disabled }}"{% endif %}
+            {% if (form_field_attribute_readonly) %}readonly="{{ form_field_attribute_readonly }}"{% endif %}
+            />
+        {% endif %}
+
+        {% endspaceless %}
+
+        {% if (form_field_help_text) %}
+        <p class="form__field__help">{{ form_field_help_text|raw }}</p>
+        {% endif %}
+    </div>
+</div>

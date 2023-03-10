@@ -1,0 +1,47 @@
+{# Set Variables #}
+{% set eventsKicker = eventsKicker|default(flexgroup.kicker) %}
+{% set eventsTitle = eventsTitle|default(flexgroup.title) %}
+{% set eventsContents = eventsContents|default(events) %}
+{% set eventsCount = eventsCount|default(flexgroup.number_of_events) %}
+{% set eventsButton = eventsButton|default(flexgroup.link) %}
+
+{% set eventsCollection %}
+<div class="miz-card-deck">
+{% for Event in eventsContents|slice(0, eventsCount) %}
+    {% include '@miz/components/event/event.twig' with {
+      'link': Event.Url,
+      'title': Event.Title,
+      'month': Event.Start| date('M'),
+      'day': Event.Start| date('j'),
+    } %}
+{% endfor %}
+</div>
+{% endset %}
+
+<section class="miz-layer--brand miz-stack-sandwich--xl">
+    <div class="miz-container">
+        {% if eventsKicker or eventsTitle %}
+        <header class="miz-layer__header miz-layer__header--center">
+            {% if eventsKicker is defined %}
+                <p class="miz-layer__kicker">{{ eventsKicker }}</p>
+            {% endif %}
+            <h2 class="miz-layer__title">{{ eventsTitle }}</h2>
+        </header>
+        {% endif %}
+
+        <div class="miz-layer__content">
+            {% if eventsContents %}
+                {{ eventsCollection }}
+            {% else %}
+            <p class="italic">No upcoming events.</p>
+            {% endif %}
+            {% if eventsButton is defined and eventsButton is iterable %}
+            {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+                <div class="miz-layer__content--center">
+                    {% set ButtonOptions = { "class": "miz-button miz-button--secondary miz-button--brand", "text": eventsButton.title, 'href': eventsButton.url }  %}
+                    {{ anchorButton( ButtonOptions ) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

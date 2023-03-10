@@ -1,0 +1,48 @@
+{% set heroOptions = {
+    "id": "miz-hero",
+    "class": "miz-hero--brand miz-decoration__tear miz-background-gel--dark",
+    "content": {}
+} %}
+
+{% if flexgroup.image is defined %}
+    {% set heroOptions = heroOptions|merge({"background-image": { "url": Image(flexgroup.image).src }}) %}
+{% endif %}
+
+{% set heroContents = [] %}
+
+{% if flexgroup.title is defined %}
+    {% set heroContents = heroContents|merge({"title": flexgroup.title }) %}
+{% endif %}
+
+{% if flexgroup.overline is defined %}
+    {% set heroContents = heroContents|merge({"overline": flexgroup.overline }) %}
+{% endif %}
+
+{% if flexgroup.alignment is defined %}
+    {% set heroContents = heroContents|merge({"align": flexgroup.alignment }) %}
+{% endif %}
+
+{% if flexgroup.buttons is defined and flexgroup.buttons is iterable %}
+    {% set Buttons = [] %}
+    {% for Button in flexgroup.buttons %}
+        {% set Buttons = Buttons|merge([{"button":{"class":"miz-button--primary miz-button--brand","text":Button.button.title,"href":Button.button.url}}]) %}
+    {% endfor %}
+    {% set heroContents = heroContents|merge({"button-group":Buttons}) %}
+{% endif %}
+
+{% if heroContents is not empty %}
+    {% set heroOptions = heroOptions|merge({"content": heroContents}) %}
+{% endif %}
+
+<div class="miz-main-grid__full">
+    {%- embed "@miz/components/hero/hero.twig" with heroOptions only %}
+        {% block hero_content %}
+
+            {{- parent() -}}
+
+            {% from "@miz/components/decoration/decoration.twig" import DecorationTear as tear %}
+            {{ tear({ "container-id": _context.id }) }}
+
+        {% endblock hero_content %}
+    {% endembed %}
+</div>

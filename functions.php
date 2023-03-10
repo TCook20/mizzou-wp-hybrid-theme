@@ -1,0 +1,1027 @@
+<?php
+/**
+ * Functions and Definitions
+ *
+ * @package WordPress
+ * @subpackage Base Theme
+ * @category theme
+ * @category functions
+ * @category Timber
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ */
+
+// Timber is required: http://upstatement.com/timber.
+if ( ! class_exists( 'Timber' ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			printf( '<div class="error"><p>Timber not activated. Make sure you <a href="%s">activate the Mizzou Blocks plugin</a>.</p></div>', esc_url( admin_url( 'plugins.php#mizzou-blocks' ) ) );
+		}
+	);
+	return;
+}
+
+/**
+ * We're going to configure our theme inside of a subclass of Timber\Site
+ * You can move this to its own file and include here via php's include("MySite.php")
+ */
+class StandardMizzouSite extends MizzouBlocks {
+	/** Add timber support. */
+	public function __construct() {
+		// Add configuration variables.
+		add_filter( 'timber_context', array( $this, 'siteConfiguration' ) );
+
+		// Setup menu locations.
+		add_action( 'init', array( $this, 'customMenuLocation' ) );
+		add_filter( 'hidden_meta_boxes', array( $this, 'show_hidden_meta_boxes' ), 10, 2 );
+
+		// Setup post types and taxonomies.
+		add_action( 'init', array( $this, 'customPostTypes' ) );
+		add_action( 'init', array( $this, 'customTaxonomies' ) );
+		add_post_type_support( 'page', 'excerpt' );
+
+		// Edit Dashboard Menu.
+		add_action( 'admin_menu', array( $this, 'customDashboardMenu' ) );
+		add_action( 'admin_bar_menu', array( $this, 'add_toolbar_items' ), 100 );
+		add_action( 'init', array( $this, 'customPostsName' ) );
+		add_action(
+			'init',
+			function () {
+				remove_post_type_support( 'post', 'comments' );
+				remove_post_type_support( 'page', 'comments' );
+			}
+		);
+
+		// Adjust template location.
+		Timber::$dirname = array( 'views' );
+
+		add_filter(
+			'timber/loader/loader',
+			function( $loader ) {
+				$loader->addPath( __DIR__ . '/views', 'miz' );
+				return $loader;
+			}
+		);
+
+		// Remove unnecessary junk from wp_head.
+		remove_action( 'wp_head', 'rsd_link' );
+		remove_action( 'wp_head', 'wlwmanifest_link' );
+		remove_action( 'wp_head', 'wp_generator' );
+		remove_action( 'wp_head', 'rel_canonical' );
+		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
+		remove_action( 'wp_head', 'feed_links', 2 );
+		remove_action( 'wp_head', 'feed_links_extra', 3 );
+		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+
+		// Add HTML5 support for gallery and caption shortcodes.
+		add_theme_support( 'html5', array( 'gallery', 'caption' ) );
+
+		// Add Responsive Embeds.
+		add_theme_support( 'responsive-embeds' );
+
+		// Add menu support.
+		add_theme_support( 'menus' );
+
+		// Add post thumbnail support and set size.
+		add_theme_support( 'post-thumbnails' );
+
+		// Twig additions.
+		add_filter( 'timber/twig', array( $this, 'twigAdditions' ) );
+
+		// Handle Timber Uploads Issue on Platform Multisite.
+		add_filter(
+			'timber/image/new_url',
+			function ( $url ) {
+				if ( strpos( $url, '-content/uploads' ) === 0 ) {
+					$url = str_replace( '-content/uploads', '/wp-content/uploads', $url );
+				}
+				return $url;
+			}
+		);
+		add_filter(
+			'timber/URLHelper/url_to_file_system/path',
+			function( $path ) {
+				if ( strpos( $path, '/wp-content/uploads' ) === 0 ) {
+					$path = str_replace( '/wp-content/uploads', '/../wp-content/uploads', $path );
+				}
+				return $path;
+			}
+		);
+
+		// Modify Tiny_MCE init.
+		add_filter( 'tiny_mce_before_init', array( $this, 'customFormatTinyMCE' ) );
+
+		// Enqueue scripts and styling.
+		add_action(
+			'wp_enqueue_scripts',
+			function () {
+				$theme = wp_get_theme( 'mu-hybrid-base' );
+
+				// Bootstrap.
+				$bootstrap_version = '4.6.0';
+				if ( get_field( 'bs_css', 'option' ) ) {
+					wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@' . $bootstrap_version . '/dist/css/bootstrap.min.css', null, $bootstrap_version, null );
+				}
+				if ( get_field( 'bs_js', 'option' ) ) {
+					wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@' . $bootstrap_version . '/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), $bootstrap_version, true );
+				}
+
+				// CSS.
+				wp_enqueue_style( 'material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', null, null );
+				wp_enqueue_style( 'mizDS-fonts', get_template_directory_uri() . '/assets/css/miz-fonts.css', null, $theme->get( 'Version' ) );
+				wp_enqueue_style( 'mizDS-base', get_template_directory_uri() . '/assets/css/miz.css', null, $theme->get( 'Version' ) );
+				wp_enqueue_style( 'mizDS-brand', get_template_directory_uri() . '/assets/css/miz-brand.css', null, $theme->get( 'Version' ) );
+				wp_enqueue_style( 'hybrid-base', get_template_directory_uri() . '/style.css', null, $theme->get( 'Version' ) );
+				// wp_enqueue_style( 'hybrid-light', get_template_directory_uri() . '/assets/css/light.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: no-preference), (prefers-color-scheme: light)' );
+				// wp_enqueue_style( 'hybrid-dark', get_template_directory_uri() . '/assets/css/dark.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: dark)' );
+
+				// Scripts.
+				wp_enqueue_script( 'hybrid-base', get_template_directory_uri() . '/assets/js/script.js', null, $theme->get( 'Version' ), true );
+				wp_enqueue_script( 'expandJS', get_template_directory_uri() . '/assets/js/expand.js', array(), $theme->get( 'Version' ), true );
+				wp_enqueue_script( 'primaryNavJS', get_template_directory_uri() . '/assets/js/primaryNavigation.js', array(), $theme->get( 'Version' ), true );
+			}
+		);
+
+		// Add Editor Styles.
+		add_theme_support( 'editor-styles' );
+		add_editor_style( '/assets/css/miz.css' );
+		add_editor_style( '/assets/css/miz-brand.css' );
+
+		// Remove emoji support.
+		add_action( 'init', array( $this, 'disableEmoji' ) );
+		add_filter( 'tiny_mce_plugins', array( $this, 'disableTinyMCEEmoji' ) );
+
+		// Setup shortcodes.
+		add_shortcode( 'home_url', array( $this, 'homeURLShortCode' ) );
+
+		// Add SVG to mime types.
+		add_filter( 'upload_mimes', array( $this, 'customMimeTypes' ) );
+
+		// Media Filters.
+		add_filter( 'img_caption_shortcode_width', array( $this, '__return_zero' ) );
+
+		// Disable XML-RPC.
+		add_filter( 'xmlrpc_enabled', '__return_false' );
+
+		// Prevent remote attackers from enumerating user names.
+		add_filter( 'redirect_canonical', array( $this, 'scanForEnumerationAttempt' ), 10, 2 );
+
+		// Remove the author archives from sitemap.
+		add_filter(
+			'wp_sitemaps_add_provider',
+			function( $provider, $str_name ) {
+				if ( 'users' === $str_name ) {
+					return false;
+				}
+
+				return $provider;
+			},
+			10,
+			2
+		);
+
+		// Set allowed blocks.
+		add_filter(
+			'allowed_block_types_all',
+			function () {
+				$allowed_block_types = array( 'core/block', 'core/audio', 'core/code', 'core/file', 'core/freeform', 'core/group', 'core/heading', 'core/html', 'core/image', 'core/list', 'core/media-text', 'core/paragraph', 'core/quote', 'core/shortcode', 'core/table', 'core/embed', 'core-embed/facebook', 'core-embed/instagram', 'core-embed/twitter', 'core-embed/vimeo', 'core-embed/youtube' );
+
+				return $allowed_block_types;
+			},
+			10,
+			2
+		);
+
+		add_action(
+			'after_setup_theme',
+			function () {
+				remove_theme_support( 'core-block-patterns' );
+			}
+		);
+
+		add_action(
+			'enqueue_block_editor_assets',
+			function () {
+				$theme = wp_get_theme();
+				wp_enqueue_script( 'mizzou-deny-list-blocks', get_template_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), $theme->get( 'Version' ), true );
+
+				$ds_version = '2.2.0';
+				wp_enqueue_style( 'mizDS-base', get_template_directory_uri() . '/assets/css/miz.css', null, $ds_version );
+				wp_enqueue_style( 'mizDS-brand', get_template_directory_uri() . '/assets/css/miz-brand.css', null, $ds_version );
+			}
+		);
+
+		// Only load block styles of used blocks.
+		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
+
+		if ( class_exists( 'ACF' ) ) {
+			require_once __DIR__ . '/inc/acf/acf-ds-layer-definitions.php';
+			require_once __DIR__ . '/inc/acf/theme-settings.php';
+
+			// ACF is installed and active so we need to remove the disabling of default custom fields.
+			add_filter( 'acf/settings/remove_wp_meta_box', '__return_false' );
+
+			add_filter( 'acf/fields/wysiwyg/toolbars', array( $this, 'acfCustomFormatTinyMCE' ) );
+		}
+
+		// Last User Login.
+		add_action(
+			'init',
+			function () {
+				$str_ds            = DIRECTORY_SEPARATOR;
+				$str_parent        = get_template_directory();
+				$str_file_location = $str_ds . 'inc' . $str_ds;
+				$str_filename      = 'last-user-login.php';
+				$str_file          = $str_parent . $str_file_location . $str_filename;
+
+				require_once $str_file;
+			}
+		);
+
+		// Continue on.
+		parent::__construct();
+	}
+
+	/**
+	 * Setup configuration variables for site
+	 *
+	 * @param array $ary_context Parent context variable.
+	 * @return Updated $ary_context
+	 */
+	public function siteConfiguration( $ary_context ) {
+		// Media Location.
+		$upload_dir                     = wp_upload_dir();
+		$ary_context['site']->media_url = $upload_dir['baseurl'] . '/';
+
+		// Map existing Timber options to aliases.
+		$ary_context['site']->asset_url        = $ary_context['site']->theme->link . '/';
+		// $ary_context['site']->parent_asset_url = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';
+		$ary_context['site']->base_url         = $ary_context['site']->url . '/';
+
+		// Standard configuration options.
+		$ary_context['site']->detected_hostname      = $_SERVER['HTTP_HOST'];
+		$ary_context['site']->search_action_path     = '';
+		$ary_context['site']->search_enabled         = true;
+		$ary_context['site']->search_field_name      = 's';
+		$ary_context['site']->search_form_field_name = 's';
+		$ary_context['site']->viewport               = 'width=device-width, initial-scale=1.0, shrink-to-fit=no';
+		$ary_context['site']->year                   = date( 'Y' );
+
+		// Site specific configuration options.
+
+		// Navigation.
+		$ary_context['site']->primary_navigation  = $this->getMenu( 'primary-navigation' );
+		$ary_context['site']->footer_navigation   = $this->getMenu( 'footer-navigation' );
+		$ary_context['site']->tactical_navigation = $this->getMenu( 'tactical-navigation' );
+
+		// Options.
+		$ary_context['option'] = get_fields( 'option' );
+
+		// Continue on.
+		return $ary_context;
+	}
+
+	/**
+	 * Custom Dashboard Menu
+	 */
+	public function customDashboardMenu() {
+		// Remove Comments Menu.
+		remove_menu_page( 'edit-comments.php' );
+
+		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+		remove_meta_box( 'health_check_status', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
+	}
+
+	/**
+	 * Custom Post Types
+	 */
+	public function customPostsName() {
+		$get_post_type              = get_post_type_object( 'post' );
+		$labels                     = $get_post_type->labels;
+		$labels->name               = 'News';
+		$labels->singular_name      = 'News';
+		$labels->add_new            = 'Add News';
+		$labels->add_new_item       = 'Add News';
+		$labels->edit_item          = 'Edit News';
+		$labels->new_item           = 'News';
+		$labels->view_item          = 'View News';
+		$labels->search_items       = 'Search News';
+		$labels->not_found          = 'No News found';
+		$labels->not_found_in_trash = 'No News found in Trash';
+		$labels->all_items          = 'All News';
+		$labels->menu_name          = 'News';
+		$labels->name_admin_bar     = 'News';
+	}
+
+	/**
+	 * Add Items to Admin Toolbar
+	 *
+	 * @param ary $admin_bar Adds items to toolbar.
+	 */
+	public function add_toolbar_items( $admin_bar ) {
+		$admin_bar->add_menu(
+			array(
+				'id'    => 'ds-request',
+				'title' => 'Make a Web Request',
+				'href'  => 'https://mizzou.us/DSRequest',
+				'meta'  => array(
+					'title'  => __( 'Make a Web Request' ),
+					'target' => '_blank',
+					'class'  => 'miz-button miz-button--primary',
+				),
+			)
+		);
+	}
+
+	/**
+	 * Show Meta Boxes
+	 *
+	 * @param str $hidden Hidden Fields.
+	 * @param str $screen Editor Screen.
+	 */
+	public function show_hidden_meta_boxes( $hidden, $screen ) {
+		if ( 'post' === $screen->base ) {
+			foreach ( $hidden as $key => $value ) {
+				if ( 'postexcerpt' === $value ) {
+					unset( $hidden[ $key ] );
+					break;
+				}
+			}
+		}
+
+		return $hidden;
+	}
+
+	/**
+	 * Setup custom menu locations
+	 */
+	public function customMenuLocation() {
+		register_nav_menu( 'primary-navigation', __( 'Primary Navigation' ) );
+		register_nav_menu( 'tactical-navigation', __( 'Tactical Navigation' ) );
+		register_nav_menu( 'footer-navigation', __( 'Footer Navigation' ) );
+	}
+
+	/**
+	 * Get menu title and items
+	 *
+	 * @param string $str_menu_name Name of menu.
+	 * @return array Associative array with the following properties:
+	 *      - (string) name Name of the menu or empty string
+	 *      - (array) items Collection of TimberMenuItem objects or empty array
+	 */
+	public static function getMenu( $str_menu_name ) {
+		$str_menu_title = '';
+		$ary_menu_items = array();
+
+		if ( is_nav_menu( $str_menu_name ) ) {
+			$obj_menu       = new Timber\Menu( $str_menu_name );
+			$str_menu_title = $obj_menu->title;
+			$ary_menu_items = $obj_menu->get_items();
+		} elseif ( has_nav_menu( $str_menu_name ) ) {
+			$obj_menu       = new Timber\Menu( $str_menu_name );
+			$str_menu_title = $obj_menu->title;
+			$ary_menu_items = $obj_menu->get_items();
+		}
+
+		return array(
+			'name'  => $str_menu_title,
+			'items' => $ary_menu_items,
+		);
+	}
+
+	/**
+	 * Adds functions or extensions to Twig
+	 *
+	 * @param object $obj_twig Existing Twig object.
+	 * @return object Updated Twig object
+	 */
+	public function twigAdditions( $obj_twig ) {
+		$obj_twig->addExtension( new Twig\Extension\StringLoaderExtension() );
+		$obj_twig->addFilter( new Timber\Twig_Filter( 'date_ap_style', array( $this, 'dateToAPStyle' ) ) );
+		$obj_twig->addFilter( new Timber\Twig_Filter( 'menu_flatten_hierarchy', array( $this, 'menuFlattenHierarchy' ) ) );
+		$obj_twig->addFilter( new Timber\Twig_Filter( 'menu_item_link_list', array( $this, 'menuItemLinkList' ) ) );
+		$obj_twig->addFilter( new Timber\Twig_Filter( 'menu_previous_next_page', array( $this, 'menuPreviousAndNextPage' ) ) );
+		$obj_twig->addFilter( new Timber\Twig_Filter( 'menu_url_in_link_list', array( $this, 'menuUrlInLinkList' ) ) );
+		$obj_twig->addFilter( new Timber\Twig_Filter( 'htmlentities', 'htmlentities', array( 'is_safe' => array( 'html' ) ) ) );
+		return $obj_twig;
+	}
+
+	/**
+	 * Creates an AP-style date
+	 *
+	 * @param string $str_date Date string.
+	 * @return string Date in AP format
+	 */
+	public function dateToAPStyle( $str_date ) {
+		$str_ap_style_date = '';
+		$str_timestamp     = strtotime( $str_date );
+		if ( false !== $str_timestamp ) {
+			$str_ap_style_date = date( 'M. j, Y', $str_timestamp );
+
+			// Fix months.
+			$str_ap_style_date = str_replace( 'Mar.', 'March', $str_ap_style_date );
+			$str_ap_style_date = str_replace( 'Apr.', 'April', $str_ap_style_date );
+			$str_ap_style_date = str_replace( 'May.', 'May', $str_ap_style_date );
+			$str_ap_style_date = str_replace( 'Jun.', 'June', $str_ap_style_date );
+			$str_ap_style_date = str_replace( 'Jul.', 'July', $str_ap_style_date );
+		}
+
+		return $str_ap_style_date;
+	}
+
+	/**
+	 * Flattens a nav item array so it isn't hierarchical
+	 *
+	 * @param array   $ary_menu Associative array of menu items (TimberMenu objects).
+	 * @param boolean $bool_include_child_links (Optional) Whether to recursively search child links. Defaults to true.
+	 * @return array Menu items without hierarchy.
+	 */
+	public function menuFlattenHierarchy( $ary_menu, $bool_include_child_links = true ) {
+		$ary_link_list = array();
+
+		if ( ! empty( $ary_menu ) ) {
+			foreach ( $ary_menu as $obj_menu_item ) {
+				$ary_link_list[] = $obj_menu_item;
+
+				// Pull in child links.
+				$ary_children = $obj_menu_item->children();
+				if ( ( true === $bool_include_child_links ) && ( ! empty( $ary_children ) ) ) {
+					$ary_child_link_list = $this->menuFlattenHierarchy( $ary_children );
+					$ary_link_list       = array_merge( $ary_link_list, $ary_child_link_list );
+				}
+			}
+		}
+
+		return $ary_link_list;
+	}
+
+	/**
+	 * Creates a list of URLs used by a menu link and any child links it might have, with infinite depth
+	 *
+	 * @param obj $obj_menu_item Menu item.
+	 * @return array List of URLs
+	 */
+	public function menuItemLinkList( $obj_menu_item ) {
+		$ary_link_list = array();
+
+		$str_link = $obj_menu_item->link();
+		if ( '' !== trim( $str_link ) ) {
+			$ary_link_list[] = $str_link;
+
+			// Recursively process child links.
+			$ary_children = $obj_menu_item->children();
+			if ( ( $ary_children ) && ( ! empty( $ary_children ) ) ) {
+				foreach ( $ary_children as $obj_child_menu_item ) {
+					$ary_link_list = array_merge( $ary_link_list, $this->menuItemLinkList( $obj_child_menu_item ) );
+				}
+			}
+		}
+
+		return array_unique( $ary_link_list );
+	}
+
+	/**
+	 * Determine previous and next page in navigation
+	 *
+	 * @param array   $ary_menu Collection of TimberMenuItem objects.
+	 * @param string  $str_current_page Current page url. $ary_menu will be searched for this to determine the previous/next link.
+	 * @param boolean $bool_include_child_links (Optional) Whether to search child links too. Defaults to true.
+	 * @return array With two keys, 'previous' and 'next', containing the menu item array for each.
+	 */
+	public function menuPreviousAndNextPage( $ary_menu, $str_current_page, $bool_include_child_links = true ) {
+		$ary_next_menu_item     = null;
+		$ary_previous_menu_item = $ary_next_menu_item;
+
+		if ( ! empty( $ary_menu ) ) {
+
+			// Start by flattening the menu array so it's no longer hierarchical.
+			$ary_link_list = $this->menuFlattenHierarchy( $ary_menu, $bool_include_child_links );
+
+			// Find the current page.
+			for ( $i = 0; $i < count( $ary_link_list ); $i++ ) {
+
+				$str_link = $ary_link_list[ $i ]->link();
+				if ( ( '' !== trim( $str_link ) ) && ( $str_link === $str_current_page ) ) {
+					if ( isset( $ary_link_list[ $i - 1 ] ) ) {
+						$ary_previous_menu_item = $ary_link_list[ $i - 1 ];
+					}
+
+					if ( isset( $ary_link_list[ $i + 1 ] ) ) {
+						$ary_next_menu_item = $ary_link_list[ $i + 1 ];
+					}
+					break;
+				}
+			}
+		}
+
+		return array(
+			'previous' => $ary_previous_menu_item,
+			'next'     => $ary_next_menu_item,
+		);
+	}
+
+	/**
+	 * Checks to see if a given URL is present in a menu
+	 *
+	 * @param ary $ary_menu Menu.
+	 * @param str $str_url URL to check.
+	 * @return boolean Whether or not the URL is in the menu.
+	 */
+	public function menuUrlInLinkList( $ary_menu, $str_url ) {
+		$ary_link_list = array();
+
+		foreach ( $ary_menu as $obj_menu_item ) {
+			$ary_link_list = array_merge( $ary_link_list, $this->menuItemLinkList( $obj_menu_item ) );
+		}
+
+		$ary_link_list = array_unique( $ary_link_list );
+
+		// Check to see if $str_url is in the list.
+		return in_array( $str_url, $ary_link_list );
+	}
+
+	/**
+	 * Modifications to the TinyMCE editor
+	 *
+	 * @param ary $ary_tiny_mce A list of all TinyMCE settings.
+	 */
+	public function customFormatTinyMCE( $ary_tiny_mce ) {
+		// Setup custom classes.
+		$ary_custom_formats = array(
+			array(
+				'title' => 'Alerts',
+				'items' => array(
+					array(
+						'title'    => 'Error',
+						'selector' => 'p',
+						'classes'  => 'alert alert--error',
+					),
+					array(
+						'title'    => 'Success',
+						'selector' => 'p',
+						'classes'  => 'alert alert--success',
+					),
+					array(
+						'title'    => 'Warning',
+						'selector' => 'p',
+						'classes'  => 'alert alert--warning',
+					),
+					array(
+						'title'    => 'Information',
+						'selector' => 'p',
+						'classes'  => 'alert alert--info',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Buttons',
+				'items' => array(
+					array(
+						'title'    => 'Small Button',
+						'selector' => 'a, button',
+						'classes'  => 'miz-button miz-button--small',
+					),
+					array(
+						'title'    => 'Large Button',
+						'selector' => 'a, button',
+						'classes'  => 'miz-button miz-button--lg',
+					),
+					array(
+						'title'    => 'Primary Button',
+						'selector' => 'a, button',
+						'classes'  => 'miz-button miz-button--primary',
+					),
+					array(
+						'title'    => 'Secondary Button',
+						'selector' => 'a, button',
+						'classes'  => 'miz-button miz-button--secondary',
+					),
+					array(
+						'title'    => 'Ghost Button',
+						'selector' => 'a, button',
+						'classes'  => 'miz-button miz-button--ghost',
+					),
+					array(
+						'title'    => 'Gold Ghost Button',
+						'selector' => 'a, button',
+						'classes'  => 'miz-button miz-button--ghost---gold',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Heading Emulation',
+				'items' => array(
+					array(
+						'title'    => 'Like Heading 1',
+						'selector' => 'h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'like-h1',
+					),
+					array(
+						'title'    => 'Like Heading 2',
+						'selector' => 'h1, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'like-h2',
+					),
+					array(
+						'title'    => 'Like Heading 3',
+						'selector' => 'h1, h2, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'like-h3',
+					),
+					array(
+						'title'    => 'Like Heading 4',
+						'selector' => 'h1, h2, h3, h5, h6, p, li, th, td, div',
+						'classes'  => 'like-h4',
+					),
+					array(
+						'title'    => 'Like Heading 5',
+						'selector' => 'h1, h2, h3, h4, h6, p, li, th, td, div',
+						'classes'  => 'like-h5',
+					),
+					array(
+						'title'    => 'Like Heading 6',
+						'selector' => 'h1, h2, h3, h4, h5, p, li, th, td, div',
+						'classes'  => 'like-h6',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Horizontal Rules',
+				'items' => array(
+					array(
+						'title'    => 'Dashed',
+						'selector' => 'hr',
+						'classes'  => 'hr--dashed',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Indent',
+				'items' => array(
+					array(
+						'title'    => 'Indent',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'indent',
+					),
+					array(
+						'title'    => '2x Indent',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'indent-2x',
+					),
+					array(
+						'title'    => 'Hanging Indent',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'hanging-indent',
+					),
+					array(
+						'title'    => '2x Hanging Indent',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'hanging-indent-2x',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Lists',
+				'items' => array(
+					array(
+						'title'    => 'Spaced',
+						'selector' => 'ul, ol',
+						'classes'  => 'list--spaced',
+					),
+					array(
+						'title'    => 'Unordered - Square',
+						'selector' => 'ul',
+						'classes'  => 'list--square',
+					),
+					array(
+						'title'    => 'Unordered - Disc',
+						'selector' => 'ul',
+						'classes'  => 'list--disc',
+					),
+					array(
+						'title'    => 'Ordered - Decimal (1.)',
+						'selector' => 'ol',
+						'classes'  => 'list--decimal',
+					),
+					array(
+						'title'    => 'Ordered - Lowercase Alpha (a.)',
+						'selector' => 'ol',
+						'classes'  => 'list--lower-alpha',
+					),
+					array(
+						'title'    => 'Ordered - Uppercase Alpha (A.)',
+						'selector' => 'ol',
+						'classes'  => 'list--upper-alpha',
+					),
+					array(
+						'title'    => 'Ordered - Lowercase Roman (i.)',
+						'selector' => 'ol',
+						'classes'  => 'list--lower-roman',
+					),
+					array(
+						'title'    => 'Ordered - Uppercase Roman (I.)',
+						'selector' => 'ol',
+						'classes'  => 'list--upper-roman',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Margins',
+				'items' => array(
+					array(
+						'title'    => 'No Margin',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'no-margin',
+					),
+					array(
+						'title'    => 'Standard Margin',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'margin',
+					),
+					array(
+						'title'    => '2x Margin',
+						'selector' => 'h1, h2, h3, h4, h5, h6, p, li, th, td, div',
+						'classes'  => 'margin-2x',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Quotes',
+				'items' => array(
+					array(
+						'title'    => 'Attribution',
+						'selector' => 'p',
+						'classes'  => 'blockquote__attribution',
+					),
+					array(
+						'title'    => 'Hanging Double Quote',
+						'selector' => 'p',
+						'classes'  => 'hanging-double-quote',
+					),
+					array(
+						'title'    => 'Hanging Single Quote',
+						'selector' => 'p',
+						'classes'  => 'hanging-quote',
+					),
+				),
+			),
+
+			array(
+				'title' => 'Text Styles',
+				'items' => array(
+					array(
+						'title'   => 'Bold (Appearance Only)',
+						'inline'  => 'span',
+						'classes' => 'miz-text--bold',
+					),
+					array(
+						'title'   => 'Italic (Appearance Only)',
+						'inline'  => 'span',
+						'classes' => 'miz-text--italic',
+					),
+					array(
+						'title'   => 'All Caps Text (Appearance Only)',
+						'inline'  => 'span',
+						'classes' => 'miz-text--transform-upper',
+					),
+					array(
+						'title'   => 'Small Caps Text (Appearance Only)',
+						'inline'  => 'span',
+						'classes' => 'miz-text--small-caps',
+					),
+					array(
+						'title'   => 'No Word Wrap',
+						'inline'  => 'span',
+						'classes' => 'no-break',
+					),
+					array(
+						'title'    => 'Material Icon',
+						'selector' => 'i',
+						'classes'  => 'miz-icon material-icons',
+					),
+				),
+			),
+		);
+
+		// Prevents formats dropdown from emulating the style each item represents.
+		$ary_tiny_mce['preview_styles'] = 'font-family font-size font-weight text-decoration text-transform background-color color';
+
+		// Insert styles, JSON encoded, into 'style_formats'.
+		$ary_tiny_mce['style_formats'] = json_encode( $ary_custom_formats );
+
+		// Fix block formats.
+		$ary_tiny_mce['block_formats'] = 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6';
+
+		// Customize toolbars.
+		$ary_tiny_mce['toolbar1']             = 'formatselect, styleselect, bold, italic, link, unlink, bullist, numlist, alignleft, aligncenter, alignright, alignjustify, blockquote, outdent, indent, hr, table, pastetext, removeformat, charmap, code, undo, redo, spellchecker, wp_fullscreen';
+		$ary_tiny_mce['toolbar2']             = '';
+		$ary_tiny_mce['wordpress_adv_hidden'] = false;
+
+		return $ary_tiny_mce;
+	}
+
+	/**
+	 * Enable modifications to the TinyMCE editor for ACF wysiwyg editors
+	 *
+	 * @param ary $ary_tiny_mce TinyMCE settings.
+	 */
+	public function acfCustomFormatTinyMCE( $ary_tiny_mce ) {
+		// Customize toolbars.
+		$ary_tiny_mce['Full'][1] = array( 'formatselect', 'styleselect', 'bold', 'italic', 'link', 'unlink', 'bullist', 'numlist', 'blockquote', 'outdent', 'indent', 'hr', 'table', 'pastetext', 'removeformat', 'charmap', 'code', 'undo', 'redo', 'spellchecker', 'wp_fullscreen' );
+		$ary_tiny_mce['Full'][2] = array();
+
+		return $ary_tiny_mce;
+	}
+
+	/**
+	 * Removes emoji support from WordPress 4.2+
+	 */
+	public function disableEmoji() {
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_action( 'admin_print_styles', 'print_emoji_styles' );
+		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	}
+
+	/**
+	 * Remove emoji from TinyMCE
+	 *
+	 * @param array $ary_plugins Plugins list.
+	 * @return array Updated plugin list.
+	 */
+	public function disableTinyMCEEmoji( $ary_plugins ) {
+		return array_diff( $ary_plugins, array( 'wpemoji' ) );
+	}
+
+	/**
+	 * Setup custom taxonomies
+	 */
+	public function customTaxonomies() {
+		// Setup Staff Type taxonomy.
+		register_taxonomy(
+			'staff_type',
+			'staff',
+			array(
+				'labels'            => array(
+					'name'              => 'Staff Type',
+					'singular_name'     => 'Staff Type',
+					'all_items'         => 'All Staff Types',
+					'edit_item'         => 'Edit Staff Type',
+					'view_item'         => 'View Staff Type',
+					'update_item'       => 'Update Staff Type',
+					'add_new_item'      => 'Add New Staff Type',
+					'new_item_name'     => 'New Staff Type',
+					'parent_item'       => 'Parent Staff Type',
+					'parent_item_colon' => 'Parent Staff Type:',
+					'search_items'      => 'Search Staff Types',
+					'not_found'         => 'No Staff Type found.',
+				),
+				'hierarchical'      => true,
+				'show_admin_column' => true,
+				'show_ui'           => true,
+				'query_var'         => true,
+				'rewrite'           => true,
+			)
+		);
+	}
+
+	/**
+	 * Setup custom post types
+	 */
+	public function customPostTypes() {
+		add_filter(
+			'rest_prepare_event',
+			function( $response ) {
+				$response->data['acf'] = get_fields( $response->data['id'] );
+				return $response;
+			}
+		);
+
+		// Staff.
+		if ( ! get_option( 'options_disable_staff' ) ) {
+			register_post_type(
+				'staff',
+				array(
+					'labels'        => array(
+						'name'               => __( 'Staff' ),
+						'singular_name'      => __( 'Staff Member' ),
+						'add_new'            => _x( 'Add New', 'staff' ),
+						'add_new_item'       => __( 'Add New Staff Member' ),
+						'edit_item'          => __( 'Edit Staff Member' ),
+						'new_item'           => __( 'New Staff Member' ),
+						'view_item'          => __( 'View Staff Member' ),
+						'search_items'       => __( 'Search Staff Members' ),
+						'not_found'          => __( 'No staff members found' ),
+						'not_found_in_trash' => __( 'No staff members found in Trash' ),
+						'parent_item_colon'  => '',
+						'menu_name'          => 'Staff',
+					),
+					'public'        => true,
+					'has_archive'   => 'staff',
+					'show_in_rest'  => true,
+					'supports'      => array( 'title', 'editor', 'page-attributes', 'thumbnail', 'excerpt', 'author', 'revisions' ),
+					'menu_position' => 9,
+					'menu_icon'     => 'dashicons-groups',
+				)
+			);
+		}
+	}
+
+	/**
+	 * Enables a shortcode for the home URL
+	 *
+	 * Usage:
+	 * [home_url]
+	 *
+	 * @return string Home URL
+	 */
+	public function homeURLShortCode() {
+		return get_bloginfo( 'url' );
+	}
+
+	/**
+	 * Add SVG to the list of acceptable mime-types
+	 *
+	 * @param array $ary_mime_types Mime types.
+	 * @return array Updated $ary_mime_types.
+	 */
+	public function customMimeTypes( $ary_mime_types ) {
+		$ary_mime_types['svg'] = 'image/svg+xml';
+
+		// Disallow file types.
+		unset( $ary_mime_types['csv'] );
+		unset( $ary_mime_types['doc'] );
+		unset( $ary_mime_types['docx'] );
+		unset( $ary_mime_types['ppt'] );
+		unset( $ary_mime_types['pptx'] );
+		unset( $ary_mime_types['pps'] );
+		unset( $ary_mime_types['ppsx'] );
+		unset( $ary_mime_types['odt'] );
+		unset( $ary_mime_types['pdf'] );
+		unset( $ary_mime_types['xls'] );
+		unset( $ary_mime_types['xlsx'] );
+
+		return $ary_mime_types;
+	}
+
+	/**
+	 * Prevent remote attackers from enumerating user names
+	 *
+	 * @param string $str_redirection_url Redirection URL.
+	 * @param string $str_requested_url Requested URL.
+	 * @return string (Possibly altered) Redirection URL.
+	 */
+	public function scanForEnumerationAttempt( $str_redirection_url, $str_requested_url ) {
+		if ( 1 === preg_match( '/\?author=([\d]*)/', $str_requested_url ) ) {
+			$str_redirection_url = false;
+		}
+
+		return $str_redirection_url;
+	}
+
+	/**
+	 * Setup custom sort for staff
+	 */
+	public function customStaffSort() {
+		$orderby_statement = "menu_order DESC, RIGHT(post_title, LOCATE(' ', REVERSE(post_title)) - 1) ASC";
+		return $orderby_statement;
+	}
+}
+
+// Create object.
+new StandardMizzouSite();
+
+// Add Option Pages.
+if ( function_exists( 'acf_add_options_page' ) ) {
+
+	acf_add_options_page(
+		array(
+			'page_title' => 'Theme Settings',
+			'menu_title' => 'Theme Settings',
+			'menu_slug'  => 'theme-general-settings',
+			'capability' => 'manage_options',
+			'redirect'   => false,
+		)
+	);
+
+	acf_add_options_sub_page(
+		array(
+			'page_title'  => 'Footer Settings',
+			'menu_title'  => 'Footer',
+			'parent_slug' => 'theme-general-settings',
+			'capability'  => 'edit_theme_options',
+		)
+	);
+}

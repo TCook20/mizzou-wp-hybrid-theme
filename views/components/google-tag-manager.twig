@@ -1,0 +1,23 @@
+{#
+/**
+ * Google Tag Manager
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2019 Curators of the University of Missouri
+ *
+ * Variables:
+ * - google_tag_manager_asset_url: (string) URL of asset directory (CSS, JavaScript, and template images) (optional, see default). 
+ * - google_tag_manager_detected_hostname: (string) Hostname as reported by the server (may be the live or development environment) (see default).
+ * - google_tag_manager_hostname: (string) Hostname of the live site (see default).
+ */
+#}
+
+{% if ((metaData.url.detected_hostname == metaData.url.hostname) and (metaData.google.tagManager)) and not (user) %}
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id={{ metaData.google.tagManager }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+{% endif %}

@@ -1,0 +1,14 @@
+bower_components
+node_modules
+vendor
+www
+package-lock.json
+yarn-lock.json
+yarn.lock
+fractal/build/
+fractal/public/css/**/*
+fractal/public/fonts/**/*
+fractal/public/images/**/*
+fractal/public/scripts/**/*
+.DS_Store
+.lighthouse-report.html

@@ -1,0 +1,54 @@
+{# Set Variables #}
+{% set byTheNumbersKicker = byTheNumbersKicker|default(flexgroup.kicker) %}
+{% set byTheNumbersTitle = byTheNumbersTitle|default(flexgroup.title) %}
+{% set byTheNumbersContent = byTheNumbersContent|default(flexgroup.numbers) %}
+{% set byTheNumbersButton = byTheNumbersButton|default(flexgroup.button) %}
+
+{% set byTheNumbers = {
+    'title': byTheNumbersTitle,
+    'kicker': byTheNumbersKicker,
+    'content': byTheNumbersContent,
+    'button': byTheNumbersButton
+} %}
+
+{# Imports #}
+  {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+
+{#
+We need:
+kicker
+title
+array of 2-4:
+    number
+    message
+button
+@todo How many number cards are there? I'm going with 2-4 for now
+#}
+<section class="miz-layer miz-layer--brand miz-main-grid__full">
+    <div class="miz-container">
+        {% if byTheNumbers.kicker or byTheNumbers.title %}
+        <header class="miz-layer__header miz-layer__header--center">
+            {% if byTheNumbers.kicker %}<p class="miz-layer__kicker">{{ byTheNumbers.kicker }}</p>{% endif %}
+            {% if byTheNumbers.title %}<h2 class="miz-layer__title">{{ byTheNumbers.title }}</h2>{% endif %}
+        </header>
+        {% endif %}
+        {% if byTheNumbers.content is defined and byTheNumbers.content is iterable  %}
+        <div class="miz-layer__content miz-layer__content--center">
+            <div class="miz-by-the-numbers__row">
+                {% for NumberData in byTheNumbers.content %}
+                    <div class="miz-by-the-numbers__column">
+                        <p class="miz-by-the-numbers__number miz-text--black">{{ NumberData.number }}</p>
+                        <p>{{ NumberData.message }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if byTheNumbers.button is defined and byTheNumbers.button is iterable %}
+                <div class="miz-button-group">
+                    {% set buttonOptions = { "class": "miz-button--primary miz-button--brand", "text": byTheNumbers.button.title, 'href': byTheNumbers.button.url } %}
+                    {{ anchorButton( buttonOptions ) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</section>

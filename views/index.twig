@@ -1,0 +1,44 @@
+{#
+/**
+ * Index Template
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ */
+#}
+
+{% extends ['site-page.twig', 'page.twig'] %}
+
+{% set page_article_modifier_class = 'miz-main-grid__main' %}
+
+{# set Feed Numbers #}
+{% set news_count = news_count|default(3) %}
+{% set events_count = events_count|default(3) %}
+
+{% block content %}
+
+{% if events %}
+    {% include 'layers/events.twig' with {
+        'eventsKicker': null,
+        'eventsTitle': 'Events',
+        'eventsContents': events,
+        'eventsCount': events_count,
+        'eventsButton': {'url': site.link ~ '/events', 'title': 'More Events'},
+        'calendarSource': 'wp'
+    } %}
+{% endif %}
+
+{% if news %}
+    {% include 'layers/featured-news.twig' with {
+        'featNews_kicker': null,
+        'featNews_title': 'News and Profiles',
+        'dynamicStories': true,
+        'featNews_contents': news|slice(0,3),
+        'featNews_buttons': {'url': site.link ~ '/archive', 'title': 'More News'}
+    } %}
+{% endif %}
+
+{% endblock %}
+
+{% block content_aside %}
+{% endblock %}

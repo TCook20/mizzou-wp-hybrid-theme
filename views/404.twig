@@ -1,0 +1,22 @@
+{#
+/**
+ * 404 Template
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - page: (object) Page content (see https://github.com/jarednova/timber/wiki/TimberPost for properties).
+ * - site: (object) Site-wide variables, mostly set in functions.php.
+ *       - base_url: (string) Base URL of the site (optional).
+ */
+#}
+
+{% extends ['site-page.twig', 'page.twig'] %}
+
+{% block content %}
+{{ parent() }}
+
+<p>Sorry! It doesn&#8217;t look like we were able to find that page.</p>
+<p><a href="{{ site.link }}">Return to Main Page</a></p>
+{% endblock %}

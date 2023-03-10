@@ -1,0 +1,184 @@
+{#
+/**
+ * HTML Boilerplate
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - page: (object) Page content.
+ *       - body_class: (string) Class to include on the <body> tag (optional).
+ *       - body_id: (string) Id to include on the <body> tag (optional).
+ *       - html_class: (string) Class to include on the <html> tag (optional).
+ *       - html_id: (string) Id to include on the <html> tag (optional).
+ * - site: (object) Site-wide variables, mostly set in functions.php.
+ *       - language: (string) Language code of the site (optional - see default).
+ * - wp_head: (string) <head> tag content for WordPress sites (optional).
+ * - wp_footer: (string) end of <body> tag content for WordPress sites (optional).
+ */
+#}
+
+{% extends ['ds-base.twig'] %}
+
+{% set content_include_navigation = content_include_navigation|default(true) %}
+{% if option.primary_nav_color %}
+    {% set navigation_modifier_class = ('nav--primary-navigation nav--primary-navigation--' ~ option.primary_nav_color) %}
+{% else %}
+    {% set navigation_modifier_class = navigation_modifier_class|default('nav--primary-navigation') %}
+{% endif %}
+
+{% set bodyOptions = { 'html_id': page.body_id, 'html_class': page.body_class } %}
+
+{% set metaData = {
+    'title': page.title,
+    'name': site.name,
+    'short_name': option.short_name,
+    'description': page.preview ?? site.description,
+    'encoding': 'utf-8',
+    'google': {
+        'analytics': option.google_analytics,
+        'cse': option.google_cse_id,
+        'tagManager': option.google_tag_manager,
+        'searchConsole': option.google_search_console
+    },
+    'icons': {
+        'color': option.site_icon_color,
+        'apple': option.apple_mask_icon_color,
+        'ms': option.ms_tile_color,
+        'sprite': metaData.url.asset ~ '/images/miz-sprite.svg'
+    },
+    'image': page.thumbnail,
+    'language': site.language|default('en'),
+    'search': {
+        'enabled': site.search_enabled,
+        'field_name': site.search_field_name,
+        'path': site.search_path
+    },
+    'socialMedia': option.social_media,
+    'url': {
+        'asset': theme.parent.link ?? theme.link ~ '/',
+        'base': site.link,
+        'current': page.current_page,
+        'detected_hostname': site.detected_hostname,
+        'hostname': option.hostname,
+        'homepage': page.is_homepage
+    },
+    'version': theme.parent.version,
+    'viewport': site.viewport
+} %}
+
+{% set navigationOptions = {
+  'enable': content_include_navigation|default(true),
+  'class': navigation_modifier_class,
+  'id': 'navigation',
+  'items': site.navigation.items
+} %}
+
+{% block head_meta_page_info %}
+	{% include ['meta/head/site-head-metadata.twig', 'meta/head/head-metadata.twig'] ignore missing with metaData %}
+  {% include ['meta/head/site-head-icons.twig', 'meta/head/head-icons.twig'] ignore missing with metaData %}
+{%- endblock head_meta_page_info %}
+
+{% block head_meta_facebook %}{%- endblock head_meta_facebook %}
+
+{% block head_meta_twitter %}{% endblock %}
+
+{% block head_js %}
+	{% include ['meta/head/site-head-js.twig', 'meta/head/head-js.twig'] ignore missing with metaData %}
+{% endblock head_js %}
+
+{% block head_css %}
+	{% include ['meta/head/site-head-css.twig', 'meta/head/head-css.twig'] ignore missing with metaData %}
+{% endblock head_css %}
+
+{% block head_code %}
+  {{ function('wp_head') }}
+
+	{% include ['components/site-google-tag-manager.twig', 'components/google-tag-manager.twig'] ignore missing with metaData %}
+{% endblock head_code %}
+
+{% block header %}
+	{% if option.header_part %}
+		{{ function('do_blocks', '<!-- wp:template-part {"tagName":"header","slug":"header","className":"miz-header","theme":"mu-hybrid-base"} /-->') }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock header %}
+
+{% block outdated_browser %}
+  {% include ['components/header/site-outdated-browser.twig', 'components/header/outdated-browser.twig'] ignore missing %}
+{% endblock %}
+
+{% block skip_to_content %}
+  {% from "@miz/components/navigation/skip-to/skip-to.twig" import SkipTo as skipTo %}
+
+  {% set skipToOptions = {
+    links: [
+      { text: "Skip to navigation", href: "#navigation" },
+      { text: "Skip to content", href: "#content" }
+    ]
+  } %}
+
+  {{ skipTo( skipToOptions ) }}
+{% endblock %}
+
+{% block pre_content %}
+  {% block pre_content__layer_processing %}
+		{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
+			{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
+		{% endif %}
+	{% endblock %}
+
+  {% block pre_content__page_headers %}
+    {# Page header #}
+		{% include "@miz/components/page-header/page-header.twig" with { "title": page.title } %}
+  {% endblock pre_content__page_headers %}
+{% endblock pre_content %}
+
+{% block content %}
+  {% if page.content %}
+    <article class="miz-main-grid__article">
+			{{ page.content }}
+		</article>
+  {% endif %}
+{% endblock content %}
+
+{% block content_aside %}
+    {% set sidebar %}
+      {% include 'sidebar.twig' ignore missing %}
+    {% endset %}
+
+    {% if sidebar | trim is not empty or (page.flexgroups.aside is defined and page.flexgroups.aside is iterable) %}
+      <aside class="miz-main-grid__sidebar">
+        {% if sidebar is not empty %}
+          {% block sidebar_contents %}
+            {{ sidebar }}
+          {% endblock sidebar_contents %}
+        {% endif %}
+
+        {% block aside__layer_processing %}
+          {% if page.flexgroups.aside is defined and page.flexgroups.aside is iterable %}
+            {% include 'flexgroups.twig' with {
+              "Flexgroups" : page.flexgroups.aside
+            } %}
+          {% endif %}
+        {% endblock aside__layer_processing %}
+      </aside>
+    {% endif %}
+{% endblock content_aside %}
+
+{% block post_content %}
+  {% block post_content__layer_processing %}
+    {% if page.meta('layout-post') is defined and page.meta('layout-post') is iterable %}
+      {% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-post') } %}
+    {% endif %}
+  {% endblock %}
+{% endblock post_content %}
+
+{% block footer %}
+	{% if option.footer_part %}
+		{{ function('do_blocks', '<!-- wp:template-part {"tagName":"footer","slug":"footer","className":"miz-footer","theme":"mu-hybrid-base"} /-->') }}
+	{% else %}
+		{{ parent() }}
+	{% endif %}
+{% endblock footer %}

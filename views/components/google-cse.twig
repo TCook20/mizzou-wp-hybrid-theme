@@ -1,0 +1,29 @@
+{#
+/**
+ * Google Custom Search Engine
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2019 Curators of the University of Missouri
+ *
+ * Variables:
+ * - google_analytics_asset_url: (string) URL of asset directory (CSS, JavaScript, and template images) (optional, see default). 
+ * - google_analytics_detected_hostname: (string) Hostname as reported by the server (may be the live or development environment) (see default).
+ * - google_analytics_hostname: (string) Hostname of the live site (see default).
+ */
+#}
+
+{% if (metaData.google.cse) %}
+<!-- Google Custom Search -->
+<script>
+  (function() {
+    var cx = '{{ metaData.google.cse }}';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+{% endif %}

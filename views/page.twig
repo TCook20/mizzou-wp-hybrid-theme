@@ -1,0 +1,59 @@
+{#
+/**
+ * Page Template
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - content: (string) Main content.
+ * - page: (object) Page content (see https://github.com/jarednova/timber/wiki/TimberPost for properties).
+ */
+#}
+
+{% extends ['baseView.twig', 'ds-base.twig'] %}
+
+{% if page.get_field('aside_side') == 'left' %}
+  {% set page_aside_modifier_class = 'miz-main-grid--reverse' %}
+{% endif %}
+
+{% block pre_content__layer_processing %}
+	{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
+		{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
+	{% endif %}
+{% endblock %}
+
+{% block pre_content__page_headers %}
+	{% include '@miz/components/page-header/page-header.twig' with {
+		'title': page.title
+	} %}
+{% endblock %}
+
+{% block content %}
+	{% if page.content %}
+    <article class="miz-main-grid__article">
+			{{ page.content }}
+		</article>
+  {% endif %}
+{% endblock %}
+
+{% block content_aside %}
+<aside class="miz-main-grid__sidebar">
+	{% if page.sub_navigation.items %}
+		{% include '@miz-block/sub-nav.twig' ignore missing with {
+			'nav_items': page.sub_navigation.items
+		} %}
+	{% elseif page.meta('layout-aside') is defined and page.meta('layout-aside') is iterable %}
+		{% include 'flexgroups.twig' with {"Flexgroups" : page.meta('layout-aside') } %}
+	{% else %}
+	{% endif %}
+</aside>
+{% endblock %}
+
+{% set post_content %}
+  {% block post_content__layer_processing %}
+    {% if page.meta('layout-post') is defined and page.meta('layout-post') is iterable %}
+      {% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-post') } %}
+    {% endif %}
+  {% endblock %}
+{% endset %}

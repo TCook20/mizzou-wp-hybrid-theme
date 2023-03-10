@@ -1,0 +1,52 @@
+{#
+/**
+ * Navigation Pagination
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2017 Curators of the University of Missouri
+ *
+ * Variables:
+ * - pagination: (array) Collection of all pagination data.
+ *       - next: (array) Navigation item of next page (optional).
+ *           - link: (string) Link for navigation item.
+ *           - title: (string) Title of navigation item.
+ *       - previous: (array) Navigation item of previous page (optional).
+ *           - link: (string) Link for navigation item.
+ *           - title: (string) Title of navigation item.
+ * - pagination_modifier_class: (string) A modifier class to apply to the block (optional).
+ * - pagination_include_numbers: (boolean) Whether to display number of pages.
+ *
+ */
+#}
+{% set pagination_include_numbers = pagination_include_numbers|default(false) %}
+{% set pagination = pagination|default(pagination) %}
+
+<div class="miz-pagination">
+{% if (pagination.prev) or (pagination.next) %}
+    <ul class="miz-pagination__list{% if (pagination_modifier_class) %} {{ pagination_modifier_class }}{% endif %}">
+    {% if (pagination.prev) %}
+        <li class="miz-pagination__list-item pagination__item--previous">
+            <a href="{{ pagination.prev.link }}" class="miz-pagination__link {{ pagination.prev.class }}"><span>&#171; Previous</span></a>
+        </li>
+    {% endif %}
+
+    {% if pagination_include_numbers == true %}
+    {% for item in pagination.pages %}
+        <li class="miz-pagination__list-item{% if (current_page == item.link) %} is-current{% endif %}{% if item.class %} {{ item.class}}{% endif %}">
+            {% if (current_page == item.link) %}
+                {{ item.title }}
+            {% else %}
+                <a href="{{ item.link }}" class="miz-pagination__link{% if item.class %} {{ item.class}}{% endif %}">{{ item.title }}</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    {% endif %}
+    
+    {% if (pagination.next) %}
+        <li class="miz-pagination__list-item pagination__item--next">
+            <a href="{{ pagination.next.link }}" class="miz-pagination__link {{ pagination.next.class }}"><span>Next &#187;</span></a>
+        </li>
+    {% endif %}
+    </ul>
+{% endif %}
+</div>

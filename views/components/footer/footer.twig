@@ -1,0 +1,104 @@
+{#
+/**
+ * Footer (Standard Configuration)
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ *
+ * Variables:
+ * - footer_modifier_class: (string) A modifier class to apply to the block (optional).
+ */
+#}
+
+{# {% extends "@miz/components/footer/footer.twig" %} #}
+{% from "@miz/components/signature/signature.twig" import Signature as signature %}
+
+{%- spaceless %}
+
+  {# Imports #}
+  {% import "@miz/utilities/twig/utils.twig" as utils %}
+  {% from "@miz/components/contact-card/contact-card.twig" import ContactCard as contactCard %}
+
+  {# Parameters #}
+    {% set options = _context ?: {} %}
+
+    {% set footerClass = "miz-footer" %}
+    {% set footerClass = options.class ? utils.AppendClasses( footerClass, options.class ) : footerClass %}
+    {% set footerAttributes = options.attributes ? utils.AddAttributes( options.attributes ) %}
+
+{% endspaceless -%}
+
+<footer class="{{ footerClass }}"{{ footerAttributes }}>
+  <div class="miz-footer__layer">
+    <div class="miz-footer__brand">
+      <div class="miz-container">
+        {% block footer__brand %}
+          {% if theme == 'dark' %}
+            {{ signature({}, {size: 'medium', reverse: true}) }}
+          {% else %}
+            {{ signature({}, {size: 'medium', reverse: false}) }}
+          {% endif %}
+        {% endblock footer__brand %}
+      </div>
+    </div>
+  </div>
+
+  <div class="miz-footer__layer">
+    <div class="miz-footer__information">
+      {% block footer__information %}
+        {% set footerContactCardClass = 'miz-contact-card--brand' %}
+        {% set footerContactCardClass = theme == 'dark' ? "#{footerContactCardClass} miz-fill--black miz-text--white" : footerContactCardClass %}
+
+        {% set footer_contact_card_header = footer_contact_card_header|default(option.footer_contact_card_title) %}
+        {% set footer_contact_dept_name = footer_contact_dept_name|default(option.contact_name) %}
+        {% set footer_contact_address = footer_contact_address|default(option.contact_address.street_address) %}
+        {% set footer_contact_address_locality = footer_contact_address_locality|default(option.contact_address.address_locality) %}
+        {% set footer_contact_address_region = footer_contact_address_region|default(option.contact_address.state_region) %}
+        {% set footer_contact_address_zip = footer_contact_address_zip|default(option.contact_address.address_postal_code) %}
+        {% set footer_contact_email = footer_contact_email|default(option.contact_email.contact_email_address) %}
+        {% set footer_contact_email_text = footer_contact_email_text|default(option.contact_email.contact_email_text) %}
+        {% set footer_contact_fax = footer_contact_fax|default(option.contact_fax) %}
+        {% set footer_contact_phone = footer_contact_phone|default(option.contact_telephone) %}
+
+        {% include 'components/cards/contact.twig' with {
+          'cardTheme': footerContactCardClass,
+          'contactHeader': footer_contact_card_header,
+          'contactDeptName': footer_contact_dept_name,
+          'contactAddress': footer_contact_address,
+          'contactLocality': footer_contact_address_locality,
+          'contactRegion': footer_contact_address_region,
+          'contactZipcode': footer_contact_address_zip,
+          'contactPhone': footer_contact_phone,
+          'contactEmail': footer_contact_email,
+          'contactCustomEmailText': footer_contact_email_text,
+          'contactFax': footer_contact_fax,
+          'enable_social_icons': true,
+          'social_media_icon_color': theme == 'dark' ? 'miz-svg--gold' : 'miz-svg--black',
+          'social_media_modifier_class': false
+        } %}
+      {% endblock footer__information %}
+    </div>
+  </div>
+
+  <div class="miz-footer__layer">
+    <div class="miz-container">
+      <div class="miz-footer__eeoaa">
+        {% block footer__eeoaa %}
+
+          <p><small>MU is an <a href="//missouri.edu/eeo-aa/">equal opportunity/access/affirmative action/pro-disabled and veteran employer</a> and does not discriminate on the basis of sex in our education programs or activities, pursuant to Title IX and 34 CFR Part 106. For more information, visit <a href="//missouri.edu/eeo-aa/">MU’s Nondiscrimination Policy</a> or the <a href="https://equity.missouri.edu/education-prevention-and-outreach/student-training-not-anymore/">Office of Institutional Equity</a>.</small></p>
+
+        {% endblock footer__eeoaa %}
+      </div>
+    </div>
+  </div>
+
+  <div class="miz-footer__layer miz-fill--black">
+    <div class="miz-container">
+      <div class="miz-footer__colophon">
+        {% block footer__colophon %}
+          {% include "@miz/components/colophon/colophon.twig" with {} only %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</footer>

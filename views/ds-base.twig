@@ -1,0 +1,156 @@
+{#
+ * View file used to render the containing structure around the majority of pages in the site
+ *
+ * @package WordPress
+ * @subpackage Mizzou Base
+ * @category theme
+ * @category view
+ * @author Digital Service, University of Missouri
+ * @copyright 2023 Curators of the University of Missouri
+ *
+ * Has access to the following variables
+ *  - objMainPost
+ *  - strPageTitle
+ *  - strEditPostLink
+ *  - strInnerViewContent
+ *
+#}
+
+{% block head -%}
+	{% spaceless %}
+		{% set html_attributes = ' dir="ltr" lang="en-US"' %}
+		{% set body = {class: "miz-body"} %}
+	{% endspaceless %}
+
+	{%- embed '@miz/components/meta/head/head.twig' with {
+		head_meta_page_info: block('head_meta_page_info'),
+		head_meta_facebook: block('head_meta_facebook'),
+		head_meta_twitter: block('head_meta_twitter'),
+		head_js: block('head_js'),
+		head_css: block('head_css'),
+		head_code: block('head_code')} %}
+	{% endembed %}
+{% endblock head %}
+
+{% block body %}
+
+  {% block skip_to_content %}
+    {% from "@miz/components/navigation/skip-to/skip-to.twig" import SkipTo as skipTo %}
+
+    {% set skip_to_options = {
+      links: [
+        { text: "Skip to navigation", href: "#navigation" },
+        { text: "Skip to content", href: "#content" }
+      ]
+    } %}
+
+    {{ skipTo(skip_to_options) }}
+  {% endblock skip_to_content %}
+
+  <div class="miz-wrapper miz-fill--white miz-section--wrapper">
+
+    {# Header #}
+		{% block header %}
+			{% set nav_items = site.primary_navigation.items %}
+			{% set ribbon_items = site.tactical_navigation.items %}
+			{% set navigationOptions = {
+				'enable': content_include_navigation|default(true),
+				'class': navigation_modifier_class,
+				'id': 'navigation',
+				'items': site.navigation.items
+			} %}
+
+			{% set header_options = {
+				ribbon: {
+					"link-list": {
+						list: ribbon_items
+					}
+				},
+				masthead: {
+					title: site.name,
+					subtitle: site.subhead_name
+				},
+				navigation: {
+          navigation_options: {
+            class: 'miz-nav miz-primary-navigation__nav miz-expand',
+            attributes: {
+              id: 'navigation'
+            },
+            list: {
+              items: nav_items
+            }
+          },
+          navigation_menu_button_options: {
+            "icon": {
+              "class": "miz-icon miz-icon--md miz-svg--black",
+              "name": "menu"
+            },
+            "options": {
+              "class": "miz-button--primary miz-primary-navigation__menu-button",
+              "attributes": {
+                "id": "mizPrimaryNavMenuButton",
+                "aria-label": "Open navigation",
+                "aria-expanded": false,
+                "aria-haspopup": true,
+                "aria-controls": "buttonDataTarget",
+                "data-miz-expand": "navigation"
+              }
+            }
+          }
+        }
+			} %}
+
+			{% embed ['@miz/components/header.twig', 'components/header/header.twig'] ignore missing with header_options only %}
+				{% block navigation %}
+				<div class="miz-fill--gold">
+					<div class="miz-container">
+						{% include '@miz-block/primary-nav.twig' ignore missing with {
+							'nav_items': header_options.navigation.navigation_options.list.items
+						} %}
+					</div>
+				</div>
+				{% endblock %}
+			{% endembed %}
+		{% endblock %}
+
+    {# Main #}
+    {% block main %}
+    <main class="miz-main-grid{{ option.aside_align == 'left' ? ' miz-main-grid--reverse' }}" id="content" role="main">
+
+      {# Main content section #}
+      {% block pre_content %}{% endblock pre_content %}
+
+      {% block content %}{% endblock content %}
+
+      {% block content_aside %}{% endblock content_aside %}
+
+      {% block post_content %}{% endblock post_content %}
+
+    </main>
+    {% endblock %}
+
+    {# Footer #}
+
+		{% block footer %}
+			{% set footer_theme = option.footer_theme %}
+			{% set footer_class = footer_theme == 'dark' ? 'miz-footer--dark' : '' %}
+
+			{% set footer_options = {
+				"class": footer_class,
+				"theme": footer_theme
+			} %}
+
+			{% include 'components/footer/footer.twig' with footer_options %}
+		{% endblock %}
+  </div>
+{% endblock body %}
+
+{% block foot %}
+  {% embed '@miz/components/meta/foot/foot.twig' %}
+    {% block foot_block %}
+      {{ parent() }}
+
+      {{ function('wp_footer') }}
+    {% endblock foot_block %}
+  {% endembed %}
+{% endblock foot %}

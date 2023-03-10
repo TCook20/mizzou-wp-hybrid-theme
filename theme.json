@@ -1,0 +1,905 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.1/theme.json",
+	"customTemplates": [
+		{
+			"name": "template-page-left-sidebar",
+			"postTypes": [ "page", "post" ],
+			"title": "Page with Left Aside"
+		},
+		{
+			"name": "template-page-right-sidebar",
+			"postTypes": [ "page", "post" ],
+			"title": "Page with Right Aside"
+		},
+		{
+			"name": "template-search",
+			"postTypes": [ "page" ],
+			"title": "Search"
+		}
+	],
+	"patterns": [],
+	"settings": {
+		"appearanceTools": true,
+		"blocks": {
+			"core/button": {
+				"border": {
+					"color": false,
+					"radius": false,
+					"style": false,
+					"width": false
+				},
+				"typography": {
+					"fontFamilies": [],
+					"fontSizes": []
+				}
+			},
+			"core/cover": {
+				"color": {
+					"custom": false,
+					"customGradient": false,
+					"duotone": [],
+					"gradients": []
+				}
+			},
+			"core/gallery": {
+				"color": {
+					"text": true,
+					"background": false
+				}
+			},
+			"core/group": {
+				"color": {
+					"background": true,
+					"text": true
+				},
+				"typography": {
+					"fontFamilies": [],
+					"fontSizes": [],
+					"fontStyle": false,
+					"fontWeight": false,
+					"textTransform": false
+				},
+				"spacing": {
+					"blockGap": null,
+					"margin": false,
+					"padding": false
+				}
+			},
+			"core/heading": {
+				"color": {
+					"palette": []
+				},
+				"typography": {
+					"fontSizes": []
+				}
+			},
+			"core/navigation": {
+				"spacing": {
+					"blockGap": false,
+					"margin": false,
+					"padding": false,
+					"units": [ "rem" ]
+				},
+				"typography": {
+					"fontFamilies": [],
+					"fontSizes": [],
+					"fontStyle": false,
+					"fontWeight": false,
+					"textTransform": false
+				}
+			},
+			"core/paragraph": {
+				"color": {
+					"palette": []
+				},
+				"custom": [],
+				"typography": {
+					"fontFamilies": [],
+					"fontSizes": [
+						{
+							"name": "Small",
+							"size": ".8em",
+							"slug": "miz-text--sm"
+						},
+						{
+							"name": "Default",
+							"size": "1em",
+							"slug": "miz-text--md"
+						},
+						{
+							"name": "Large",
+							"size": "1.25em",
+							"slug": "miz-text--lg"
+						}
+					]
+				}
+			},
+			"core/social-links": {
+				"color": {
+					"palette": [
+						{
+							"color": "#222222",
+							"name": "Black",
+							"slug": "miz-black"
+						},
+						{
+							"color": "#F1B82D",
+							"name": "Gold",
+							"slug": "miz-gold"
+						},
+						{
+							"color": "#FFFFFF",
+							"name": "White",
+							"slug": "miz-white"
+						}
+					]
+				}
+			}
+		},
+		"border": {
+			"color": false,
+			"radius": false,
+			"style": false,
+			"width": false
+		},
+		"color": {
+			"background": false,
+			"custom": false,
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultPalette": false,
+			"duotone": [],
+			"gradients": [],
+			"link": false,
+			"palette": [
+				{
+					"color": "#222222",
+					"name": "Black",
+					"slug": "miz-black"
+				},
+				{
+					"color": "#F1B82D",
+					"name": "Gold",
+					"slug": "miz-gold"
+				},
+				{
+					"color": "#FFFFFF",
+					"name": "White",
+					"slug": "miz-white"
+				},
+				{
+					"color": "#900000",
+					"name": "Red",
+					"slug": "miz-red"
+				},
+				{
+					"color": "#BD4D1F",
+					"name": "Orange",
+					"slug": "miz-orange"
+				},
+				{
+					"color": "#318FD7",
+					"name": "Blue",
+					"slug": "miz-blue"
+				},
+				{
+					"color": "#3F8F26",
+					"name": "Green",
+					"slug": "miz-green"
+				},
+				{
+					"color": "#FFF4D6",
+					"name": "Gold 100",
+					"slug": "miz-gold--100"
+				},
+				{
+					"color": "#FEE8B6",
+					"name": "Gold 200",
+					"slug": "miz-gold--200"
+				},
+				{
+					"color": "#FBD986",
+					"name": "Gold 300",
+					"slug": "miz-gold--300"
+				},
+				{
+					"color": "#D79900",
+					"name": "Gold 500",
+					"slug": "miz-gold--500"
+				},
+				{
+					"color": "#AF7C00",
+					"name": "Gold 600",
+					"slug": "miz-gold--600"
+				},
+				{
+					"color": "#F0F0F0",
+					"name": "Black 100",
+					"slug": "miz-black--100"
+				},
+				{
+					"color": "#CCCCCC",
+					"name": "Black 200",
+					"slug": "miz-black--200"
+				},
+				{
+					"color": "#999999",
+					"name": "Black 300",
+					"slug": "miz-black--300"
+				},
+				{
+					"color": "#666666",
+					"name": "Black 400",
+					"slug": "miz-black--400"
+				},
+				{
+					"color": "#444444",
+					"name": "Black 500",
+					"slug": "miz-black--500"
+				},
+				{
+					"color": "#222222",
+					"name": "Black 600",
+					"slug": "miz-black--600"
+				},
+				{
+					"color": "#FFECEC",
+					"name": "Red 100",
+					"slug": "miz-red--100"
+				},
+				{
+					"color": "#FFC2C4",
+					"name": "Red 200",
+					"slug": "miz-red--200"
+				},
+				{
+					"color": "#CA4B4B",
+					"name": "Red 300",
+					"slug": "miz-red--300"
+				},
+				{
+					"color": "#6A0206",
+					"name": "Red 500",
+					"slug": "miz-red--500"
+				},
+				{
+					"color": "#470102",
+					"name": "Red 600",
+					"slug": "miz-red--600"
+				},
+				{
+					"color": "#FFE4DB",
+					"name": "Orange 100",
+					"slug": "miz-orange--100"
+				},
+				{
+					"color": "#FFBEA9",
+					"name": "Orange 200",
+					"slug": "miz-orange--200"
+				},
+				{
+					"color": "#DE6835",
+					"name": "Orange 300",
+					"slug": "miz-orange--300"
+				},
+				{
+					"color": "#992D00",
+					"name": "Orange 500",
+					"slug": "miz-orange--500"
+				},
+				{
+					"color": "#611C00",
+					"name": "Orange 600",
+					"slug": "miz-orange--600"
+				},
+				{
+					"color": "#E4F1FA",
+					"name": "Blue 100",
+					"slug": "miz-blue--100"
+				},
+				{
+					"color": "#B2D5F0",
+					"name": "Blue 200",
+					"slug": "miz-blue--200"
+				},
+				{
+					"color": "#65ABE1",
+					"name": "Blue 300",
+					"slug": "miz-blue--300"
+				},
+				{
+					"color": "#1A5888",
+					"name": "Blue 500",
+					"slug": "miz-blue--500"
+				},
+				{
+					"color": "#143650",
+					"name": "Blue 600",
+					"slug": "miz-blue--600"
+				},
+				{
+					"color": "#EBF4E9",
+					"name": "Green 100",
+					"slug": "miz-green--100"
+				},
+				{
+					"color": "#B2CFA9",
+					"name": "Green 200",
+					"slug": "miz-green--200"
+				},
+				{
+					"color": "#6FAB5D",
+					"name": "Green 300",
+					"slug": "miz-green--300"
+				},
+				{
+					"color": "#2D671B",
+					"name": "Green 500",
+					"slug": "miz-green--500"
+				},
+				{
+					"color": "#214716",
+					"name": "Green 600",
+					"slug": "miz-green--600"
+				}
+			],
+			"text": false
+		},
+		"custom": {
+			"font-primary": "'Open Sans', 'Segoe UI', Tahoma, sans-serif",
+			"font-weight": {
+				"bold": 700,
+				"light": 300,
+				"normal": 400
+			},
+			"line-height": {
+				"body": 1.5,
+				"heading": 1.2,
+				"page-title": 1.3
+			}
+		},
+		"layout": {
+			"contentSize": "960px",
+			"wideSize": "1200px"
+		},
+		"spacing": {
+			"margin": false,
+			"padding": false,
+			"units": [ "px", "em", "rem", "vh", "vw" ]
+		},
+		"typography": {
+			"customFontSize": false,
+			"dropCap": false,
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "normal",
+							"fontWeight": "300",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "italic",
+							"fontWeight": "300",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300italic.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300italic.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300italic.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-300italic.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-regular.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-regular.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-regular.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-regular.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "italic",
+							"fontWeight": "400",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-italic.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-italic.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-italic.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-italic.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "normal",
+							"fontWeight": "600",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "italic",
+							"fontWeight": "600",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600italic.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600italic.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600italic.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-600italic.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "italic",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700italic.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700italic.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700italic.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-700italic.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "normal",
+							"fontWeight": "800",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans",
+							"fontStyle": "italic",
+							"fontWeight": "800",
+							"src": [
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800italic.eot?#iefix",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800italic.ttf",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800italic.woff",
+								"file:./assets/fonts/open-sans/open-sans-v17-latin-800italic.woff2"
+							]
+						}
+					],
+					"fontFamily": "Open Sans",
+					"name": "Open Sans",
+					"slug": "open-sans"
+				},
+				{
+					"fontFace": [
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans Condensed",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "300",
+							"src": [
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-300.eot?#iefix",
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-300.woff",
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-300.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans Condensed",
+							"fontStretch": "normal",
+							"fontStyle": "italic",
+							"fontWeight": "300",
+							"src": [
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-300italic.eot?#iefix",
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-300italic.woff",
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-300italic.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Open Sans Condensed",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-700.eot?#iefix",
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-700.woff",
+								"file:./assets/fonts/open-sans-condensed/open-sans-condensed-v14-latin-700.woff2"
+							]
+						}
+					],
+					"fontFamily": "Open Sans Condensed",
+					"name": "Open Sans Condensed",
+					"slug": "miz-text--condensed"
+				},
+				{
+					"fontFace": [
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "ClarendonURW-Reg",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./assets/fonts/clarendon-urw/367C47_3_0.eot?#iefix",
+								"file:./assets/fonts/clarendon-urw/367C47_3_0.ttf",
+								"file:./assets/fonts/clarendon-urw/367C47_3_0.woff",
+								"file:./assets/fonts/clarendon-urw/367C47_3_0.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "ClarendonURW-Reg",
+							"fontStyle": "italic",
+							"fontWeight": "400",
+							"src": [
+								"file:./assets/fonts/clarendon-urw/367C47_1_0.eot?#iefix",
+								"file:./assets/fonts/clarendon-urw/367C47_1_0.ttf",
+								"file:./assets/fonts/clarendon-urw/367C47_1_0.woff",
+								"file:./assets/fonts/clarendon-urw/367C47_1_0.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "ClarendonURW-Reg",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/clarendon-urw/367C47_0_0.eot?#iefix",
+								"file:./assets/fonts/clarendon-urw/367C47_0_0.ttf",
+								"file:./assets/fonts/clarendon-urw/367C47_0_0.woff",
+								"file:./assets/fonts/clarendon-urw/367C47_0_0.woff2"
+							]
+						},
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "ClarendonURW-Reg",
+							"fontStyle": "italic",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/clarendon-urw/367C47_2_0.eot?#iefix",
+								"file:./assets/fonts/clarendon-urw/367C47_2_0.ttf",
+								"file:./assets/fonts/clarendon-urw/367C47_2_0.woff",
+								"file:./assets/fonts/clarendon-urw/367C47_2_0.woff2"
+							]
+						}
+					],
+					"fontFamily": "ClarendonURW-Reg",
+					"name": "Clarendon",
+					"slug": "miz-clarendon"
+				},
+				{
+					"fontFace": [
+						{
+							"fontDisplay": "auto",
+							"fontFamily": "Graphik Cond Web",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "bold",
+							"src": [
+								"file:./assets/fonts/graphik-condensed-black/GraphikCondensed-Black-Web.eot?#iefix",
+								"file:./assets/fonts/graphik-condensed-black/GraphikCondensed-Black-Web.woff",
+								"file:./assets/fonts/graphik-condensed-black/GraphikCondensed-Black-Web.woff2"
+							]
+						}
+					],
+					"fontFamily": "Graphik Cond Web",
+					"name": "Graphik",
+					"slug": "miz-graphik"
+				},
+				{
+					"fontFamily": "Material Icons",
+					"name": "Material Icons",
+					"slug": "material-icons",
+					"fontFace": [
+						{
+							"fontFamily": "Material Icons",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"https://fonts.googleapis.com/icon?family=Material+Icons"
+							]
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{
+					"name": "Level 0",
+					"size": ".8em",
+					"slug": "miz-text--sm"
+				},
+				{
+					"name": "Level 1",
+					"size": "1em",
+					"slug": "miz-text--md"
+				},
+				{
+					"name": "Level 2",
+					"size": "1.25em",
+					"slug": "miz-text--lg"
+				},
+				{
+					"name": "Level 3",
+					"size": "1.563em",
+					"slug": "miz-text--level-3"
+				},
+				{
+					"name": "Level 4",
+					"size": "1.953em",
+					"slug": "miz-text--level-4"
+				},
+				{
+					"name": "Level 5",
+					"size": "2.441em",
+					"slug": "miz-text--level-5"
+				},
+				{
+					"name": "Level 6",
+					"size": "3.052em",
+					"slug": "miz-text--level-6"
+				},
+				{
+					"name": "Level 7",
+					"size": "3.815em",
+					"slug": "miz-text--level-7"
+				}
+			],
+			"letterSpacing": false,
+			"lineHeight": false,
+			"textDecoration": false
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/button": {
+				"border": {
+					"radius": "0rem"
+				}
+			},
+			"core/media-text": {
+				"spacing": {
+					"margin": {
+						"bottom": "0.5rem",
+						"top": "0.5rem",
+						"left": "auto",
+						"right": "auto"
+					}
+				}
+			},
+			"core/paragraph": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0rem"
+					}
+				}
+			},
+			"core/post-date": {
+				"typography": {
+					"fontStyle": "italic",
+					"fontWeight": "400"
+				}
+			},
+			"core/post-title": {
+				"spacing": {
+					"margin": {
+						"bottom": "0rem"
+					}
+				},
+				"typography": {
+					"fontFamily": "Open Sans",
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-6)",
+					"fontStyle": "normal",
+					"fontWeight": "600",
+					"lineHeight": "1.3"
+				}
+			},
+			"core/query-pagination": {
+				"spacing": {
+					"padding": {
+						"left": "0.5rem",
+						"right": "0.5rem"
+					}
+				}
+			},
+			"core/query-pagination-numbers": {
+				"spacing": {
+					"padding": {
+						"left": "0.5rem",
+						"right": "0.5rem"
+					}
+				}
+			},
+			"core/site-tagline": {
+				"typography": {
+					"fontFamily": "Open Sans",
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-4)",
+					"fontWeight": "300"
+				}
+			},
+			"core/site-title": {
+				"typography": {
+					"fontFamily": "Open Sans",
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-6)",
+					"fontStyle": "normal",
+					"fontWeight": "300",
+					"lineHeight": "1.2"
+				}
+			},
+			"core/social-links": {
+				"spacing": {
+					"blockGap": "1rem",
+					"margin": {
+						"right": "1rem"
+					}
+				}
+			}
+		},
+		"color": {
+			"background": "var(--wp--preset--color--miz-white)",
+			"text": "var(--wp--preset--color--miz-black)"
+		},
+		"elements": {
+			"h1": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0"
+					}
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-7)",
+					"fontWeight": "600",
+					"lineHeight": "var(--wp--custom--line-height--heading)"
+				}
+			},
+			"h2": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0"
+					}
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-6)",
+					"fontWeight": "600",
+					"lineHeight": "var(--wp--custom--line-height--heading)"
+				}
+			},
+			"h3": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0"
+					}
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-5)",
+					"fontWeight": "600",
+					"lineHeight": "var(--wp--custom--line-height--heading)"
+				}
+			},
+			"h4": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0"
+					}
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-4)",
+					"fontWeight": "600",
+					"lineHeight": "var(--wp--custom--line-height--heading)"
+				}
+			},
+			"h5": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0"
+					}
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-3)",
+					"fontWeight": "600",
+					"lineHeight": "var(--wp--custom--line-height--heading)"
+				}
+			},
+			"h6": {
+				"spacing": {
+					"margin": {
+						"bottom": "1rem",
+						"top": "0"
+					}
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--miz-text-level-2)",
+					"fontWeight": "600",
+					"lineHeight": "var(--wp--custom--line-height--heading)"
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--miz-black)"
+				},
+				"typography": {
+					"fontFamily": "Open Sans",
+					"fontSize": "var(--wp--preset--font-size--miz-text-md)"
+				}
+			}
+		},
+		"spacing": {
+			"blockGap": "0rem",
+			"margin": {
+				"bottom": "1rem"
+			}
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--open-sans)",
+			"fontSize": "var(--wp--preset--font-size--miz-text-md)",
+			"lineHeight": "var(--wp--custom--line-height--body)"
+		}
+	},
+	"templateParts": [
+		{
+			"area": "header",
+			"name": "header",
+			"title": "Header"
+		},
+		{
+			"area": "footer",
+			"name": "footer",
+			"title": "Footer"
+		},
+		{
+			"area": "uncategorized",
+			"name": "content",
+			"title": "Page Content"
+		},
+		{
+			"area": "uncategorized",
+			"name": "page-header",
+			"title": "Default Page Title"
+		},
+		{
+			"area": "uncategorized",
+			"name": "page-header-hero",
+			"title": "Page Title in Cover Image"
+		},
+		{
+			"area": "uncategorized",
+			"name": "sidebar",
+			"title": "Sidebar"
+		}
+	],
+	"version": 2
+}

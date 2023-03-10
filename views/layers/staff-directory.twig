@@ -1,0 +1,60 @@
+{% set directoryTitle = directoryTitle|default(flexgroup.title) %}
+{% set staff_per_row = staff_per_row|default(flexgroup.items_per_row) %}
+
+{% if flexgroup.dynamic_staff_list %}
+    {% set staff_list = staff_list|default(staffList) %}
+{% else %}
+    {% set staff_list = staff_list|default(flexgroup.staff_list) %}
+{% endif %}
+
+{% set staffCollection %}
+<div id="staff-directory" class="{% if (staff_per_row) and (staff_per_row != 1) %}miz-grid-columns-{{ staff_per_row }}{% elseif (staff_per_row == 1) %}{% else %}miz-grid-columns-3{% endif %}">
+    {% for staff in staff_list %}
+        {% if staff.content and (staff_per_row != 1) %}
+            {% set staff_link = staff.link %}
+            {% set staff_bio = false %}
+        {% else %}
+            {% set staff_link = false %}
+            {% set staff_bio = staff.content %}
+        {% endif %}
+
+        {% if staff_per_row != 1 %}
+            {% set staff_class = 'miz-card miz-card--auto card' %}
+        {% else %}
+            {% set staff_class = '' %}
+        {% endif %}
+    {% include 'components/cards/person-profile.twig' with {
+        'person_can_be_edited': staff.can_edit,
+        'person_content': staff_bio,
+        'person_link': staff_link,
+        'person_id': staff.slug,
+        'person_edit_link': staff.edit_link,
+        'person_email': staff.get_field('email'),
+        'person_image_alt': staff.thumbnail.alt,
+        'person_image_resize_width': false,
+        'person_image_resize_height': false,
+        'person_image_src': staff.thumbnail.src('medium-large'),
+        'person_name': staff.post_title,
+        'person_phone_number': staff.get_field('phone_number'),
+        'person_position': staff.get_field('position'),
+        'person_office': staff.get_field('office_location'),
+        'person_modifier_class': staff_class
+    } %}
+    {% endfor %}
+</div>
+{% endset %}
+
+{% if directoryTitle %}
+    <section class="miz-main-grid__full">
+        {% if directoryTitle %}
+        <header class="miz-layer__header">
+            <h2 class="miz-layer__title">{{ directoryTitle }}</h2>
+        </header>
+        {% endif %}
+        <div class="miz-layer__content">
+        {{ staffCollection }}
+        </div>
+    </section>
+{% else %}
+    {{ staffCollection }}
+{% endif %}

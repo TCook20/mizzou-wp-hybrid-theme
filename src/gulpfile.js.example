@@ -1,0 +1,58 @@
+const mizTasks = require('@mizzou/miz-gulp')
+const gulp = require('gulp')
+const { sources } = require('./gulp.config.json')
+
+// Styles
+function stylesProd() {
+  return mizTasks.build.styles(sources.styles.default)
+}
+
+function stylesDev() {
+  return mizTasks.build.styles(sources.styles.lando)
+}
+
+// Twig
+function twigDev() {
+  return mizTasks.copy(sources.twig.lando)
+}
+
+// Clean
+// Only cleans CSS for now
+function clean() {
+  return mizTasks.clean(sources.styles.default.clean.path, {force: true})
+}
+
+function cleanDev() {
+  return mizTasks.clean(sources.styles.lando.clean.path, {force: true})
+}
+
+// Images
+function imagesProd() {
+  return mizTasks.copy(sources.images.default)
+}
+
+function imagesDev() {
+  return mizTasks.copy(sources.images.lando)
+}
+
+// Builds
+// Prod build does not include Twig. Files are already present in prod area and are watched/built(for dev) from that location
+const build = gulp.series(clean, stylesProd, imagesProd)
+const buildDev = gulp.series(cleanDev, stylesDev, twigDev, imagesDev)
+
+// Watches
+const watchStyles = () => mizTasks.watch(sources.styles.lando, stylesDev)
+const watchTwig = () => mizTasks.watch(sources.twig.lando, twigDev)
+const watchImages = () => mizTasks.watch(sources.images.lando, imagesDev)
+const watch = gulp.series(buildDev, gulp.parallel(watchStyles, watchTwig, watchImages))
+
+// Exports
+exports.clean = clean
+exports['clean:dev'] = cleanDev
+exports.build = build
+exports['build:dev'] = buildDev
+exports.watch = watch
+exports.styles = stylesProd
+exports['styles:dev'] = stylesDev
+exports['twig:dev'] = twigDev
+exports.default = build

@@ -1,0 +1,83 @@
+{#
+/**
+ * Accordion Template
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2020 Curators of the University of Missouri
+ *
+ * Variables:
+ * - page: (object) Block content (see https://github.com/jarednova/timber/wiki/TimberPost for properties).
+ */
+#}
+{# Set Variables #}
+{% set accordionContainerId = accordionContainerId|default(block.id) %}
+{% set accordionItemId = accordionItemId|default(loop.index) %}
+{% set accordionTitle = accordionTitle|default(fields.title) %}
+{% set accordionContentFields = accordionContentFields|default(fields.accordion) %}
+{% set accordionTheme = accordionTheme|default('light') %}
+{% set accordionButtonClass = accordionButtonClass|default() %}
+{% set accordionIconClass = accordionIconClass|default() %}
+
+{% if accordionTheme == 'light' %}
+  {% set themeClass = 'miz-button--primary miz-button--light' %}
+{% else %}
+  {% set themeClass = 'miz-button--secondary' %}
+{% endif %}
+
+{% set accordion = {
+  'id': accordionContainerId,
+  'theme': themeClass,
+  'class': accordionContainerClass,
+  'title': accordionTitle,
+  'content': accordionContentFields,
+  'buttonClass': accordionButtonClass,
+  'iconClass': accordionIconClass
+} %}
+
+{% set accordionTemplate %}
+<div class="miz-accordion accordion{% if accordion.class %} {{ accordion.class }}{% endif %}" id="{{ accordion.id }}">
+  {% for item in accordion.content %}
+    {% if loop.first %}
+      {% set accordionItem = {
+        'id': loop.index,
+        'class': 'expanded',
+        'expand': true
+      } %}
+    {% else %}
+      {% set accordionItem = {
+        'id': loop.index,
+        'class': 'collapsed',
+        'expand': false
+      } %}
+    {% endif %}
+
+  <div class="miz-accordion__item card">
+    <div class="miz-accordion__header card-header" id="heading{{ accordionItem.id }}" tabindex="0" role="button">
+      <button class="miz-accordion__trigger miz-button {{ accordion.theme }}{% if accordion.buttonClass %} {{ accordion.buttonClass }}{% endif %}" data-toggle="collapse" data-target="#collapse{{ accordionItem.id }}" aria-expanded="{% if accordionItem.expand %}true{% else %}false{% endif %}" aria-controls="collapse{{ accordionItem.id }}">
+        {{ item.title|raw }} <i class="miz-icon miz-icon--sm material-icons{% if accordion.iconClass %} {{ accordion.iconClass }}{% endif %}"></i>
+      </button>
+    </div>
+    <div id="collapse{{ accordionItem.id }}" class="miz-accordion__content {{ accordionItem.class }}" aria-labelledby="heading{{ accordionItem.id }}" data-parent="#{{ accordion.id }}">
+      <div class="miz-accordion__body card-body">
+        {{ item.content|raw }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endset %}
+
+{% if accordion.title %}
+<section class="miz-layer miz-layer--brand miz-main-grid__full">
+  <div class="miz-container">
+    {% if accordion.title %}
+    <header class="miz-layer__header miz-layer__header--center margin-2x">
+        <h2 class="miz-layer__title">{{ accordion.title }}</h2>
+    </header>
+    {% endif %}
+    {{ accordionTemplate }}
+  </div>
+</section>
+{% else %}
+  {{ accordionTemplate }}
+{% endif %}

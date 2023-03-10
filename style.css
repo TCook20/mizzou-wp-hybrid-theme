@@ -1,0 +1,17 @@
+/*
+ Theme Name:   MU Base Theme
+ Theme URI:    https://undergraduatestudies.missouri.edu/
+ Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ Author URI:   https://missouri.edu/
+ Description:  Default Mizzou Hybrid WordPress Theme.
+ Version:      0.1.0
+ Text Domain:  mu-hybrid-base
+ */
+.miz-primary-navigation__sub-nav-list.show {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  z-index: 20;
+  background-color: #F0F0F0;
+  box-shadow: 0.125rem 0.25rem 0.25rem rgba(204, 204, 204, 0.5), -0.125rem 0.25rem 0.25rem rgba(204, 204, 204, 0.5);
+}

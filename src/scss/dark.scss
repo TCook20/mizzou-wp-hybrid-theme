@@ -1,0 +1,25 @@
+/**
+ * Mizzou SCSS: Dark Mode
+ *
+ * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
+ * @copyright 2022 Curators of the University of Missouri
+ */
+
+/* @group Imports */
+
+@import "dark";
+
+/* @end */
+
+.miz-pagination {
+	.miz-pagination__list-item {
+		&:hover,
+		&:active {
+			color: #111;
+		}
+
+		&.is-current {
+			color: #111;
+		}
+	}
+}

@@ -1,0 +1,45 @@
+{% from "@miz/components/news-card/news-card.twig" import NewsCard as newsCard %}
+
+{% set CardImage = "https://missouri.edu/sites/default/files/2019-05/traditions.jpg" %}
+{% if Card.thumbnail %}
+    {% set CardImage = Card.thumbnail.src %}
+{% endif %}
+
+{% set CardLink = Card.link %}
+{% if Card.link_external and (Card.link_external != 'http://' or Card.link_external == '') %}
+    {% set CardLink = Card.link_external %}
+{% else %}
+    {% set CardLink = Card.link %}
+{% endif %}
+
+{% set cardOptions = {
+    "class": "miz-card--news miz-card--brand",
+    "contents": [
+        {
+            "type": "thumb",
+            "src": CardImage,
+            "alt": ""
+        },
+        {
+            "class": "",
+            "type": "body",
+            "contents": [
+            {
+                "type": "title",
+                "content": Card.title,
+                "class": "miz-card__title--mark miz-card__title--news"
+            }, 
+            {
+                "type": "text",
+                "content": Card.preview.length(40).strip('<b><strong><em><i>').read_more(false)
+            }
+        ]
+        }
+
+    ],
+    "link":{
+        "href": CardLink
+    }
+}%}
+
+{{ newsCard( cardOptions ) }}

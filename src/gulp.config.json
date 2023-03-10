@@ -1,0 +1,327 @@
+{
+	"sources": {
+		"miz": {
+			"theme": {
+				"styles": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/css/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/css/**/*",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/css/*.css"
+					},
+					"dest": {
+						"path": "./../assets/css/"
+					},
+					"clean": {
+						"path": [ "./../assets/css/*.css*" ]
+					}
+				},
+				"fonts": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/**/*",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/**/*"
+					},
+					"dest": {
+						"path": "./../assets/fonts/"
+					},
+					"clean": {
+						"path": [ "./../assets/fonts/" ]
+					}
+				},
+				"images": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/**/*",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/**/*"
+					},
+					"dest": {
+						"path": "./../assets/images/"
+					},
+					"clean": {
+						"path": [ "./../assets/images/" ]
+					}
+				},
+				"twig": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/**/*.twig",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/**/*.twig"
+					},
+					"dest": {
+						"path": "./../views/design-system/"
+					},
+					"options": {
+						"ignore": [
+							"/**/*--*.twig",
+							"/**/layers/**",
+							"/**/templates/**",
+							"/**/layouts/**"
+						]
+					},
+					"clean": {
+						"path": [ "./../views/design-system/" ]
+					}
+				},
+				"scripts": {
+					"scripts": {
+						"src": {
+							"path": "../node_modules/@university-of-missouri/mizzou-design-system/src/scripts/",
+							"glob": "../node_modules/@university-of-missouri/mizzou-design-system/src/scripts/**/*",
+							"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/src/scss/*.scss"
+						},
+						"dest": {
+							"path": "./../assets/scripts/"
+						},
+						"clean": {
+							"path": [ "./../assets/scripts/" ]
+						},
+						"settings": {}
+					}
+				}
+			},
+			"lando": {
+				"styles": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/src/scss/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/src/scss/**/*",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/src/scss/*.scss"
+					},
+					"dest": {
+						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/css/"
+					},
+					"clean": {
+						"path": [
+							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/css/*.css*"
+						]
+					},
+					"settings": {
+						"sassOptions": {
+							"includePaths": [
+								"node_modules/@university-of-missouri/mizzou-design-system/src/components/",
+								"node_modules/@university-of-missouri/mizzou-design-system/src/scss/",
+								"node_modules/"
+							]
+						}
+					}
+				},
+				"fonts": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/**/*",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/**/*"
+					},
+					"dest": {
+						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/fonts/"
+					},
+					"clean": {
+						"path": [
+							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/fonts/"
+						]
+					}
+				},
+				"images": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/**/*",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/**/*"
+					},
+					"dest": {
+						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/images/"
+					},
+					"clean": {
+						"path": [
+							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/images/"
+						]
+					}
+				},
+				"twig": {
+					"src": {
+						"path": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/",
+						"glob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/**/*.twig",
+						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/**/*.twig"
+					},
+					"dest": {
+						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/views/design-system/"
+					},
+					"options": {
+						"ignore": [
+							"/**/*--*.twig",
+							"/**/layers/**",
+							"/**/templates/**",
+							"/**/layouts/**"
+						]
+					},
+					"clean": {
+						"path": [
+							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/views/design-system/"
+						]
+					}
+				}
+			}
+		},
+		"root": {
+			"lando": {
+				"src": {
+					"path": "./../",
+					"glob": "./../*",
+					"fileGlob": "./../*",
+					"watch": [ "./../*" ]
+				},
+				"dest": {
+					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/"
+				},
+				"clean": false
+			}
+		},
+		"php": {
+			"lando": {
+				"src": {
+					"path": "./../",
+					"glob": "./../**/*.php",
+					"fileGlob": "./../**/*.php",
+					"watch": [ "./../**/*.php" ]
+				},
+				"dest": {
+					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/"
+				},
+				"clean": false
+			}
+		},
+		"darkStyles": {
+			"theme": {
+				"src": {
+					"path": "./scss/",
+					"glob": "./scss/**/*",
+					"fileGlob": "./scss/dark.scss",
+					"watch": [ "./scss/**/dark.scss" ]
+				},
+				"dest": {
+					"path": "./../assets/css/"
+				},
+				"clean": {
+					"path": [ "./../assets/css/*.css*" ]
+				},
+				"settings": {
+					"sassOptions": {
+						"includePaths": [
+							"../node_modules/@mizzou/undergraduate-studies-boilerplate/src/scss/",
+							"../node_modules/@university-of-missouri/mizzou-design-system/src/scss/",
+							"../node_modules/"
+						]
+					}
+				}
+			}
+		},
+		"lightStyles": {
+			"theme": {
+				"src": {
+					"path": "./scss/",
+					"glob": "./scss/**/*",
+					"fileGlob": "./scss/light.scss",
+					"watch": [ "./scss/**/light.scss" ]
+				},
+				"dest": {
+					"path": "./../assets/css/"
+				},
+				"clean": {
+					"path": [ "./../assets/css/*.css*" ]
+				},
+				"settings": {
+					"sassOptions": {
+						"includePaths": [
+							"../node_modules/@mizzou/undergraduate-studies-boilerplate/src/scss/",
+							"../node_modules/@university-of-missouri/mizzou-design-system/src/scss/",
+							"../node_modules/"
+						]
+					}
+				}
+			}
+		},
+		"editorStyles": {
+			"theme": {
+				"src": {
+					"path": "./scss/",
+					"glob": "./scss/**/*",
+					"fileGlob": "./scss/editor.scss",
+					"watch": [ "./scss/**/editor.scss" ]
+				},
+				"dest": {
+					"path": "./../assets/css/"
+				},
+				"clean": {
+					"path": [ "./../assets/css/*.css*" ]
+				},
+				"settings": {
+					"sassOptions": {
+						"includePaths": [
+							"../node_modules/@mizzou/undergraduate-studies-boilerplate/src/scss/",
+							"../node_modules/@university-of-missouri/mizzou-design-system/src/scss/",
+							"../node_modules/"
+						]
+					}
+				}
+			}
+		},
+		"styles": {
+			"theme": {
+				"src": {
+					"path": "./scss/",
+					"glob": "./scss/**/*",
+					"fileGlob": "./scss/style.scss",
+					"watch": [ "./scss/**/style.scss" ]
+				},
+				"dest": {
+					"path": "./../"
+				},
+				"clean": {
+					"path": [ "./../*.css*" ]
+				},
+				"settings": {
+					"sassOptions": {
+						"includePaths": [
+							"../node_modules/@mizzou/undergraduate-studies-boilerplate/src/scss/",
+							"../node_modules/@university-of-missouri/mizzou-design-system/src/scss/",
+							"../node_modules/"
+						]
+					}
+				}
+			},
+			"lando": {
+				"src": {
+					"path": "./scss/",
+					"glob": "./scss/**/*",
+					"fileGlob": "./scss/*.scss",
+					"watch": [ "./scss/**/*.scss" ]
+				},
+				"dest": {
+					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/"
+				},
+				"settings": {
+					"sourcemaps": true
+				},
+				"clean": {
+					"path": [
+						"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/*.css*"
+					]
+				}
+			}
+		},
+		"twig": {
+			"lando": {
+				"src": {
+					"path": "./../views/",
+					"glob": "./../views/**/*",
+					"fileGlob": "./../views/**/*.twig",
+					"watch": [ "./../views/**/*.twig" ]
+				},
+				"dest": {
+					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/views/"
+				},
+				"settings": {
+					"sourcemaps": true
+				},
+				"clean": false
+			}
+		}
+	}
+}
