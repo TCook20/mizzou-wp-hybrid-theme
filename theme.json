@@ -1,22 +1,6 @@
 {
 	"$schema": "https://schemas.wp.org/wp/6.1/theme.json",
-	"customTemplates": [
-		{
-			"name": "template-page-left-sidebar",
-			"postTypes": [ "page", "post" ],
-			"title": "Page with Left Aside"
-		},
-		{
-			"name": "template-page-right-sidebar",
-			"postTypes": [ "page", "post" ],
-			"title": "Page with Right Aside"
-		},
-		{
-			"name": "template-search",
-			"postTypes": [ "page" ],
-			"title": "Search"
-		}
-	],
+	"customTemplates": [],
 	"patterns": [],
 	"settings": {
 		"appearanceTools": true,
@@ -882,11 +866,6 @@
 		},
 		{
 			"area": "uncategorized",
-			"name": "content",
-			"title": "Page Content"
-		},
-		{
-			"area": "uncategorized",
 			"name": "page-header",
 			"title": "Default Page Title"
 		},
@@ -894,11 +873,6 @@
 			"area": "uncategorized",
 			"name": "page-header-hero",
 			"title": "Page Title in Cover Image"
-		},
-		{
-			"area": "uncategorized",
-			"name": "sidebar",
-			"title": "Sidebar"
 		}
 	],
 	"version": 2
