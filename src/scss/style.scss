@@ -7,6 +7,11 @@
 
 @import 'tokens/tokens';
 @import 'base/variables';
+@import 'mixins/breakpoints';
+@import 'mixins/layout';
+@import 'mixins/text';
+
+@import 'wordpress/wp-blocks';
 
 .miz-primary-navigation__sub-nav-list.show {
 	min-width: max-content;
