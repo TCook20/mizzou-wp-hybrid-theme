@@ -1,11 +1,12 @@
 @mixin addWPStyleHeader {
 	/*
-  Theme Name:   #{$WP_THEME_NAME}
-  Theme URI:    #{$WP_THEME_URI}
-  Author:       #{$WP_AUTHOR}
-  Author URI:   #{$WP_AUTHOR_URI}
-  Description:  #{$WP_THEME_DESCRIPTION}
-  Version:      #{$WP_THEME_VERSION}
-  Text Domain:  #{$WP_TEXT_DOMAIN}
+    Theme Name:   #{$WP_THEME_NAME}
+    Theme URI:    #{$WP_THEME_URI}
+    Author:       #{$WP_AUTHOR}
+    Author URI:   #{$WP_AUTHOR_URI}
+    Description:  #{$WP_THEME_DESCRIPTION}
+    Version:      #{$WP_THEME_VERSION}
+    Text Domain:  #{$WP_TEXT_DOMAIN}
+    Tags:         #{$WP_TAGS}
   */
 }
