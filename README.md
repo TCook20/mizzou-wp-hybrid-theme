@@ -1,6 +1,6 @@
 # Mizzou Base Theme
 
-This is the base theme used by University of Missouri sites. The theem has support for WordPress Full Site Editing (FSE) features as well as PHP templating via Timber.
+This is the base theme used by University of Missouri sites. The theme has support for WordPress Full Site Editing (FSE) features as well as PHP templating via Timber.
 
 Table of Contents
 
@@ -17,7 +17,7 @@ Table of Contents
 
 ## [Features](#features)
 
--   Light/Dark Mode Support: utilizes prefers-color-scheme
+-   Light/Dark Mode Support: utilizes prefers-color-scheme (available in theme settings)
 -   Link to Web Request Form in WordPress Admin bar
 -   Ability to use header and footer template parts from WordPress Editor
 
