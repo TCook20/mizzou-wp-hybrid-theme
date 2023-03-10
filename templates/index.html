@@ -1,0 +1,53 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","theme":"mu-hybrid-base","lock":{"move":true,"remove":true}} /-->
+
+<!-- wp:group {"tagName":"main","className":"miz-main-grid","layout":{"inherit":false},"style":{"spacing":{"blockGap":"0rem"}},"lock":{"move":true,"remove":true}} -->
+<main class="wp-block-group miz-main-grid" id="content">
+  <!-- wp:group {"tagName":"header","className":"miz-page-header","layout":{"inherit":true}} -->
+  <header class="wp-block-group miz-page-header">
+    <!-- wp:group {"className":"miz-container"} -->
+    <div class="wp-block-group miz-container">
+
+    </div>
+    <!-- /wp:group -->
+  </header>
+  <!-- /wp:group -->
+
+  <!-- wp:group {"tagName":"article","className":"miz-main-grid__article","layout":{"inherit":true}} -->
+  <article class="wp-block-group miz-main-grid__article">
+    <!-- wp:query {"queryId":0,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"displayLayout":{"type":"flex","columns":2},"layout":{"inherit":true}} -->
+    <div class="wp-block-query">
+      <!-- wp:post-template -->
+        <!-- wp:group {"className":"miz-card"} -->
+        <div class="wp-block-group miz-card">
+          <!-- wp:post-featured-image {"className":"miz-card__image"} /-->
+          <!-- wp:group {"className":"miz-card__body"} -->
+          <div class="wp-block-group miz-card__body">
+            <!-- wp:post-title {"isLink":true,"className":"miz-card__title"} /-->
+            <!-- wp:post-excerpt {"className":"miz-card__text"} /-->
+          </div>
+          <!-- /wp:group -->
+        </div>
+        <!-- /wp:group -->
+      <!-- /wp:post-template -->
+
+      <!-- wp:query-pagination {"className":"miz-pagination"} -->
+        <!-- wp:query-pagination-previous /-->
+
+        <!-- wp:query-pagination-numbers {"className":"miz-pagination__list"} /-->
+
+        <!-- wp:query-pagination-next /-->
+      <!-- /wp:query-pagination -->
+
+      <!-- wp:query-no-results -->
+      <!-- wp:paragraph {"placeholder":"Add text or blocks that will display when the query returns no results."} -->
+      <p></p>
+      <!-- /wp:paragraph -->
+      <!-- /wp:query-no-results -->
+    </div>
+    <!-- /wp:query -->
+  </article>
+  <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","theme":"mu-hybrid-base","lock":{"move":true,"remove":true}} /-->
