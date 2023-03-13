@@ -103,10 +103,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 See also the list of [contributors][hybrid-base-theme-contributors] who participated in this project.
 
-[hybrid-base-theme-releases]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/mu-hybrid-base/-/releases
-[hybrid-base-theme-tags]: (https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/mu-hybrid-base/-/tags
-[hybrid-base-theme-changelog]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/mu-hybrid-base/-/blob/main/CHANGELOG.md
-[hybrid-base-theme-contributors]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/mu-hybrid-base/-/graphs/master
+[hybrid-base-theme-releases]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/releases
+[hybrid-base-theme-tags]: (https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/tags
+[hybrid-base-theme-changelog]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/blob/main/CHANGELOG.md
+[hybrid-base-theme-contributors]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/graphs/master
 [miz-wordpress-blocks]: https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/wp-plugins/miz-wordpress-blocks
 [miz-ds]: https://gitlab.com/university-of-missouri/mizzou-digital/miz-ds/mizzou-design-system
 [acf-pro]: https://www.advancedcustomfields.com/pro/

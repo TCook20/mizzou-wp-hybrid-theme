@@ -140,7 +140,7 @@ class StandardMizzouSite extends MizzouBlocks {
 		add_action(
 			'init',
 			function () {
-				$theme      = wp_get_theme( 'mu-hybrid-base' );
+				$theme      = wp_get_theme( 'miz-hybrid-base' );
 				$ds_version = '3.2';
 
 				// Register Styles.
@@ -759,31 +759,31 @@ class StandardMizzouSite extends MizzouBlocks {
 	public function mizCustomPatternCategories() {
 		$block_pattern_categories = array(
 			'footer'  => array(
-				'label'         => __( 'Footer', 'mu-hybrid-base' ),
+				'label'         => __( 'Footer', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'general' => array(
-				'label'         => __( 'General', 'mu-hybrid-base' ),
+				'label'         => __( 'General', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'header'  => array(
-				'label'         => __( 'Header', 'mu-hybrid-base' ),
+				'label'         => __( 'Header', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'layout'  => array(
-				'label'         => __( 'Layout', 'mu-hybrid-base' ),
+				'label'         => __( 'Layout', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'layer'   => array(
-				'label'         => __( 'Layer', 'mu-hybrid-base' ),
+				'label'         => __( 'Layer', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'page'    => array(
-				'label'         => __( 'Page', 'mu-hybrid-base' ),
+				'label'         => __( 'Page', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'query'   => array(
-				'label'         => __( 'Query', 'mu-hybrid-base' ),
+				'label'         => __( 'Query', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 		);

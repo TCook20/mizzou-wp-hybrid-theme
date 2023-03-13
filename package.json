@@ -1,5 +1,5 @@
 {
-	"name": "mu-hybrid-base",
+	"name": "miz-hybrid-base",
 	"version": "0.1.0",
 	"description": "Base WordPress theme for University of Missouri sites.",
 	"author": "Travis Cook <cooktw@missouri.edu>",
@@ -11,11 +11,11 @@
 	"homepage": "https://digialservice.missouri.edu/",
 	"repository": {
 		"type": "git",
-		"url": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/mu-hybrid-base"
+		"url": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base"
 	},
 	"bugs": {
 		"email": "digitalservice@missouri.edu",
-		"url": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/mu-hybrid-base/issues"
+		"url": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/issues"
 	},
 	"dependencies": {
 		"babelify": "^10.0.0",

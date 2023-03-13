@@ -92,7 +92,7 @@
 
 {% block header %}
 	{% if option.header_part %}
-		{{ function('do_blocks', '<!-- wp:template-part {"tagName":"header","slug":"header","className":"miz-header","theme":"mu-hybrid-base"} /-->') }}
+		{{ function('do_blocks', '<!-- wp:template-part {"tagName":"header","slug":"header","className":"miz-header","theme":"miz-hybrid-base"} /-->') }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -170,7 +170,7 @@
 
 {% block footer %}
 	{% if option.footer_part %}
-		{{ function('do_blocks', '<!-- wp:template-part {"tagName":"footer","slug":"footer","className":"miz-footer","theme":"mu-hybrid-base"} /-->') }}
+		{{ function('do_blocks', '<!-- wp:template-part {"tagName":"footer","slug":"footer","className":"miz-footer","theme":"miz-hybrid-base"} /-->') }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}

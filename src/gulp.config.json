@@ -87,11 +87,11 @@
 						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/src/scss/*.scss"
 					},
 					"dest": {
-						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/css/"
+						"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/assets/css/"
 					},
 					"clean": {
 						"path": [
-							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/css/*.css*"
+							"./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/assets/css/*.css*"
 						]
 					},
 					"settings": {
@@ -111,11 +111,11 @@
 						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/fonts/**/*"
 					},
 					"dest": {
-						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/fonts/"
+						"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/assets/fonts/"
 					},
 					"clean": {
 						"path": [
-							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/fonts/"
+							"./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/assets/fonts/"
 						]
 					}
 				},
@@ -126,11 +126,11 @@
 						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/assets/images/**/*"
 					},
 					"dest": {
-						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/images/"
+						"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/assets/images/"
 					},
 					"clean": {
 						"path": [
-							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/assets/images/"
+							"./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/assets/images/"
 						]
 					}
 				},
@@ -141,7 +141,7 @@
 						"fileGlob": "../node_modules/@university-of-missouri/mizzou-design-system/dist/twig/**/*.twig"
 					},
 					"dest": {
-						"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/views/design-system/"
+						"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/views/design-system/"
 					},
 					"options": {
 						"ignore": [
@@ -153,7 +153,7 @@
 					},
 					"clean": {
 						"path": [
-							"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/views/design-system/"
+							"./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/views/design-system/"
 						]
 					}
 				}
@@ -168,7 +168,7 @@
 					"watch": [ "./../*" ]
 				},
 				"dest": {
-					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/"
+					"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/"
 				},
 				"clean": false
 			}
@@ -182,7 +182,7 @@
 					"watch": [ "./../**/*.php" ]
 				},
 				"dest": {
-					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/"
+					"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/"
 				},
 				"clean": false
 			}
@@ -294,14 +294,14 @@
 					"watch": [ "./scss/**/*.scss" ]
 				},
 				"dest": {
-					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/"
+					"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/"
 				},
 				"settings": {
 					"sourcemaps": true
 				},
 				"clean": {
 					"path": [
-						"./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/*.css*"
+						"./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/*.css*"
 					]
 				}
 			}
@@ -315,7 +315,7 @@
 					"watch": [ "./../views/**/*.twig" ]
 				},
 				"dest": {
-					"path": "./../../mu-freedev-4/web/wp-content/themes/mu-hybrid-base/views/"
+					"path": "./../../mu-freedev-4/web/wp-content/themes/miz-hybrid-base/views/"
 				},
 				"settings": {
 					"sourcemaps": true
