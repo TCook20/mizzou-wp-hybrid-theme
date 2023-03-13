@@ -172,8 +172,10 @@ class StandardMizzouSite extends MizzouBlocks {
 				wp_enqueue_script( 'svg4everybody' );
 				wp_enqueue_script( 'svg', 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js', array(), '2.7.1', false );
 
-				wp_enqueue_script( 'expandJS' );
-				wp_enqueue_script( 'primaryNavJS' );
+				if ( !get_field( 'header_part', 'option' ) && wp_get_nav_menu_object( 'Primary' ) ) {
+					wp_enqueue_script( 'expandJS' );
+					wp_enqueue_script( 'primaryNavJS' );
+				}
 			}
 		);
 
