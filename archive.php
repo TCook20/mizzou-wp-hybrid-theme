@@ -61,20 +61,6 @@ if ( is_day() ) {
 
 $ary_context['news'] = new Timber\PostQuery();
 
-// Pagination.
-global $paged;
-if ( ! isset( $paged ) || ! $paged ) {
-	$paged = 1;
-}
-
-$args_pagination = array(
-	'mid_size' => 1,
-	'end_size' => 1,
-);
-
-query_posts( $ary_params );
-$ary_context['pagination'] = Timber::get_pagination( $args_pagination );
-
 // Render view.
 $ary_templates[] = 'archive.twig';
 Timber::render( $ary_templates, $ary_context );
