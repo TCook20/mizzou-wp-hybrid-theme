@@ -106,6 +106,7 @@ class StandardMizzouSite extends MizzouBlocks {
 				add_theme_support( 'automatic-feed-links' );
 				add_theme_support( 'block-templates' );
 				add_theme_support( 'editor-styles' );
+				add_theme_support( 'title-tag' );
 				add_theme_support( 'wp-block-styles' );
 			}
 		);
@@ -153,10 +154,10 @@ class StandardMizzouSite extends MizzouBlocks {
 
 				// Register Scripts.
 				wp_register_script( 'svg4everybody', 'https://jonneal.dev/svg4everybody/svg4everybody.min.js', array(), $theme->get( 'Version' ), false );
-				wp_register_script( 'dropdownJS', get_template_directory_uri() . '/assets/scripts/dropdown.js', array(), $theme->get( 'Version' ), true );
-				wp_register_script( 'expandJS', get_template_directory_uri() . '/assets/scripts/expand.js', array(), $theme->get( 'Version' ), true );
-				wp_register_script( 'primaryNavJS', get_template_directory_uri() . '/assets/scripts/primaryNavigation.js', array(), $theme->get( 'Version' ), true );
-				wp_register_script( 'toggleJS', get_template_directory_uri() . '/assets/scripts/toggle.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'dropdownJS', get_template_directory_uri() . '/assets/js/dropdown.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'expandJS', get_template_directory_uri() . '/assets/js/expand.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'primaryNavJS', get_template_directory_uri() . '/assets/js/primaryNavigation.js', array(), $theme->get( 'Version' ), true );
+				wp_register_script( 'toggleJS', get_template_directory_uri() . '/assets/js/toggle.js', array(), $theme->get( 'Version' ), true );
 			}
 		);
 
@@ -610,6 +611,13 @@ class StandardMizzouSite extends MizzouBlocks {
 	 * Set up Custom Head
 	 */
 	public function customMizHead() {
+		// Base meta
+		echo "<meta charset='UTF-8'>\n" .
+        "<meta http-equiv='x-ua-compatible' content='ie=edge'>\n" .
+        "<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" .
+        "<meta name='format-detection' content='telephone=no'>\n" .
+        "<meta name='robots' content='index,follow'>";
+
 		// Add favicon.
 		echo ' <!-- Favicon -->' . "<link rel='shortcut icon' href='" . get_template_directory_uri() . "/assets/images/favicons/favicon.ico' />\n";
 
