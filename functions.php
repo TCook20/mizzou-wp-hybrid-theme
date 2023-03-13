@@ -80,12 +80,12 @@ class StandardMizzouSite extends MizzouBlocks {
 		remove_action( 'wp_head', 'feed_links_extra', 3 );
 		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 		remove_action( 'wp_head', 'rest_output_link_wp_head' );
-		// add_action( 'wp_head', array( $this, 'customMizHead' ) );
-		// add_action( 'wp_head', array( $this, 'mizHeadOpenGraph' ) );
-		// add_action( 'wp_head', array( $this, 'mizHeadTwitter' ) );
-		// add_action( 'wp_head', array( $this, 'mizHeadGTM' ) );
-		// add_action( 'wp_head', array( $this, 'mizHeadGCSE' ) );
-		// add_action( 'wp_head', array( $this, 'mizHeadScripts' ) );
+		add_action( 'wp_head', array( $this, 'customMizHead' ) );
+		add_action( 'wp_head', array( $this, 'mizHeadOpenGraph' ) );
+		add_action( 'wp_head', array( $this, 'mizHeadTwitter' ) );
+		add_action( 'wp_head', array( $this, 'mizHeadGTM' ) );
+		add_action( 'wp_head', array( $this, 'mizHeadGCSE' ) );
+		add_action( 'wp_head', array( $this, 'mizHeadScripts' ) );
 
 		add_action(
 			'after_setup_theme',
@@ -170,6 +170,9 @@ class StandardMizzouSite extends MizzouBlocks {
 
 				wp_enqueue_script( 'svg4everybody' );
 				wp_enqueue_script( 'svg', 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js', array(), '2.7.1', false );
+
+				wp_enqueue_script( 'expandJS' );
+				wp_enqueue_script( 'primaryNavJS' );
 			}
 		);
 

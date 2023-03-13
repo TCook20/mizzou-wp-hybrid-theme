@@ -67,27 +67,18 @@
   'items': site.navigation.items
 } %}
 
-{% block head_meta_page_info %}
-	{% include ['meta/head/site-head-metadata.twig', 'meta/head/head-metadata.twig'] ignore missing with metaData %}
-  {% include ['meta/head/site-head-icons.twig', 'meta/head/head-icons.twig'] ignore missing with metaData %}
-{%- endblock head_meta_page_info %}
+{% block head_meta_page_info %}{%- endblock head_meta_page_info %}
 
 {% block head_meta_facebook %}{%- endblock head_meta_facebook %}
 
 {% block head_meta_twitter %}{% endblock %}
 
-{% block head_js %}
-	{% include ['meta/head/site-head-js.twig', 'meta/head/head-js.twig'] ignore missing with metaData %}
-{% endblock head_js %}
+{% block head_js %}{% endblock head_js %}
 
-{% block head_css %}
-	{% include ['meta/head/site-head-css.twig', 'meta/head/head-css.twig'] ignore missing with metaData %}
-{% endblock head_css %}
+{% block head_css %}{% endblock head_css %}
 
 {% block head_code %}
   {{ function('wp_head') }}
-
-	{% include ['components/site-google-tag-manager.twig', 'components/google-tag-manager.twig'] ignore missing with metaData %}
 {% endblock head_code %}
 
 {% block header %}
