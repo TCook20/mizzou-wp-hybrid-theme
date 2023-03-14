@@ -18,6 +18,14 @@
 {% endif %}
 
 {% block pre_content__layer_processing %}
+	{% block breadcrumbs %}
+		{% if option.include_breadcrumbs %}
+		<div class="miz-container">
+				{% include 'components/navs/breadcrumbs.twig' %}
+		</div>
+		{% endif %}
+	{% endblock %}
+
 	{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
 		{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
 	{% endif %}
