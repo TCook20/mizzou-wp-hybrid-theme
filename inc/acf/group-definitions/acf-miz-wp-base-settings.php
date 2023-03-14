@@ -31,7 +31,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				'name' => 'include_breadcrumbs',
 				'aria-label' => '',
 				'type' => 'true_false',
-				'instructions' => '',
+				'instructions' => 'This will only include breadcrumbs on Twig driven templates.',
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array(
