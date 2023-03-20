@@ -367,7 +367,7 @@ class StandardMizzouSite extends MizzouBlocks {
 
 		// Map existing Timber options to aliases.
 		$ary_context['site']->assetUrl = $ary_context['site']->theme->link . '/';
-		// $ary_context['site']->ParentThemeURL = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';ParentThemeURL
+		// $ary_context['site']->ParentThemeURL = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';
 		$ary_context['site']->baseURL = $ary_context['site']->url . '/';
 
 		// Standard configuration options.
