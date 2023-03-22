@@ -19,7 +19,7 @@
 {% block head -%}
 	{% spaceless %}
 		{% set html_attributes = ' dir="ltr" lang="en-US"' %}
-		{% set body = {class: "miz-body"} %}
+		{% set body = { class: body_class } %}
 	{% endspaceless %}
 
 	{%- embed '@miz/components/meta/head/head.twig' with {
