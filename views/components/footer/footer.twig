@@ -60,7 +60,7 @@
         {% set footer_contact_fax = footer_contact_fax|default(option.contact_fax) %}
         {% set footer_contact_phone = footer_contact_phone|default(option.contact_telephone) %}
 
-        {% include 'components/cards/contact.twig' with {
+        {% include 'components/contact-card/contact-card.twig' with {
           'cardTheme': footerContactCardClass,
           'contactHeader': footer_contact_card_header,
           'contactDeptName': footer_contact_dept_name,

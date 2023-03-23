@@ -1,0 +1,113 @@
+{% from "@miz/components/contact-card/contact-card.twig" import ContactCard as contactCard %}
+
+{% set contactCard = {
+    'header': contactHeader|default(fields.contact_card_title),
+    'name': contactDeptName|default(fields.contact_name),
+    'address': {
+        'street': contactAddress|default(fields.contact_address.street_address),
+        'locality': contactLocality|default(fields.contact_address.address_locality),
+        'region': contactRegion|default(fields.contact_address.state_region),
+        'zip': contactZipcode|default(fields.contact_address.address_postal_code)
+    },
+    'email': contactEmail|default(fields.contact_email.contact_email_address),
+    'customEmail': contactCustomEmailText,
+    'phone': contactPhone|default(fields.contact_telephone),
+    'fax': contactFax|default(fields.contact_fax),
+    'theme': cardTheme|default(themeClass),
+    'align': cardAlign|default(block.align),
+    'social': {
+        'enable': enable_social_icons,
+        'classes': social_media_modifier_class
+    }
+} %}
+
+{% set footerContactCardClass = 'miz-contact-card--brand' %}
+{% set footerContactCardClass = theme == 'dark' ? "#{footerContactCardClass} miz-fill--black miz-text--white" : footerContactCardClass %}
+
+{% set contactCardContents = {} %}
+
+{# Name #}
+{% if contactCard.name %}
+    {% set contactCardName = {
+        "type": "name",
+        "content": contactCard.name
+    } %}
+    {% set contactCardContents = contactCardContents|merge([contactCardName]) %}
+{% endif %}
+
+{# Email #}
+{% if contactCard.email %}
+    {% if contactCard.customEmail is not empty %}
+        {% set contactCardEmail = {
+            "type": "email",
+            "content": {
+                "href": contactCard.email,
+                "text": contactCard.customEmail
+            }
+        } %}
+    {% else %}
+        {% set contactCardEmail = {
+            "type": "email",
+            "content": contactCard.email
+        } %}
+    {% endif %}
+    {% set contactCardContents = contactCardContents|merge([contactCardEmail]) %}
+{% endif %}
+
+{# Address #}
+{% if contactCard.address.street or
+        contactCard.address.locality and
+        contactCard.address.region and
+        contactCard.address.zip %}
+    {% set contactCardAddress = {
+        "type": "address",
+        "street": contactCard.address.street,
+        "locality": contactCard.address.locality,
+        "region": contactCard.address.region,
+        "postal-code": contactCard.address.zip
+    } %}
+    {% set contactCardContents = contactCardContents|merge([contactCardAddress]) %}
+{% endif %}
+
+{# Telephone #}
+{% if contactCard.phone %}
+    {% set contactCardTelephone = {
+        "type": "telephone",
+        "content": contactCard.phone
+    } %}
+    {% set contactCardContents = contactCardContents|merge([contactCardTelephone]) %}
+{% endif %}
+
+{# Fax #}
+{% if contactCard.fax %}
+    {% set contactCardFax = {
+        "type": "faxNumber",
+        "content": contactCard.fax
+    } %}
+    {% set contactCardContents = contactCardContents|merge([contactCardFax]) %}
+{% endif %}
+
+{# Checks if there's a title for the card #}
+{% if contactCard.header is not empty %}
+    {% set contactCardTitle = {
+    "type": "title",
+    "content": contactCard.header
+    } %}
+    {% set contactCardContents = [contactCardTitle]|merge(contactCardContents) %}
+{% endif %}
+
+{# Create Card options #}
+{% set contactCardOptions = {
+    "class": footerContactCardClass,
+    "contents": contactCardContents
+} %}
+
+{% if contactCard.social.enable %}
+    <div class="miz-card-deck" style="flex-wrap: wrap;">
+        {{ contactCard( contactCardOptions ) }}
+
+        {% include ['components/site-social-media.twig', 'components/social-media.twig'] ignore missing with { 'social_media_modifier_class' : contactCard.social.classes } %}
+    </div>
+{% else %}
+    {{ contactCard( contactCardOptions ) }}
+{% endif %}
