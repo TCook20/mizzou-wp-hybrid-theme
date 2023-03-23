@@ -1,9 +1,0 @@
-{% extends 'components/accordion.twig' %}
-
-{# Set Variables #}
-{% set accordionContainerId = accordionContainerId|default(page.post_name) %}
-{% set accordionItemId = accordionItemId|default(loop.index) %}
-{% set accordionTitle = accordionTitle|default(flexgroup.title) %}
-{% set accordionContentFields = accordionContentFields|default(flexgroup.accordion) %}
-{% set accordionTheme = accordionTheme|default('light') %}
-{% set accordionIconClass = accordionIconClass|default() %}
