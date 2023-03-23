@@ -51,16 +51,16 @@
 
         {% set footer_contact_card_header = footer_contact_card_header|default(option.footer_contact_card_title) %}
         {% set footer_contact_dept_name = footer_contact_dept_name|default(option.contact_name) %}
-        {% set footer_contact_address = footer_contact_address|default(option.contact_address.street_address) %}
+        {% set footer_contact_address = footer_contact_address|default(option.contact_address.address_street) %}
         {% set footer_contact_address_locality = footer_contact_address_locality|default(option.contact_address.address_locality) %}
-        {% set footer_contact_address_region = footer_contact_address_region|default(option.contact_address.state_region) %}
+        {% set footer_contact_address_region = footer_contact_address_region|default(option.contact_address.address_region) %}
         {% set footer_contact_address_zip = footer_contact_address_zip|default(option.contact_address.address_postal_code) %}
         {% set footer_contact_email = footer_contact_email|default(option.contact_email.contact_email_address) %}
         {% set footer_contact_email_text = footer_contact_email_text|default(option.contact_email.contact_email_text) %}
         {% set footer_contact_fax = footer_contact_fax|default(option.contact_fax) %}
         {% set footer_contact_phone = footer_contact_phone|default(option.contact_telephone) %}
 
-        {% include 'components/cards/contact.twig' with {
+        {% include 'components/contact-card/contact-card.twig' with {
           'cardTheme': footerContactCardClass,
           'contactHeader': footer_contact_card_header,
           'contactDeptName': footer_contact_dept_name,

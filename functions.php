@@ -32,7 +32,7 @@ if ( ! class_exists( 'Timber' ) ) {
  * We're going to configure our theme inside of a subclass of MizzouBlocks
  * You can move this to its own file and include here via php's include("MySite.php")
  */
-class StandardMizzouSite extends MizzouBlocks {
+class MizzouHybridBase extends MizzouBlocks {
 	/** Add timber support. */
 	public function __construct() {
 		// Add configuration variables.
@@ -367,7 +367,7 @@ class StandardMizzouSite extends MizzouBlocks {
 
 		// Map existing Timber options to aliases.
 		$ary_context['site']->assetUrl = $ary_context['site']->theme->link . '/';
-		// $ary_context['site']->ParentThemeURL = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';ParentThemeURL
+		// $ary_context['site']->ParentThemeURL = $ary_context['site']->theme->parent->link . '/' ?? $ary_context['site']->theme->link . '/';
 		$ary_context['site']->baseURL = $ary_context['site']->url . '/';
 
 		// Standard configuration options.
@@ -1108,7 +1108,7 @@ class StandardMizzouSite extends MizzouBlocks {
 
 
 // Create object.
-new StandardMizzouSite();
+new MizzouHybridBase();
 
 // Add Option Pages.
 if ( function_exists( 'acf_add_options_page' ) ) {

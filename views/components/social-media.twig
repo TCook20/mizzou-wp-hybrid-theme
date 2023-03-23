@@ -4,32 +4,45 @@
  *
  * @author Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
  * @copyright 2022 Curators of the University of Missouri
- *
- * Variables:
- * - social_media_facebook_url: (string) Facebook URL (optional, see default).
- * - social_media_flickr_url: (string) Flickr URL (optional, see default).
- * - social_media_modifier_class: (string) A modifier class to apply to the block (optional).
- * - social_media_twitter_username: (string) Twitter username (optional, see default).
  */
 #}
 {# Defaults #}
-{% set social_media_sprite_path = social_media_sprite_path|default(theme.parent.link ?? theme.link ~ '/images/miz-sprite.svg') %}
-{% set social_media_icon_size = social_media_icon_size|default('miz-icon--lg') %}
-{% set social_media_icon_color = social_media_icon_color|default('miz-svg--gold') %}
-{% set social_icons = social_icons|default(option.social_media) %}
+{% set social_media_sprite_path = social_media_sprite_path|default(site.theme.parent.link ?? site.theme.link ~ '/assets/images/icons/svg/sprite.symbol.svg') %}
+{% set social_icons = social_icons|default(option.contact_social_media) %}
+
+{% if option.contact_social_media.facebook or
+	option.contact_social_media.instagram or
+	option.contact_social_media.twitter or
+	option.contact_social_media.youtube or
+	option.contact_social_media.linkedin %}
+	{% set social_icons = {
+		"facebook": option.contact_social_media.facebook,
+		"instagram": option.contact_social_media.instagram,
+		"twitter": option.contact_social_media.twitter,
+		"linkedin": option.contact_social_media.linkedin,
+		"youtube": option.contact_social_media.youtube
+	} %}
+{% endif %}
 
 {% if social_icons %}
 <div class="miz-icon-list{% if (social_media_modifier_class) %} {{ social_media_modifier_class }}{% endif %}">{% spaceless %}
 {% block social_media_list %}
-{% for social in social_icons %}
-    {% if social.name %}
-    <a href="{{ social.link }}" class="miz-icon-list__link" title="Go to {{ social.name|capitalize }} page" aria-label="Go to {{ social.name|capitalize }} page" target="_blank" rel="noreferrer">
-        <svg class="miz-icon__svg {% if social_media_icon_size %}{{ social_media_icon_size }}{% endif %} miz-svg--{{ social.name|lower }} {{ social_media_icon_color }}" role="img" aria-labelledby="miz-contact-card-social-icon-{{ social.name|lower }}">
-            <title id="miz-contact-card-social-icon-{{ social.name|lower }}">{{ social.name }}</title>
-            <use xlink:href="{{ social_media_sprite_path }}#icons--miz-social-network--{{ social.name|lower }}"></use>
-        </svg>
-    </a>
-    {% endif %}
+{% for key,value in social_icons %}
+	{% if value is not empty %}
+		{% from "@miz/components/social-media/social-media.twig" import SocialSVG as socialIcon %}
+
+		{% set socialIconsOptions = {
+			"class": 'miz-icon--lg',
+			"color": theme == 'dark' ? 'white' : 'black',
+			"name": key,
+			"link": {
+				"href": value
+			},
+			"xlink": social_media_sprite_path
+		} %}
+
+		{{ socialIcon( socialIconsOptions ) }}
+	{% endif %}
 {% endfor %}
 {% endblock %}
 {% endspaceless %}</div>
