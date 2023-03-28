@@ -18,7 +18,7 @@
     {% set heroContents = heroContents|merge({"overline": flexgroup.overline }) %}
 {% endif %}
 
-{% if flexgroup.alignment is defined %}
+{% if flexgroup.displayOptions.alignment is defined %}
     {% set heroContents = heroContents|merge({"align": flexgroup.displayOptions.alignment }) %}
 {% endif %}
 
