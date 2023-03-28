@@ -83,6 +83,69 @@
 						"parent_repeater": "field_6422fddfbe798"
 					}
 				]
+			},
+			{
+				"key": "field_64232c7fd1cad",
+				"label": "Appearance",
+				"name": "displayOptions",
+				"aria-label": "",
+				"type": "group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"layout": "block",
+				"sub_fields": [
+					{
+						"key": "field_64232c96d1cae",
+						"label": "Layer Background",
+						"name": "layer_background",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"miz-black": "Black",
+							"miz-black-100": "Black 100",
+							"miz-white": "White",
+							"image": "Image"
+						},
+						"default_value": "",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					},
+					{
+						"key": "field_6423300c17512",
+						"label": "Plus Decoration Clone",
+						"name": "plus_decoration_clone",
+						"aria-label": "",
+						"type": "clone",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"clone": ["group_64232d4f917a1"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
+					}
+				]
 			}
 		],
 		"location": [
@@ -337,8 +400,8 @@
 				"sub_fields": [
 					{
 						"key": "field_6422ff226701e",
-						"label": "Variant",
-						"name": "variant",
+						"label": "Layer Background",
+						"name": "layer_background",
 						"aria-label": "",
 						"type": "button_group",
 						"instructions": "",
@@ -361,7 +424,7 @@
 					},
 					{
 						"key": "field_6422ff5a6701f",
-						"label": "Image for Variant",
+						"label": "Background Image",
 						"name": "image",
 						"aria-label": "",
 						"type": "image",
@@ -391,6 +454,74 @@
 						"max_size": "",
 						"mime_types": "",
 						"preview_size": "medium"
+					},
+					{
+						"key": "field_642329b5f522e",
+						"label": "Content Background",
+						"name": "content_background",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"black": "Black",
+							"black-100": "Black 100",
+							"white": "White"
+						},
+						"default_value": "white",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					},
+					{
+						"key": "field_64232a33f522f",
+						"label": "Button Style",
+						"name": "button_style",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"brand-primary": "Branded Primary",
+							"brand-secondary": "Branded Secondary",
+							"ghost": "Ghost"
+						},
+						"default_value": "",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					},
+					{
+						"key": "field_642330352ff08",
+						"label": "Plus Decoration Clone",
+						"name": "plus_decoration_clone",
+						"aria-label": "",
+						"type": "clone",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"clone": ["group_64232d4f917a1"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
 					}
 				]
 			}
@@ -537,6 +668,44 @@
 					"id": ""
 				},
 				"return_format": "array"
+			},
+			{
+				"key": "field_64233062c6c88",
+				"label": "Appearance",
+				"name": "displayOptions",
+				"aria-label": "",
+				"type": "group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"layout": "block",
+				"sub_fields": [
+					{
+						"key": "field_6423306cc6c89",
+						"label": "Plus Decoration Clone",
+						"name": "plus_decoration_clone",
+						"aria-label": "",
+						"type": "clone",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"clone": ["group_64232d4f917a1"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
+					}
+				]
 			}
 		],
 		"location": [
@@ -876,6 +1045,44 @@
 						"parent_repeater": "field_642302406c6ce"
 					}
 				]
+			},
+			{
+				"key": "field_64233099df7a2",
+				"label": "Appearance",
+				"name": "displayOptions",
+				"aria-label": "",
+				"type": "group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"layout": "row",
+				"sub_fields": [
+					{
+						"key": "field_642330a2df7a3",
+						"label": "Plus Decoration Clone",
+						"name": "plus_decoration_clone",
+						"aria-label": "",
+						"type": "clone",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"clone": ["group_64232d4f917a1"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
+					}
+				]
 			}
 		],
 		"location": [
@@ -1059,6 +1266,47 @@
 					"id": ""
 				},
 				"return_format": "array"
+			},
+			{
+				"key": "field_642330d54313a",
+				"label": "Appearance",
+				"name": "displayOptions",
+				"aria-label": "",
+				"type": "group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"layout": "row",
+				"sub_fields": [
+					{
+						"key": "field_642330e94313b",
+						"label": "Layer Background",
+						"name": "layer_background",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"miz-black-100": "Black 100",
+							"miz-white": "White"
+						},
+						"default_value": "white",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					}
+				]
 			}
 		],
 		"location": [
