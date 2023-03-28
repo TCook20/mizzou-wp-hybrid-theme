@@ -5,8 +5,9 @@
         "fields": [
             {
                 "key": "field_6048db6ee9bb5",
-                "label": "Flex Layers",
+                "label": "Design System Layers",
                 "name": "layout-post",
+                "aria-label": "",
                 "type": "flexible_content",
                 "instructions": "",
                 "required": 0,
@@ -24,9 +25,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebbb5",
+                                "key": "field_64230a02707e1",
                                 "label": "Big Message Clone",
-                                "name": "big-message-clone",
+                                "name": "big_message_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -37,7 +39,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec7e8fb06aca"
+                                    "group_6422fdbc26190"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -55,9 +57,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebc4f",
+                                "key": "field_64230a32707e2",
                                 "label": "By the Numbers Clone",
                                 "name": "by_the_numbers_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -68,7 +71,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec7eb5bf02b2"
+                                    "group_6422fe12ad9e1"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -86,9 +89,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebce2",
+                                "key": "field_64230a4c707e3",
                                 "label": "Call to Action Clone",
                                 "name": "call_to_action_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -99,7 +103,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec4064ec0b72"
+                                    "group_6422feb4e3b08"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -117,9 +121,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebd73",
+                                "key": "field_64230a75707e4",
                                 "label": "Events Clone",
                                 "name": "events_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -130,7 +135,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec7edd7297f9"
+                                    "group_6422ffabdf21c"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -148,9 +153,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebe14",
+                                "key": "field_64230a97707e5",
                                 "label": "Featured News Clone",
                                 "name": "featured_news_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -161,7 +167,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec7eeec550b9"
+                                    "group_642300bdc27f5"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -179,9 +185,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebf56",
+                                "key": "field_64230ab6707e6",
                                 "label": "Link List Clone",
                                 "name": "link_list_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -192,7 +199,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec4559a09f9d"
+                                    "group_64230234c7cb1"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -210,9 +217,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eebff2",
+                                "key": "field_64230ad5707e7",
                                 "label": "Quote Clone",
                                 "name": "quote_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -223,7 +231,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec4059f18820"
+                                    "group_6423027fb6d65"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -241,9 +249,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_6048db6eec087",
+                                "key": "field_64230af4707e8",
                                 "label": "Split Layout Clone",
                                 "name": "split_layout_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -254,7 +263,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec7ea00f1ae3"
+                                    "group_64230329f0255"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -266,17 +275,17 @@
                         "max": ""
                     }
                 },
-                "button_label": "Add Layer",
                 "min": "",
-                "max": ""
+                "max": "",
+                "button_label": "Add Layer"
             }
         ],
         "location": [
             [
                 {
-                    "param": "page_type",
+                    "param": "post_type",
                     "operator": "==",
-                    "value": "front_page"
+                    "value": "page"
                 }
             ]
         ],
@@ -286,7 +295,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": false,
+        "active": true,
         "description": "",
         "show_in_rest": 0
     },
@@ -296,8 +305,9 @@
         "fields": [
             {
                 "key": "field_5ec81598d32aa",
-                "label": "Flex Layers",
+                "label": "Design System Layers",
                 "name": "layout-pre",
+                "aria-label": "",
                 "type": "flexible_content",
                 "instructions": "",
                 "required": 0,
@@ -315,9 +325,10 @@
                         "display": "block",
                         "sub_fields": [
                             {
-                                "key": "field_5ec816d4d32b5",
+                                "key": "field_642309ad467bb",
                                 "label": "Hero Clone",
                                 "name": "hero_clone",
+                                "aria-label": "",
                                 "type": "clone",
                                 "instructions": "",
                                 "required": 0,
@@ -328,7 +339,7 @@
                                     "id": ""
                                 },
                                 "clone": [
-                                    "group_5ec7ec799bba5"
+                                    "group_6423014a9fc5a"
                                 ],
                                 "display": "seamless",
                                 "layout": "block",
@@ -340,9 +351,9 @@
                         "max": "1"
                     }
                 },
-                "button_label": "Add Layer",
                 "min": "",
-                "max": ""
+                "max": "",
+                "button_label": "Add Layer"
             }
         ],
         "location": [
@@ -360,7 +371,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": false,
+        "active": true,
         "description": "",
         "show_in_rest": 0
     }
