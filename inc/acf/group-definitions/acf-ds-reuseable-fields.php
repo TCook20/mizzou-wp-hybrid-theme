@@ -57,7 +57,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'default_value'     => array(),
 					'return_format'     => 'value',
 					'allow_custom'      => 0,
-					'layout'            => 'vertical',
+					'layout'            => 'horizontal',
 					'toggle'            => 0,
 					'save_custom'       => 0,
 				),
