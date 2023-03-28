@@ -101,7 +101,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 						'class' => '',
 						'id'    => '',
 					),
-					'layout'            => 'block',
+					'layout'            => 'row',
 					'sub_fields'        => array(
 						array(
 							'key'               => 'field_64232c96d1cae',
@@ -700,7 +700,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 						'class' => '',
 						'id'    => '',
 					),
-					'layout'            => 'block',
+					'layout'            => 'row',
 					'sub_fields'        => array(
 						array(
 							'key'               => 'field_6423306cc6c89',

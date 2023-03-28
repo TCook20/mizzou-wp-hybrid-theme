@@ -98,7 +98,7 @@
 					"class": "",
 					"id": ""
 				},
-				"layout": "block",
+				"layout": "row",
 				"sub_fields": [
 					{
 						"key": "field_64232c96d1cae",
@@ -683,7 +683,7 @@
 					"class": "",
 					"id": ""
 				},
-				"layout": "block",
+				"layout": "row",
 				"sub_fields": [
 					{
 						"key": "field_6423306cc6c89",
