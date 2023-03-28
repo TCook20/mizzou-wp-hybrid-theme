@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.2.0
+
+### Changes
+
+-   Design System ACF Layers completely reworked
+-   `singular.php` events layer can now set query from layer fields
+
 ## 0.1.3
 
 ### Fixes
