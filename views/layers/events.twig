@@ -2,7 +2,7 @@
 {% set eventsKicker = eventsKicker|default(flexgroup.kicker) %}
 {% set eventsTitle = eventsTitle|default(flexgroup.title) %}
 {% set eventsContents = eventsContents|default(events) %}
-{% set eventsCount = eventsCount|default(flexgroup.events.number_of_events) %}
+{% set eventsCount = eventsCount|default(flexgroup.eventsOptions.number_of_events) %}
 {% set eventsButton = eventsButton|default(flexgroup.button) %}
 
 {% set eventsCollection %}
