@@ -29,7 +29,7 @@ $ary_context['page']->parent_pages = $ary_parents;
 
 // Sub-navigation.
 if ( ( isset( $ary_context['page']->sub_navigation ) ) && ( false !== $ary_context['page']->sub_navigation ) ) {
-	$ary_context['page']->sub_navigation = StandardMizzouSite::getMenu( $ary_context['page']->sub_navigation );
+	$ary_context['page']->sub_navigation = MizzouHybridBase::getMenu( $ary_context['page']->sub_navigation );
 }
 
 // Page or post.

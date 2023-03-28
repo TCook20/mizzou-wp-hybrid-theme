@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.1.3
+
+### Fixes
+
+-   Class function call in `singular.php`
+-   Background image inclusion for `miz-decoration__plus`
+
 ## 0.1.2
 
 ### Fixes
