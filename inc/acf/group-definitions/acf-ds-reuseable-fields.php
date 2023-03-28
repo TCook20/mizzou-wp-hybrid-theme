@@ -4,7 +4,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_64232d4f917a1',
-			'title'                 => 'DS-plus-decoration',
+			'title'                 => 'MizzouDS-plus-decoration',
 			'fields'                => array(
 				array(
 					'key'               => 'field_64232d4fb3cc0',
