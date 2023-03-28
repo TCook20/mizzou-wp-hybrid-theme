@@ -372,7 +372,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 			'hide_on_screen'        => '',
 			'active'                => true,
 			'description'           => 'Contact information placed in the footer of the site.',
-			'show_in_rest'			=> true,
+			'show_in_rest'          => true,
 		)
 	);
 endif;
