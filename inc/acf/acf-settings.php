@@ -30,6 +30,7 @@ function acf_custom_format_tiny_mce( $ary_tiny_mce ) {
 }
 
 $ary_acf_options_settings = array(
+	'acf-ds-reusable-fields',
 	'acf-ds-layer-definitions',
 	'acf-miz-wp-base-contact-information-footer',
 	'acf-miz-wp-base-footer',
