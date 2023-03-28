@@ -1,3 +1,6 @@
+{# Imports #}
+{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+
 {# Set Variables #}
 {% set bigMessageTitle = bigMessageTitle|default(flexgroup.title) %}
 {% set bigMessageContent = bigMessageContent|default(flexgroup.message) %}
@@ -9,17 +12,6 @@
     'buttons': bigMessageButtons
 } %}
 
-{# Imports #}
-  {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
-{#
-We Need:
-Title
-alignment?
-Message?
-Button/Link 0 --> 2
-
-@todo in big-message it is buttonOptions, in cta is't ButtonOptions, though I guess the specific name doesnt matter
-#}
 <section class="miz-layer miz-layer--brand miz-fill--black-100 miz-decoration miz-decoration__plus miz-decoration__plus--bottom-right miz-main-grid__full">
     <div class="miz-container">
         <div class="miz-decoration miz-decoration__corner--top-left">

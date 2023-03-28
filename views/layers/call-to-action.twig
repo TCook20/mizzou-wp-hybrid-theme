@@ -5,8 +5,8 @@
 {% set ctaTitle = ctaTitle|default(flexgroup.title) %}
 {% set ctaContent = ctaContent|default(flexgroup.content) %}
 {% set ctaButtons = ctaButtons|default(flexgroup.buttons) %}
-{% set ctaVariant = ctaVariant|default(flexgroup.variant) %}
-{% set ctaImage = ctaImage|default(flexgroup.image) %}
+{% set ctaVariant = ctaVariant|default(flexgroup.displayOptions.variant) %}
+{% set ctaImage = ctaImage|default(flexgroup.displayOptions.image) %}
 
 {% set cta = {
     'title': ctaTitle,

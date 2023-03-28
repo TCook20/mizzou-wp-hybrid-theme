@@ -1,7 +1,7 @@
 {# Set Variables #}
 {% set featNews_kicker = featNews_kicker|default(flexgroup.kicker) %}
 {% set featNews_title = featNews_title|default(flexgroup.title) %}
-{% set featNews_buttons = featNews_buttons|default(flexgroup.read_more_button) %}
+{% set featNews_buttons = featNews_buttons|default(flexgroup.button) %}
 {% set Posts = Posts|default(Post(flexgroup.cards)) %}
 
 {% set featNews = {

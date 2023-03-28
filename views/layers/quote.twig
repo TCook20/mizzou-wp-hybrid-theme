@@ -1,10 +1,10 @@
 {# Set Variables #}
 {% set quoteKicker = quoteKicker|default(flexgroup.kicker) %}
 {% set quoteTitle = quoteTitle|default(flexgroup.title) %}
-{% set quoteAttribution = quoteAttribution|default(flexgroup.attribution) %}
-{% set quoteDegree = quoteDegree|default(flexgroup.degree) %}
-{% set quoteContent = quoteContent|default(flexgroup.quote) %}
-{% set quoteImg = quoteImg|default(flexgroup.image) %}
+{% set quoteAttribution = quoteAttribution|default(flexgroup.quote.attribution) %}
+{% set quoteDegree = quoteDegree|default(flexgroup.quote.degree) %}
+{% set quoteContent = quoteContent|default(flexgroup.quote.content) %}
+{% set quoteImg = quoteImg|default(flexgroup.quote.image) %}
 {% set quoteButton = quoteButton|default(flexgroup.button) %}
 
 {% set quote = {

@@ -1,3 +1,6 @@
+{# Imports #}
+{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+
 {# Defaults #}
 {% set FigureStyle="" %}
 {% set SectionExtras = "" %}
@@ -6,15 +9,12 @@
 {% set OffsetDivStyle = "" %}
 {% set splitLayoutKicker = splitLayoutKicker|default(flexgroup.kicker) %}
 {% set splitLayoutTitle = splitLayoutTitle|default(flexgroup.title) %}
-{% set splitLayoutVariant = splitLayoutVariant|default(flexgroup.variant) %}
-{% set splitLayoutBackgroundImg = splitLayoutBackgroundImg|default(flexgroup.background_image) %}
-{% set splitLayoutLayoutImg = splitLayoutLayoutImg|default(flexgroup.layout_image) %}
+{% set splitLayoutVariant = splitLayoutVariant|default(flexgroup.displayOptions.variant) %}
+{% set splitLayoutBackgroundImg = splitLayoutBackgroundImg|default(flexgroup.displayOptions.background_image) %}
+{% set splitLayoutLayoutImg = splitLayoutLayoutImg|default(flexgroup.displayOptions.layout_image) %}
 {% set splitLayoutImg = splitLayoutImg|default(flexgroup.image) %}
 {% set splitLayoutContent = splitLayoutContent|default(flexgroup.message) %}
 {% set splitLayoutButtons = splitLayoutButtons|default(flexgroup.buttons) %}
-
-{# Imports #}
-{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
 {% if 'black' == splitLayoutVariant %}
     {% set SectionExtras = " miz-split-layout-layer miz-fill--black" %}
