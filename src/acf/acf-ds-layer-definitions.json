@@ -1029,7 +1029,7 @@
 				"sub_fields": [
 					{
 						"key": "field_6423024d6c6cf",
-						"label": "link",
+						"label": "Link",
 						"name": "link",
 						"aria-label": "",
 						"type": "link",

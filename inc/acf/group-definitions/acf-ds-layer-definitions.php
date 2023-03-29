@@ -1063,7 +1063,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'sub_fields'        => array(
 						array(
 							'key'               => 'field_6423024d6c6cf',
-							'label'             => 'link',
+							'label'             => 'Link',
 							'name'              => 'link',
 							'aria-label'        => '',
 							'type'              => 'link',
