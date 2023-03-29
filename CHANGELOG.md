@@ -6,8 +6,13 @@
 
 ### Changes
 
--   Design System ACF Layers completely reworked
+-   Design System ACF Layers completely reworked (`views/layers/`)
+    -   Events layer now supports setting Localist query information (`events.twig`)
 -   `singular.php` events layer can now set query from layer fields
+
+### Removes
+
+-   Calendar theme settings. Events layer manages its own settings. Events collection block manages its own settings.
 
 ## 0.1.3
 
