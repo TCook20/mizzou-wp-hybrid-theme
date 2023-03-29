@@ -1,72 +1,100 @@
 {# Imports #}
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
-{# Defaults #}
-{% set FigureStyle="" %}
-{% set SectionExtras = "" %}
-{% set KickerStyle = "" %}
-{% set TitleStyle = "" %}
-{% set OffsetDivStyle = "" %}
-{% set splitLayoutKicker = splitLayoutKicker|default(flexgroup.kicker) %}
-{% set splitLayoutTitle = splitLayoutTitle|default(flexgroup.title) %}
-{% set splitLayoutVariant = splitLayoutVariant|default(flexgroup.displayOptions.variant) %}
-{% set splitLayoutBackgroundImg = splitLayoutBackgroundImg|default(flexgroup.displayOptions.background_image) %}
-{% set splitLayoutLayoutImg = splitLayoutLayoutImg|default(flexgroup.displayOptions.layout_image) %}
-{% set splitLayoutImg = splitLayoutImg|default(flexgroup.image) %}
-{% set splitLayoutContent = splitLayoutContent|default(flexgroup.message) %}
-{% set splitLayoutButtons = splitLayoutButtons|default(flexgroup.buttons) %}
+{% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
+	{% set LayerSectionClasses = ' miz-fill--black-100' %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
+	{% set LayerSectionClasses = ' miz-fill--black' %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
+	{% set LayerSectionClasses = ' miz-fill--white' %}
+{% else %}
+	{% set LayerSectionClasses = '' %}
+{% endif %}
 
-{% if 'black' == splitLayoutVariant %}
-    {% set SectionExtras = " miz-split-layout-layer miz-fill--black" %}
-{% elseif 'image' == splitLayoutVariant and splitLayoutBackgroundImg is defined %}
-    {% set SectionExtras = "\" style=\"background: #000000 url('" ~ Image(splitLayoutBackgroundImg).src('medium') ~ "') top left/cover; "%}
+{% if flexgroup.displayOptions.background_image != '' and flexgroup.displayOptions.layer_background == 'image' %}
+{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.background_image).src %}
+
+{% endif %}
+
+{% if flexgroup.displayOptions.content_background == 'light' %}
+	{% set SplitLayoutContentBackground = ' miz-fill--black-100' %}
+{% elseif flexgroup.displayOptions.content_background == 'dark' %}
+	{% set SplitLayoutContentBackground = ' miz-fill--black' %}
+{% else %}
+	{% set SplitLayoutContentBackground = '' %}
 {% endif %}
 
 {% set SplitLayoutAlign = "" %}
-{% if "right" == splitLayoutLayoutImg %}
+{% if "right" == flexgroup.displayOptions.image_align %}
     {% set SplitLayoutAlign = " miz-split-layout--flip" %}
 {% endif %}
-
-{% if 'offset' == splitLayoutVariant %}
+{% if 'offset' == flexgroup.displayOptions.variant %}
     {% set SplitLayoutAlign = SplitLayoutAlign ~ " miz-split-layout--no-gap" %}
 {% endif %}
 
-<section class="miz-layer miz-layer--brand miz-main-grid__full{{ SectionExtras }}">
-    <div class="miz-container">
-        <div class="miz-split-layout{{ SplitLayoutAlign }}">
-            {% if 'offset' == splitLayoutVariant %}
-            {% if 'right' == splitLayoutLayoutImg %}
-                {% set FigureStyle = " miz-split-layout__offset" %}
-            {% else %}
-                {% set OffsetDivStyle = " miz-split-layout__offset" %}
-            {% endif %}
-            <div class="miz-split-layout__header-content miz-fill--black-100 miz-text--black{{ OffsetDivStyle }}">
+{# Defaults #}
+{% set splitLayoutLayer = {
+	'classes': {
+		'section': 'miz-layer miz-layer--brand miz-main-grid__full' ~ LayerSectionClasses,
+		'frame': 'miz-split-layout' ~ SplitLayoutAlign,
+		'figure': 'miz-split-layout__figure',
+		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
+		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
+		'offsetContent': 'miz-split-layout__header-content' ~ SplitLayoutContentBackground
+	},
+	'style': {
+		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
+	},
+	'title': flexgroup.title,
+	'kicker': flexgroup.kicker,
+	'image': {
+		'file': Image(flexgroup.image),
+		'align': flexgroup.displayOptions.image_align
+	},
+	'content': flexgroup.message,
+	'buttons': flexgroup.buttons,
+	'variant': flexgroup.displayOptions.variant,
+} %}
 
-                {% else %}
-                    {% set KickerStyle = " miz-text--white" %}
-                    {% set TitleStyle = " miz-text--gold" %}
-                {% endif %}
-                <header class="miz-layer__header miz-split-layout__header">
-                    {% if splitLayoutKicker %}<h2 class="miz-layer__kicker{{ KickerStyle }}">{{ splitLayoutKicker }}</h2>{% endif %}
-                    <h2 class="miz-layer__title {{ TitleStyle }}">{{ splitLayoutTitle }}</h2>
-                </header>
-                <div class="miz-layer__content miz-split-layout__content">
-                    {{ splitLayoutContent }}
-                    {% if splitLayoutButtons is defined and splitLayoutButtons is iterable %}
-                        {% for Button in splitLayoutButtons %}
-                            {% set buttonOptions = { "class": "miz-button miz-button--primary miz-button--brand", "text": Button.button.title, 'href': Button.button.url } %}
-                            {{ anchorButton( buttonOptions ) }}
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                {% if 'offset' == splitLayoutVariant %}
-            </div>
-            {% endif %}
-            {% if splitLayoutImg %}
-            <figure class="miz-split-layout__figure{{ FigureStyle }}">
-                <img src="{{ Image(splitLayoutImg).src('large') }}" alt="Image(splitLayoutImg).alt" class="miz-split-layout__image">
-            </figure>
-            {% endif %}
-        </div>
+{% set splitLayoutInnerContent %}
+<header class="miz-layer__header miz-split-layout__header">
+	{% if splitLayoutLayer.kicker %}
+		<h2 class="miz-layer__kicker{% if splitLayoutLayer.classes.kicker != '' %}{{ splitLayoutLayer.classes.kicker }}{% endif %}">{{ splitLayoutLayer.kicker }}</h2>
+	{% endif %}
+	<h2 class="miz-layer__title{% if splitLayoutLayer.classes.title != '' %}{{ splitLayoutLayer.classes.title }}{% endif %}">{{ splitLayoutLayer.title }}</h2>
+</header>
+<div class="miz-layer__content miz-split-layout__content">
+	{{ splitLayoutLayer.content }}
+
+	{% if splitLayoutLayer.buttons is defined and splitLayoutLayer.buttons is iterable %}
+		{% for Button in splitLayoutLayer.buttons %}
+			{% set buttonOptions = { "class": "miz-button miz-button--primary miz-button--brand", "text": Button.button.title, 'href': Button.button.url } %}
+			{{ anchorButton( buttonOptions ) }}
+		{% endfor %}
+	{% endif %}
+</div>
+{% endset %}
+
+{% set splitLayoutImageContent %}
+	{% if splitLayoutLayer.image.file %}
+	<figure class="{{ splitLayoutLayer.classes.figure }}">
+		<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
+	</figure>
+	{% endif %}
+{% endset %}
+
+<section class="{{ splitLayoutLayer.classes.section }}"{% if splitLayoutLayer.style.section != '' %} style="{{ splitLayoutLayer.style.section }}"{% endif %}>
+    <div class="miz-container">
+		<div class="{{ splitLayoutLayer.classes.frame }}">
+			{% if splitLayoutLayer.variant == 'level' %}
+				{{ splitLayoutInnerContent }}
+				{{ splitLayoutImageContent }}
+			{% else %}
+				<div class="{{ splitLayoutLayer.classes.offsetContent }}">
+					{{ splitLayoutInnerContent }}
+				</div>
+				{{ splitLayoutImageContent }}
+			{% endif %}
+		</div>
     </div>
 </section>
