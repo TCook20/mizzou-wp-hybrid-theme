@@ -2,14 +2,10 @@
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
 {# Set Variables #}
-{% set bigMessageTitle = bigMessageTitle|default(flexgroup.title) %}
-{% set bigMessageContent = bigMessageContent|default(flexgroup.message) %}
-{% set bigMessageButtons = bigMessageButtons|default(flexgroup.buttons) %}
-
-{% set bigMessage = {
-    'title': bigMessageTitle,
-    'content': bigMessageContent,
-    'buttons': bigMessageButtons
+{% set bigMessageLayer = {
+    'title': flexgroup.title,
+    'content': flexgroup.message,
+    'buttons': flexgroup.buttons
 } %}
 
 <section class="miz-layer miz-layer--brand miz-fill--black-100 miz-decoration miz-decoration__plus miz-decoration__plus--bottom-right miz-main-grid__full">
@@ -17,12 +13,14 @@
         <div class="miz-decoration miz-decoration__corner--top-left">
             <div class="miz-big-message__frame miz-fill--white">
                 <header class="miz-layer__header miz-layer__header--center">
-                    <h2 class="miz-layer__title">{{ bigMessage.title }}</h2>
+                    <h2 class="miz-layer__title">{{ bigMessageLayer.title }}</h2>
                 </header>
+
                 <div class="miz-layer__content miz-layer__content--center miz-big-message__content">
-                    {{ bigMessage.content }}
-                    {% if bigMessage.buttons is defined and bigMessage.buttons is iterable %}
-                        {% for Button in bigMessage.buttons %}
+                    {{ bigMessageLayer.content }}
+
+                    {% if bigMessageLayer.buttons is defined and bigMessageLayer.buttons is iterable %}
+                        {% for Button in bigMessageLayer.buttons %}
                             {% set ButtonOptions = { "class": "miz-button--secondary miz-button--brand", "text": Button.button.title, 'href': Button.button.url} %}
                             {{ anchorButton( ButtonOptions ) }}
                         {% endfor %}
