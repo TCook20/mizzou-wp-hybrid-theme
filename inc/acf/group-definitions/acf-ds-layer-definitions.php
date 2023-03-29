@@ -65,7 +65,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'min'               => 0,
 					'max'               => 0,
 					'collapsed'         => '',
-					'button_label'      => 'Add Row',
+					'button_label'      => 'Add Button',
 					'rows_per_page'     => 20,
 					'sub_fields'        => array(
 						array(
@@ -104,11 +104,11 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'layout'            => 'row',
 					'sub_fields'        => array(
 						array(
-							'key'               => 'field_64232c96d1cae',
-							'label'             => 'Layer Background',
-							'name'              => 'layer_background',
+							'key'               => 'field_64248cf26bd04',
+							'label'             => 'Layer Background Clone',
+							'name'              => 'layer_background_clone',
 							'aria-label'        => '',
-							'type'              => 'button_group',
+							'type'              => 'clone',
 							'instructions'      => '',
 							'required'          => 0,
 							'conditional_logic' => 0,
@@ -117,16 +117,13 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'class' => '',
 								'id'    => '',
 							),
-							'choices'           => array(
-								'miz-black'     => 'Black',
-								'miz-black-100' => 'Black 100',
-								'miz-white'     => 'White',
-								'image'         => 'Image',
+							'clone'             => array(
+								0 => 'field_64248336fd14b',
 							),
-							'default_value'     => '',
-							'return_format'     => 'value',
-							'allow_null'        => 0,
-							'layout'            => 'horizontal',
+							'display'           => 'seamless',
+							'layout'            => 'block',
+							'prefix_label'      => 0,
+							'prefix_name'       => 0,
 						),
 						array(
 							'key'               => 'field_6423300c17512',
@@ -143,7 +140,8 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'id'    => '',
 							),
 							'clone'             => array(
-								0 => 'group_64232d4f917a1',
+								0 => 'field_64232d4fb3cc0',
+								1 => 'field_64232d75b3cc1',
 							),
 							'display'           => 'seamless',
 							'layout'            => 'block',
@@ -285,6 +283,22 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 						),
 					),
 				),
+				array(
+					'key'               => 'field_642490d91875a',
+					'label'             => 'Button',
+					'name'              => 'button',
+					'aria-label'        => '',
+					'type'              => 'link',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'return_format'     => 'array',
+				),
 			),
 			'location'              => array(
 				array(
@@ -371,7 +385,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'min'               => 0,
 					'max'               => 0,
 					'collapsed'         => '',
-					'button_label'      => 'Add Row',
+					'button_label'      => 'Add Button',
 					'rows_per_page'     => 20,
 					'sub_fields'        => array(
 						array(
@@ -410,11 +424,11 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'layout'            => 'row',
 					'sub_fields'        => array(
 						array(
-							'key'               => 'field_6422ff226701e',
-							'label'             => 'Layer Background',
-							'name'              => 'layer_background',
+							'key'               => 'field_64248d37bdb08',
+							'label'             => 'Layer Background Clone',
+							'name'              => 'layer_background_clone',
 							'aria-label'        => '',
-							'type'              => 'button_group',
+							'type'              => 'clone',
 							'instructions'      => '',
 							'required'          => 0,
 							'conditional_logic' => 0,
@@ -423,55 +437,21 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'class' => '',
 								'id'    => '',
 							),
-							'choices'           => array(
-								'miz-black' => 'Black',
-								'miz-gold'  => 'Gold',
-								'image'     => 'Image',
+							'clone'             => array(
+								0 => 'field_64248336fd14b',
+								1 => 'field_6424837bfd14c',
 							),
-							'default_value'     => 'miz-black',
-							'return_format'     => 'value',
-							'allow_null'        => 0,
-							'layout'            => 'horizontal',
+							'display'           => 'seamless',
+							'layout'            => 'block',
+							'prefix_label'      => 0,
+							'prefix_name'       => 0,
 						),
 						array(
-							'key'               => 'field_6422ff5a6701f',
-							'label'             => 'Background Image',
-							'name'              => 'image',
+							'key'               => 'field_64248d68bdb09',
+							'label'             => 'Content Background Clone',
+							'name'              => 'content_background_clone',
 							'aria-label'        => '',
-							'type'              => 'image',
-							'instructions'      => '',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_6422ff226701e',
-										'operator' => '==',
-										'value'    => 'image',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'return_format'     => 'array',
-							'library'           => 'all',
-							'min_width'         => '',
-							'min_height'        => '',
-							'min_size'          => '',
-							'max_width'         => '',
-							'max_height'        => '',
-							'max_size'          => '',
-							'mime_types'        => '',
-							'preview_size'      => 'medium',
-						),
-						array(
-							'key'               => 'field_642329b5f522e',
-							'label'             => 'Content Background',
-							'name'              => 'content_background',
-							'aria-label'        => '',
-							'type'              => 'button_group',
+							'type'              => 'clone',
 							'instructions'      => '',
 							'required'          => 0,
 							'conditional_logic' => 0,
@@ -480,15 +460,13 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'class' => '',
 								'id'    => '',
 							),
-							'choices'           => array(
-								'miz-black'     => 'Black',
-								'miz-black-100' => 'Black 100',
-								'miz-white'     => 'White',
+							'clone'             => array(
+								0 => 'field_642483c7fd14d',
 							),
-							'default_value'     => 'miz-white',
-							'return_format'     => 'value',
-							'allow_null'        => 0,
-							'layout'            => 'horizontal',
+							'display'           => 'seamless',
+							'layout'            => 'block',
+							'prefix_label'      => 0,
+							'prefix_name'       => 0,
 						),
 						array(
 							'key'               => 'field_64232a33f522f',
@@ -529,7 +507,8 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'id'    => '',
 							),
 							'clone'             => array(
-								0 => 'group_64232d4f917a1',
+								0 => 'field_64232d4fb3cc0',
+								1 => 'field_64232d75b3cc1',
 							),
 							'display'           => 'seamless',
 							'layout'            => 'block',
@@ -717,7 +696,8 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'id'    => '',
 							),
 							'clone'             => array(
-								0 => 'group_64232d4f917a1',
+								0 => 'field_64232d4fb3cc0',
+								1 => 'field_64232d75b3cc1',
 							),
 							'display'           => 'seamless',
 							'layout'            => 'block',
@@ -1063,7 +1043,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'sub_fields'        => array(
 						array(
 							'key'               => 'field_6423024d6c6cf',
-							'label'             => 'Link',
+							'label'             => 'link',
 							'name'              => 'link',
 							'aria-label'        => '',
 							'type'              => 'link',
@@ -1111,7 +1091,8 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'id'    => '',
 							),
 							'clone'             => array(
-								0 => 'group_64232d4f917a1',
+								0 => 'field_64232d4fb3cc0',
+								1 => 'field_64232d75b3cc1',
 							),
 							'display'           => 'seamless',
 							'layout'            => 'block',
@@ -1340,7 +1321,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'miz-black-100' => 'Black 100',
 								'miz-white'     => 'White',
 							),
-							'default_value'     => 'miz-white',
+							'default_value'     => 'white',
 							'return_format'     => 'value',
 							'allow_null'        => 0,
 							'layout'            => 'horizontal',
@@ -1519,7 +1500,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 						array(
 							'key'               => 'field_6423039bdb9d7',
 							'label'             => 'Layout Image Location',
-							'name'              => 'image_align',
+							'name'              => 'layout_image',
 							'aria-label'        => '',
 							'type'              => 'button_group',
 							'instructions'      => '',
@@ -1563,11 +1544,11 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'layout'            => 'horizontal',
 						),
 						array(
-							'key'               => 'field_6423244e47a9a',
-							'label'             => 'Layer Background',
-							'name'              => 'layer_background',
+							'key'               => 'field_64248e5e2b9ea',
+							'label'             => 'Layer Background Clone',
+							'name'              => 'layer_background_clone',
 							'aria-label'        => '',
-							'type'              => 'button_group',
+							'type'              => 'clone',
 							'instructions'      => '',
 							'required'          => 0,
 							'conditional_logic' => 0,
@@ -1576,16 +1557,14 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'class' => '',
 								'id'    => '',
 							),
-							'choices'           => array(
-								'miz-black'     => 'Black',
-								'miz-black-100' => 'Black 100',
-								'miz-white'     => 'White',
-								'image'         => 'Image',
+							'clone'             => array(
+								0 => 'field_64248336fd14b',
+								1 => 'field_6424837bfd14c',
 							),
-							'default_value'     => '',
-							'return_format'     => 'value',
-							'allow_null'        => 0,
-							'layout'            => 'horizontal',
+							'display'           => 'seamless',
+							'layout'            => 'block',
+							'prefix_label'      => 0,
+							'prefix_name'       => 0,
 						),
 						array(
 							'key'               => 'field_642324c747a9c',
@@ -1610,39 +1589,6 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'return_format'     => 'value',
 							'allow_null'        => 0,
 							'layout'            => 'horizontal',
-						),
-						array(
-							'key'               => 'field_6423037bdb9d6',
-							'label'             => 'Background Image',
-							'name'              => 'background_image',
-							'aria-label'        => '',
-							'type'              => 'image',
-							'instructions'      => '',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_6423244e47a9a',
-										'operator' => '==',
-										'value'    => 'image',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'return_format'     => 'array',
-							'library'           => 'all',
-							'min_width'         => '',
-							'min_height'        => '',
-							'min_size'          => '',
-							'max_width'         => '',
-							'max_height'        => '',
-							'max_size'          => '',
-							'mime_types'        => '',
-							'preview_size'      => 'medium',
 						),
 						array(
 							'key'               => 'field_6423251a47a9d',
@@ -1691,4 +1637,4 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		)
 	);
 
-endif;
+				endif;

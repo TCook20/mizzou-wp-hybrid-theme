@@ -62,7 +62,7 @@
 				"min": 0,
 				"max": 0,
 				"collapsed": "",
-				"button_label": "Add Row",
+				"button_label": "Add Button",
 				"rows_per_page": 20,
 				"sub_fields": [
 					{
@@ -101,11 +101,11 @@
 				"layout": "row",
 				"sub_fields": [
 					{
-						"key": "field_64232c96d1cae",
-						"label": "Layer Background",
-						"name": "layer_background",
+						"key": "field_64248cf26bd04",
+						"label": "Layer Background Clone",
+						"name": "layer_background_clone",
 						"aria-label": "",
-						"type": "button_group",
+						"type": "clone",
 						"instructions": "",
 						"required": 0,
 						"conditional_logic": 0,
@@ -114,16 +114,11 @@
 							"class": "",
 							"id": ""
 						},
-						"choices": {
-							"miz-black": "Black",
-							"miz-black-100": "Black 100",
-							"miz-white": "White",
-							"image": "Image"
-						},
-						"default_value": "",
-						"return_format": "value",
-						"allow_null": 0,
-						"layout": "horizontal"
+						"clone": ["field_64248336fd14b"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
 					},
 					{
 						"key": "field_6423300c17512",
@@ -139,7 +134,7 @@
 							"class": "",
 							"id": ""
 						},
-						"clone": ["group_64232d4f917a1"],
+						"clone": ["field_64232d4fb3cc0", "field_64232d75b3cc1"],
 						"display": "seamless",
 						"layout": "block",
 						"prefix_label": 0,
@@ -276,6 +271,22 @@
 						"parent_repeater": "field_6422fe5b5aab6"
 					}
 				]
+			},
+			{
+				"key": "field_642490d91875a",
+				"label": "Button",
+				"name": "button",
+				"aria-label": "",
+				"type": "link",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"return_format": "array"
 			}
 		],
 		"location": [
@@ -360,7 +371,7 @@
 				"min": 0,
 				"max": 0,
 				"collapsed": "",
-				"button_label": "Add Row",
+				"button_label": "Add Button",
 				"rows_per_page": 20,
 				"sub_fields": [
 					{
@@ -399,11 +410,11 @@
 				"layout": "row",
 				"sub_fields": [
 					{
-						"key": "field_6422ff226701e",
-						"label": "Layer Background",
-						"name": "layer_background",
+						"key": "field_64248d37bdb08",
+						"label": "Layer Background Clone",
+						"name": "layer_background_clone",
 						"aria-label": "",
-						"type": "button_group",
+						"type": "clone",
 						"instructions": "",
 						"required": 0,
 						"conditional_logic": 0,
@@ -412,55 +423,18 @@
 							"class": "",
 							"id": ""
 						},
-						"choices": {
-							"miz-black": "Black",
-							"miz-gold": "Gold",
-							"image": "Image"
-						},
-						"default_value": "miz-black",
-						"return_format": "value",
-						"allow_null": 0,
-						"layout": "horizontal"
+						"clone": ["field_64248336fd14b", "field_6424837bfd14c"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
 					},
 					{
-						"key": "field_6422ff5a6701f",
-						"label": "Background Image",
-						"name": "image",
+						"key": "field_64248d68bdb09",
+						"label": "Content Background Clone",
+						"name": "content_background_clone",
 						"aria-label": "",
-						"type": "image",
-						"instructions": "",
-						"required": 0,
-						"conditional_logic": [
-							[
-								{
-									"field": "field_6422ff226701e",
-									"operator": "==",
-									"value": "image"
-								}
-							]
-						],
-						"wrapper": {
-							"width": "",
-							"class": "",
-							"id": ""
-						},
-						"return_format": "array",
-						"library": "all",
-						"min_width": "",
-						"min_height": "",
-						"min_size": "",
-						"max_width": "",
-						"max_height": "",
-						"max_size": "",
-						"mime_types": "",
-						"preview_size": "medium"
-					},
-					{
-						"key": "field_642329b5f522e",
-						"label": "Content Background",
-						"name": "content_background",
-						"aria-label": "",
-						"type": "button_group",
+						"type": "clone",
 						"instructions": "",
 						"required": 0,
 						"conditional_logic": 0,
@@ -469,15 +443,11 @@
 							"class": "",
 							"id": ""
 						},
-						"choices": {
-							"miz-black": "Black",
-							"miz-black-100": "Black 100",
-							"miz-white": "White"
-						},
-						"default_value": "miz-white",
-						"return_format": "value",
-						"allow_null": 0,
-						"layout": "horizontal"
+						"clone": ["field_642483c7fd14d"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
 					},
 					{
 						"key": "field_64232a33f522f",
@@ -517,7 +487,7 @@
 							"class": "",
 							"id": ""
 						},
-						"clone": ["group_64232d4f917a1"],
+						"clone": ["field_64232d4fb3cc0", "field_64232d75b3cc1"],
 						"display": "seamless",
 						"layout": "block",
 						"prefix_label": 0,
@@ -699,7 +669,7 @@
 							"class": "",
 							"id": ""
 						},
-						"clone": ["group_64232d4f917a1"],
+						"clone": ["field_64232d4fb3cc0", "field_64232d75b3cc1"],
 						"display": "seamless",
 						"layout": "block",
 						"prefix_label": 0,
@@ -1029,7 +999,7 @@
 				"sub_fields": [
 					{
 						"key": "field_6423024d6c6cf",
-						"label": "Link",
+						"label": "link",
 						"name": "link",
 						"aria-label": "",
 						"type": "link",
@@ -1076,7 +1046,7 @@
 							"class": "",
 							"id": ""
 						},
-						"clone": ["group_64232d4f917a1"],
+						"clone": ["field_64232d4fb3cc0", "field_64232d75b3cc1"],
 						"display": "seamless",
 						"layout": "block",
 						"prefix_label": 0,
@@ -1477,7 +1447,7 @@
 					{
 						"key": "field_6423039bdb9d7",
 						"label": "Layout Image Location",
-						"name": "image_align",
+						"name": "layout_image",
 						"aria-label": "",
 						"type": "button_group",
 						"instructions": "",
@@ -1521,11 +1491,11 @@
 						"layout": "horizontal"
 					},
 					{
-						"key": "field_6423244e47a9a",
-						"label": "Layer Background",
-						"name": "layer_background",
+						"key": "field_64248e5e2b9ea",
+						"label": "Layer Background Clone",
+						"name": "layer_background_clone",
 						"aria-label": "",
-						"type": "button_group",
+						"type": "clone",
 						"instructions": "",
 						"required": 0,
 						"conditional_logic": 0,
@@ -1534,16 +1504,11 @@
 							"class": "",
 							"id": ""
 						},
-						"choices": {
-							"miz-black": "Black",
-							"miz-black-100": "Black 100",
-							"miz-white": "White",
-							"image": "Image"
-						},
-						"default_value": "",
-						"return_format": "value",
-						"allow_null": 0,
-						"layout": "horizontal"
+						"clone": ["field_64248336fd14b", "field_6424837bfd14c"],
+						"display": "seamless",
+						"layout": "block",
+						"prefix_label": 0,
+						"prefix_name": 0
 					},
 					{
 						"key": "field_642324c747a9c",
@@ -1568,39 +1533,6 @@
 						"return_format": "value",
 						"allow_null": 0,
 						"layout": "horizontal"
-					},
-					{
-						"key": "field_6423037bdb9d6",
-						"label": "Background Image",
-						"name": "background_image",
-						"aria-label": "",
-						"type": "image",
-						"instructions": "",
-						"required": 0,
-						"conditional_logic": [
-							[
-								{
-									"field": "field_6423244e47a9a",
-									"operator": "==",
-									"value": "image"
-								}
-							]
-						],
-						"wrapper": {
-							"width": "",
-							"class": "",
-							"id": ""
-						},
-						"return_format": "array",
-						"library": "all",
-						"min_width": "",
-						"min_height": "",
-						"min_size": "",
-						"max_width": "",
-						"max_height": "",
-						"max_size": "",
-						"mime_types": "",
-						"preview_size": "medium"
 					},
 					{
 						"key": "field_6423251a47a9d",
