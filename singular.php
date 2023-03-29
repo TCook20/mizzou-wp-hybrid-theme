@@ -65,11 +65,11 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 				$eventFields = get_sub_field( 'eventsOptions' );
 
 				if ( $eventFields ) {
-					$event_method = $eventFields[ 'method' ];
-					$event_term = $eventFields[ 'term' ];
+					$event_method = $eventFields['method'];
+					$event_term   = $eventFields['term'];
 				} else {
 					$event_method = get_field( 'method', 'option' );
-					$event_term = get_field( 'term', 'option' );
+					$event_term   = get_field( 'term', 'option' );
 				}
 
 
