@@ -75,7 +75,7 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 				$ary_calendar_options = array(
 					'method'                   => $str_event_method,
 					'term'                     => $str_event_term,
-					'calendar_exception_email' => get_option( 'admin_email' )
+					'calendar_exception_email' => get_option( 'admin_email' ),
 				);
 
 				if ( isset( $ary_calendar_options['method'] ) && isset( $ary_calendar_options['term'] ) ) {
