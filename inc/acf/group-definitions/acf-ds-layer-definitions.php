@@ -673,7 +673,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				array(
 					'key'               => 'field_6423009912246',
 					'label'             => 'More Events Link',
-					'name'              => 'Button',
+					'name'              => 'button',
 					'aria-label'        => '',
 					'type'              => 'link',
 					'instructions'      => '',

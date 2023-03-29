@@ -656,7 +656,7 @@
 			{
 				"key": "field_6423009912246",
 				"label": "More Events Link",
-				"name": "Button",
+				"name": "button",
 				"aria-label": "",
 				"type": "link",
 				"instructions": "",
