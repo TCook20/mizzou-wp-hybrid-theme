@@ -413,11 +413,11 @@
 							"id": ""
 						},
 						"choices": {
-							"black": "Black",
-							"gold": "Gold",
+							"miz-black": "Black",
+							"miz-gold": "Gold",
 							"image": "Image"
 						},
-						"default_value": "black",
+						"default_value": "miz-black",
 						"return_format": "value",
 						"allow_null": 0,
 						"layout": "horizontal"
@@ -470,11 +470,11 @@
 							"id": ""
 						},
 						"choices": {
-							"black": "Black",
-							"black-100": "Black 100",
-							"white": "White"
+							"miz-black": "Black",
+							"miz-black-100": "Black 100",
+							"miz-white": "White"
 						},
-						"default_value": "white",
+						"default_value": "miz-white",
 						"return_format": "value",
 						"allow_null": 0,
 						"layout": "horizontal"
@@ -1301,7 +1301,7 @@
 							"miz-black-100": "Black 100",
 							"miz-white": "White"
 						},
-						"default_value": "white",
+						"default_value": "miz-white",
 						"return_format": "value",
 						"allow_null": 0,
 						"layout": "horizontal"
@@ -1477,7 +1477,7 @@
 					{
 						"key": "field_6423039bdb9d7",
 						"label": "Layout Image Location",
-						"name": "layout_image",
+						"name": "image_align",
 						"aria-label": "",
 						"type": "button_group",
 						"instructions": "",
@@ -1537,7 +1537,7 @@
 						"choices": {
 							"miz-black": "Black",
 							"miz-black-100": "Black 100",
-							"white": "White",
+							"miz-white": "White",
 							"image": "Image"
 						},
 						"default_value": "",
