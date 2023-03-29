@@ -62,23 +62,20 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 			if ( 'events' === get_row_layout() ) {
 				$obj_calendar = new CalendarModel();
 
-				$eventFields = get_sub_field( 'eventsOptions' );
+				$obj_event_fields = get_sub_field( 'eventsOptions' );
 
-				if ( $eventFields ) {
-					$event_method = $eventFields['method'];
-					$event_term   = $eventFields['term'];
-				} else {
-					$event_method = get_field( 'method', 'option' );
-					$event_term   = get_field( 'term', 'option' );
+				if ( $obj_event_fields ) {
+					$str_event_method = $obj_event_fields['method'];
+					$str_event_term   = $obj_event_fields['term'];
 				}
 
 
 				$event_email = get_option( 'admin_email' ) ?? get_field( 'calendar_exception_email', 'option' );
 
 				$ary_calendar_options = array(
-					'method'                   => $event_method,
-					'term'                     => $event_term,
-					'calendar_exception_email' => get_option( 'admin_email' ) || get_field( 'calendar_exception_email', 'option' ),
+					'method'                   => $str_event_method,
+					'term'                     => $str_event_term,
+					'calendar_exception_email' => get_option( 'admin_email' )
 				);
 
 				if ( isset( $ary_calendar_options['method'] ) && isset( $ary_calendar_options['term'] ) ) {
