@@ -119,6 +119,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							),
 							'clone'             => array(
 								0 => 'field_64248336fd14b',
+								1 => 'field_6424837bfd14c',
 							),
 							'display'           => 'seamless',
 							'layout'            => 'block',
