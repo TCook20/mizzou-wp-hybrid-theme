@@ -1,8 +1,90 @@
 [
 	{
 		"key": "group_64232d4f917a1",
-		"title": "MizzouDS-plus-decoration",
+		"title": "MizzouDS-layer-displayOptions",
 		"fields": [
+			{
+				"key": "field_64248336fd14b",
+				"label": "Layer Background",
+				"name": "layer_background",
+				"aria-label": "",
+				"type": "button_group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"miz-black": "Black",
+					"miz-black-100": "Black 100",
+					"miz-white": "White",
+					"image": "Image"
+				},
+				"default_value": "",
+				"return_format": "value",
+				"allow_null": 0,
+				"layout": "horizontal"
+			},
+			{
+				"key": "field_6424837bfd14c",
+				"label": "Background Image",
+				"name": "image",
+				"aria-label": "",
+				"type": "image",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": [
+					[
+						{
+							"field": "field_64248336fd14b",
+							"operator": "==",
+							"value": "image"
+						}
+					]
+				],
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"return_format": "array",
+				"library": "all",
+				"min_width": "",
+				"min_height": "",
+				"min_size": "",
+				"max_width": "",
+				"max_height": "",
+				"max_size": "",
+				"mime_types": "",
+				"preview_size": "medium"
+			},
+			{
+				"key": "field_642483c7fd14d",
+				"label": "Content Background",
+				"name": "content_background",
+				"aria-label": "",
+				"type": "button_group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"miz-black": "Black",
+					"miz-black-100": "Black 100",
+					"miz-white": "White"
+				},
+				"default_value": "",
+				"return_format": "value",
+				"allow_null": 0,
+				"layout": "horizontal"
+			},
 			{
 				"key": "field_64232d4fb3cc0",
 				"label": "Decoration",
@@ -29,7 +111,7 @@
 				"name": "decoration_location",
 				"aria-label": "",
 				"type": "checkbox",
-				"instructions": "Select up to 2 locations.",
+				"instructions": "",
 				"required": 0,
 				"conditional_logic": [
 					[
