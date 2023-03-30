@@ -1607,7 +1607,15 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'type'              => 'button_group',
 							'instructions'      => '',
 							'required'          => 0,
-							'conditional_logic' => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_64248336fd14b',
+										'operator' => '==',
+										'value'    => 'image',
+									),
+								),
+							),
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
