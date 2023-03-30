@@ -14,6 +14,19 @@ if ( class_exists( 'ACF' ) ) {
 	add_filter( 'acf/settings/remove_wp_meta_box', '__return_false' );
 
 	add_filter( 'acf/fields/wysiwyg/toolbars', 'acf_custom_format_tiny_mce' );
+
+	// Restrict Decoration Location to 2 Options.
+	add_filter(
+		'acf/validate_value/name=decoration_location',
+		function ( $valid, $value, $field, $input ) {
+			if ( count( $value ) > 2 ) {
+				$valid = 'Only Select 2';
+			}
+			return $valid;
+		},
+		20,
+		4
+	);
 }
 
 /**
