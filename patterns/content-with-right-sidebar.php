@@ -2,7 +2,7 @@
 /**
  * Title: Content with Right Sidebar
  * Slug: mizzou/content-with-right-sidebar
- * Block Types: core/post-content
+ * Block Types: core/template-part
  * Categories: layout
  * Post Types: page
  * Keywords: layout, content, aside, sidebar
