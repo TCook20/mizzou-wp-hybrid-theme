@@ -2,6 +2,21 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.2.1
+
+### Changes
+
+-   `archive.twig` Archive filters moved to separate template and only displays with a theme setting (`option.include_archive_filters`)
+-   Twig template content blocks cleaned up.
+
+### Fixes
+
+-   Events Layer (`layers/events.twig`) button fixed
+
+### Removes
+
+-   Unused Twig templates
+
 ## 0.2.0
 
 ### Adds
