@@ -29,6 +29,7 @@
 {% endif %}
 {% if 'offset' == flexgroup.displayOptions.variant %}
     {% set SplitLayoutAlign = SplitLayoutAlign ~ " miz-split-layout--no-gap" %}
+		{% set SplitLayoutOffsetContent = ' miz-split-layout__header-content' %}
 {% endif %}
 
 {# Defaults #}
@@ -39,7 +40,7 @@
 		'figure': 'miz-split-layout__figure',
 		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
 		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
-		'offsetContent': 'miz-split-layout__header-content' ~ SplitLayoutContentBackground
+		'content': '' ~ SplitLayoutOffsetContent ~ SplitLayoutContentBackground
 	},
 	'style': {
 		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
@@ -85,15 +86,10 @@
 <section class="{{ splitLayoutLayer.classes.section }}"{% if splitLayoutLayer.style.section != '' %} style="{{ splitLayoutLayer.style.section }}"{% endif %}>
     <div class="miz-container">
 		<div class="{{ splitLayoutLayer.classes.frame }}">
-			{% if splitLayoutLayer.variant == 'level' %}
+			<div class="{{ splitLayoutLayer.classes.content }}">
 				{{ splitLayoutInnerContent }}
-				{{ splitLayoutImageContent }}
-			{% else %}
-				<div class="{{ splitLayoutLayer.classes.offsetContent }}">
-					{{ splitLayoutInnerContent }}
-				</div>
-				{{ splitLayoutImageContent }}
-			{% endif %}
+			</div>
+			{{ splitLayoutImageContent }}
 		</div>
     </div>
 </section>

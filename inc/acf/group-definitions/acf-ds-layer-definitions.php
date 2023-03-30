@@ -1501,7 +1501,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 						array(
 							'key'               => 'field_6423039bdb9d7',
 							'label'             => 'Layout Image Location',
-							'name'              => 'layout_image',
+							'name'              => 'image_align',
 							'aria-label'        => '',
 							'type'              => 'button_group',
 							'instructions'      => '',
@@ -1575,7 +1575,15 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'type'              => 'button_group',
 							'instructions'      => '',
 							'required'          => 0,
-							'conditional_logic' => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_64230346db9d5',
+										'operator' => '==',
+										'value'    => 'offset',
+									),
+								),
+							),
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
