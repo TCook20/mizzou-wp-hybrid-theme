@@ -465,8 +465,8 @@
 						},
 						"choices": {
 							"brand-primary": "Branded Primary",
-							"brand-secondary": "Branded Secondary",
-							"ghost": "Ghost"
+							"gold-ghost": "Gold Ghost",
+							"outline": "Outline"
 						},
 						"default_value": "",
 						"return_format": "value",

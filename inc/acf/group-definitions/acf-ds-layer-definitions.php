@@ -484,9 +484,9 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'id'    => '',
 							),
 							'choices'           => array(
-								'brand-primary'   => 'Branded Primary',
-								'brand-secondary' => 'Branded Secondary',
-								'ghost'           => 'Ghost',
+								'brand-primary' => 'Branded Primary',
+								'gold-ghost'    => 'Gold Ghost',
+								'outline'       => 'Outline',
 							),
 							'default_value'     => '',
 							'return_format'     => 'value',
