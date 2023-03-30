@@ -172,7 +172,7 @@ class MizzouHybridBase extends MizzouBlocks {
 				wp_enqueue_script( 'svg4everybody' );
 				wp_enqueue_script( 'svg', 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js', array(), '2.7.1', false );
 
-				if ( !get_field( 'header_part', 'option' ) && wp_get_nav_menu_object( 'Primary' ) ) {
+				if ( ! get_field( 'header_part', 'option' ) && wp_get_nav_menu_object( 'Primary' ) ) {
 					wp_enqueue_script( 'expandJS' );
 					wp_enqueue_script( 'primaryNavJS' );
 				}
@@ -362,7 +362,7 @@ class MizzouHybridBase extends MizzouBlocks {
 	 */
 	public function siteConfiguration( $ary_context ) {
 		// Media Location.
-		$upload_dir                     = wp_upload_dir();
+		$upload_dir                    = wp_upload_dir();
 		$ary_context['site']->mediaUrl = $upload_dir['baseurl'] . '/';
 
 		// Map existing Timber options to aliases.
@@ -615,10 +615,10 @@ class MizzouHybridBase extends MizzouBlocks {
 	public function customMizHead() {
 		// Base meta
 		echo "<meta charset='UTF-8'>\n" .
-        "<meta http-equiv='x-ua-compatible' content='ie=edge'>\n" .
-        "<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" .
-        "<meta name='format-detection' content='telephone=no'>\n" .
-        "<meta name='robots' content='index,follow'>";
+		"<meta http-equiv='x-ua-compatible' content='ie=edge'>\n" .
+		"<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" .
+		"<meta name='format-detection' content='telephone=no'>\n" .
+		"<meta name='robots' content='index,follow'>";
 
 		// Add favicon.
 		echo ' <!-- Favicon -->' . "<link rel='shortcut icon' href='" . get_template_directory_uri() . "/assets/images/favicons/favicon.ico' />\n";

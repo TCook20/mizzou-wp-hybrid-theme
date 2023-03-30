@@ -2,54 +2,81 @@
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
 {# Set Variables #}
-{% set ctaTitle = ctaTitle|default(flexgroup.title) %}
-{% set ctaContent = ctaContent|default(flexgroup.content) %}
-{% set ctaButtons = ctaButtons|default(flexgroup.buttons) %}
-{% set ctaVariant = ctaVariant|default(flexgroup.variant) %}
-{% set ctaImage = ctaImage|default(flexgroup.image) %}
+{% set sectionClasses = '' %}
+{% if flexgroup.displayOptions.plus_decoration %}
+	{% set sectionClasses = sectionClasses ~ ' miz-decoration miz-decoration__plus' %}
 
-{% set cta = {
-    'title': ctaTitle,
-    'content': ctaContent,
-    'buttons': ctaButtons,
-    'variant': ctaVariant,
-    'image': ctaImage
-} %}
-
-{% set VariantOptions = {
-    "section" : "miz-fill--black miz-decoration miz-decoration__plus miz-decoration__plus--top-right",
-    "frame" : "miz-fill--white miz-text--black",
-    "buttonclass" : "miz-button--outline"
-} %}
-{% if cta.variant == "image" and cta.image  %}
-    {% set VariantOptions = VariantOptions|merge({
-        "section" : "\" style=\"background: #F1B82D url('" ~ Image(cta.image).src('full') ~"') center/cover ",
-        "frame" : "miz-fill--white",
-    }) %}
-{% endif %}
-{% if cta.variant == "gold" %}
-    {% set VariantOptions = VariantOptions|merge({
-        "section" : "miz-background-gel--gold",
-        "frame"   : "miz-fill--black",
-        "buttonclass" : "miz-button--ghost-gold"
-    }) %}
+	{% if flexgroup.displayOptions.decoration_location is iterable %}
+		{% for location in flexgroup.displayOptions.decoration_location %}
+			{% set sectionClasses = sectionClasses ~ " miz-decoration__plus--#{ location }" %}
+		{% endfor %}
+	{% endif %}
 {% endif %}
 
-<section class="miz-layer miz-layer--brand miz-cta-layer miz-main-grid__full {{ VariantOptions.section }}">
+{% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
+	{% set sectionClasses = sectionClasses ~ ' miz-fill--black-100' %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
+	{% set sectionClasses = sectionClasses ~ ' miz-fill--black' %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
+	{% set sectionClasses = sectionClasses ~ ' miz-fill--white' %}
+{% else %}
+{% endif %}
+
+{% set hasLayerBackgroundImage = false %}
+{% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
+	{% set hasLayerBackgroundImage = true %}
+	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
+{% endif %}
+
+{% if flexgroup.displayOptions.content_background == 'miz-black-100' %}
+	{% set frameClasses = ' miz-fill--black-100' %}
+{% elseif flexgroup.displayOptions.content_background == 'miz-black' %}
+	{% set frameClasses = ' miz-fill--black' %}
+{% else %}
+	{% set frameClasses = ' miz-fill--white' %}
+{% endif %}
+
+{% if flexgroup.displayOptions.button_style == 'brand-primary' %}
+	{% set buttonClass = 'miz-button--primary' %}
+{% elseif flexgroup.displayOptions.button_style == 'gold-ghost' %}
+	{% set buttonClass = 'miz-button--ghost-gold' %}
+{% else %}
+	{% set buttonClass = 'miz-outline' %}
+{% endif %}
+
+{% set ctaLayer = {
+    'title': flexgroup.title,
+    'content': flexgroup.content,
+    'buttons': flexgroup.buttons,
+    'variant': flexgroup.displayOptions.variant,
+    'image': flexgroup.displayOptions.image,
+	'classes': {
+		'section': 'miz-layer miz-layer--brand miz-cta-layer miz-main-grid__full' ~ sectionClasses,
+		'frame': 'miz-cta-frame' ~ frameClasses,
+		'button': buttonClass
+	},
+	'styles': {
+		'section': hasLayerBackgroundImage ? "background: #F1B82D url('" ~ LayerBackgroundImage ~ "') center/cover " : ''
+	}
+} %}
+
+<section class="{{ ctaLayer.classes.section }}"{% if ctaLayer.styles.section != '' %} style="{{ ctaLayer.styles.section }}"{% endif %}>
     <div class="miz-container">
-        <div class="miz-cta-frame {{ VariantOptions.frame }}">
+        <div class="{{ ctaLayer.classes.frame }}">
             <header class="miz-layer__header">
-                <h2 class="miz-cta-title">{{ cta.title }}</h2>
+                <h2 class="miz-cta-title">{{ ctaLayer.title }}</h2>
             </header>
+
             <div class="miz-layer__content miz-cta-content">
                 <div class="miz-cta-content__body">
-                    {{ cta.content }}
+                    {{ ctaLayer.content }}
                 </div>
-                {% if cta.buttons is defined and cta.buttons is iterable %}
+
+                {% if ctaLayer.buttons is defined and ctaLayer.buttons is iterable %}
                     <div class="miz-cta-content__action">
                         <div class="miz-cta-button-group">
-                            {% for Button in cta.buttons %}
-                                {% set buttonOptions = { "class": "miz-button--brand " ~ VariantOptions.buttonclass, "text": Button.button.title, 'href': Button.button.url } %}
+                            {% for Button in ctaLayer.buttons %}
+                                {% set buttonOptions = { "class": "miz-button--brand " ~ ctaLayer.classes.button, "text": Button.button.title, 'href': Button.button.url } %}
                                 {{ anchorButton( buttonOptions ) }}
                             {% endfor %}
                         </div>

@@ -1,37 +1,60 @@
-{# Set Variables #}
-{% set bigMessageTitle = bigMessageTitle|default(flexgroup.title) %}
-{% set bigMessageContent = bigMessageContent|default(flexgroup.message) %}
-{% set bigMessageButtons = bigMessageButtons|default(flexgroup.buttons) %}
+{# Imports #}
+{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
-{% set bigMessage = {
-    'title': bigMessageTitle,
-    'content': bigMessageContent,
-    'buttons': bigMessageButtons
+{% set sectionClasses = '' %}
+{% if flexgroup.displayOptions.plus_decoration %}
+	{% set sectionClasses = sectionClasses ~ ' miz-decoration miz-decoration__plus' %}
+
+	{% if flexgroup.displayOptions.decoration_location is iterable %}
+		{% for location in flexgroup.displayOptions.decoration_location %}
+			{% set sectionClasses = sectionClasses ~ " miz-decoration__plus--#{ location }" %}
+		{% endfor %}
+	{% endif %}
+{% endif %}
+
+{% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
+	{% set sectionClasses = sectionClasses ~ ' miz-fill--black-100' %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
+	{% set sectionClasses = sectionClasses ~ ' miz-fill--black' %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
+	{% set sectionClasses = sectionClasses ~ ' miz-fill--white' %}
+{% else %}
+{% endif %}
+
+{% if flexgroup.displayOptions.background_image != '' and flexgroup.displayOptions.layer_background == 'image' %}
+	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.background_image).src %}
+{% endif %}
+
+{# Set Variables #}
+{% set bigMessageLayer = {
+    'title': flexgroup.title,
+    'content': flexgroup.message,
+    'buttons': flexgroup.buttons,
+	'classes': {
+		'section': 'miz-layer miz-layer--brand miz-main-grid__full' ~ sectionClasses,
+		'frame': 'miz-big-message__frame miz-fill--white',
+		'content': 'miz-layer__content miz-layer__content--center miz-big-message__content',
+		'button': 'miz-button--secondary miz-button--brand'
+	},
+	'style': {
+		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
+	}
 } %}
 
-{# Imports #}
-  {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
-{#
-We Need:
-Title
-alignment?
-Message?
-Button/Link 0 --> 2
-
-@todo in big-message it is buttonOptions, in cta is't ButtonOptions, though I guess the specific name doesnt matter
-#}
-<section class="miz-layer miz-layer--brand miz-fill--black-100 miz-decoration miz-decoration__plus miz-decoration__plus--bottom-right miz-main-grid__full">
+<section class="{{ bigMessageLayer.classes.section }}"{% if bigMessageLayer.style.section != '' %} style="{{ bigMessageLayer.style.section }}"{% endif %}>
     <div class="miz-container">
         <div class="miz-decoration miz-decoration__corner--top-left">
-            <div class="miz-big-message__frame miz-fill--white">
+            <div class="{{ bigMessageLayer.classes.frame }}">
                 <header class="miz-layer__header miz-layer__header--center">
-                    <h2 class="miz-layer__title">{{ bigMessage.title }}</h2>
+                    <h2 class="miz-layer__title">{{ bigMessageLayer.title }}</h2>
                 </header>
-                <div class="miz-layer__content miz-layer__content--center miz-big-message__content">
-                    {{ bigMessage.content }}
-                    {% if bigMessage.buttons is defined and bigMessage.buttons is iterable %}
-                        {% for Button in bigMessage.buttons %}
-                            {% set ButtonOptions = { "class": "miz-button--secondary miz-button--brand", "text": Button.button.title, 'href': Button.button.url} %}
+
+                <div class="{{ bigMessageLayer.classes.content }}">
+                    {{ bigMessageLayer.content }}
+
+                    {% if bigMessageLayer.buttons is defined and bigMessageLayer.buttons is iterable %}
+                        {% for Button in bigMessageLayer.buttons %}
+                            {% set ButtonOptions = { "class": bigMessageLayer.classes.button, "text": Button.button.title, 'href': Button.button.url} %}
                             {{ anchorButton( ButtonOptions ) }}
                         {% endfor %}
                     {% endif %}

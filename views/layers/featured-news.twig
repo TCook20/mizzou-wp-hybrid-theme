@@ -1,44 +1,35 @@
 {# Set Variables #}
-{% set featNews_kicker = featNews_kicker|default(flexgroup.kicker) %}
-{% set featNews_title = featNews_title|default(flexgroup.title) %}
-{% set featNews_buttons = featNews_buttons|default(flexgroup.read_more_button) %}
-{% set Posts = Posts|default(Post(flexgroup.cards)) %}
-
-{% set featNews = {
-    'title': featNews_title,
-    'kicker': featNews_kicker,
-    'content': Posts,
-    'button': featNews_buttons
+{% set featNewsLayer = {
+    'title': flexgroup.title,
+    'kicker': flexgroup.kicker,
+    'content': Post(flexgroup.cards),
+    'button': flexgroup.button
 } %}
-
-{% set newsCollection %}
-<div class="miz-card-deck card-deck miz-news-group">
-    {% for Card in featNews.content %}
-        {% include '/layers/card-news.twig' %}
-    {% endfor %}
-</div>
-{% endset %}
 
 <section class="miz-layer--brand miz-stack-sandwich--xl">
     <div class="miz-container">
-        {% if featNews.kicker or featNews.title %}
+        {% if featNewsLayer.kicker or featNewsLayer.title %}
         <header class="miz-layer__header miz-layer__header--center">
-            {% if featNews.kicker %}
-                <p class="miz-layer__kicker">{{ featNews.kicker }}</p>
+            {% if featNewsLayer.kicker %}
+                <p class="miz-layer__kicker">{{ featNewsLayer.kicker }}</p>
             {% endif %}
-            <h2 class="miz-layer__title">{{ featNews.title }}</h2>
+            <h2 class="miz-layer__title">{{ featNewsLayer.title }}</h2>
         </header>
         {% endif %}
 
         <div class="miz-layer__content">
-            {% if featNews.content is defined and featNews.content is iterable %}
-                {{ newsCollection }}
+            {% if featNewsLayer.content is defined and featNewsLayer.content is iterable %}
+                <div class="miz-card-deck card-deck miz-news-group">
+					{% for Card in featNewsLayer.content %}
+						{% include '/layers/card-news.twig' %}
+					{% endfor %}
+				</div>
             {% endif %}
 
-            {% if featNews.button is defined and featNews.button is iterable %}
+            {% if featNewsLayer.button is defined and featNewsLayer.button is iterable %}
             {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
                 <div class="miz-layer__content--center">
-                    {% set ButtonOptions = { "class": "miz-button miz-button--secondary miz-button--brand", "text": featNews.button.title, 'href': featNews.button.url }  %}
+                    {% set ButtonOptions = { "class": "miz-button miz-button--secondary miz-button--brand", "text": featNewsLayer.button.title, 'href': featNewsLayer.button.url }  %}
                     {{ anchorButton( ButtonOptions ) }}
                 </div>
             {% endif %}

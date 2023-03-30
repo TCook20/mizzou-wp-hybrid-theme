@@ -1,49 +1,47 @@
 {# Set Variables #}
-{% set quoteKicker = quoteKicker|default(flexgroup.kicker) %}
-{% set quoteTitle = quoteTitle|default(flexgroup.title) %}
-{% set quoteAttribution = quoteAttribution|default(flexgroup.attribution) %}
-{% set quoteDegree = quoteDegree|default(flexgroup.degree) %}
-{% set quoteContent = quoteContent|default(flexgroup.quote) %}
-{% set quoteImg = quoteImg|default(flexgroup.image) %}
-{% set quoteButton = quoteButton|default(flexgroup.button) %}
-
-{% set quote = {
-    'title': quoteTitle,
-    'kicker': quoteKicker,
-    'content': quoteContent,
-    'attribution': quoteAttribution,
-    'degree': quoteDegree,
-    'image': quoteImg,
-    'button': quoteButton
+{% set quoteLayer = {
+    'title': flexgroup.title,
+    'kicker': flexgroup.kicker,
+    'quote': {
+		'attribution': flexgroup.quote.attribution,
+		'degree': flexgroup.quote.degree,
+		'image': Image(flexgroup.quote.image),
+		'content': flexgroup.quote.content
+	},
+	'button': flexgroup.button
 } %}
 
 <section class="miz-layer miz-layer--brand miz-main-grid__full">
     <div class="miz-container">
-        {% if quote.kicker or quote.title %}
+        {% if quoteLayer.kicker or quoteLayer.title %}
         <header class="miz-layer__header miz-layer__header--center">
-            {% if quote.kicker %}<p class="miz-layer__kicker">{{ quote.kicker }}</p>{% endif %}
-            {% if quote.title %}<h2 class="miz-layer__title">{{ quote.title }}</h2>{% endif %}
+            {% if quoteLayer.kicker %}<p class="miz-layer__kicker">{{ quoteLayer.kicker }}</p>{% endif %}
+            {% if quoteLayer.title %}<h2 class="miz-layer__title">{{ quoteLayer.title }}</h2>{% endif %}
         </header>
         {% endif %}
+
         <div class="miz-layer__content miz-quote-content">
             <div class="miz-quote-content__body miz-background-gel--gold" style="background-image: url('//missouri.edu/images/backgrounds/campus-beauty-web.jpg');">
                 <blockquote class="miz-quote">
-                    <footer class="miz-quote_footer">
-                        <cite class="miz-quote_name">{{ quote.attribution }}</cite>
-                        {% if quote.degree %}<p class="miz-quote_degree">{{ quote.degree }}</p>{% endif %}
+                    <footer class="miz-quote__footer">
+                        <cite class="miz-quote__name">{{ quoteLayer.quote.attribution }}</cite>
+                        {% if quoteLayer.quote.degree %}<p class="miz-quote__degree">{{ quoteLayer.quote.degree }}</p>{% endif %}
                     </footer>
-                    <p class="miz-quote_quote">{{ quote.content }}</p>
+
+                    <p class="miz-quote__quote">{{ quoteLayer.quote.content }}</p>
                 </blockquote>
+
                 {# Parameters #}
-                {% if quote.button is defined and quote.button is iterable %}
+                {% if quoteLayer.button is defined and quoteLayer.button is iterable %}
                     {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
-                    {% set buttonOptions = { "class": "miz-button--secondary miz-button--brand miz-quote__button", "text": quote.button.title, 'href': quote.button.url } %}
+                    {% set buttonOptions = { "class": "miz-button--secondary miz-button--brand miz-quote__button", "text": quoteLayer.button.title, 'href': quoteLayer.button.url } %}
                     {{ anchorButton( buttonOptions ) }}
                 {% endif %}
             </div>
-            {% if quote.image %}
+
+            {% if quoteLayer.quote.image %}
             <div class="miz-quote-content__image-container">
-                <img src="{{ Image(quote.image).src('medium') }}" alt="{{ Image(quote.image).alt }}">
+                <img src="{{ quoteLayer.quote.image.src('medium') }}" alt="{{ quoteLayer.quote.image.alt }}">
             </div>
             {% endif %}
         </div>

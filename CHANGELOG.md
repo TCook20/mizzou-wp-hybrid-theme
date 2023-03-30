@@ -2,6 +2,25 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.2.0
+
+### Adds
+
+-   Add filter to restrict number of selections on Decoration Location field
+
+### Changes
+
+-   Design System ACF Layers completely reworked (`views/layers/`)
+    -   Events layer now supports setting Localist query information (`events.twig`)
+    -   Decoration support added to: Big Message, Call to Action, Events, Link List
+    -   Layer Background support added to: Big Message, Call to Action, Split Layout
+    -   Content Background support added to: Call to Action, Split Layout
+-   `singular.php` events layer can now set query from layer fields
+
+### Removes
+
+-   Calendar theme settings. Events layer manages its own settings. Events collection block manages its own settings.
+
 ## 0.1.3
 
 ### Fixes

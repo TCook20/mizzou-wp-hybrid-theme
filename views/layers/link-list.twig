@@ -1,32 +1,50 @@
+{# Import #}
+{% from "@miz/components/link-list/link-list.twig" import LinkList as linkList %}
+{% from "@miz/components/icon/icon.twig" import Icon as icon %}
+
 {# Set Variables #}
-{% set linkListTitle = linkListTitle|default(flexgroup.title) %}
-{% set linkListContents = linkListContents|default(flexgroup.links) %}
-{% set linkListOrientation = linkListOrientation|default(flexgroup.orientation) %}
-{% set linkListVariant = linkListVariant|default(flexgroup.variant) %}
+{% set sectionClasses = '' %}
+{% if flexgroup.displayOptions.plus_decoration %}
+	{% set sectionClasses = sectionClasses ~ ' miz-decoration miz-decoration__plus' %}
 
-{% set linkListIcon = {
-	'name': 'chevron_right',
-	'class': 'miz-text--gold miz-flex-item--push'
+	{% if flexgroup.displayOptions.decoration_location is iterable %}
+		{% for location in flexgroup.displayOptions.decoration_location %}
+			{% set sectionClasses = sectionClasses ~ " miz-decoration__plus--#{ location }" %}
+		{% endfor %}
+	{% endif %}
+{% endif %}
+
+{% set linkListLayer = {
+	'classes': {
+		'section': 'miz-layer miz-main-grid__full' ~ sectionClasses
+	},
+	'title': flexgroup.title,
+    'list': flexgroup.links
 } %}
 
-{% set linkList = {
-    'title': linkListTitle,
-    'content': linkListContents
-} %}
+{% set linkListInlineOptions = {"class": "miz-link-list--brand miz-link-list--layer", "list" : []} %}
 
-<section class="miz-layer miz-main-grid__full">
+{% if linkListLayer.list is defined and linkListLayer.list is iterable %}
+	{% set Links = [] %}
+	{% for Link in linkListLayer.list  %}
+		{% set Links = Links|merge([{
+			"link": {
+				"href": Link.link.url,
+				"text": Link.link.title ~ icon({"class": "miz-text--gold miz-flex-item--push", "name": "chevron_right"})
+			}
+		}]) %}
+	{% endfor %}
+	{% set linkListInlineOptions = linkListInlineOptions|merge({"list":Links}) %}
+{% endif %}
+
+<section class="{{ linkListLayer.classes.section }}">
     <div class="miz-container">
-        {% if linkList.title %}
+        {% if linkListLayer.title %}
         <header class="miz-text--center">
-            <h2 class="miz-graphik">{{ linkList.title }}</h2>
+            <h2 class="miz-graphik">{{ linkListLayer.title }}</h2>
         </header>
         {% endif %}
-        <ul class="miz-link-list miz-link-list--brand miz-link-list--layer">
-            {% for item in linkList.content %}
-            <li class="miz-link-list__item"><a href="{{ item.link.url }}" class="miz-link-list__link"{% if item.link.target %} target="{{ item.link.target }}"{% endif %}>
-                {{ item.link.title }}{% if linkListIcon.name %} <i class="miz-icon material-icons{% if linkListIcon.class %} {{ linkListIcon.class }}{% endif %}">{{ linkListIcon.name }}</i>{% endif %}</a>
-            </li>
-            {% endfor %}
-        </ul>
+
+		{{ linkList( linkListInlineOptions ) }}
     </div>
 </section>

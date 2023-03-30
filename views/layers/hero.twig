@@ -4,8 +4,8 @@
     "content": {}
 } %}
 
-{% if flexgroup.image is defined %}
-    {% set heroOptions = heroOptions|merge({"background-image": { "url": Image(flexgroup.image).src }}) %}
+{% if flexgroup.displayOptions.image is defined %}
+    {% set heroOptions = heroOptions|merge({"background-image": { "url": Image(flexgroup.displayOptions.image).src }}) %}
 {% endif %}
 
 {% set heroContents = [] %}
@@ -18,8 +18,8 @@
     {% set heroContents = heroContents|merge({"overline": flexgroup.overline }) %}
 {% endif %}
 
-{% if flexgroup.alignment is defined %}
-    {% set heroContents = heroContents|merge({"align": flexgroup.alignment }) %}
+{% if flexgroup.displayOptions.alignment is defined %}
+    {% set heroContents = heroContents|merge({"align": flexgroup.displayOptions.alignment }) %}
 {% endif %}
 
 {% if flexgroup.buttons is defined and flexgroup.buttons is iterable %}
