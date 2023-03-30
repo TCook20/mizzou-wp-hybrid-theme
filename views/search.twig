@@ -10,16 +10,18 @@
  */
 #}
 
-{% extends ['site-page.twig', 'page.twig'] %}
+{% extends ['page.twig'] %}
 
 {% set resultsId = resultsId|default(option.google_cse_id) %}
 
 {% block content %}
 {{ parent() }}
 
-{% if resultsId %}
-<gcse:search gname="sitesearch" queryParameterName="s"></gcse:search>
-{% else %}
-<p>You did not provide a Google Custom Search Engine ID. Please provide one to use the GCSE.</p>
-{% endif %}
+<article class="miz-main-grid__article">
+	{% if resultsId %}
+	<gcse:search gname="sitesearch" queryParameterName="s"></gcse:search>
+	{% else %}
+	<p>You did not provide a Google Custom Search Engine ID. Please provide one to use the GCSE.</p>
+	{% endif %}
+</article>
 {% endblock %}

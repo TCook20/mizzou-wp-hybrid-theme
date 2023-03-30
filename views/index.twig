@@ -7,7 +7,7 @@
  */
 #}
 
-{% extends ['site-page.twig', 'page.twig'] %}
+{% extends ['page.twig'] %}
 
 {% set page_article_modifier_class = 'miz-main-grid__main' %}
 
@@ -16,28 +16,28 @@
 {% set events_count = events_count|default(3) %}
 
 {% block content %}
+<article class="miz-main-grid__article">
+	{% if events %}
+		{% include 'layers/events.twig' with {
+			'eventsKicker': null,
+			'eventsTitle': 'Events',
+			'eventsContents': events,
+			'eventsCount': events_count,
+			'eventsButton': {'url': site.link ~ '/events', 'title': 'More Events'},
+			'calendarSource': 'wp'
+		} %}
+	{% endif %}
 
-{% if events %}
-    {% include 'layers/events.twig' with {
-        'eventsKicker': null,
-        'eventsTitle': 'Events',
-        'eventsContents': events,
-        'eventsCount': events_count,
-        'eventsButton': {'url': site.link ~ '/events', 'title': 'More Events'},
-        'calendarSource': 'wp'
-    } %}
-{% endif %}
-
-{% if news %}
-    {% include 'layers/featured-news.twig' with {
-        'featNews_kicker': null,
-        'featNews_title': 'News and Profiles',
-        'dynamicStories': true,
-        'featNews_contents': news|slice(0,3),
-        'featNews_buttons': {'url': site.link ~ '/archive', 'title': 'More News'}
-    } %}
-{% endif %}
-
+	{% if news %}
+		{% include 'layers/featured-news.twig' with {
+			'featNews_kicker': null,
+			'featNews_title': 'News and Profiles',
+			'dynamicStories': true,
+			'featNews_contents': news|slice(0,3),
+			'featNews_buttons': {'url': site.link ~ '/archive', 'title': 'More News'}
+		} %}
+	{% endif %}
+</article>
 {% endblock %}
 
 {% block content_aside %}
