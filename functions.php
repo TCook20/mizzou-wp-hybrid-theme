@@ -66,6 +66,7 @@ class MizzouHybridBase extends MizzouBlocks {
 			'timber/loader/loader',
 			function( $loader ) {
 				$loader->addPath( __DIR__ . '/views', 'miz' );
+				$loader->addPath( get_template_directory() . '/views', 'parent' );
 				return $loader;
 			}
 		);
