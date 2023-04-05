@@ -8,10 +8,6 @@
 
 -   Social Media SVG updated based on WP icons
 
-### Fixes
-
--   `contact-card.twig` dark theme class
-
 ## 0.3.0
 
 ### Adds
