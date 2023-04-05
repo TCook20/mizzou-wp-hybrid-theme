@@ -187,6 +187,18 @@
 				"clean": false
 			}
 		},
+		"svgSprite": {
+			"theme": {
+				"src": {
+					"path": "../assets/images/icons/",
+					"glob": "../assets/images/icons/**/*.svg",
+					"fileGlob": "../assets/images/icons/**/*.svg"
+				},
+				"dest": {
+					"path": "../assets/images/icons/svg/"
+				}
+			}
+		},
 		"darkStyles": {
 			"theme": {
 				"src": {

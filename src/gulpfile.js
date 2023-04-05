@@ -6,6 +6,7 @@ const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 const debug = require('gulp-debug');
 const es = require('event-stream');
+const svgSprite = require('gulp-svg-sprite');
 
 const { sources } = require('./gulp.config.json');
 
@@ -36,6 +37,24 @@ const copyPHPDev = () => mizTasks.copy(sources.php.lando);
 
 // PHP files
 const copyRootDev = () => mizTasks.copy(sources.root.lando);
+
+// SVG Sprite
+const createSvgSprite = () => {
+	return gulp
+		.src(sources.svgSprite.theme.src.fileGlob)
+		.pipe(
+			svgSprite({
+				mode: {
+					symbol: {
+						dest: '.',
+						example: false,
+						sprite: 'sprite.symbol.svg',
+					},
+				},
+			})
+		)
+		.pipe(gulp.dest(sources.svgSprite.theme.dest.path));
+};
 
 // Mizzou Design System builds
 const cleanStylesMiz = () => {
@@ -160,6 +179,7 @@ exports.build = build;
 exports['build:dev'] = buildDev;
 exports['build:miz'] = buildMiz;
 exports['build:miz:dev'] = buildMizDev;
+exports['build:svg'] = createSvgSprite;
 exports.styles = buildStyles;
 exports['styles:dev'] = buildStylesDev;
 exports.default = build;

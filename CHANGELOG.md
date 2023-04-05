@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.3.1
+
+### Changes
+
+-   Social Media SVG updated based on WP icons
+
 ## 0.3.0
 
 ### Adds
