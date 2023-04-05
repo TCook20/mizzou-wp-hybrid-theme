@@ -2,6 +2,17 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.3.0
+
+### Adds
+
+-   `@parent` twig loader path
+
+### Removes
+
+-   Comments removed from admin bar
+-   Site Editor removed from admin bar
+
 ## 0.2.1
 
 ### Changes

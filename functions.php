@@ -66,6 +66,7 @@ class MizzouHybridBase extends MizzouBlocks {
 			'timber/loader/loader',
 			function( $loader ) {
 				$loader->addPath( __DIR__ . '/views', 'miz' );
+				$loader->addPath( get_template_directory() . '/views' ?? plugin_dir_path( __DIR__ ) . '/miz-wordpress-blocks/views', 'parent' );
 				return $loader;
 			}
 		);
@@ -429,9 +430,9 @@ class MizzouHybridBase extends MizzouBlocks {
 	}
 
 	/**
-	 * Add Items to Admin Toolbar
+	 * Adjust Items in Admin Toolbar
 	 *
-	 * @param ary $admin_bar Adds items to toolbar.
+	 * @param ary $admin_bar items in toolbar.
 	 */
 	public function add_toolbar_items( $admin_bar ) {
 		$admin_bar->add_menu(
@@ -446,6 +447,8 @@ class MizzouHybridBase extends MizzouBlocks {
 				),
 			)
 		);
+		$admin_bar->remove_menu( 'comments' );
+		$admin_bar->remove_menu( 'site-editor' );
 	}
 
 	/**
