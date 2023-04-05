@@ -8,6 +8,11 @@
 
 -   `@parent` twig loader path
 
+### Removes
+
+-   Comments removed from admin bar
+-   Site Editor removed from admin bar
+
 ## 0.2.1
 
 ### Changes
