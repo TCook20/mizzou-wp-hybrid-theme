@@ -430,9 +430,9 @@ class MizzouHybridBase extends MizzouBlocks {
 	}
 
 	/**
-	 * Add Items to Admin Toolbar
+	 * Adjust Items in Admin Toolbar
 	 *
-	 * @param ary $admin_bar Adds items to toolbar.
+	 * @param ary $admin_bar items in toolbar.
 	 */
 	public function add_toolbar_items( $admin_bar ) {
 		$admin_bar->add_menu(
@@ -447,6 +447,8 @@ class MizzouHybridBase extends MizzouBlocks {
 				),
 			)
 		);
+		$admin_bar->remove_menu( 'comments' );
+		$admin_bar->remove_menu( 'site-editor' );
 	}
 
 	/**
