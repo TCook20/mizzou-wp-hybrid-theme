@@ -2,6 +2,18 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.0
+
+### Changes
+
+-   `navigation-pagination.twig` renamed to `pagination.twig`
+-   `baseView.twig` aside blocks restructured
+
+### Fixes
+
+-   Setting main class modifier for selected aside side
+-   Breadcrumbs hidden on homepage
+
 ## 0.3.1
 
 ### Changes
