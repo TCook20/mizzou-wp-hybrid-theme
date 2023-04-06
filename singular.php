@@ -41,15 +41,7 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 		array(
 			'posts_per_page' => 3,
 			'orderby'        => 'date',
-			'tax_query'      => array(
-				array(
-					'taxonomy' => 'category',
-					'field'    => 'slug',
-					'terms'    => 'featured',
-					'operator' => 'NOT IN',
-				),
-			),
-		)
+		),
 	);
 
 	if ( have_rows( 'layout-pre' ) || have_rows( 'layout-post' ) ) {
@@ -69,7 +61,6 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 					$str_event_term   = $obj_event_fields['term'];
 				}
 
-
 				$event_email = get_option( 'admin_email' ) ?? get_field( 'calendar_exception_email', 'option' );
 
 				$ary_calendar_options = array(
@@ -88,67 +79,19 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 		}
 	}
 
-	/**
-	 * Setup custom sort for staff
-	 */
-	function customStaffSort() {
-		$orderby_statement = "menu_order DESC, RIGHT(post_title, LOCATE(' ', REVERSE(post_title)) - 1) ASC";
-		return $orderby_statement;
-	}
-
-	add_filter( 'posts_orderby', 'customStaffSort' );
-
-	$ary_staff_params = array(
-		'post_type'      => 'staff',
-		'posts_per_page' => -1,
-		'orderby'        => array(
-			'menu_order' => 'DESC',
-			'title'      => 'ASC',
-		),
-	);
-
-	$ary_context['staffList'] = Timber::get_posts( $ary_staff_params );
-
-	remove_filter( 'posts_orderby', 'customStaffSort' );
-
 	if ( is_front_page() ) {
 
 		// Could use is_home(), but wanted to catch the search condition.
 		$ary_context['page']->is_homepage = true;
 
 		// Set current page to base URL.
-		$ary_context['page']->current_page = $ary_context['site']->base_url;
-
-		// Feature story.
-		$ary_context['feature'] = Timber::get_posts(
-			array(
-				'posts_per_page' => 3,
-				'tax_query'      => array(
-					array(
-						'taxonomy' => 'category',
-						'field'    => 'slug',
-						'terms'    => 'featured',
-						'operator' => 'IN',
-					),
-				),
-			)
-		);
+		$ary_context['page']->current_page = $ary_context['site']->baseUrl;
 
 		$str_template_prefix = 'front-page';
 	} else {
 		// Map existing Timber option for permalink to alias.
 		$ary_context['page']->current_page = $ary_context['page']->link;
 	}
-} elseif ( ( isset( $ary_context['page']->post_type ) ) && ( 'event' === $ary_context['page']->post_type ) ) {
-	$str_template_prefix = 'single-event';
-
-	// Map existing Timber option for permalink to alias.
-	$ary_context['page']->current_page = $ary_context['page']->link;
-} elseif ( ( isset( $ary_context['page']->post_type ) ) && ( 'staff' === $ary_context['page']->post_type ) ) {
-	$str_template_prefix = 'single-staff';
-
-	// Map existing Timber option for permalink to alias.
-	$ary_context['page']->current_page = $ary_context['page']->link;
 } else {
 	$str_template_prefix = 'post';
 
