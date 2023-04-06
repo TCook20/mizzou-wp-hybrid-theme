@@ -13,6 +13,7 @@
 
 -   Setting main class modifier for selected aside side
 -   Breadcrumbs hidden on homepage
+-   `layers/big-message.twig` Layer background setting
 
 ## 0.3.1
 
