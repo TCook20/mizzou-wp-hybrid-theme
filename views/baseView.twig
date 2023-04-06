@@ -130,7 +130,7 @@
 {% endblock content %}
 
 {% block content_aside %}
-    {% if page.sub_navigation.items is not empty or (page.flexgroups.aside is defined and page.flexgroups.aside is iterable) %}
+    {% if (page.sub_navigation.items is not empty) or (page.flexgroups.aside is defined and page.flexgroups.aside is iterable) or (include_sidebar) %}
       <aside class="miz-main-grid__sidebar">
           {% block sidebar_nav %}
           {% endblock sidebar_nav %}

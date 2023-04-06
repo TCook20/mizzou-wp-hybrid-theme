@@ -9,6 +9,10 @@
 
 {% extends ['page.twig'] %}
 
+{% if option.include_archive_filters %}
+	{% set include_sidebar = true %}
+{% endif %}
+
 {% block content %}
 <article class="miz-main-grid__article">
 	{{ parent() }}
