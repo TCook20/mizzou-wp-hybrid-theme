@@ -25,16 +25,15 @@
 		</div>
 
 		{% if news.pagination %}
-			{% include 'components/navs/navigation-pagination.twig' with { 'pagination_include_numbers': true, 'pagination': news.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+			{% include 'components/navs/pagination.twig' with { 'pagination_include_numbers': true, 'pagination': news.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
 		{% endif %}
 	{% endif %}
 </article>
 {% endblock %}
 
-{% block content_aside %}
-<aside class="miz-main-grid__sidebar">
-	{% if option.include_archive_filters %}
+
+{% if option.include_archive_filters %}
+	{% block sidebar_nav %}
 		{% include 'components/archive-sidebar-filters.twig' %}
-	{% endif %}
-</aside>
-{% endblock %}
+	{% endblock sidebar_nav %}
+{% endif %}
