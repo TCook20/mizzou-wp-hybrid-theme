@@ -25,7 +25,7 @@ $ary_context['page']['body_class'] = 'index';
 // Setup standard news parameters.
 $ary_news_params = array(
 	'posts_per_page' => -1,
-	'orderby'        => 'date'
+	'orderby'        => 'date',
 );
 
 // News.
