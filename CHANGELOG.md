@@ -14,6 +14,7 @@
 -   Setting main class modifier for selected aside side
 -   Breadcrumbs hidden on homepage
 -   `layers/big-message.twig` Layer background setting
+-   `layers/split-layout.twig` Ignore content background when level variant is selected
 
 ## 0.3.1
 

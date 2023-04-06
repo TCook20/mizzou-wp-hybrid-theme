@@ -15,9 +15,9 @@
 	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.background_image).src %}
 {% endif %}
 
-{% if flexgroup.displayOptions.content_background == 'light' %}
+{% if (flexgroup.displayOptions.content_background == 'light') and (flexgroup.displayOptions.variant == 'offset') %}
 	{% set SplitLayoutContentBackground = ' miz-fill--black-100' %}
-{% elseif flexgroup.displayOptions.content_background == 'dark' %}
+{% elseif (flexgroup.displayOptions.content_background == 'dark') and (flexgroup.displayOptions.variant == 'offset') %}
 	{% set SplitLayoutContentBackground = ' miz-fill--black' %}
 {% else %}
 	{% set SplitLayoutContentBackground = '' %}
@@ -40,7 +40,7 @@
 		'figure': 'miz-split-layout__figure',
 		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
 		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
-		'content': '' ~ SplitLayoutOffsetContent ~ SplitLayoutContentBackground
+		'content': 'miz-split-layout__content--frame' ~ SplitLayoutOffsetContent ~ SplitLayoutContentBackground
 	},
 	'style': {
 		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
