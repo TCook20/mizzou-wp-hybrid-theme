@@ -14,27 +14,15 @@
 {% extends ['baseView.twig', 'ds-base.twig'] %}
 
 {% if page.get_field('aside_side') == 'left' %}
-  {% set page_aside_modifier_class = 'miz-main-grid--reverse' %}
+  {% set page_main_modifier_class = 'miz-main-grid--reverse' %}
 {% endif %}
 
-{% block pre_content__layer_processing %}
-	{% block breadcrumbs %}
-		{% if option.include_breadcrumbs %}
-		<div class="miz-container">
-				{% include 'components/navs/breadcrumbs.twig' %}
-		</div>
-		{% endif %}
-	{% endblock %}
-
-	{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
-		{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
+{% block breadcrumbs %}
+	{% if option.include_breadcrumbs %}
+	<div class="miz-container">
+			{% include 'components/navs/breadcrumbs.twig' %}
+	</div>
 	{% endif %}
-{% endblock %}
-
-{% block pre_content__page_headers %}
-	{% include '@miz/components/page-header/page-header.twig' with {
-		'title': page.title
-	} %}
 {% endblock %}
 
 {% block content %}
