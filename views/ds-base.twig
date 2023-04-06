@@ -15,6 +15,9 @@
  *  - strInnerViewContent
  *
 #}
+{% if option.aside_align == 'left' %}
+  {% set page_main_modifier_class = 'miz-main-grid--reverse' %}
+{% endif %}
 
 {% block head -%}
 	{% spaceless %}
@@ -118,7 +121,7 @@
 
     {# Main #}
     {% block main %}
-    <main class="miz-main-grid{{ option.aside_align == 'left' ? ' miz-main-grid--reverse' }}" id="content" role="main">
+    <main class="miz-main-grid{% if page_main_modifier_class %} {{ page_main_modifier_class }}{% endif %}" id="content" role="main">
 
       {# Main content section #}
       {% block pre_content %}{% endblock pre_content %}
