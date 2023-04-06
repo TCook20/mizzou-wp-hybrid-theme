@@ -107,6 +107,8 @@
 {% endblock %}
 
 {% block pre_content %}
+	{% block breadcrumbs %}{% endblock breadcrumbs %}
+
   {% block pre_content__layer_processing %}
 		{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
 			{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
