@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards for Mizzou Base Theme">
+<ruleset name="WordPress Coding Standards for Mizzou Hybrid Base Theme">
 	<!--
 	Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
 	See https://github.com/WordPress/WordPress-Coding-Standards/issues/2035
