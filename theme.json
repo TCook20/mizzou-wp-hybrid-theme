@@ -325,6 +325,11 @@
 					"color": "#214716",
 					"name": "Green 600",
 					"slug": "miz-green--600"
+				},
+				{
+					"color": "transparent",
+					"name": "Transparent",
+					"slug": "transparent"
 				}
 			],
 			"text": false
