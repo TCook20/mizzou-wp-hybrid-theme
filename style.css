@@ -94,6 +94,10 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   text-decoration: none;
 }
 
+.is-content-justification-center {
+  justify-content: center;
+}
+
 /* Quote Block */
 .wp-block-quote cite,
 .wp-block-pullquote cite {
