@@ -4,6 +4,10 @@
 
 ## 0.4.0
 
+### Adds
+
+-   `editor.css` Add overrides to block editor
+
 ### Changes
 
 -   `navigation-pagination.twig` renamed to `pagination.twig`
