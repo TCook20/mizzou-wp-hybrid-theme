@@ -56,40 +56,32 @@
 	'variant': flexgroup.displayOptions.variant,
 } %}
 
-{% set splitLayoutInnerContent %}
-<header class="miz-layer__header miz-split-layout__header">
-	{% if splitLayoutLayer.kicker %}
-		<h2 class="miz-layer__kicker{% if splitLayoutLayer.classes.kicker != '' %}{{ splitLayoutLayer.classes.kicker }}{% endif %}">{{ splitLayoutLayer.kicker }}</h2>
-	{% endif %}
-	<h2 class="miz-layer__title{% if splitLayoutLayer.classes.title != '' %}{{ splitLayoutLayer.classes.title }}{% endif %}">{{ splitLayoutLayer.title }}</h2>
-</header>
-<div class="miz-layer__content miz-split-layout__content">
-	{{ splitLayoutLayer.content }}
-
-	{% if splitLayoutLayer.buttons is defined and splitLayoutLayer.buttons is iterable %}
-		{% for Button in splitLayoutLayer.buttons %}
-			{% set buttonOptions = { "class": "miz-button miz-button--primary miz-button--brand", "text": Button.button.title, 'href': Button.button.url } %}
-			{{ anchorButton( buttonOptions ) }}
-		{% endfor %}
-	{% endif %}
-</div>
-{% endset %}
-
-{% set splitLayoutImageContent %}
-	{% if splitLayoutLayer.image.file %}
-	<figure class="{{ splitLayoutLayer.classes.figure }}">
-		<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
-	</figure>
-	{% endif %}
-{% endset %}
-
 <section class="{{ splitLayoutLayer.classes.section }}"{% if splitLayoutLayer.style.section != '' %} style="{{ splitLayoutLayer.style.section }}"{% endif %}>
     <div class="miz-container">
-		<div class="{{ splitLayoutLayer.classes.frame }}">
-			<div class="{{ splitLayoutLayer.classes.content }}">
-				{{ splitLayoutInnerContent }}
+			<div class="{{ splitLayoutLayer.classes.frame }}">
+				<div class="{{ splitLayoutLayer.classes.content }}">
+					<header class="miz-layer__header miz-split-layout__header">
+						{% if splitLayoutLayer.kicker %}
+							<h2 class="miz-layer__kicker{% if splitLayoutLayer.classes.kicker != '' %}{{ splitLayoutLayer.classes.kicker }}{% endif %}">{{ splitLayoutLayer.kicker }}</h2>
+						{% endif %}
+						<h2 class="miz-layer__title{% if splitLayoutLayer.classes.title != '' %}{{ splitLayoutLayer.classes.title }}{% endif %}">{{ splitLayoutLayer.title }}</h2>
+					</header>
+					<div class="miz-layer__content miz-split-layout__content">
+						{{ splitLayoutLayer.content }}
+
+						{% if splitLayoutLayer.buttons is defined and splitLayoutLayer.buttons is iterable %}
+							{% for Button in splitLayoutLayer.buttons %}
+								{% set buttonOptions = { "class": "miz-button miz-button--primary miz-button--brand", "text": Button.button.title, 'href': Button.button.url } %}
+								{{ anchorButton( buttonOptions ) }}
+							{% endfor %}
+						{% endif %}
+					</div>
+				</div>
+				{% if splitLayoutLayer.image.file %}
+				<figure class="{{ splitLayoutLayer.classes.figure }}">
+					<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
+				</figure>
+				{% endif %}
 			</div>
-			{{ splitLayoutImageContent }}
-		</div>
     </div>
 </section>
