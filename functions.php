@@ -181,6 +181,7 @@ class MizzouHybridBase extends MizzouBlocks {
 		);
 
 		// Add Editor Styles.
+		add_editor_style( '/assets/css/editor.css' );
 		add_editor_style( '/assets/css/miz.css' );
 		add_editor_style( '/assets/css/miz-brand.css' );
 

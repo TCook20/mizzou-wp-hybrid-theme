@@ -107,6 +107,8 @@
 {% endblock %}
 
 {% block pre_content %}
+	{% block breadcrumbs %}{% endblock breadcrumbs %}
+
   {% block pre_content__layer_processing %}
 		{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
 			{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
@@ -128,25 +130,16 @@
 {% endblock content %}
 
 {% block content_aside %}
-    {% set sidebar %}
-      {% include 'sidebar.twig' ignore missing %}
-    {% endset %}
-
-    {% if sidebar | trim is not empty or (page.flexgroups.aside is defined and page.flexgroups.aside is iterable) %}
+    {% if (page.sub_navigation.items is not empty) or (page.flexgroups.aside is defined and page.flexgroups.aside is iterable) or (include_sidebar) %}
       <aside class="miz-main-grid__sidebar">
-        {% if sidebar is not empty %}
-          {% block sidebar_contents %}
-            {{ sidebar }}
-          {% endblock sidebar_contents %}
-        {% endif %}
+          {% block sidebar_nav %}
+          {% endblock sidebar_nav %}
 
-        {% block aside__layer_processing %}
-          {% if page.flexgroups.aside is defined and page.flexgroups.aside is iterable %}
-            {% include 'flexgroups.twig' with {
-              "Flexgroups" : page.flexgroups.aside
-            } %}
-          {% endif %}
-        {% endblock aside__layer_processing %}
+				{% if page.meta('layout-aside') is defined and page.meta('layout-aside') is iterable %}
+					{% block aside__layer_processing %}
+						{% include 'flexgroups.twig' with {"Flexgroups" : page.meta('layout-aside') } %}
+					{% endblock aside__layer_processing %}
+				{% endif %}
       </aside>
     {% endif %}
 {% endblock content_aside %}

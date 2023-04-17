@@ -13,7 +13,7 @@
 // Setup Timber.
 $ary_context               = Timber::context();
 $ary_context['page']       = new Timber\Term();
-$ary_context['archives']   = new Timber\Archives( $args );
+$ary_context['archives']   = new Timber\Archives();
 $ary_context['categories'] = Timber::get_terms(
 	'category',
 	array(

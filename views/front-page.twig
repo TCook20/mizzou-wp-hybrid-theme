@@ -17,6 +17,8 @@
     {% set page_article_modifier_class = 'miz-main-grid__main' %}
 {% endif %}
 
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
 {% block pre_content__layer_processing %}
     {% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
         {% include 'flexgroups.twig' with { "Flexgroups" : page.get_field('layout-pre') } %}

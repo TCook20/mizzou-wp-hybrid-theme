@@ -1,0 +1,9 @@
+@import 'tokens/tokens';
+@import 'base/variables';
+@import 'mixins/breakpoints';
+@import 'mixins/layout';
+@import 'mixins/text';
+
+.wp-block-paragraph {
+	margin-bottom: 1rem !important;
+}

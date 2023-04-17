@@ -9,33 +9,18 @@
 
 {% extends ['page.twig'] %}
 
-{% set page_article_modifier_class = 'miz-main-grid__main' %}
-
-{# set Feed Numbers #}
-{% set news_count = news_count|default(3) %}
-{% set events_count = events_count|default(3) %}
-
 {% block content %}
 <article class="miz-main-grid__article">
-	{% if events %}
-		{% include 'layers/events.twig' with {
-			'eventsKicker': null,
-			'eventsTitle': 'Events',
-			'eventsContents': events,
-			'eventsCount': events_count,
-			'eventsButton': {'url': site.link ~ '/events', 'title': 'More Events'},
-			'calendarSource': 'wp'
-		} %}
-	{% endif %}
+	{% if (news) %}
+		<div id="news-collection" class="miz-grid-columns-2">
+		{% for Card in news %}
+			{% include '/layers/card-news.twig' %}
+		{% endfor %}
+		</div>
 
-	{% if news %}
-		{% include 'layers/featured-news.twig' with {
-			'featNews_kicker': null,
-			'featNews_title': 'News and Profiles',
-			'dynamicStories': true,
-			'featNews_contents': news|slice(0,3),
-			'featNews_buttons': {'url': site.link ~ '/archive', 'title': 'More News'}
-		} %}
+		{% if news.pagination %}
+			{% include 'components/navs/pagination.twig' with { 'pagination_include_numbers': true, 'pagination': news.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+		{% endif %}
 	{% endif %}
 </article>
 {% endblock %}

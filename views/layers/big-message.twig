@@ -21,8 +21,10 @@
 {% else %}
 {% endif %}
 
-{% if flexgroup.displayOptions.background_image != '' and flexgroup.displayOptions.layer_background == 'image' %}
-	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.background_image).src %}
+{% set hasLayerBackgroundImage = false %}
+{% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
+	{% set hasLayerBackgroundImage = true %}
+	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
 {# Set Variables #}
@@ -37,7 +39,7 @@
 		'button': 'miz-button--secondary miz-button--brand'
 	},
 	'style': {
-		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
+		'section': hasLayerBackgroundImage ? "background: #F1B82D url('" ~ LayerBackgroundImage ~ "') center/cover " : ''
 	}
 } %}
 
