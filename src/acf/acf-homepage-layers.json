@@ -38,11 +38,7 @@
 									"class": "",
 									"id": ""
 								},
-								"clone": [
-									"field_6422fdbcbe796",
-									"field_6422fdccbe797",
-									"field_64232c7fd1cad"
-								],
+								"clone": ["group_6422fdbc26190"],
 								"display": "seamless",
 								"layout": "block",
 								"prefix_label": 0,
