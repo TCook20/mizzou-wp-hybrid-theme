@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.1
+
+### Changes
+
+-   DS Layer Definitions: Button in repeater field is now required
+-   DS Layer Definitions: Max number of buttons set
+
 ## 0.4.0
 
 ### Adds
