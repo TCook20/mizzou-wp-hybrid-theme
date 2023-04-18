@@ -2,6 +2,18 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.2
+
+### Changes
+
+-   `functions`: Add GCSE script to page titled `Search`
+-   `search.twig`: queryParameter updated
+-   GCSE styling updated
+
+### Fixes
+
+-   `split-layout`: Background image fixed. Temporarily adding dark gel overlay.
+
 ## 0.4.1
 
 ### Changes
