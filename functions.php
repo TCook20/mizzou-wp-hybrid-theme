@@ -745,7 +745,7 @@ class MizzouHybridBase extends MizzouBlocks {
 	 * Add Google Custom Search to Head
 	 */
 	public function mizHeadGCSE() {
-		if ( get_option( 'options_google_cse_id' ) && ( is_search() || is_page_template( 'template-search' ) ) ) {
+		if ( get_option( 'options_google_cse_id' ) && ( is_search() || is_page_template( 'template-search' ) || is_page( 'search' ) ) ) {
 			echo '<!-- Google Custom Search -->' . "\n" .
 			"<script>
                 ( function () {
