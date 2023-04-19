@@ -18,20 +18,19 @@
 {% block pre_content__page_headers %}
 {% embed '@miz/components/page-header/page-header.twig' with {
     'title': page.title|striptags('<em>')|raw,
-    'class': 'article__header'
+    'class': 'miz-page-header--article'
 } %}
     {% block page_header %}
     <div class="miz-container">
         {% if page.terms('category') %}
-        <div class="entry-meta">
-            <p class="article__category">{% for category in page.terms('category') %}<a href="{{ category.link|raw }}">{{ category.name}}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
-        </div>
+					<p class="miz-article__category">{% for category in page.terms('category') %}<a href="{{ category.link|raw }}">{{ category.name}}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         {% endif %}
 
         <h2 class="miz-page-header__title">{{ pageHeaderTitle }}</h2>
-        {% if (page.subhead) %}
-        <p class="miz-page-header__blurb">{{ page.subhead|raw }}</p>
-        {% endif %}
+
+				{% if page.preview.length(40).strip('<b><strong><em><i>').read_more(false) %}
+					<p class="miz-article__blurb">{{ page.preview.length(40).strip('<b><strong><em><i>').read_more(false) }}</p>
+				{% endif %}
     </div>
     {% endblock %}
 {% endembed %}
@@ -39,44 +38,13 @@
 
 {% block content %}
 <article class="miz-main-grid__article">
-	{% if (page.author_name) %}
-		<p class="article__author">By {{ page.author_name|striptags('<em>')|raw }}</p>
-	{% endif %}
 	{% if (page.date) %}
-		<p class="article__date">Published on {{ page.date|date_ap_style }}</p>
+		<p class="miz-article__date">Published on {{ page.date|date_ap_style }}</p>
 		{% if page.modified_date and (page.modified_date != page.date) %}
-		<p class="article__date">Updated on {{ page.modified_date|date_ap_style }}</p>
+		<p class="miz-article__date">Updated on {{ page.modified_date|date_ap_style }}</p>
 		{% endif %}
-	{% endif %}
-
-	{% if page.get_field('video_url') and page.get_field('video_title') %}
-	<figure class="video">
-		<iframe src="{{ page.get_field('video_url') }}" title="{{ page.get_field('video_title') }}" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-	</figure>
 	{% endif %}
 
 	{{ page.content|raw }}
 </article>
 {% endblock content %}
-
-{% block content_aside %}
-<aside class="miz-main-grid__sidebar">
-	{% if (page.attribution) %}
-	<p class="article__attribution">
-		{% if (page.attribution_link) %}
-			<a href="{{ page.attribution_link }}">{{ page.attribution|striptags('<em>')|raw }}</a>
-		{% else %}
-			{{ page.attribution|striptags('<em>')|raw }}
-		{% endif %}
-	</p>
-	{% endif %}
-
-	{% if page.terms('tag') %}
-	<div class="entry-meta">
-		<p class="article__category">{% for tag in page.terms('tag') %}<a href="{{ tag.link|raw }}">{{ tag.name}}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
-	</div>
-	{% endif %}
-</aside>
-
-{% endblock content_aside %}
-
