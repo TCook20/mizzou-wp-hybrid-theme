@@ -169,7 +169,7 @@ const buildMizDev = gulp.series(
 const compileAllStyles = gulp.series(
 	buildStyles,
 	buildEditorStyles,
-	buildThemedStyles
+	// buildThemedStyles
 );
 
 // Watch
