@@ -4,11 +4,16 @@
 
 ## 0.4.2
 
+### Adds
+
+-   Post article header styling
+
 ### Changes
 
 -   `functions`: Add GCSE script to page titled `Search`
 -   `search.twig`: queryParameter updated
 -   GCSE styling updated
+-   `post.twig`: Clean up template
 
 ### Fixes
 
