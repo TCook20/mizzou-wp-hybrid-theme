@@ -11,12 +11,13 @@
 	{% set LayerSectionClasses = '' %}
 {% endif %}
 
-{% if flexgroup.displayOptions.background_image != '' and flexgroup.displayOptions.layer_background == 'image' %}
-	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.background_image).src %}
+{% if flexgroup.displayOptions.image != '' and flexgroup.displayOptions.layer_background == 'image' %}
+	{% set LayerSectionClasses = ' miz-background-gel--dark' %}
+	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
 {% if (flexgroup.displayOptions.content_background == 'light') and (flexgroup.displayOptions.variant == 'offset') %}
-	{% set SplitLayoutContentBackground = ' miz-fill--black-100' %}
+	{% set SplitLayoutContentBackground = ' miz-fill--black-100 miz-text--black' %}
 {% elseif (flexgroup.displayOptions.content_background == 'dark') and (flexgroup.displayOptions.variant == 'offset') %}
 	{% set SplitLayoutContentBackground = ' miz-fill--black' %}
 {% else %}
