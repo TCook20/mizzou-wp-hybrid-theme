@@ -25,7 +25,7 @@
 {% endif %}
 
 {% set SplitLayoutAlign = "" %}
-{% if "right" == flexgroup.displayOptions.image_align %}
+{% if "right" == flexgroup.displayOptions.media_align %}
     {% set SplitLayoutAlign = " miz-split-layout--flip" %}
 {% endif %}
 {% if 'offset' == flexgroup.displayOptions.variant %}
@@ -38,7 +38,7 @@
 	'classes': {
 		'section': 'miz-layer miz-layer--brand miz-main-grid__full' ~ LayerSectionClasses,
 		'frame': 'miz-split-layout' ~ SplitLayoutAlign,
-		'figure': 'miz-split-layout__figure',
+		'figure': flexgroup.mediaType == 'video' ? 'miz-split-layout__figure miz-split-layout__figure--video' : 'miz-split-layout__figure',
 		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
 		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
 		'content': 'miz-split-layout__content--frame' ~ SplitLayoutOffsetContent ~ SplitLayoutContentBackground
@@ -48,9 +48,14 @@
 	},
 	'title': flexgroup.title,
 	'kicker': flexgroup.kicker,
+	'mediaType': flexgroup.mediaType,
 	'image': {
 		'file': Image(flexgroup.image),
-		'align': flexgroup.displayOptions.image_align
+		'align': flexgroup.displayOptions.media_align
+	},
+	'video': {
+		'title': flexgroup.video.title,
+		'src': 'https://www.youtube.com/embed/' ~ flexgroup.video.id
 	},
 	'content': flexgroup.message,
 	'buttons': flexgroup.buttons,
@@ -80,7 +85,11 @@
 				</div>
 				{% if splitLayoutLayer.image.file %}
 				<figure class="{{ splitLayoutLayer.classes.figure }}">
-					<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
+					{% if splitLayoutLayer.mediaType == 'video' %}
+						<iframe src="{{ splitLayoutLayer.video.src }}" title="{{ splitLayoutLayer.video.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="miz-split-layout__video"></iframe>
+					{% else %}
+						<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
+					{% endif %}
 				</figure>
 				{% endif %}
 			</div>
