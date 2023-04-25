@@ -173,6 +173,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		)
 	);
 
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
+
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_6422fe12ad9e1',
@@ -321,6 +325,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 			'show_in_rest'          => 0,
 		)
 	);
+
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
 
 	acf_add_local_field_group(
 		array(
@@ -540,6 +548,352 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		)
 	);
 
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
+
+	acf_add_local_field_group(
+		array(
+			'key'                   => 'group_6447ce2b83fd3',
+			'title'                 => 'MizzouDS-card-deck',
+			'fields'                => array(
+				array(
+					'key'               => 'field_6447ce2b9edcf',
+					'label'             => 'Title',
+					'name'              => 'title',
+					'aria-label'        => '',
+					'type'              => 'text',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'default_value'     => '',
+					'maxlength'         => '',
+					'placeholder'       => '',
+					'prepend'           => '',
+					'append'            => '',
+				),
+				array(
+					'key'               => 'field_6447ce3e9edd0',
+					'label'             => 'Content',
+					'name'              => 'content',
+					'aria-label'        => '',
+					'type'              => 'textarea',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'default_value'     => '',
+					'maxlength'         => '',
+					'rows'              => '',
+					'placeholder'       => '',
+					'new_lines'         => '',
+				),
+				array(
+					'key'               => 'field_6447ce549edd1',
+					'label'             => 'Card Deck',
+					'name'              => 'cards',
+					'aria-label'        => '',
+					'type'              => 'repeater',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'layout'            => 'table',
+					'pagination'        => 0,
+					'min'               => 0,
+					'max'               => 0,
+					'collapsed'         => 'field_6447cef49edd7',
+					'button_label'      => 'Add Card',
+					'rows_per_page'     => 20,
+					'sub_fields'        => array(
+						array(
+							'key'               => 'field_6447ce649edd2',
+							'label'             => 'Media Type',
+							'name'              => 'mediaType',
+							'aria-label'        => '',
+							'type'              => 'button_group',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'choices'           => array(
+								'image' => 'Image',
+								'video' => 'Video',
+							),
+							'default_value'     => 'image',
+							'return_format'     => 'value',
+							'allow_null'        => 0,
+							'layout'            => 'horizontal',
+							'parent_repeater'   => 'field_6447ce549edd1',
+						),
+						array(
+							'key'               => 'field_6447ce899edd3',
+							'label'             => 'Image',
+							'name'              => 'image',
+							'aria-label'        => '',
+							'type'              => 'image',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_6447ce649edd2',
+										'operator' => '==',
+										'value'    => 'image',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'return_format'     => 'array',
+							'library'           => 'all',
+							'min_width'         => '',
+							'min_height'        => '',
+							'min_size'          => '',
+							'max_width'         => '',
+							'max_height'        => '',
+							'max_size'          => '',
+							'mime_types'        => '',
+							'preview_size'      => 'medium',
+							'parent_repeater'   => 'field_6447ce549edd1',
+						),
+						array(
+							'key'               => 'field_6447ceab9edd4',
+							'label'             => 'Video',
+							'name'              => 'video',
+							'aria-label'        => '',
+							'type'              => 'group',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_6447ce649edd2',
+										'operator' => '==',
+										'value'    => 'video',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'layout'            => 'block',
+							'sub_fields'        => array(
+								array(
+									'key'               => 'field_6447cebe9edd5',
+									'label'             => 'Video Title',
+									'name'              => 'title',
+									'aria-label'        => '',
+									'type'              => 'text',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'maxlength'         => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+								),
+								array(
+									'key'               => 'field_6447cec89edd6',
+									'label'             => 'Video ID',
+									'name'              => 'id',
+									'aria-label'        => '',
+									'type'              => 'text',
+									'instructions'      => 'Found in the URL of the video after <code>https://youtube.com/watch?v=</code>',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'maxlength'         => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+								),
+							),
+							'parent_repeater'   => 'field_6447ce549edd1',
+						),
+						array(
+							'key'               => 'field_6447cef49edd7',
+							'label'             => 'Title',
+							'name'              => 'title',
+							'aria-label'        => '',
+							'type'              => 'text',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'maxlength'         => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'parent_repeater'   => 'field_6447ce549edd1',
+						),
+						array(
+							'key'               => 'field_6447cefb9edd8',
+							'label'             => 'Content',
+							'name'              => 'content',
+							'aria-label'        => '',
+							'type'              => 'text',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'maxlength'         => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'parent_repeater'   => 'field_6447ce549edd1',
+						),
+						array(
+							'key'               => 'field_6447cf0a9edd9',
+							'label'             => 'Links',
+							'name'              => 'links',
+							'aria-label'        => '',
+							'type'              => 'repeater',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'layout'            => 'table',
+							'pagination'        => 0,
+							'min'               => 0,
+							'max'               => 0,
+							'collapsed'         => 'field_6447cf1b9edda',
+							'button_label'      => 'Add Link',
+							'rows_per_page'     => 20,
+							'sub_fields'        => array(
+								array(
+									'key'               => 'field_6447cf1b9edda',
+									'label'             => 'Link',
+									'name'              => 'link',
+									'aria-label'        => '',
+									'type'              => 'link',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'return_format'     => 'array',
+									'parent_repeater'   => 'field_6447cf0a9edd9',
+								),
+							),
+							'parent_repeater'   => 'field_6447ce549edd1',
+						),
+					),
+				),
+				array(
+					'key'               => 'field_6447cf609eddb',
+					'label'             => 'Button',
+					'name'              => 'button',
+					'aria-label'        => '',
+					'type'              => 'link',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'return_format'     => 'array',
+				),
+				array(
+					'key'               => 'field_6447cf6a9eddc',
+					'label'             => 'displayOptions Clone',
+					'name'              => 'displayoptions_clone',
+					'aria-label'        => '',
+					'type'              => 'clone',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'clone'             => array(
+						0 => 'group_64232d4f917a1',
+					),
+					'display'           => 'seamless',
+					'layout'            => 'block',
+					'prefix_label'      => 0,
+					'prefix_name'       => 0,
+				),
+			),
+			'location'              => array(
+				array(
+					array(
+						'param'    => 'post_type',
+						'operator' => '==',
+						'value'    => 'post',
+					),
+				),
+			),
+			'menu_order'            => 0,
+			'position'              => 'normal',
+			'style'                 => 'default',
+			'label_placement'       => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen'        => '',
+			'active'                => true,
+			'description'           => '',
+			'show_in_rest'          => 0,
+		)
+	);
+
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
+
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_6422ffabdf21c',
@@ -634,7 +988,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'aria-label'        => '',
 							'type'              => 'text',
 							'instructions'      => '<p>If you selected <strong>Department</strong> previously then this field will have the group_id. If you selected <strong>Type</strong> earlier then this field will have the Event Type.</p>
-					<p>If you selected either <strong>Type</strong> or <strong>Keyword</strong> then this field can accept multiple values separated by a single space.</p>',
+		<p>If you selected either <strong>Type</strong> or <strong>Keyword</strong> then this field can accept multiple values separated by a single space.</p>',
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -729,6 +1083,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		)
 	);
 
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
+
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_642300bdc27f5',
@@ -819,6 +1177,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 			'show_in_rest'          => 0,
 		)
 	);
+
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
 
 	acf_add_local_field_group(
 		array(
@@ -995,6 +1357,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		)
 	);
 
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
+
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_64230234c7cb1',
@@ -1123,6 +1489,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 			'show_in_rest'          => 0,
 		)
 	);
+
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
 
 	acf_add_local_field_group(
 		array(
@@ -1322,7 +1692,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'miz-black-100' => 'Black 100',
 								'miz-white'     => 'White',
 							),
-							'default_value'     => 'white',
+							'default_value'     => 'miz-white',
 							'return_format'     => 'value',
 							'allow_null'        => 0,
 							'layout'            => 'horizontal',
@@ -1350,6 +1720,10 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 			'show_in_rest'          => 0,
 		)
 	);
+
+	endif;
+
+if ( function_exists( 'acf_add_local_field_group' ) ) :
 
 	acf_add_local_field_group(
 		array(
@@ -1395,31 +1769,6 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'placeholder'       => '',
 					'prepend'           => '',
 					'append'            => '',
-				),
-				array(
-					'key'               => 'field_642303dddb9da',
-					'label'             => 'Layout Image',
-					'name'              => 'image',
-					'aria-label'        => '',
-					'type'              => 'image',
-					'instructions'      => '',
-					'required'          => 0,
-					'conditional_logic' => 0,
-					'wrapper'           => array(
-						'width' => '',
-						'class' => '',
-						'id'    => '',
-					),
-					'return_format'     => 'array',
-					'library'           => 'all',
-					'min_width'         => '',
-					'min_height'        => '',
-					'min_size'          => '',
-					'max_width'         => '',
-					'max_height'        => '',
-					'max_size'          => '',
-					'mime_types'        => '',
-					'preview_size'      => 'medium',
 				),
 				array(
 					'key'               => 'field_642303f4db9db',
@@ -1479,6 +1828,128 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							),
 							'return_format'     => 'array',
 							'parent_repeater'   => 'field_6423040cdb9dc',
+						),
+					),
+				),
+				array(
+					'key'               => 'field_6447cc1c5d161',
+					'label'             => 'Media Type',
+					'name'              => 'mediaType',
+					'aria-label'        => '',
+					'type'              => 'button_group',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'choices'           => array(
+						'image' => 'Image',
+						'video' => 'Video',
+					),
+					'default_value'     => '',
+					'return_format'     => 'value',
+					'allow_null'        => 0,
+					'layout'            => 'horizontal',
+				),
+				array(
+					'key'               => 'field_642303dddb9da',
+					'label'             => 'Image',
+					'name'              => 'image',
+					'aria-label'        => '',
+					'type'              => 'image',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_6447cc1c5d161',
+								'operator' => '==',
+								'value'    => 'image',
+							),
+						),
+					),
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'return_format'     => 'array',
+					'library'           => 'all',
+					'min_width'         => '',
+					'min_height'        => '',
+					'min_size'          => '',
+					'max_width'         => '',
+					'max_height'        => '',
+					'max_size'          => '',
+					'mime_types'        => '',
+					'preview_size'      => 'medium',
+				),
+				array(
+					'key'               => 'field_6447cd1eaa704',
+					'label'             => 'Video',
+					'name'              => 'video',
+					'aria-label'        => '',
+					'type'              => 'group',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_6447cc1c5d161',
+								'operator' => '==',
+								'value'    => 'video',
+							),
+						),
+					),
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'layout'            => 'table',
+					'sub_fields'        => array(
+						array(
+							'key'               => 'field_6447cdb81fb35',
+							'label'             => 'Video Title',
+							'name'              => 'title',
+							'aria-label'        => '',
+							'type'              => 'text',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'maxlength'         => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+						),
+						array(
+							'key'               => 'field_6447cdc21fb36',
+							'label'             => 'Video ID',
+							'name'              => 'id',
+							'aria-label'        => '',
+							'type'              => 'text',
+							'instructions'      => 'Found in the URL of the video after <code>https://youtube.com/watch?v=</code>',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'maxlength'         => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
 						),
 					),
 				),
@@ -1654,4 +2125,5 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		)
 	);
 
-				endif;
+	endif;
+
