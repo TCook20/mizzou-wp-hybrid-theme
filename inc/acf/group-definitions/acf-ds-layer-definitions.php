@@ -1971,8 +1971,8 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'sub_fields'        => array(
 						array(
 							'key'               => 'field_6423039bdb9d7',
-							'label'             => 'Layout Image Location',
-							'name'              => 'image_align',
+							'label'             => 'Layout Media Location',
+							'name'              => 'media_align',
 							'aria-label'        => '',
 							'type'              => 'button_group',
 							'instructions'      => '',
