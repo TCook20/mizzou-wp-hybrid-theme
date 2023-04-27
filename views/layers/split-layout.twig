@@ -1,48 +1,47 @@
 {# Imports #}
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
+{% set LayerSectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
 {% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
-	{% set LayerSectionClasses = ' miz-fill--black-100' %}
+	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-fill--black-100']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
-	{% set LayerSectionClasses = ' miz-fill--black' %}
+	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-fill--black']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
-	{% set LayerSectionClasses = ' miz-fill--white' %}
+	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-fill--white']) %}
 {% else %}
-	{% set LayerSectionClasses = '' %}
 {% endif %}
 
 {% if flexgroup.displayOptions.image != '' and flexgroup.displayOptions.layer_background == 'image' %}
-	{% set LayerSectionClasses = ' miz-background-gel--dark' %}
+	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
 	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
+{% set splitLayoutContentClasses = ['miz-split-layout__content--frame'] %}
 {% if (flexgroup.displayOptions.content_background == 'light') and (flexgroup.displayOptions.variant == 'offset') %}
-	{% set SplitLayoutContentBackground = ' miz-fill--black-100 miz-text--black' %}
+	{% set splitLayoutContentClasses = splitLayoutContentClasses|merge(['miz-fill--black-100 miz-text--black']) %}
 {% elseif (flexgroup.displayOptions.content_background == 'dark') and (flexgroup.displayOptions.variant == 'offset') %}
-	{% set SplitLayoutContentBackground = ' miz-fill--black' %}
+	{% set splitLayoutContentClasses = splitLayoutContentClasses|merge(['miz-fill--black']) %}
 {% else %}
-	{% set SplitLayoutContentBackground = '' %}
 {% endif %}
 
-{% set SplitLayoutAlign = "" %}
+{% set SplitLayoutFrameClasses = ['miz-split-layout'] %}
 {% if "right" == flexgroup.displayOptions.media_align %}
-    {% set SplitLayoutAlign = " miz-split-layout--flip" %}
+    {% set SplitLayoutFrameClasses = SplitLayoutFrameClasses|merge([" miz-split-layout--flip"]) %}
 {% endif %}
 {% if 'offset' == flexgroup.displayOptions.variant %}
-    {% set SplitLayoutAlign = SplitLayoutAlign ~ " miz-split-layout--no-gap" %}
-		{% set SplitLayoutOffsetContent = ' miz-split-layout__header-content' %}
+    {% set SplitLayoutFrameClasses = SplitLayoutFrameClasses|merge(["miz-split-layout--no-gap"]) %}
+		{% set splitLayoutContentClasses = splitLayoutContentClasses|merge(['miz-split-layout__header-content']) %}
 {% endif %}
 
 {# Defaults #}
 {% set splitLayoutLayer = {
 	'classes': {
-		'section': 'miz-layer miz-layer--brand miz-main-grid__full' ~ LayerSectionClasses,
-		'frame': 'miz-split-layout' ~ SplitLayoutAlign,
+		'section': LayerSectionClasses|join(' '),
+		'frame': SplitLayoutFrameClasses|join(' '),
 		'figure': flexgroup.mediaType == 'video' ? 'miz-split-layout__figure miz-split-layout__figure--video' : 'miz-split-layout__figure',
 		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
 		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
-		'content': 'miz-split-layout__content--frame' ~ SplitLayoutOffsetContent ~ SplitLayoutContentBackground
-	},
+		'content': splitLayoutContentClasses|join(' '),
 	'style': {
 		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
 	},

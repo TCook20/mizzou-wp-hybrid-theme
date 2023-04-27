@@ -2,23 +2,23 @@
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
 {# Set Variables #}
-{% set sectionClasses = '' %}
+{% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-cta-layer', 'miz-main-grid__full'] %}
 {% if flexgroup.displayOptions.plus_decoration %}
-	{% set sectionClasses = sectionClasses ~ ' miz-decoration miz-decoration__plus' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
 
 	{% if flexgroup.displayOptions.decoration_location is iterable %}
 		{% for location in flexgroup.displayOptions.decoration_location %}
-			{% set sectionClasses = sectionClasses ~ " miz-decoration__plus--#{ location }" %}
+			{% set sectionClasses = sectionClasses|merge(["miz-decoration__plus--#{ location }"]) %}
 		{% endfor %}
 	{% endif %}
 {% endif %}
 
 {% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
-	{% set sectionClasses = sectionClasses ~ ' miz-fill--black-100' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--black-100']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
-	{% set sectionClasses = sectionClasses ~ ' miz-fill--black' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--black']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
-	{% set sectionClasses = sectionClasses ~ ' miz-fill--white' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--white']) %}
 {% else %}
 {% endif %}
 
@@ -28,12 +28,13 @@
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
+{% set frameClasses = ['miz-cta-frame'] %}
 {% if flexgroup.displayOptions.content_background == 'miz-black-100' %}
-	{% set frameClasses = ' miz-fill--black-100' %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--black-100']) %}
 {% elseif flexgroup.displayOptions.content_background == 'miz-black' %}
-	{% set frameClasses = ' miz-fill--black' %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--black']) %}
 {% else %}
-	{% set frameClasses = ' miz-fill--white' %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--white']) %}
 {% endif %}
 
 {% if flexgroup.displayOptions.button_style == 'brand-primary' %}
@@ -51,7 +52,7 @@
     'variant': flexgroup.displayOptions.variant,
     'image': flexgroup.displayOptions.image,
 	'classes': {
-		'section': 'miz-layer miz-layer--brand miz-cta-layer miz-main-grid__full' ~ sectionClasses,
+		'section': sectionClasses|join(' '),
 		'frame': 'miz-cta-frame' ~ frameClasses,
 		'button': buttonClass
 	},

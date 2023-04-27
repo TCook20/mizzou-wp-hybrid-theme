@@ -3,20 +3,20 @@
 {% from "@miz/components/icon/icon.twig" import Icon as icon %}
 
 {# Set Variables #}
-{% set sectionClasses = '' %}
+{% set sectionClasses = ['miz-layer', 'miz-main-grid__full'] %}
 {% if flexgroup.displayOptions.plus_decoration %}
-	{% set sectionClasses = sectionClasses ~ ' miz-decoration miz-decoration__plus' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
 
 	{% if flexgroup.displayOptions.decoration_location is iterable %}
 		{% for location in flexgroup.displayOptions.decoration_location %}
-			{% set sectionClasses = sectionClasses ~ " miz-decoration__plus--#{ location }" %}
+			{% set sectionClasses = sectionClasses|merge(["miz-decoration__plus--#{ location }"]) %}
 		{% endfor %}
 	{% endif %}
 {% endif %}
 
 {% set linkListLayer = {
 	'classes': {
-		'section': 'miz-layer miz-main-grid__full' ~ sectionClasses
+		'section': sectionClasses|join(' ')
 	},
 	'title': flexgroup.title,
     'list': flexgroup.links
