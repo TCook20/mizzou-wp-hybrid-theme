@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.4
+
+### Fixes
+
+-   `call-to-action`: Fixes frame classes
+-   `split-layout`: Syntax error
+
 ## 0.4.3
 
 ### Adds
