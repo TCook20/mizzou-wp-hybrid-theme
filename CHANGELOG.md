@@ -2,6 +2,16 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.3
+
+### Adds
+
+-   `split-layout`: Adds support for media type (image/video)
+
+### Changes
+
+-   Updates ACF definitions
+
 ## 0.4.2
 
 ### Adds

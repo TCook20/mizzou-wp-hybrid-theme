@@ -4,7 +4,7 @@
    Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
    Author URI:   https://missouri.edu/
    Description:  Default Mizzou Hybrid WordPress Theme.
-   Version:      0.4.2
+   Version:      0.4.3
    Text Domain:  miz-hybrid-base
    Tags:         full-site-editing, custom-colors, featured-images, editor-style
  */
@@ -138,4 +138,19 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
 }
 .miz-article__date:last-of-type {
   margin-bottom: 1rem;
+}
+
+.miz-split-layout__figure--video {
+  aspect-ratio: 16/9;
+  position: relative;
+  width: 100%;
+}
+.miz-split-layout__figure--video .miz-split-layout__video {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
 }
