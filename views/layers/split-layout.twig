@@ -8,7 +8,6 @@
 	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-fill--black']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
 	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-fill--white']) %}
-{% else %}
 {% endif %}
 
 {% if flexgroup.displayOptions.image != '' and flexgroup.displayOptions.layer_background == 'image' %}
@@ -16,37 +15,29 @@
 	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
-{% set splitLayoutContentClasses = ['miz-split-layout__content--frame'] %}
+{% set LayerContentClasses = ['miz-split-layout__content--frame'] %}
 {% if (flexgroup.displayOptions.content_background == 'light') and (flexgroup.displayOptions.variant == 'offset') %}
-	{% set splitLayoutContentClasses = splitLayoutContentClasses|merge(['miz-fill--black-100 miz-text--black']) %}
+	{% set LayerContentClasses = LayerContentClasses|merge(['miz-fill--black-100', 'miz-text--black']) %}
 {% elseif (flexgroup.displayOptions.content_background == 'dark') and (flexgroup.displayOptions.variant == 'offset') %}
-	{% set splitLayoutContentClasses = splitLayoutContentClasses|merge(['miz-fill--black']) %}
-{% else %}
+	{% set LayerContentClasses = LayerContentClasses|merge(['miz-fill--black']) %}
 {% endif %}
 
-{% set SplitLayoutFrameClasses = ['miz-split-layout'] %}
+{% set LayerFrameClasses = ['miz-split-layout'] %}
 {% if "right" == flexgroup.displayOptions.media_align %}
-    {% set SplitLayoutFrameClasses = SplitLayoutFrameClasses|merge([" miz-split-layout--flip"]) %}
+    {% set LayerFrameClasses = LayerFrameClasses|merge(['miz-split-layout--flip']) %}
 {% endif %}
+
 {% if 'offset' == flexgroup.displayOptions.variant %}
-    {% set SplitLayoutFrameClasses = SplitLayoutFrameClasses|merge(["miz-split-layout--no-gap"]) %}
-		{% set splitLayoutContentClasses = splitLayoutContentClasses|merge(['miz-split-layout__header-content']) %}
+    {% set LayerFrameClasses = LayerFrameClasses|merge(['miz-split-layout--no-gap']) %}
+		{% set LayerContentClasses = LayerContentClasses|merge(['miz-split-layout__header-content']) %}
 {% endif %}
 
 {# Defaults #}
 {% set splitLayoutLayer = {
-	'classes': {
-		'section': LayerSectionClasses|join(' '),
-		'frame': SplitLayoutFrameClasses|join(' '),
-		'figure': flexgroup.mediaType == 'video' ? 'miz-split-layout__figure miz-split-layout__figure--video' : 'miz-split-layout__figure',
-		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
-		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
-		'content': splitLayoutContentClasses|join(' '),
-	'style': {
-		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
-	},
 	'title': flexgroup.title,
 	'kicker': flexgroup.kicker,
+	'content': flexgroup.message,
+	'buttons': flexgroup.buttons,
 	'mediaType': flexgroup.mediaType,
 	'image': {
 		'file': Image(flexgroup.image),
@@ -56,9 +47,18 @@
 		'title': flexgroup.video.title,
 		'src': 'https://www.youtube.com/embed/' ~ flexgroup.video.id
 	},
-	'content': flexgroup.message,
-	'buttons': flexgroup.buttons,
 	'variant': flexgroup.displayOptions.variant,
+	'classes': {
+		'section': LayerSectionClasses|join(' '),
+		'frame': LayerFrameClasses|join(' '),
+		'figure': flexgroup.mediaType == 'video' ? 'miz-split-layout__figure miz-split-layout__figure--video' : 'miz-split-layout__figure',
+		'title': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--gold',
+		'kicker': flexgroup.displayOptions.content_background == 'light' ? '' : ' miz-text--white',
+		'content': LayerContentClasses|join(' ')
+	},
+	'style': {
+		'section': LayerSectionBackgroundImage ? "background: #000000 url('" ~ LayerSectionBackgroundImage ~ "') top left/cover;" : ''
+	}
 } %}
 
 <section class="{{ splitLayoutLayer.classes.section }}"{% if splitLayoutLayer.style.section != '' %} style="{{ splitLayoutLayer.style.section }}"{% endif %}>
@@ -82,12 +82,14 @@
 						{% endif %}
 					</div>
 				</div>
-				{% if splitLayoutLayer.image.file %}
+				{% if splitLayoutLayer.image.file or splitLayoutLayer.video.src %}
 				<figure class="{{ splitLayoutLayer.classes.figure }}">
-					{% if splitLayoutLayer.mediaType == 'video' %}
+					{% if (splitLayoutLayer.mediaType == 'video') %}
 						<iframe src="{{ splitLayoutLayer.video.src }}" title="{{ splitLayoutLayer.video.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="miz-split-layout__video"></iframe>
 					{% else %}
+						{% if (splitLayoutLayer.image.file) %}
 						<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
+						{% endif %}
 					{% endif %}
 				</figure>
 				{% endif %}
