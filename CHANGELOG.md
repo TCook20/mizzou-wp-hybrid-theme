@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.5
+
+### Changes
+
+-   Layer Plus Decoration: Limit to one location
+
 ## 0.4.4
 
 ### Fixes
