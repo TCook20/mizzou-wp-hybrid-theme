@@ -8,6 +8,11 @@
 
 -   Layer Plus Decoration: Limit to one location
 
+### Fixes
+
+-   `layers/call-to-action`: Set text color for black-100 content background
+-   `layers/split-layout`: Text color for transparent content background
+
 ## 0.4.4
 
 ### Fixes
