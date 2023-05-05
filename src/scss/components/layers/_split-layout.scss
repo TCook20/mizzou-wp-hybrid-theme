@@ -1,13 +1,3 @@
-.miz-split-layout {
-	@include media-breakpoint-up(lg) {
-		grid-template:
-      'margin-left split-layout__figure split-layout__content-frame margin-right' min-content
-      'margin-left split-layout__figure split-layout__content-frame margin-right' min-content
-      'margin-left split-layout__figure . margin-right' max-content
-      / minmax(0, 1fr) minmax(432px, 568px) minmax(432px, 568px) minmax(0, 1fr) !important;
-	}
-}
-
 .miz-split-layout__content--frame {
 	&.miz-fill--transparent {
 		p {
