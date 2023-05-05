@@ -1,0 +1,137 @@
+.miz-sub-nav {
+  @include miz-make-flex-column;
+
+  list-style: none;
+  padding-left: 0;
+  font-weight: $miz-font-weight-bold;
+  font-size: $miz-font-size-base;
+  background-color: $miz-gold-200;
+}
+
+.miz-sub-nav-item {
+  // @extend .nav-item;
+
+	& > .miz-sub-nav {
+		.miz-sub-nav-link {
+			padding-left: $miz-space-l;
+			background: $miz-gold-100;
+
+			&:hover {
+				background: $miz-gold-300;
+			}
+		}
+	}
+}
+
+.miz-sub-nav-link {
+  display: block;
+  padding: $miz-space-inset-squish-default;
+  text-decoration: none;
+
+  &:hover {
+    background: $miz-gold-300;
+  }
+
+	&--active {
+		background: $miz-gold-200;
+	}
+}
+
+// Expanding variant
+.miz-sub-nav--expanding {
+	background-color: $miz-white;
+
+	.miz-sub-nav-item {
+		border-bottom: 1px solid $miz-black-200;
+
+		.miz-sub-nav-link {
+			display: block;
+			padding: .5rem 2rem;
+			text-decoration: none;
+
+			&:hover {
+				background-color: $miz-gold-100;
+			}
+		}
+	}
+
+	.miz-sub-nav__list {
+		list-style: none;
+		position: relative;
+		margin: 0;
+		padding: inherit;
+		background-color: $miz-black-100;
+		display: none;
+
+		&.expand {
+			display: block;
+			transform-origin: center;
+			transition: transform 0.2s ease-out;
+		}
+	}
+
+	.miz-sub-nav__list-item {
+		display: flex;
+		flex-direction: column;
+
+		& > * {
+			flex: 1 0 100%;
+		}
+	}
+
+	.miz-sub-nav-link,
+	.miz-sub-nav__expand-button {
+		position: relative;
+		text-decoration: none;
+		border: none;
+		text-align: left;
+		padding: 0.5rem 2rem;
+
+		&:hover {
+			background-color: $miz-gold-200;
+		}
+
+		&:focus {
+			outline: 2px solid $miz-blue;
+			outline-offset: 4px;
+			z-index: 10;
+		}
+	}
+}
+
+.miz-sub-nav__expand-button {
+  font-weight: $miz-font-weight-bold;
+	width: 100%;
+
+  &[aria-expanded='true'] {
+		&:after {
+			transform: rotate(180deg);
+		}
+
+		&:hover:after {
+			transform: rotate();
+		}
+  }
+
+  &::after {
+    position: absolute;
+    display: inline-block;
+    top: auto;
+    right: 1rem;
+    transform-origin: center;
+    transition: transform 0.2s ease-out;
+    content: 'expand_more';
+		font-family: 'Material Icons';
+  }
+
+  &.collapsed {
+    &::after {
+      content: 'expand_more';
+    }
+
+    &:hover::after {
+      transform: rotate(180deg);
+      transition-delay: 0.15s;
+    }
+  }
+}

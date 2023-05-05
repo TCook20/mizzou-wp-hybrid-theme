@@ -1,0 +1,13 @@
+.miz-featured-news__card-deck {
+  gap: $miz-space-m $miz-space-l;
+
+  @include media-breakpoint-up(md) {
+    flex-flow: row wrap;
+
+    > .miz-card,
+    > .miz-linked-card {
+      margin-right: initial;
+      flex: 0 1 calc(33.333333% - $miz-space-l);
+    }
+  }
+}

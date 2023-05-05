@@ -1,0 +1,11 @@
+.miz-primary-navigation__sub-nav-list {
+	&.show {
+		min-width: max-content;
+		z-index: 20;
+		background-color: $miz-black-100;
+		box-shadow: $miz-size-xxs $miz-size-xs $miz-size-xs
+				rgba($color: $miz-black-200, $alpha: 50%),
+			(-$miz-size-xxs) $miz-size-xs $miz-size-xs
+				rgba($color: $miz-black-200, $alpha: 50%);
+	}
+}

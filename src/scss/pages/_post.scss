@@ -1,0 +1,30 @@
+.miz-page-header--article {
+	.miz-article__blurb {
+		margin-top: 1rem;
+	}
+
+	.miz-article__category {
+		font-family: $miz-font-family-clarendon;
+		font-size: 1rem;
+		font-weight: $miz-font-weight-semi-bold;
+
+		a {
+			font-family: inherit;
+		}
+	}
+
+	.miz-page-header__title {
+		font-family: $miz-font-family-graphik;
+		margin-top: 1rem;
+	}
+}
+
+.miz-article__date {
+	&:first-of-type {
+		margin-bottom: 0;
+	}
+
+	&:last-of-type {
+		margin-bottom: 1rem;
+	}
+}
