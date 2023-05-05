@@ -16,7 +16,7 @@
 {% if flexgroup.displayOptions.image != '' and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
 	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.image).src %}
-	{% set LayerContentClasses = LayerContentClasses|merge(['miz-text--white']) %}
+	{% set LayerContentClasses = LayerContentClasses|merge(['miz-fill--transparent']) %}
 {% endif %}
 
 {% if (flexgroup.displayOptions.content_background == 'light') and (flexgroup.displayOptions.variant == 'offset') %}
