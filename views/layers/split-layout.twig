@@ -2,6 +2,9 @@
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
 {% set LayerSectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
+{% set LayerContentClasses = ['miz-split-layout__content--frame'] %}
+{% set LayerFrameClasses = ['miz-split-layout'] %}
+
 {% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
 	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-fill--black-100']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
@@ -13,16 +16,15 @@
 {% if flexgroup.displayOptions.image != '' and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
 	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.image).src %}
+	{% set LayerContentClasses = LayerContentClasses|merge(['miz-text--white']) %}
 {% endif %}
 
-{% set LayerContentClasses = ['miz-split-layout__content--frame'] %}
 {% if (flexgroup.displayOptions.content_background == 'light') and (flexgroup.displayOptions.variant == 'offset') %}
 	{% set LayerContentClasses = LayerContentClasses|merge(['miz-fill--black-100', 'miz-text--black']) %}
 {% elseif (flexgroup.displayOptions.content_background == 'dark') and (flexgroup.displayOptions.variant == 'offset') %}
 	{% set LayerContentClasses = LayerContentClasses|merge(['miz-fill--black']) %}
 {% endif %}
 
-{% set LayerFrameClasses = ['miz-split-layout'] %}
 {% if "right" == flexgroup.displayOptions.media_align %}
     {% set LayerFrameClasses = LayerFrameClasses|merge(['miz-split-layout--flip']) %}
 {% endif %}
