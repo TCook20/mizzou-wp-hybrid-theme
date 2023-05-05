@@ -140,6 +140,10 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   margin-bottom: 1rem;
 }
 
+.miz-split-layout .miz-split-layout__content--frame.miz-fill--transparent p {
+  color: #FFFFFF;
+}
+
 .miz-split-layout__figure--video {
   aspect-ratio: 16/9;
   position: relative;
