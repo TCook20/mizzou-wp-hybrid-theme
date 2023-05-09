@@ -4,7 +4,7 @@
    Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
    Author URI:   https://missouri.edu/
    Description:  Default Mizzou Hybrid WordPress Theme.
-   Version:      0.4.4
+   Version:      0.4.5
    Text Domain:  miz-hybrid-base
    Tags:         full-site-editing, custom-colors, featured-images, editor-style
  */
@@ -108,6 +108,140 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   color: #444444;
 }
 
+.miz-card-group {
+  /* stylelint-disable-next-line */
+  display: flex;
+  flex-flow: column wrap;
+}
+.miz-card-group > * {
+  flex: 1 1 auto;
+}
+@media (min-width: 768px) {
+  .miz-card-group {
+    /* stylelint-disable-next-line */
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .miz-card-group > * {
+    flex: 1 1 auto;
+  }
+  .miz-card-group > .miz-card {
+    margin-bottom: 0;
+  }
+}
+
+.miz-card-deck {
+  /* stylelint-disable-next-line */
+  display: flex;
+  flex-flow: column wrap;
+  /* stylelint-disable-next-line */
+}
+.miz-card-deck > * {
+  flex: 1 1 auto;
+}
+.miz-card-deck > .miz-card,
+.miz-card-deck > .miz-linked-card {
+  margin-bottom: 2rem;
+}
+.miz-card-deck > .miz-card:last-of-type,
+.miz-card-deck > .miz-linked-card:last-of-type {
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+  .miz-card-deck {
+    /* stylelint-disable-next-line */
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .miz-card-deck > * {
+    flex: 1 1 100%;
+  }
+  .miz-card-deck > .miz-card,
+  .miz-card-deck > .miz-linked-card {
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+  .miz-card-deck > .miz-card:last-of-type,
+  .miz-card-deck > .miz-linked-card:last-of-type {
+    margin-right: 0;
+  }
+}
+.miz-card-deck.miz-card-deck--2 {
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .miz-card-deck.miz-card-deck--2 {
+    flex-flow: row wrap;
+  }
+  .miz-card-deck.miz-card-deck--2 > .miz-card,
+  .miz-card-deck.miz-card-deck--2 > .miz-linked-card {
+    margin-right: initial;
+    flex: 0 1 calc(50% - 2rem);
+  }
+}
+.miz-card-deck.miz-card-deck--3 {
+  gap: 1rem 2rem;
+}
+@media (min-width: 768px) {
+  .miz-card-deck.miz-card-deck--3 {
+    flex-flow: row wrap;
+  }
+  .miz-card-deck.miz-card-deck--3 > .miz-card,
+  .miz-card-deck.miz-card-deck--3 > .miz-linked-card {
+    margin-right: initial;
+    flex: 0 1 calc(33.333333% - 2rem);
+  }
+}
+
+.miz-card-deck--grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .miz-card-deck--grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .miz-card-deck--grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .miz-card-deck--grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .miz-card-deck--grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.miz-split-layout__content--frame.miz-fill--transparent p {
+  color: #FFFFFF;
+}
+
+.miz-split-layout__figure--video {
+  aspect-ratio: 16/9;
+  position: relative;
+  width: 100%;
+}
+.miz-split-layout__figure--video .miz-split-layout__video {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
 .miz-primary-navigation__sub-nav-list.show {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
@@ -115,6 +249,121 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   z-index: 20;
   background-color: #F0F0F0;
   box-shadow: 0.125rem 0.25rem 0.25rem rgba(204, 204, 204, 0.5), -0.125rem 0.25rem 0.25rem rgba(204, 204, 204, 0.5);
+}
+
+.miz-sub-nav {
+  /* stylelint-disable-next-line */
+  display: flex;
+  flex-flow: column wrap;
+  list-style: none;
+  padding-left: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: #FEE8B6;
+}
+.miz-sub-nav > * {
+  flex: 1 1 auto;
+}
+
+.miz-sub-nav-item > .miz-sub-nav .miz-sub-nav-link {
+  padding-left: 2rem;
+  background: #FFF4D6;
+}
+.miz-sub-nav-item > .miz-sub-nav .miz-sub-nav-link:hover {
+  background: #FBD986;
+}
+
+.miz-sub-nav-link {
+  display: block;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  text-decoration: none;
+}
+.miz-sub-nav-link:hover {
+  background: #FBD986;
+}
+.miz-sub-nav-link--active {
+  background: #FEE8B6;
+}
+
+.miz-sub-nav--expanding {
+  background-color: #FFFFFF;
+}
+.miz-sub-nav--expanding .miz-sub-nav-item {
+  border-bottom: 1px solid #CCCCCC;
+}
+.miz-sub-nav--expanding .miz-sub-nav-item .miz-sub-nav-link {
+  display: block;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+}
+.miz-sub-nav--expanding .miz-sub-nav-item .miz-sub-nav-link:hover {
+  background-color: #FFF4D6;
+}
+.miz-sub-nav--expanding .miz-sub-nav__list {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: inherit;
+  background-color: #F0F0F0;
+  display: none;
+}
+.miz-sub-nav--expanding .miz-sub-nav__list.expand {
+  display: block;
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+}
+.miz-sub-nav--expanding .miz-sub-nav__list-item {
+  display: flex;
+  flex-direction: column;
+}
+.miz-sub-nav--expanding .miz-sub-nav__list-item > * {
+  flex: 1 0 100%;
+}
+.miz-sub-nav--expanding .miz-sub-nav-link,
+.miz-sub-nav--expanding .miz-sub-nav__expand-button {
+  position: relative;
+  text-decoration: none;
+  border: none;
+  text-align: left;
+  padding: 0.5rem 2rem;
+}
+.miz-sub-nav--expanding .miz-sub-nav-link:hover,
+.miz-sub-nav--expanding .miz-sub-nav__expand-button:hover {
+  background-color: #FEE8B6;
+}
+.miz-sub-nav--expanding .miz-sub-nav-link:focus,
+.miz-sub-nav--expanding .miz-sub-nav__expand-button:focus {
+  outline: 2px solid #318FD7;
+  outline-offset: 4px;
+  z-index: 10;
+}
+
+.miz-sub-nav__expand-button {
+  font-weight: 700;
+  width: 100%;
+}
+.miz-sub-nav__expand-button[aria-expanded=true]:after {
+  transform: rotate(180deg);
+}
+.miz-sub-nav__expand-button[aria-expanded=true]:hover:after {
+  transform: rotate();
+}
+.miz-sub-nav__expand-button::after {
+  position: absolute;
+  display: inline-block;
+  top: auto;
+  right: 1rem;
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+  content: "expand_more";
+  font-family: "Material Icons";
+}
+.miz-sub-nav__expand-button.collapsed::after {
+  content: "expand_more";
+}
+.miz-sub-nav__expand-button.collapsed:hover::after {
+  transform: rotate(180deg);
+  transition-delay: 0.15s;
 }
 
 .miz-page-header--article .miz-article__blurb {
@@ -138,19 +387,4 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
 }
 .miz-article__date:last-of-type {
   margin-bottom: 1rem;
-}
-
-.miz-split-layout__figure--video {
-  aspect-ratio: 16/9;
-  position: relative;
-  width: 100%;
-}
-.miz-split-layout__figure--video .miz-split-layout__video {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
 }

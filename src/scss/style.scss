@@ -7,65 +7,15 @@
 
 @import 'tokens/tokens';
 @import 'base/variables';
+
 @import 'mixins/breakpoints';
+@import 'mixins/flex';
 @import 'mixins/layout';
 @import 'mixins/text';
 
 @import 'wordpress/wp-blocks';
-
-.miz-primary-navigation__sub-nav-list.show {
-	min-width: max-content;
-	z-index: 20;
-	background-color: $miz-black-100;
-	box-shadow: $miz-size-xxs $miz-size-xs $miz-size-xs
-			rgba($color: $miz-black-200, $alpha: 50%),
-		(-$miz-size-xxs) $miz-size-xs $miz-size-xs
-			rgba($color: $miz-black-200, $alpha: 50%);
-}
-
-.miz-page-header--article {
-	.miz-article__blurb {
-		margin-top: 1rem;
-	}
-
-	.miz-article__category {
-		font-family: $miz-font-family-clarendon;
-		font-size: 1rem;
-		font-weight: $miz-font-weight-semi-bold;
-
-		a {
-			font-family: inherit;
-		}
-	}
-
-	.miz-page-header__title {
-		font-family: $miz-font-family-graphik;
-		margin-top: 1rem;
-	}
-}
-
-.miz-article__date {
-	&:first-of-type {
-		margin-bottom: 0;
-	}
-
-	&:last-of-type {
-		margin-bottom: 1rem;
-	}
-}
-
-.miz-split-layout__figure--video {
-	aspect-ratio: 16 / 9;
-	position: relative;
-	width: 100%;
-
-	.miz-split-layout__video {
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		top: 0;
-	}
-}
+@import 'components/card/card-layouts.scss';
+@import 'components/layers/split-layout.scss';
+@import 'components/navigations/primary-navigation.scss';
+@import 'components/navigations/sub-navigation.scss';
+@import 'pages/post.scss';

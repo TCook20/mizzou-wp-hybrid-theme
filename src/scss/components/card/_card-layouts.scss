@@ -1,0 +1,103 @@
+/// Card Group
+/// Surround Cards with a container using this class
+/// to create a horizontal group of cards (small screens and up)
+.miz-card-group {
+  @include miz-make-flex-column;
+
+  @include media-breakpoint-up(md) {
+    @include miz-make-flex-row;
+
+    > .miz-card {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/// Card Deck
+/// Group Cards together with gutters
+.miz-card-deck {
+  @include miz-make-flex-column;
+
+  /* stylelint-disable-next-line */
+  > .miz-card,
+  > .miz-linked-card {
+    margin-bottom: $miz-space-l;
+  }
+
+  > .miz-card:last-of-type,
+  > .miz-linked-card:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @include media-breakpoint-up(md) {
+		@include miz-make-flex-row($flex-basis: 100%);
+
+    > .miz-card,
+    > .miz-linked-card {
+      margin-right: $miz-space-l;
+      margin-bottom: 0;
+    }
+
+    > .miz-card:last-of-type,
+    > .miz-linked-card:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+	&.miz-card-deck--2 {
+		gap: $miz-space-l;
+
+		@include media-breakpoint-up(md) {
+			flex-flow: row wrap;
+
+			> .miz-card,
+			> .miz-linked-card {
+				margin-right: initial;
+				flex: 0 1 calc(50% - $miz-space-l);
+			}
+		}
+	}
+
+	&.miz-card-deck--3 {
+		gap: $miz-space-m $miz-space-l;
+
+		@include media-breakpoint-up(md) {
+			flex-flow: row wrap;
+
+			> .miz-card,
+			> .miz-linked-card {
+				margin-right: initial;
+				flex: 0 1 calc(33.333333% - $miz-space-l);
+			}
+		}
+	}
+}
+
+.miz-card-deck--grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.miz-card-deck--grid-2 {
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.miz-card-deck--grid-3 {
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.miz-card-deck--grid-4 {
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -30,7 +30,7 @@
 
 {% set frameClasses = ['miz-cta-frame'] %}
 {% if flexgroup.displayOptions.content_background == 'miz-black-100' %}
-	{% set frameClasses = frameClasses|merge(['miz-fill--black-100']) %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--black-100', 'miz-text--black']) %}
 {% elseif flexgroup.displayOptions.content_background == 'miz-black' %}
 	{% set frameClasses = frameClasses|merge(['miz-fill--black']) %}
 {% else %}

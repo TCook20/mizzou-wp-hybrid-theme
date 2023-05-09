@@ -2,6 +2,17 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.5
+
+### Changes
+
+-   Layer Plus Decoration: Limit to one location
+
+### Fixes
+
+-   `layers/call-to-action`: Set text color for black-100 content background
+-   `layers/split-layout`: Text color for transparent content background
+
 ## 0.4.4
 
 ### Fixes

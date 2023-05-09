@@ -1,0 +1,23 @@
+.miz-split-layout__content--frame {
+	&.miz-fill--transparent {
+		p {
+			color: $miz-white;
+		}
+	}
+}
+
+.miz-split-layout__figure--video {
+	aspect-ratio: 16 / 9;
+	position: relative;
+	width: 100%;
+
+	.miz-split-layout__video {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+	}
+}

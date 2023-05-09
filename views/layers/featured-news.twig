@@ -19,7 +19,7 @@
 
         <div class="miz-layer__content">
             {% if featNewsLayer.content is defined and featNewsLayer.content is iterable %}
-                <div class="miz-card-deck card-deck miz-news-group">
+                <div class="miz-card-deck card-deck miz-news-group miz-featured-news__card-deck">
 					{% for Card in featNewsLayer.content %}
 						{% include '/layers/card-news.twig' %}
 					{% endfor %}

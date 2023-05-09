@@ -204,8 +204,8 @@
 				"src": {
 					"path": "./scss/",
 					"glob": "./scss/**/*",
-					"fileGlob": "./scss/dark.scss",
-					"watch": [ "./scss/**/dark.scss" ]
+					"fileGlob": "./scss/themed/dark.scss",
+					"watch": [ "./scss/**/themed/dark.scss" ]
 				},
 				"dest": {
 					"path": "./../assets/css/"
@@ -229,8 +229,8 @@
 				"src": {
 					"path": "./scss/",
 					"glob": "./scss/**/*",
-					"fileGlob": "./scss/light.scss",
-					"watch": [ "./scss/**/light.scss" ]
+					"fileGlob": "./scss/themed/light.scss",
+					"watch": [ "./scss/**/themed/light.scss" ]
 				},
 				"dest": {
 					"path": "./../assets/css/"
