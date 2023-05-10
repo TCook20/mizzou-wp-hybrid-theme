@@ -1,4 +1,14 @@
 <?php
+/**
+ * ACF Layer Definitions
+ *
+ * @package WordPress
+ * @subpackage Theme
+ * @category functions
+ * @author Travis Cook, Digital Service, University of Missouri
+ * @copyright 2023 Curators of the University of Missouri
+ */
+
 add_action(
 	'acf/include_fields',
 	function() {
@@ -2138,6 +2148,3 @@ add_action(
 		);
 	}
 );
-
-
-
