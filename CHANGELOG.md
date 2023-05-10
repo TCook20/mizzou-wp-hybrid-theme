@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.7
+
+### Changes
+
+-   `layers/big-message`: Conditionally setting frame background color
+
 ## 0.4.6
 
 ### Adds
