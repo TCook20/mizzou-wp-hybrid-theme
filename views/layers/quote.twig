@@ -1,4 +1,16 @@
+{# Set Defaults #}
+{% set hasLayerBackgroundImage = false %}
+{% set quoteBodyClasses = ['miz-quote-content__body'] %}
+
 {# Set Variables #}
+{% if flexgroup.displayOptions.quote_background == 'image' %}
+	{% set hasLayerBackgroundImage = true %}
+	{% set quoteBodyClasses = quoteBodyClasses|merge(['miz-background-gel--gold']) %}
+{% else %}
+	{% set quoteBodyClasses = quoteBodyClasses|merge(['miz-fill--gold']) %}
+{% endif %}
+
+{# Layer Array #}
 {% set quoteLayer = {
     'title': flexgroup.title,
     'kicker': flexgroup.kicker,
@@ -8,7 +20,13 @@
 		'image': Image(flexgroup.quote.image),
 		'content': flexgroup.quote.content
 	},
-	'button': flexgroup.button
+	'button': flexgroup.button,
+	'classes': {
+		'quote': quoteBodyClasses|join(' ')
+	},
+	'styles': {
+		'quote': hasLayerBackgroundImage ? "background-image: url('//missouri.edu/images/backgrounds/campus-beauty-web.jpg');" : ''
+	}
 } %}
 
 <section class="miz-layer miz-layer--brand miz-main-grid__full">
@@ -21,7 +39,7 @@
         {% endif %}
 
         <div class="miz-layer__content miz-quote-content">
-            <div class="miz-quote-content__body miz-background-gel--gold" style="background-image: url('//missouri.edu/images/backgrounds/campus-beauty-web.jpg');">
+            <div class="{{ quoteLayer.classes.quote }}"{% if quoteLayer.styles.quote %} style="{{ quoteLayer.styles.quote }}"{% endif %}>
                 <blockquote class="miz-quote">
                     <footer class="miz-quote__footer">
                         <cite class="miz-quote__name">{{ quoteLayer.quote.attribution }}</cite>
