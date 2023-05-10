@@ -6,6 +6,9 @@
 
 ### Changes
 
+-   ACF:
+    -   Reusable fields adds conditional field for background overlay
+    -   PHP import rewritten
 -   `layers/big-message`:
     -   Corner decoration is optional
     -   Button style options (primary and secondary)
