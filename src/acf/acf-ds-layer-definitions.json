@@ -121,6 +121,49 @@
 						"prefix_name": 0
 					},
 					{
+						"key": "field_645ba155b0c44",
+						"label": "Button Style",
+						"name": "button_style",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"primary": "Primary Branded",
+							"secondary": "Secondary Branded"
+						},
+						"default_value": "primary",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					},
+					{
+						"key": "field_645ba1d67b16b",
+						"label": "Corner Decoration",
+						"name": "include_corner_decoration",
+						"aria-label": "",
+						"type": "true_false",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"message": "Include Gold Decoration in Top Left Corner",
+						"default_value": 0,
+						"ui": 0,
+						"ui_on_text": "",
+						"ui_off_text": ""
+					},
+					{
 						"key": "field_6423300c17512",
 						"label": "Plus Decoration Clone",
 						"name": "plus_decoration_clone",
@@ -148,7 +191,7 @@
 				{
 					"param": "post_type",
 					"operator": "==",
-					"value": "acf-field-group"
+					"value": "post"
 				}
 			]
 		],
@@ -662,6 +705,7 @@
 							"id": ""
 						},
 						"layout": "block",
+						"parent_repeater": "field_6447ce549edd1",
 						"sub_fields": [
 							{
 								"key": "field_6447cebe9edd5",
@@ -703,8 +747,7 @@
 								"prepend": "",
 								"append": ""
 							}
-						],
-						"parent_repeater": "field_6447ce549edd1"
+						]
 					},
 					{
 						"key": "field_6447cef49edd7",
@@ -769,6 +812,7 @@
 						"collapsed": "field_6447cf1b9edda",
 						"button_label": "Add Link",
 						"rows_per_page": 20,
+						"parent_repeater": "field_6447ce549edd1",
 						"sub_fields": [
 							{
 								"key": "field_6447cf1b9edda",
@@ -787,8 +831,7 @@
 								"return_format": "array",
 								"parent_repeater": "field_6447cf0a9edd9"
 							}
-						],
-						"parent_repeater": "field_6447ce549edd1"
+						]
 					}
 				]
 			},
