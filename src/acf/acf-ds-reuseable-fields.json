@@ -62,6 +62,38 @@
 				"preview_size": "medium"
 			},
 			{
+				"key": "field_645bb99f8db02",
+				"label": "Background Image Overlay",
+				"name": "background_overlay",
+				"aria-label": "",
+				"type": "button_group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": [
+					[
+						{
+							"field": "field_64248336fd14b",
+							"operator": "==",
+							"value": "image"
+						}
+					]
+				],
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"gold": "Gold",
+					"black": "Black",
+					"none": "No Overlay"
+				},
+				"default_value": "",
+				"return_format": "value",
+				"allow_null": 0,
+				"layout": "horizontal"
+			},
+			{
 				"key": "field_642483c7fd14d",
 				"label": "Content Background",
 				"name": "content_background",
@@ -138,7 +170,8 @@
 				"allow_custom": 0,
 				"layout": "horizontal",
 				"toggle": 0,
-				"save_custom": 0
+				"save_custom": 0,
+				"custom_choice_button_text": "Add new choice"
 			}
 		],
 		"location": [

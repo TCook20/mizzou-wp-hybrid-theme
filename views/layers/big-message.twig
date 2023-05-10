@@ -1,7 +1,12 @@
 {# Imports #}
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
+{# Set Defaults #}
 {% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
+{% set hasLayerBackgroundImage = false %}
+{% set buttonClass = ['miz-button--brand'] %}
+
+{# Set Variables #}
 {% if flexgroup.displayOptions.plus_decoration %}
 	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
 
@@ -21,13 +26,18 @@
 {% else %}
 {% endif %}
 
-{% set hasLayerBackgroundImage = false %}
 {% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set hasLayerBackgroundImage = true %}
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
-{# Set Variables #}
+{% if flexgroup.displayOptions.button_style == 'primary' %}
+	{% set buttonClass = buttonClass|merge(['miz-button--primary']) %}
+{% elseif flexgroup.displayOptions.button_style == 'secondary' %}
+	{% set buttonClass = buttonClass|merge(['miz-button--secondary']) %}
+{% endif %}
+
+{# Layer Array #}
 {% set bigMessageLayer = {
     'title': flexgroup.title,
     'content': flexgroup.message,
@@ -36,7 +46,7 @@
 		'section': sectionClasses|join(' '),
 		'frame': 'miz-big-message__frame miz-fill--white',
 		'content': 'miz-layer__content miz-layer__content--center miz-big-message__content',
-		'button': 'miz-button--secondary miz-button--brand'
+		'button': buttonClass|join(' '),
 	},
 	'style': {
 		'section': hasLayerBackgroundImage ? "background: #F1B82D url('" ~ LayerBackgroundImage ~ "') center/cover " : ''
@@ -45,7 +55,7 @@
 
 <section class="{{ bigMessageLayer.classes.section }}"{% if bigMessageLayer.style.section != '' %} style="{{ bigMessageLayer.style.section }}"{% endif %}>
     <div class="miz-container">
-        <div class="miz-decoration miz-decoration__corner--top-left">
+        <div{% if flexgroup.displayOptions.include_corner_decoration %} class="miz-decoration miz-decoration__corner--top-left"{% endif %}>
             <div class="{{ bigMessageLayer.classes.frame }}">
                 <header class="miz-layer__header miz-layer__header--center">
                     <h2 class="miz-layer__title">{{ bigMessageLayer.title }}</h2>

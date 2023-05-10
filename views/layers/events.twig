@@ -1,5 +1,7 @@
-{# Set Variables #}
+{# Set Defaults #}
 {% set sectionClasses = ['miz-layer--brand', 'miz-stack-sandwich--xl'] %}
+
+{# Set Variables #}
 {% if flexgroup.displayOptions.plus_decoration %}
 	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
 
@@ -10,6 +12,7 @@
 	{% endif %}
 {% endif %}
 
+{# Layer Array #}
 {% set eventsLayer = {
 	'classes': {
 		'section': sectionClasses|join(' '),

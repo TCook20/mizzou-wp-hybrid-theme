@@ -1,8 +1,12 @@
 {# Imports #}
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
-{# Set Variables #}
+{# Set Defaults #}
 {% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-cta-layer', 'miz-main-grid__full'] %}
+{% set frameClasses = ['miz-cta-frame'] %}
+{% set hasLayerBackgroundImage = false %}
+
+{# Set Variables #}
 {% if flexgroup.displayOptions.plus_decoration %}
 	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
 
@@ -22,13 +26,11 @@
 {% else %}
 {% endif %}
 
-{% set hasLayerBackgroundImage = false %}
 {% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set hasLayerBackgroundImage = true %}
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 {% endif %}
 
-{% set frameClasses = ['miz-cta-frame'] %}
 {% if flexgroup.displayOptions.content_background == 'miz-black-100' %}
 	{% set frameClasses = frameClasses|merge(['miz-fill--black-100', 'miz-text--black']) %}
 {% elseif flexgroup.displayOptions.content_background == 'miz-black' %}
@@ -45,6 +47,7 @@
 	{% set buttonClass = 'miz-outline' %}
 {% endif %}
 
+{# Layer Array #}
 {% set ctaLayer = {
     'title': flexgroup.title,
     'content': flexgroup.content,

@@ -1,6 +1,7 @@
 {# Imports #}
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
+{# Set Defaults #}
 {% set LayerSectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
 {% set LayerContentClasses = ['miz-split-layout__content--frame'] %}
 {% set LayerFrameClasses = ['miz-split-layout'] %}
@@ -37,7 +38,7 @@
 		{% set LayerContentClasses = LayerContentClasses|merge(['miz-split-layout__header-content']) %}
 {% endif %}
 
-{# Defaults #}
+{# Layer Array #}
 {% set splitLayoutLayer = {
 	'title': flexgroup.title,
 	'kicker': flexgroup.kicker,

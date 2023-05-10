@@ -2,6 +2,21 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.6
+
+### Adds
+
+-   `layers/quote`: Quote body adds background options
+
+### Changes
+
+-   ACF:
+    -   Reusable fields adds conditional field for background overlay
+    -   PHP import rewritten
+-   `layers/big-message`:
+    -   Corner decoration is optional
+    -   Button style options (primary and secondary)
+
 ## 0.4.5
 
 ### Changes

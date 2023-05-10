@@ -42,23 +42,12 @@ function acf_custom_format_tiny_mce( $ary_tiny_mce ) {
 	return $ary_tiny_mce;
 }
 
-$ary_acf_options_settings = array(
-	'acf-ds-reuseable-fields',
-	'acf-ds-layer-definitions',
-	'acf-miz-wp-base-contact-information-footer',
-	'acf-miz-wp-base-footer',
-	'acf-miz-wp-base-settings',
-	'acf-miz-wp-base-social-media-image-site-wide',
-);
+$ary_acf_fields_import = array();
+$str_ds                = DIRECTORY_SEPARATOR;
+$str_theme             = get_template_directory( __FILE__ );
+$str_import_folder     = 'group-definitions';
 
-foreach ( $ary_acf_options_settings as $str_acf_options_setting ) {
-	$str_ds            = DIRECTORY_SEPARATOR;
-	$str_parent        = get_template_directory( __FILE__ );
-	$str_location      = $str_ds . 'inc' . $str_ds . 'acf' . $str_ds . 'group-definitions' . $str_ds;
-	$str_settings_file = $str_acf_options_setting . '.php';
-	$str_file          = $str_parent . $str_location . $str_settings_file;
-
-	if ( is_file( $str_file ) ) {
-		require_once $str_file;
-	}
+foreach ( array_filter( glob( $str_theme . $str_ds . 'inc' . $str_ds . 'acf' . $str_ds . $str_import_folder . $str_ds . '*.php' ), 'is_file' ) as $file ) {
+	// $ary_acf_fields_import[] = $file;
+	require_once $file;
 }
