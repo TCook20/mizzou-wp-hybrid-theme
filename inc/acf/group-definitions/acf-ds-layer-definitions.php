@@ -13,7 +13,7 @@ add_action(
 	'acf/include_fields',
 	function() {
 		if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-			return;
+			  return;
 		}
 
 		acf_add_local_field_group(
@@ -215,7 +215,7 @@ add_action(
 						array(
 							'param'    => 'post_type',
 							'operator' => '==',
-							'value'    => 'post',
+							'value'    => 'acf-field-group',
 						),
 					),
 				),
@@ -920,7 +920,7 @@ add_action(
 						array(
 							'param'    => 'post_type',
 							'operator' => '==',
-							'value'    => 'post',
+							'value'    => 'acf-field-group',
 						),
 					),
 				),
@@ -1030,7 +1030,7 @@ add_action(
 								'aria-label'        => '',
 								'type'              => 'text',
 								'instructions'      => '<p>If you selected <strong>Department</strong> previously then this field will have the group_id. If you selected <strong>Type</strong> earlier then this field will have the Event Type.</p>
-		<p>If you selected either <strong>Type</strong> or <strong>Keyword</strong> then this field can accept multiple values separated by a single space.</p>',
+        <p>If you selected either <strong>Type</strong> or <strong>Keyword</strong> then this field can accept multiple values separated by a single space.</p>',
 								'required'          => 0,
 								'conditional_logic' => 0,
 								'wrapper'           => array(
@@ -1078,6 +1078,29 @@ add_action(
 						),
 						'layout'            => 'row',
 						'sub_fields'        => array(
+							array(
+								'key'               => 'field_645bd3cff1531',
+								'label'             => 'Layer Background',
+								'name'              => 'layer_background',
+								'aria-label'        => '',
+								'type'              => 'button_group',
+								'instructions'      => '',
+								'required'          => 0,
+								'conditional_logic' => 0,
+								'wrapper'           => array(
+									'width' => '',
+									'class' => '',
+									'id'    => '',
+								),
+								'choices'           => array(
+									'white'     => 'White',
+									'black-100' => 'Black 100',
+								),
+								'default_value'     => 'white',
+								'return_format'     => 'value',
+								'allow_null'        => 0,
+								'layout'            => 'horizontal',
+							),
 							array(
 								'key'               => 'field_6423306cc6c89',
 								'label'             => 'Plus Decoration Clone',
@@ -1368,6 +1391,203 @@ add_action(
 								'layout'            => 'horizontal',
 							),
 						),
+					),
+				),
+				'location'              => array(
+					array(
+						array(
+							'param'    => 'post_type',
+							'operator' => '==',
+							'value'    => 'acf-field-group',
+						),
+					),
+				),
+				'menu_order'            => 0,
+				'position'              => 'normal',
+				'style'                 => 'default',
+				'label_placement'       => 'top',
+				'instruction_placement' => 'label',
+				'hide_on_screen'        => '',
+				'active'                => true,
+				'description'           => '',
+				'show_in_rest'          => 0,
+			)
+		);
+
+		acf_add_local_field_group(
+			array(
+				'key'                   => 'group_64232d4f917a1',
+				'title'                 => 'MizzouDS-layer-displayOptions',
+				'fields'                => array(
+					array(
+						'key'               => 'field_64248336fd14b',
+						'label'             => 'Layer Background',
+						'name'              => 'layer_background',
+						'aria-label'        => '',
+						'type'              => 'button_group',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'choices'           => array(
+							'miz-black'     => 'Black',
+							'miz-black-100' => 'Black 100',
+							'miz-white'     => 'White',
+							'image'         => 'Image',
+						),
+						'default_value'     => '',
+						'return_format'     => 'value',
+						'allow_null'        => 0,
+						'layout'            => 'horizontal',
+					),
+					array(
+						'key'               => 'field_6424837bfd14c',
+						'label'             => 'Background Image',
+						'name'              => 'image',
+						'aria-label'        => '',
+						'type'              => 'image',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => 'field_64248336fd14b',
+									'operator' => '==',
+									'value'    => 'image',
+								),
+							),
+						),
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'return_format'     => 'array',
+						'library'           => 'all',
+						'min_width'         => '',
+						'min_height'        => '',
+						'min_size'          => '',
+						'max_width'         => '',
+						'max_height'        => '',
+						'max_size'          => '',
+						'mime_types'        => '',
+						'preview_size'      => 'medium',
+					),
+					array(
+						'key'               => 'field_645bb99f8db02',
+						'label'             => 'Background Image Overlay',
+						'name'              => 'background_overlay',
+						'aria-label'        => '',
+						'type'              => 'button_group',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => 'field_64248336fd14b',
+									'operator' => '==',
+									'value'    => 'image',
+								),
+							),
+						),
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'choices'           => array(
+							'gold'  => 'Gold',
+							'black' => 'Black',
+							'none'  => 'No Overlay',
+						),
+						'default_value'     => '',
+						'return_format'     => 'value',
+						'allow_null'        => 0,
+						'layout'            => 'horizontal',
+					),
+					array(
+						'key'               => 'field_642483c7fd14d',
+						'label'             => 'Content Background',
+						'name'              => 'content_background',
+						'aria-label'        => '',
+						'type'              => 'button_group',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'choices'           => array(
+							'miz-black'     => 'Black',
+							'miz-black-100' => 'Black 100',
+							'miz-white'     => 'White',
+						),
+						'default_value'     => '',
+						'return_format'     => 'value',
+						'allow_null'        => 0,
+						'layout'            => 'horizontal',
+					),
+					array(
+						'key'               => 'field_64232d4fb3cc0',
+						'label'             => 'Decoration',
+						'name'              => 'plus_decoration',
+						'aria-label'        => '',
+						'type'              => 'true_false',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'message'           => 'Add Plus Decoration',
+						'default_value'     => 0,
+						'ui'                => 0,
+						'ui_on_text'        => '',
+						'ui_off_text'       => '',
+					),
+					array(
+						'key'                       => 'field_64232d75b3cc1',
+						'label'                     => 'Decoration Location',
+						'name'                      => 'decoration_location',
+						'aria-label'                => '',
+						'type'                      => 'checkbox',
+						'instructions'              => 'Select 1 location.',
+						'required'                  => 0,
+						'conditional_logic'         => array(
+							array(
+								array(
+									'field'    => 'field_64232d4fb3cc0',
+									'operator' => '==',
+									'value'    => '1',
+								),
+							),
+						),
+						'wrapper'                   => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'choices'                   => array(
+							'top-left'     => 'Top Left',
+							'top-right'    => 'Top Right',
+							'bottom-left'  => 'Bottom Left',
+							'bottom-right' => 'Bottom Right',
+						),
+						'default_value'             => array(),
+						'return_format'             => 'value',
+						'allow_custom'              => 0,
+						'layout'                    => 'horizontal',
+						'toggle'                    => 0,
+						'save_custom'               => 0,
+						'custom_choice_button_text' => 'Add new choice',
 					),
 				),
 				'location'              => array(
@@ -1719,6 +1939,29 @@ add_action(
 									'miz-white'     => 'White',
 								),
 								'default_value'     => 'miz-white',
+								'return_format'     => 'value',
+								'allow_null'        => 0,
+								'layout'            => 'horizontal',
+							),
+							array(
+								'key'               => 'field_645bd445d1c27',
+								'label'             => 'Quote Background',
+								'name'              => 'quote_background',
+								'aria-label'        => '',
+								'type'              => 'button_group',
+								'instructions'      => '',
+								'required'          => 0,
+								'conditional_logic' => 0,
+								'wrapper'           => array(
+									'width' => '',
+									'class' => '',
+									'id'    => '',
+								),
+								'choices'           => array(
+									'gold'  => 'Gold',
+									'image' => 'Image with Gold Overlay',
+								),
+								'default_value'     => '',
 								'return_format'     => 'value',
 								'allow_null'        => 0,
 								'layout'            => 'horizontal',
