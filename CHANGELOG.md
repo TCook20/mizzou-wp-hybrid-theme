@@ -4,6 +4,10 @@
 
 ## 0.4.6
 
+### Adds
+
+-   `layers/quote`: Quote body adds background options
+
 ### Changes
 
 -   ACF:
