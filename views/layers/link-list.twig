@@ -2,8 +2,10 @@
 {% from "@miz/components/link-list/link-list.twig" import LinkList as linkList %}
 {% from "@miz/components/icon/icon.twig" import Icon as icon %}
 
-{# Set Variables #}
+{# Set Defaults #}
 {% set sectionClasses = ['miz-layer', 'miz-main-grid__full'] %}
+
+{# Set Variables #}
 {% if flexgroup.displayOptions.plus_decoration %}
 	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
 
@@ -14,6 +16,7 @@
 	{% endif %}
 {% endif %}
 
+{# Layer Array #}
 {% set linkListLayer = {
 	'classes': {
 		'section': sectionClasses|join(' ')
