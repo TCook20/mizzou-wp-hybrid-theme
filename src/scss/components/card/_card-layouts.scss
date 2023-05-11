@@ -44,6 +44,19 @@
     }
   }
 
+	&.miz-card-deck--1 {
+		gap: $miz-space-l;
+
+		@include media-breakpoint-up(md) {
+			flex-flow: column;
+
+			> .miz-card,
+			> .miz-linked-card {
+				margin-right: initial;
+			}
+		}
+	}
+
 	&.miz-card-deck--2 {
 		gap: $miz-space-l;
 
@@ -53,13 +66,13 @@
 			> .miz-card,
 			> .miz-linked-card {
 				margin-right: initial;
-				flex: 0 1 calc(50% - $miz-space-l);
+				flex: 0 1 calc(100% / 2 - $miz-space-l);
 			}
 		}
 	}
 
 	&.miz-card-deck--3 {
-		gap: $miz-space-m $miz-space-l;
+		gap: $miz-space-l;
 
 		@include media-breakpoint-up(md) {
 			flex-flow: row wrap;
@@ -67,7 +80,7 @@
 			> .miz-card,
 			> .miz-linked-card {
 				margin-right: initial;
-				flex: 0 1 calc(33.333333% - $miz-space-l);
+				flex: 0 1 calc(100% / 3 - $miz-space-l);
 			}
 		}
 	}
@@ -75,29 +88,27 @@
 
 .miz-card-deck--grid {
   display: grid;
-  gap: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
+  gap: $miz-space-l;
 
-.miz-card-deck--grid-2 {
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+	&.miz-card-deck--grid-2 {
+		@include media-breakpoint-up(md) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
 
-.miz-card-deck--grid-3 {
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+	&.miz-card-deck--grid-3 {
+		@include media-breakpoint-up(md) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
 
-.miz-card-deck--grid-4 {
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+	&.miz-card-deck--grid-4 {
+		@include media-breakpoint-up(md) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 
-  @include media-breakpoint-up(lg) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
 }
