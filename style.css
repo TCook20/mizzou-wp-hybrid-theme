@@ -166,6 +166,18 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
     margin-right: 0;
   }
 }
+.miz-card-deck.miz-card-deck--1 {
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .miz-card-deck.miz-card-deck--1 {
+    flex-flow: column;
+  }
+  .miz-card-deck.miz-card-deck--1 > .miz-card,
+  .miz-card-deck.miz-card-deck--1 > .miz-linked-card {
+    margin-right: initial;
+  }
+}
 .miz-card-deck.miz-card-deck--2 {
   gap: 2rem;
 }
@@ -180,7 +192,7 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   }
 }
 .miz-card-deck.miz-card-deck--3 {
-  gap: 1rem 2rem;
+  gap: 2rem;
 }
 @media (min-width: 768px) {
   .miz-card-deck.miz-card-deck--3 {
@@ -189,36 +201,31 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   .miz-card-deck.miz-card-deck--3 > .miz-card,
   .miz-card-deck.miz-card-deck--3 > .miz-linked-card {
     margin-right: initial;
-    flex: 0 1 calc(33.333333% - 2rem);
+    flex: 0 1 calc(33.3333333333% - 2rem);
   }
 }
 
 .miz-card-deck--grid {
   display: grid;
   gap: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
-
 @media (min-width: 768px) {
-  .miz-card-deck--grid-2 {
+  .miz-card-deck--grid.miz-card-deck--grid-2 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media (min-width: 768px) {
-  .miz-card-deck--grid-3 {
+  .miz-card-deck--grid.miz-card-deck--grid-3 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 @media (min-width: 768px) {
-  .miz-card-deck--grid-4 {
+  .miz-card-deck--grid.miz-card-deck--grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: 992px) {
-  .miz-card-deck--grid-4 {
+  .miz-card-deck--grid.miz-card-deck--grid-4 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
