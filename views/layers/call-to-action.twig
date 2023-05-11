@@ -4,6 +4,8 @@
 {# Set Defaults #}
 {% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-cta-layer', 'miz-main-grid__full'] %}
 {% set frameClasses = ['miz-cta-frame'] %}
+{% set headerClasses = ['miz-layer__header'] %}
+{% set contentClasses = ['miz-layer__content', 'miz-cta-content'] %}
 {% set hasLayerBackgroundImage = false %}
 
 {# Set Variables #}
@@ -57,6 +59,8 @@
 	'classes': {
 		'section': sectionClasses|join(' '),
 		'frame': frameClasses|join(' '),
+		'header': headerClasses|join(' '),
+		'content': contentClasses|join(' '),
 		'button': buttonClass
 	},
 	'styles': {
@@ -67,11 +71,11 @@
 <section class="{{ ctaLayer.classes.section }}"{% if ctaLayer.styles.section != '' %} style="{{ ctaLayer.styles.section }}"{% endif %}>
     <div class="miz-container">
         <div class="{{ ctaLayer.classes.frame }}">
-            <header class="miz-layer__header">
+            <header class="{{ ctaLayer.classes.header }}">
                 <h2 class="miz-cta-title">{{ ctaLayer.title }}</h2>
             </header>
 
-            <div class="miz-layer__content miz-cta-content">
+            <div class="{{ ctaLayer.classes.content }}">
                 <div class="miz-cta-content__body">
                     {{ ctaLayer.content }}
                 </div>

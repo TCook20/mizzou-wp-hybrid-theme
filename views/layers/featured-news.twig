@@ -1,3 +1,11 @@
+{# Imports #}
+{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+
+{# Set Defaults #}
+{% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-stack-sandwich--xl'] %}
+{% set headerClasses = ['miz-layer__header', 'miz-layer__header--center'] %}
+{% set cardDeckClasses = ['miz-card-deck', 'miz-news-group', 'miz-featured-news__card-deck'] %}
+
 {# Set Variables #}
 
 {# Layer Array #}
@@ -5,13 +13,18 @@
     'title': flexgroup.title,
     'kicker': flexgroup.kicker,
     'content': Post(flexgroup.cards),
-    'button': flexgroup.button
+    'button': flexgroup.button,
+	'classes': {
+		'section': sectionClasses|join(' '),
+		'header': headerClasses|join(' '),
+		'deck': cardDeckClasses|join(' ')
+	}
 } %}
 
-<section class="miz-layer--brand miz-stack-sandwich--xl">
+<section class="{{ featNewsLayer.classes.section }}">
     <div class="miz-container">
         {% if featNewsLayer.kicker or featNewsLayer.title %}
-        <header class="miz-layer__header miz-layer__header--center">
+        <header class="{{ featNewsLayer.classes.header }}">
             {% if featNewsLayer.kicker %}
                 <p class="miz-layer__kicker">{{ featNewsLayer.kicker }}</p>
             {% endif %}
@@ -21,7 +34,7 @@
 
         <div class="miz-layer__content">
             {% if featNewsLayer.content is defined and featNewsLayer.content is iterable %}
-                <div class="miz-card-deck card-deck miz-news-group miz-featured-news__card-deck">
+                <div class="{{ featNewsLayer.classes.deck }}">
 					{% for Card in featNewsLayer.content %}
 						{% include '/layers/card-news.twig' %}
 					{% endfor %}
@@ -29,7 +42,6 @@
             {% endif %}
 
             {% if featNewsLayer.button is defined and featNewsLayer.button is iterable %}
-            {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
                 <div class="miz-layer__content--center">
                     {% set ButtonOptions = { "class": "miz-button miz-button--secondary miz-button--brand", "text": featNewsLayer.button.title, 'href': featNewsLayer.button.url }  %}
                     {{ anchorButton( ButtonOptions ) }}
