@@ -6,6 +6,7 @@
 
 ### Changes
 
+-   `archive`: Card Deck class changed
 -   `layers/big-message`: Conditionally setting frame background color
 
 ## 0.4.6
