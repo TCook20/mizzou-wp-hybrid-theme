@@ -93,7 +93,7 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 		$ary_context['page']->current_page = $ary_context['page']->link;
 	}
 } else {
-	$str_template_prefix = 'post';
+	$str_template_prefix = $ary_context['page']->post_type;
 
 	// Map existing Timber option for permalink to alias.
 	$ary_context['page']->current_page = $ary_context['page']->link;
@@ -110,11 +110,6 @@ if ( isset( $ary_context['page']->slug ) ) {
 // Custom parent template.
 if ( isset( $ary_context['page']->parent->slug ) ) {
 	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->parent->slug . '.twig';
-}
-
-// Custom post type template.
-if ( ( isset( $ary_context['page']->post_type ) ) && ( ! in_array( $ary_context['page']->post_type, array( 'post', 'page' ) ) ) ) {
-	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->post_type . '.twig';
 }
 
 // Default.
