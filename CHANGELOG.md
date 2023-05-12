@@ -8,6 +8,7 @@
 
 -   `archive`: Card Deck class changed
 -   `layers/big-message`: Conditionally setting frame background color
+-   Single Twig templates updated to use `single-[post_type]` naming convention
 
 ## 0.4.6
 
