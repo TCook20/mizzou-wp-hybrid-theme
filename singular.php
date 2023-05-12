@@ -34,7 +34,7 @@ if ( ( isset( $ary_context['page']->sub_navigation ) ) && ( false !== $ary_conte
 
 // Page or post.
 if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['page']->post_type ) ) {
-	$str_template_prefix = 'page';
+	$str_template_prefix = 'single-page';
 
 	// News.
 	$ary_context['news'] = Timber::get_posts(
@@ -93,7 +93,7 @@ if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' === $ary_context['
 		$ary_context['page']->current_page = $ary_context['page']->link;
 	}
 } else {
-	$str_template_prefix = $ary_context['page']->post_type;
+	$str_template_prefix = 'single-' . $ary_context['page']->post_type;
 
 	// Map existing Timber option for permalink to alias.
 	$ary_context['page']->current_page = $ary_context['page']->link;
