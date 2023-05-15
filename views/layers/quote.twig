@@ -1,5 +1,6 @@
 {# Set Defaults #}
 {% set hasLayerBackgroundImage = false %}
+{% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
 {% set quoteBodyClasses = ['miz-quote-content__body'] %}
 
 {# Set Variables #}
@@ -22,6 +23,7 @@
 	},
 	'button': flexgroup.button,
 	'classes': {
+		'section': sectionClasses|join(' '),
 		'quote': quoteBodyClasses|join(' ')
 	},
 	'styles': {
@@ -29,7 +31,7 @@
 	}
 } %}
 
-<section class="miz-layer miz-layer--brand miz-main-grid__full">
+<section class="{{ quoteLayer.classes.section }}">
     <div class="miz-container">
         {% if quoteLayer.kicker or quoteLayer.title %}
         <header class="miz-layer__header miz-layer__header--center">

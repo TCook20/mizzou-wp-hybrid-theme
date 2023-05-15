@@ -1,6 +1,9 @@
 {# Imports #}
 {% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
 
+{# Set Defaults #}
+{% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
+
 {# Set Variables #}
 
 {# Layer Array #}
@@ -8,10 +11,13 @@
     'title': flexgroup.title,
     'kicker': flexgroup.kicker,
     'content': flexgroup.numbers,
-    'button': flexgroup.button
+    'button': flexgroup.button,
+	'classes': {
+		'section': sectionClasses|join(' ')
+	}
 } %}
 
-<section class="miz-layer miz-layer--brand miz-main-grid__full">
+<section class="{{ byTheNumbersLayer.classes.section }}">
     <div class="miz-container">
         {% if byTheNumbersLayer.kicker or byTheNumbersLayer.title %}
         <header class="miz-layer__header miz-layer__header--center">

@@ -3,12 +3,15 @@
 
 {# Set Defaults #}
 {% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
+{% set frameClasses = ['miz-big-message__frame'] %}
+{% set headerClasses = ['miz-layer__header', 'miz-layer__header--center'] %}
+{% set contentClasses = ['miz-layer__content', 'miz-layer__content--center', 'miz-big-message__content'] %}
 {% set hasLayerBackgroundImage = false %}
 {% set buttonClass = ['miz-button--brand'] %}
 
 {# Set Variables #}
 {% if flexgroup.displayOptions.plus_decoration %}
-	{% set sectionClasses = sectionClasses|merge(['miz-decoration miz-decoration__plus']) %}
+	{% set sectionClasses = sectionClasses|merge(['miz-decoration', 'miz-decoration__plus']) %}
 
 	{% if flexgroup.displayOptions.decoration_location is iterable %}
 		{% for location in flexgroup.displayOptions.decoration_location %}
@@ -19,8 +22,10 @@
 
 {% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
 	{% set sectionClasses = sectionClasses|merge(['miz-fill--black-100']) %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--white']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
 	{% set sectionClasses = sectionClasses|merge(['miz-fill--black']) %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--white']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
 	{% set sectionClasses = sectionClasses|merge(['miz-fill--white']) %}
 {% else %}
@@ -44,8 +49,9 @@
     'buttons': flexgroup.buttons,
 	'classes': {
 		'section': sectionClasses|join(' '),
-		'frame': 'miz-big-message__frame miz-fill--white',
-		'content': 'miz-layer__content miz-layer__content--center miz-big-message__content',
+		'frame': frameClasses|join(' '),
+		'header': headerClasses|join(' '),
+		'content': contentClasses|join(' '),
 		'button': buttonClass|join(' '),
 	},
 	'style': {
@@ -57,7 +63,7 @@
     <div class="miz-container">
         <div{% if flexgroup.displayOptions.include_corner_decoration %} class="miz-decoration miz-decoration__corner--top-left"{% endif %}>
             <div class="{{ bigMessageLayer.classes.frame }}">
-                <header class="miz-layer__header miz-layer__header--center">
+                <header class="{{ bigMessageLayer.classes.header }}">
                     <h2 class="miz-layer__title">{{ bigMessageLayer.title }}</h2>
                 </header>
 

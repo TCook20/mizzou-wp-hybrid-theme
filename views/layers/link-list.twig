@@ -3,7 +3,9 @@
 {% from "@miz/components/icon/icon.twig" import Icon as icon %}
 
 {# Set Defaults #}
-{% set sectionClasses = ['miz-layer', 'miz-main-grid__full'] %}
+{% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-main-grid__full'] %}
+{% set headerClasses = ['miz-layer__header', 'miz-layer__header--center'] %}
+{% set contentClasses = ['miz-layer__content', 'miz-layer__content--center'] %}
 
 {# Set Variables #}
 {% if flexgroup.displayOptions.plus_decoration %}
@@ -18,11 +20,13 @@
 
 {# Layer Array #}
 {% set linkListLayer = {
-	'classes': {
-		'section': sectionClasses|join(' ')
-	},
 	'title': flexgroup.title,
-    'list': flexgroup.links
+	'list': flexgroup.links,
+	'classes': {
+		'section': sectionClasses|join(' '),
+		'header': headerClasses|join(' '),
+		'content': contentClasses|join(' ')
+	}
 } %}
 
 {% set linkListInlineOptions = {"class": "miz-link-list--brand miz-link-list--layer", "list" : []} %}
@@ -41,13 +45,15 @@
 {% endif %}
 
 <section class="{{ linkListLayer.classes.section }}">
-    <div class="miz-container">
-        {% if linkListLayer.title %}
-        <header class="miz-text--center">
-            <h2 class="miz-graphik">{{ linkListLayer.title }}</h2>
-        </header>
-        {% endif %}
+	<div class="miz-container">
+		{% if linkListLayer.title %}
+			<header class="{{ linkListLayer.classes.header }}">
+					<h2 class="miz-layer__title">{{ linkListLayer.title }}</h2>
+			</header>
+		{% endif %}
 
-		{{ linkList( linkListInlineOptions ) }}
-    </div>
+		<div class="{{ linkListLayer.classes.content }}">
+			{{ linkList( linkListInlineOptions ) }}
+		</div>
+	</div>
 </section>

@@ -2,6 +2,14 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.7
+
+### Changes
+
+-   `archive`: Card Deck class changed
+-   `layers/big-message`: Conditionally setting frame background color
+-   Single Twig templates updated to use `single-[post_type]` naming convention
+
 ## 0.4.6
 
 ### Adds
