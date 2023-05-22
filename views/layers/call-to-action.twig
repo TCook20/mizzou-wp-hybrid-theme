@@ -31,6 +31,12 @@
 {% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set hasLayerBackgroundImage = true %}
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
+
+	{% if flexgroup.displayOptions.background_overlay_three == 'black' %}
+		{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
+	{% elseif flexgroup.displayOptions.background_overlay_three == 'gold' %}
+		{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--gold']) %}
+	{% endif %}
 {% endif %}
 
 {% if flexgroup.displayOptions.content_background == 'miz-black-100' %}

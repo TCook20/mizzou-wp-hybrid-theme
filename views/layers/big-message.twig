@@ -34,6 +34,10 @@
 {% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set hasLayerBackgroundImage = true %}
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
+
+	{% if flexgroup.displayOptions.background_overlay_two == 'black' %}
+		{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
+	{% endif %}
 {% endif %}
 
 {% if flexgroup.displayOptions.button_style == 'primary' %}

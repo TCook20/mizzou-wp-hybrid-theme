@@ -18,7 +18,7 @@
 	{% set LayerSectionBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 	{% set LayerContentClasses = LayerContentClasses|merge(['miz-fill--transparent']) %}
 
-	{% if flexgroup.displayOptions.overlay == 70 %}
+	{% if flexgroup.displayOptions.background_overlay_two == 'black' %}
 		{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
 	{% endif %}
 {% endif %}
