@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.8
+
+### Adds
+
+-   `layers/big-message`: Overlay options for image background (dark overlay or no overlay)
+
 ## 0.4.7
 
 ### Changes
