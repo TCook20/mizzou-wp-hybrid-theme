@@ -33,9 +33,9 @@
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
 
 	{% if flexgroup.displayOptions.background_overlay_three == 'black' %}
-		{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--dark']) %}
+		{% set sectionClasses = sectionClasses|merge(['miz-background-gel--dark']) %}
 	{% elseif flexgroup.displayOptions.background_overlay_three == 'gold' %}
-		{% set LayerSectionClasses = LayerSectionClasses|merge(['miz-background-gel--gold']) %}
+		{% set sectionClasses = sectionClasses|merge(['miz-background-gel--gold']) %}
 	{% endif %}
 {% endif %}
 
