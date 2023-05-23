@@ -75,10 +75,12 @@
                     {{ bigMessageLayer.content }}
 
                     {% if bigMessageLayer.buttons is defined and bigMessageLayer.buttons is iterable %}
+										<div class="miz-button-group">
                         {% for Button in bigMessageLayer.buttons %}
                             {% set ButtonOptions = { "class": bigMessageLayer.classes.button, "text": Button.button.title, 'href': Button.button.url} %}
                             {{ anchorButton( ButtonOptions ) }}
                         {% endfor %}
+										</div>
                     {% endif %}
                 </div>
             </div>

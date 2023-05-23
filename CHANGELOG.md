@@ -10,6 +10,7 @@
 
 ### Changes
 
+-   `layers/big-message`: Buttons moved into button group container
 -   `layers/link-list`: Left align text
 -   `layers/split-layout`:
     -   Move buttons into button group container
