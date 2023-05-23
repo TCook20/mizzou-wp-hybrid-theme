@@ -11,6 +11,9 @@
 ### Changes
 
 -   `layers/link-list`: Left align text
+-   `layers/split-layout`:
+    -   Move buttons into button group container
+    -   Add z-index to figure
 
 ## 0.4.7
 
