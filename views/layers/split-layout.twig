@@ -81,10 +81,12 @@
 						{{ splitLayoutLayer.content }}
 
 						{% if splitLayoutLayer.buttons is defined and splitLayoutLayer.buttons is iterable %}
+						<div class="miz-button-group">
 							{% for Button in splitLayoutLayer.buttons %}
 								{% set buttonOptions = { "class": "miz-button miz-button--primary miz-button--brand", "text": Button.button.title, 'href': Button.button.url } %}
 								{{ anchorButton( buttonOptions ) }}
 							{% endfor %}
+						</div>
 						{% endif %}
 					</div>
 				</div>
