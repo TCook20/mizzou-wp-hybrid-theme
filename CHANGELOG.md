@@ -8,6 +8,10 @@
 
 -   `layers/big-message`: Overlay options for image background (dark overlay or no overlay)
 
+### Changes
+
+-   `layers/link-list`: Left align text
+
 ## 0.4.7
 
 ### Changes
