@@ -62,9 +62,40 @@
 				"preview_size": "medium"
 			},
 			{
+				"key": "field_646b6e2d0299d",
+				"label": "Background Image Overlay",
+				"name": "background_overlay_two",
+				"aria-label": "",
+				"type": "button_group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": [
+					[
+						{
+							"field": "field_64248336fd14b",
+							"operator": "==",
+							"value": "image"
+						}
+					]
+				],
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"choices": {
+					"black": "Black",
+					"none": "No Overlay"
+				},
+				"default_value": "",
+				"return_format": "value",
+				"allow_null": 0,
+				"layout": "horizontal"
+			},
+			{
 				"key": "field_645bb99f8db02",
 				"label": "Background Image Overlay",
-				"name": "background_overlay",
+				"name": "background_overlay_three",
 				"aria-label": "",
 				"type": "button_group",
 				"instructions": "",

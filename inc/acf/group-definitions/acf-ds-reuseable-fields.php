@@ -9,7 +9,7 @@
  * @copyright 2023 Curators of the University of Missouri
  */
 
- if ( function_exists( 'acf_add_local_field_group' ) ) :
+if ( function_exists( 'acf_add_local_field_group' ) ) :
 
 	acf_add_local_field_group(
 		array(
@@ -75,9 +75,40 @@
 					'preview_size'      => 'medium',
 				),
 				array(
+					'key'               => 'field_646b6e2d0299d',
+					'label'             => 'Background Image Overlay',
+					'name'              => 'background_overlay_two',
+					'aria-label'        => '',
+					'type'              => 'button_group',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_64248336fd14b',
+								'operator' => '==',
+								'value'    => 'image',
+							),
+						),
+					),
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'choices'           => array(
+						'black' => 'Black',
+						'none'  => 'No Overlay',
+					),
+					'default_value'     => '',
+					'return_format'     => 'value',
+					'allow_null'        => 0,
+					'layout'            => 'horizontal',
+				),
+				array(
 					'key'               => 'field_645bb99f8db02',
 					'label'             => 'Background Image Overlay',
-					'name'              => 'background_overlay',
+					'name'              => 'background_overlay_three',
 					'aria-label'        => '',
 					'type'              => 'button_group',
 					'instructions'      => '',

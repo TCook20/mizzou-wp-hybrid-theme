@@ -2,6 +2,24 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.8
+
+### Adds
+
+-   `layers/big-message`: Overlay options for image background (dark overlay or no overlay)
+
+### Changes
+
+-   `layers/big-message`: Buttons moved into button group container
+-   `layers/link-list`: Left align text
+-   `layers/split-layout`:
+    -   Move buttons into button group container
+    -   Add z-index to figure
+
+### Fixes
+
+-   `layers/split-layout`: Missing offset class
+
 ## 0.4.7
 
 ### Changes

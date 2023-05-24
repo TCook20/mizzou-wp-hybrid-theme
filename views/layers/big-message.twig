@@ -34,6 +34,10 @@
 {% if flexgroup.displayOptions.image and flexgroup.displayOptions.layer_background == 'image' %}
 	{% set hasLayerBackgroundImage = true %}
 	{% set LayerBackgroundImage = Image(flexgroup.displayOptions.image).src %}
+
+	{% if flexgroup.displayOptions.background_overlay_two == 'black' %}
+		{% set sectionClasses = sectionClasses|merge(['miz-background-gel--dark']) %}
+	{% endif %}
 {% endif %}
 
 {% if flexgroup.displayOptions.button_style == 'primary' %}
@@ -71,10 +75,12 @@
                     {{ bigMessageLayer.content }}
 
                     {% if bigMessageLayer.buttons is defined and bigMessageLayer.buttons is iterable %}
+										<div class="miz-button-group">
                         {% for Button in bigMessageLayer.buttons %}
                             {% set ButtonOptions = { "class": bigMessageLayer.classes.button, "text": Button.button.title, 'href': Button.button.url} %}
                             {{ anchorButton( ButtonOptions ) }}
                         {% endfor %}
+										</div>
                     {% endif %}
                 </div>
             </div>

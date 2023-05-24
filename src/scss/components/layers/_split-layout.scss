@@ -6,6 +6,10 @@
 	}
 }
 
+.miz-split-layout__figure {
+	z-index: 1;
+}
+
 .miz-split-layout__figure--video {
 	aspect-ratio: 16 / 9;
 	position: relative;
