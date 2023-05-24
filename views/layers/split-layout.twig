@@ -35,7 +35,7 @@
 
 {% if 'offset' == flexgroup.displayOptions.variant %}
     {% set frameClasses = frameClasses|merge(['miz-split-layout--no-gap']) %}
-		{% set contentClasses = contentClasses|merge(['miz-split-layout__header-content']) %}
+		{% set contentClasses = contentClasses|merge(['miz-split-layout__offset', 'miz-split-layout__header-content']) %}
 {% endif %}
 
 {# Layer Array #}
