@@ -16,6 +16,10 @@
     -   Move buttons into button group container
     -   Add z-index to figure
 
+### Fixes
+
+-   `layers/split-layout`: Missing offset class
+
 ## 0.4.7
 
 ### Changes
