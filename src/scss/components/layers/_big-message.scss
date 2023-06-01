@@ -1,0 +1,11 @@
+.miz-big-message__content {
+	.miz-button-group {
+		& > * {
+			margin-bottom: .5rem;
+
+			@include media-breakpoint-up(md) {
+				margin-bottom: initial;
+			}
+		}
+	}
+}
