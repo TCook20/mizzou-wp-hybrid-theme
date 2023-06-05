@@ -6,6 +6,18 @@
 	}
 }
 
+.miz-split-layout__content {
+	.miz-button-group {
+		& > * {
+			margin-bottom: .5rem;
+
+			@include media-breakpoint-up(md) {
+				margin-bottom: initial;
+			}
+		}
+	}
+}
+
 .miz-split-layout__figure {
 	z-index: 1;
 }
