@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.9
+
+### Changes
+
+-   `layers/big-message`: Margin added to buttons on mobile
+-   `layers/split-layout`: Margin added to buttons on mobile
+
 ## 0.4.8
 
 ### Adds
