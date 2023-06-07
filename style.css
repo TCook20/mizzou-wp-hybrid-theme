@@ -4,7 +4,7 @@
    Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
    Author URI:   https://missouri.edu/
    Description:  Default Mizzou Hybrid WordPress Theme.
-   Version:      0.4.9
+   Version:      0.4.10
    Text Domain:  miz-hybrid-base
    Tags:         full-site-editing, custom-colors, featured-images, editor-style
  */
@@ -230,12 +230,20 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   }
 }
 
-.miz-big-message__content .miz-button-group > * {
-  margin-bottom: 0.5rem;
+.miz-big-message__content .miz-button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 @media (min-width: 768px) {
-  .miz-big-message__content .miz-button-group > * {
-    margin-bottom: initial;
+  .miz-big-message__content .miz-button-group {
+    flex-direction: row;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -243,16 +251,22 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   text-align: left;
 }
 
-.miz-split-layout__content--frame.miz-fill--transparent p {
+.miz-split-layout__content--frame.miz-fill--transparent p, .miz-split-layout__content--frame.miz-fill--black p {
+  color: #FFFFFF;
+}
+.miz-split-layout__content--frame.miz-fill--transparent p a, .miz-split-layout__content--frame.miz-fill--black p a {
   color: #FFFFFF;
 }
 
-.miz-split-layout__content .miz-button-group > * {
-  margin-bottom: 0.5rem;
+.miz-split-layout__content .miz-button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 @media (min-width: 768px) {
-  .miz-split-layout__content .miz-button-group > * {
-    margin-bottom: initial;
+  .miz-split-layout__content .miz-button-group {
+    flex-direction: row;
   }
 }
 

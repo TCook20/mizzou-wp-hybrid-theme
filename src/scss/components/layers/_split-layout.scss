@@ -1,19 +1,24 @@
 .miz-split-layout__content--frame {
-	&.miz-fill--transparent {
+	&.miz-fill--transparent, &.miz-fill--black {
 		p {
 			color: $miz-white;
+
+			a {
+				color: $miz-white;
+			}
 		}
 	}
 }
 
 .miz-split-layout__content {
 	.miz-button-group {
-		& > * {
-			margin-bottom: .5rem;
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+		flex-direction: column;
 
-			@include media-breakpoint-up(md) {
-				margin-bottom: initial;
-			}
+		@include media-breakpoint-up(md) {
+			flex-direction: row;
 		}
 	}
 }
