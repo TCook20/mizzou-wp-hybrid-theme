@@ -1,11 +1,15 @@
 .miz-big-message__content {
 	.miz-button-group {
-		& > * {
-			margin-bottom: .5rem;
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+		flex-direction: column;
 
-			@include media-breakpoint-up(md) {
-				margin-bottom: initial;
-			}
+		@include media-breakpoint-up(md) {
+			flex-direction: row;
+			width: max-content;
+			margin-left: auto;
+			margin-right: auto;
 		}
 	}
 }

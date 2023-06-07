@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.10
+
+### Changes
+
+-   `layers/big-message`: Button group changed to flexbox
+-   `layers/split-layout`: Button group changed to flexbox
+
 ## 0.4.9
 
 ### Changes
