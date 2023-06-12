@@ -95,7 +95,7 @@
 					{% if (splitLayoutLayer.mediaType == 'video') %}
 						<iframe src="{{ splitLayoutLayer.video.src }}" title="{{ splitLayoutLayer.video.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="miz-split-layout__video"></iframe>
 					{% else %}
-						{% if (splitLayoutLayer.image.file) %}
+						{% if (splitLayoutLayer.image.file.src) %}
 						<img src="{{ splitLayoutLayer.image.file.src('large') }}" alt="{{ splitLayoutLayer.image.file.alt }}" class="miz-split-layout__image">
 						{% endif %}
 					{% endif %}

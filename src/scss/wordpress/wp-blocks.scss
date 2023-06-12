@@ -84,3 +84,12 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
 		color: #444444;
 	}
 }
+
+/* RSS Block */
+.wp-block-rss {
+	&:where(:not(.is-grid)) {
+		.wp-block-rss__item {
+			margin-bottom: 1rem;
+		}
+	}
+}

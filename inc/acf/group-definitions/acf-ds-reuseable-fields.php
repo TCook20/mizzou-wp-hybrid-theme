@@ -186,7 +186,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'label'                     => 'Decoration Location',
 					'name'                      => 'decoration_location',
 					'aria-label'                => '',
-					'type'                      => 'checkbox',
+					'type'                      => 'radio',
 					'instructions'              => 'Select 1 location.',
 					'required'                  => 0,
 					'conditional_logic'         => array(
