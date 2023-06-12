@@ -173,7 +173,7 @@
 				"label": "Decoration Location",
 				"name": "decoration_location",
 				"aria-label": "",
-				"type": "checkbox",
+				"type": "radio",
 				"instructions": "Select 1 location.",
 				"required": 0,
 				"conditional_logic": [

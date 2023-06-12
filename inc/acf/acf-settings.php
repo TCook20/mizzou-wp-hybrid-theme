@@ -16,17 +16,17 @@ if ( class_exists( 'ACF' ) ) {
 	add_filter( 'acf/fields/wysiwyg/toolbars', 'acf_custom_format_tiny_mce' );
 
 	// Restrict Decoration Location to 2 Options.
-	add_filter(
-		'acf/validate_value/name=decoration_location',
-		function ( $valid, $value, $field, $input ) {
-			if ( count( $value ) > 1 ) {
-				$valid = 'Only Select 1';
-			}
-			return $valid;
-		},
-		20,
-		4
-	);
+	// add_filter(
+	// 	'acf/validate_value/name=decoration_location',
+	// 	function ( $valid, $value, $field, $input ) {
+	// 		if ( count( $value ) > 1 ) {
+	// 			$valid = 'Only Select 1';
+	// 		}
+	// 		return $valid;
+	// 	},
+	// 	20,
+	// 	4
+	// );
 }
 
 /**

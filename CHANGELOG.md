@@ -2,6 +2,21 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.11
+
+### Adds
+
+-   RSS Block: Added bottom margin to list
+-   Event card: Updated styling
+
+## Changes
+
+-   Decoration Location: Field changed to radio from checkbox
+
+### Fixes
+
+-   `layers/split-layout`: Image container won't display if no image source is available
+
 ## 0.4.10
 
 ### Changes

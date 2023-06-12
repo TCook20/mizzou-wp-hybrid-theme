@@ -4,7 +4,7 @@
    Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
    Author URI:   https://missouri.edu/
    Description:  Default Mizzou Hybrid WordPress Theme.
-   Version:      0.4.10
+   Version:      0.4.11
    Text Domain:  miz-hybrid-base
    Tags:         full-site-editing, custom-colors, featured-images, editor-style
  */
@@ -106,6 +106,11 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   font-size: 1rem;
   font-weight: 400;
   color: #444444;
+}
+
+/* RSS Block */
+.wp-block-rss:where(:not(.is-grid)) .wp-block-rss__item {
+  margin-bottom: 1rem;
 }
 
 .miz-card-group {
@@ -228,6 +233,67 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   .miz-card-deck--grid.miz-card-deck--grid-4 {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.miz-card.miz-card--event {
+  padding: 1rem;
+  border-bottom: 1px solid #111111;
+}
+.miz-card.miz-card--event:last-child {
+  border-bottom: 0;
+}
+@media screen and (min-width: 784px) {
+  .miz-card.miz-card--event {
+    border-bottom: 0;
+    gap: 1rem;
+    align-items: center;
+  }
+  .miz-card.miz-card--event:hover .miz-event__date, .miz-card.miz-card--event:focus .miz-event__date, .miz-card.miz-card--event:active .miz-event__date {
+    background-color: #FBD986;
+    border: 1px solid rgba(241, 184, 45, 0.6);
+  }
+}
+.miz-card.miz-card--event .miz-event__date {
+  display: block;
+  font-family: "Graphik Cond Web";
+  font-size: 1.953em;
+}
+@media screen and (min-width: 784px) {
+  .miz-card.miz-card--event .miz-event__date {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 125px;
+    min-width: 100%;
+    height: 125px;
+    line-height: 1;
+    padding: 2rem 2rem 2rem 2rem;
+    inline-size: -webkit-min-content;
+    inline-size: -moz-min-content;
+    inline-size: min-content;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    background-color: #F1B82D;
+    color: #111111;
+    text-align: center;
+  }
+}
+.miz-card.miz-card--event .miz-event__title {
+  text-decoration: none;
+  z-index: 1;
+  display: inline-block;
+  font-family: "Graphik Cond Web";
+  font-size: 1.563em;
+  position: relative;
+}
+.miz-card.miz-card--event .miz-event__title.stretched-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: auto;
 }
 
 .miz-big-message__content .miz-button-group {
