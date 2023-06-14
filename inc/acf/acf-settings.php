@@ -17,15 +17,15 @@ if ( class_exists( 'ACF' ) ) {
 
 	// Restrict Decoration Location to 2 Options.
 	// add_filter(
-	// 	'acf/validate_value/name=decoration_location',
-	// 	function ( $valid, $value, $field, $input ) {
-	// 		if ( count( $value ) > 1 ) {
-	// 			$valid = 'Only Select 1';
-	// 		}
-	// 		return $valid;
-	// 	},
-	// 	20,
-	// 	4
+	// 'acf/validate_value/name=decoration_location',
+	// function ( $valid, $value, $field, $input ) {
+	// if ( count( $value ) > 1 ) {
+	// $valid = 'Only Select 1';
+	// }
+	// return $valid;
+	// },
+	// 20,
+	// 4
 	// );
 }
 
