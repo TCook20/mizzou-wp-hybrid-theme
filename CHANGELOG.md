@@ -8,6 +8,10 @@
 
 -   `layers/split-layout`: Add recommendation text to Image field
 
+### Fixes
+
+-   Plus decoration setting on layers
+
 ## Removes
 
 -   `layers/hero`: Tear is removed
