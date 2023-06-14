@@ -1925,7 +1925,8 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'name'              => 'image',
 					'aria-label'        => '',
 					'type'              => 'image',
-					'instructions'      => '',
+					'instructions'      => '<p><strong>Recommended Aspect Ratio</strong> 4:3</p>
+	<p><strong>Recommended Minimum Height</strong> 516px<br/><strong>Recommended Minimum Width</strong> 688px</p>',
 					'required'          => 0,
 					'conditional_logic' => array(
 						array(
@@ -1958,7 +1959,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 					'name'              => 'video',
 					'aria-label'        => '',
 					'type'              => 'group',
-					'instructions'      => '',
+					'instructions'      => 'Will display in 16:9 aspect ratio',
 					'required'          => 0,
 					'conditional_logic' => array(
 						array(

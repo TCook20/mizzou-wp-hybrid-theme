@@ -2,6 +2,16 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.12
+
+### Changes
+
+-   `layers/split-layout`: Add recommendation text to Image field
+
+## Removes
+
+-   `layers/hero`: Tear is removed
+
 ## 0.4.11
 
 ### Adds

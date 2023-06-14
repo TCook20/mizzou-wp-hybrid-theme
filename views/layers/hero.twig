@@ -1,6 +1,6 @@
 {% set heroOptions = {
     "id": "miz-hero",
-    "class": "miz-hero--brand miz-decoration__tear miz-background-gel--dark",
+    "class": "miz-hero--brand miz-background-gel--dark",
     "content": {}
 } %}
 
@@ -37,12 +37,7 @@
 <div class="miz-main-grid__full">
     {%- embed "@miz/components/hero/hero.twig" with heroOptions only %}
         {% block hero_content %}
-
             {{- parent() -}}
-
-            {% from "@miz/components/decoration/decoration.twig" import DecorationTear as tear %}
-            {{ tear({ "container-id": _context.id }) }}
-
         {% endblock hero_content %}
     {% endembed %}
 </div>
