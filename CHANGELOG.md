@@ -12,7 +12,7 @@
 
 -   Plus decoration setting on layers
 
-## Removes
+### Removes
 
 -   `layers/hero`: Tear is removed
 
