@@ -2,6 +2,13 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.13
+
+### Changes
+
+-   Event: Set min-width and word-spacing
+-   Move editor styles to editor.scss
+
 ## 0.4.12
 
 ### Changes

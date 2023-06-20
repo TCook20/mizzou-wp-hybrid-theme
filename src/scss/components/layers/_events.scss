@@ -1,0 +1,13 @@
+.miz-card-deck {
+	&.miz-card-deck--3 {
+		.miz-card--event {
+			@include media-breakpoint-up(md) {
+				flex-flow: column wrap;
+			}
+
+			@include media-breakpoint-up(lg) {
+				flex-flow: row;
+			}
+		}
+	}
+}
