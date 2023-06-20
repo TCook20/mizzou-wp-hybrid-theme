@@ -32,16 +32,16 @@
 
   &::after {
     position: absolute;
-    display: inline-block !important;
-    top: auto;
-    right: $miz-space-default;
-    padding: $miz-space-inset-squish-default;
-    width: auto !important;
-    height: auto !important;
-    margin-top: 0 !important;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    padding: $miz-space-default;
+    width: auto;
+    height: auto;
+    margin-top: 0;
     transform-origin: center;
     transition: transform 0.2s ease-out;
-    content: 'expand_more' !important;
+    content: 'expand_more';
     font-family: 'Material Icons';
   }
 
@@ -50,7 +50,7 @@
 
     &::after {
       transform: rotate(180deg);
-			content: 'close' !important;
+			content: 'close';
     }
   }
 
@@ -80,6 +80,7 @@
   padding: $miz-space-inset-l;
 	transition: max-height 1s ease-in-out;
 	max-height: 0;
+	font-size: 1rem;
 
   &.show,
   &.expand {
@@ -97,10 +98,10 @@
   }
 
   .miz-accordion__content {
-    font-size: 0.8rem !important;
+    font-size: 1.2em;
 
     p {
-      font-size: 1.2em !important;
+      font-size: inherit;
     }
 
     h3 {

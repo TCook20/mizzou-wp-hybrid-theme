@@ -6,41 +6,51 @@
 
 .miz-card.miz-card--event {
   padding: 1rem;
-  border-bottom: 1px solid $miz-black;
+	border-bottom: 1px solid $miz-black;
+	flex-flow: column wrap;
 
   &:last-child {
     border-bottom: 0;
   }
 
-  @media screen and (min-width: 784px) {
-    border-bottom: 0;
-    gap: 1rem;
+  @include media-breakpoint-up(md) {
+		border-bottom: 0;
+		gap: 1rem;
 		align-items: center;
+		flex-flow: row;
+	}
 
-    &:hover,
-    &:focus,
-    &:active {
-      .miz-event__date {
-        background-color: $miz-gold-300;
-        border: 1px solid rgba($miz-gold, 0.6);
-      }
-    }
-  }
+	&.has-title-link {
+		@include media-breakpoint-up(md) {
+			&:hover,
+			&:focus,
+			&:active {
+				.miz-event__date {
+					background-color: $miz-gold-300;
+					border: 1px solid rgba($miz-gold, 0.6);
+				}
+			}
+		}
+	}
 
   .miz-event__details {
 
   }
+
+	.miz-event__date--container {
+		flex-grow: 0;
+	}
 
   .miz-event__date {
     display: block;
     font-family: $miz-font-family-graphik;
     font-size: $miz-font-size-level-4;
 
-    @media screen and (min-width: 784px) {
+    @include media-breakpoint-up(md) {
       margin-top: auto;
       margin-bottom: auto;
       width: 125px;
-      min-width: 100%;
+      min-width: 125px;
       height: 125px;
       line-height: 1;
       padding: 2rem 2rem 2rem 2rem;
@@ -50,6 +60,7 @@
       background-color: $miz-gold;
       color: $miz-black;
       text-align: center;
+			word-spacing: 125px;
     }
   }
 
@@ -59,7 +70,6 @@
     display: inline-block;
     font-family: $miz-font-family-graphik;
     font-size: $miz-font-size-level-3;
-    position: relative;
 
     &.stretched-link {
       &::after {

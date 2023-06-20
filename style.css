@@ -4,7 +4,7 @@
    Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
    Author URI:   https://missouri.edu/
    Description:  Default Mizzou Hybrid WordPress Theme.
-   Version:      0.4.12
+   Version:      0.4.13
    Text Domain:  miz-hybrid-base
    Tags:         full-site-editing, custom-colors, featured-images, editor-style
  */
@@ -58,22 +58,6 @@
 
 .block-editor-block-list__block.miz-main-grid__main {
   max-width: inherit !important;
-}
-
-.block-editor-default-block-appender .block-editor-default-block-appender__content {
-  margin: 0;
-}
-
-.block-editor-link-control {
-  min-width: initial !important;
-}
-
-.edit-post-visual-editor {
-  background: var(--wp--preset--color--miz-white);
-}
-
-.edit-site-visual-editor__editor-canvas {
-  background-color: var(--wp--preset--color--miz-black-500) !important;
 }
 
 body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
@@ -238,32 +222,39 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
 .miz-card.miz-card--event {
   padding: 1rem;
   border-bottom: 1px solid #111111;
+  flex-flow: column wrap;
 }
 .miz-card.miz-card--event:last-child {
   border-bottom: 0;
 }
-@media screen and (min-width: 784px) {
+@media (min-width: 768px) {
   .miz-card.miz-card--event {
     border-bottom: 0;
     gap: 1rem;
     align-items: center;
+    flex-flow: row;
   }
-  .miz-card.miz-card--event:hover .miz-event__date, .miz-card.miz-card--event:focus .miz-event__date, .miz-card.miz-card--event:active .miz-event__date {
+}
+@media (min-width: 768px) {
+  .miz-card.miz-card--event.has-title-link:hover .miz-event__date, .miz-card.miz-card--event.has-title-link:focus .miz-event__date, .miz-card.miz-card--event.has-title-link:active .miz-event__date {
     background-color: #FBD986;
     border: 1px solid rgba(241, 184, 45, 0.6);
   }
+}
+.miz-card.miz-card--event .miz-event__date--container {
+  flex-grow: 0;
 }
 .miz-card.miz-card--event .miz-event__date {
   display: block;
   font-family: "Graphik Cond Web";
   font-size: 1.953em;
 }
-@media screen and (min-width: 784px) {
+@media (min-width: 768px) {
   .miz-card.miz-card--event .miz-event__date {
     margin-top: auto;
     margin-bottom: auto;
     width: 125px;
-    min-width: 100%;
+    min-width: 125px;
     height: 125px;
     line-height: 1;
     padding: 2rem 2rem 2rem 2rem;
@@ -275,6 +266,7 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
     background-color: #F1B82D;
     color: #111111;
     text-align: center;
+    word-spacing: 125px;
   }
 }
 .miz-card.miz-card--event .miz-event__title {
@@ -283,7 +275,6 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   display: inline-block;
   font-family: "Graphik Cond Web";
   font-size: 1.563em;
-  position: relative;
 }
 .miz-card.miz-card--event .miz-event__title.stretched-link::after {
   content: "";
@@ -310,6 +301,17 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
     width: max-content;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .miz-card-deck.miz-card-deck--3 .miz-card--event {
+    flex-flow: column wrap;
+  }
+}
+@media (min-width: 992px) {
+  .miz-card-deck.miz-card-deck--3 .miz-card--event {
+    flex-flow: row;
   }
 }
 
