@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.14
+
+### Changes
+
+-   `assets/css/brand.css`: Height of plus decoration changed to 5rem
+
 ## 0.4.13
 
 ### Changes
