@@ -2,6 +2,17 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.15
+
+### Changes
+
+-   `layers/big-message`: Don't render `<header>` if no title is entered
+-   `layers/link-list`: Add aria-hidden to chevron icon
+
+### Fixes
+
+-   `layers/split-layout`: Content background no longer restricted to offset variant (defaults to light)
+
 ## 0.4.14
 
 ### Changes
