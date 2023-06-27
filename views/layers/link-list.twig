@@ -35,7 +35,13 @@
 		{% set Links = Links|merge([{
 			"link": {
 				"href": Link.link.url,
-				"text": Link.link.title ~ icon({"class": "miz-text--gold miz-flex-item--push", "name": "chevron_right"})
+				"text": Link.link.title ~ icon( {
+					"class": "miz-text--gold miz-flex-item--push",
+					"name": "chevron_right",
+					"attributes": {
+						"aria-hidden": "true"
+					}
+				} )
 			}
 		}]) %}
 	{% endfor %}

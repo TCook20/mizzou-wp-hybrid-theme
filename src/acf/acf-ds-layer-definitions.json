@@ -2049,15 +2049,7 @@
 						"type": "button_group",
 						"instructions": "",
 						"required": 0,
-						"conditional_logic": [
-							[
-								{
-									"field": "field_64230346db9d5",
-									"operator": "==",
-									"value": "offset"
-								}
-							]
-						],
+						"conditional_logic": 0,
 						"wrapper": {
 							"width": "",
 							"class": "",
@@ -2068,7 +2060,7 @@
 							"dark": "Dark",
 							"transparent": "Transparent"
 						},
-						"default_value": "",
+						"default_value": "light",
 						"return_format": "value",
 						"allow_null": 0,
 						"layout": "horizontal"

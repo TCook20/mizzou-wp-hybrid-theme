@@ -65,9 +65,11 @@
     <div class="miz-container">
         <div{% if flexgroup.displayOptions.include_corner_decoration %} class="miz-decoration miz-decoration__corner--top-left"{% endif %}>
             <div class="{{ bigMessageLayer.classes.frame }}">
+								{% if bigMessageLayer.title %}
                 <header class="{{ bigMessageLayer.classes.header }}">
                     <h2 class="miz-layer__title">{{ bigMessageLayer.title }}</h2>
                 </header>
+								{% endif %}
 
                 <div class="{{ bigMessageLayer.classes.content }}">
                     {{ bigMessageLayer.content }}

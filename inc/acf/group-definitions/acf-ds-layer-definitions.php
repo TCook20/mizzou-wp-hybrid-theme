@@ -2113,15 +2113,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 							'type'              => 'button_group',
 							'instructions'      => '',
 							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_64230346db9d5',
-										'operator' => '==',
-										'value'    => 'offset',
-									),
-								),
-							),
+							'conditional_logic' => 0,
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
@@ -2132,7 +2124,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 								'dark'        => 'Dark',
 								'transparent' => 'Transparent',
 							),
-							'default_value'     => '',
+							'default_value'     => 'light',
 							'return_format'     => 'value',
 							'allow_null'        => 0,
 							'layout'            => 'horizontal',
