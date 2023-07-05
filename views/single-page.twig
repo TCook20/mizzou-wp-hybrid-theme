@@ -35,7 +35,7 @@
 
 {% if page.sub_navigation.items %}
 	{% block sidebar_nav %}
-		{% include '@miz-block/sub-nav.twig' ignore missing with {
+		{% include '@miz-block/navigations/sub-navigation.twig' ignore missing with {
 			'nav_items': page.sub_navigation.items
 		} %}
 	{% endblock sidebar_nav %}

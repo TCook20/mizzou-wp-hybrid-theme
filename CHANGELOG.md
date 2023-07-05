@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.16
+
+### Fixes
+
+-   `single-page`: Path to sub navigation template
+
 ## 0.4.15
 
 ### Changes
