@@ -1,3 +1,40 @@
+/**
+ *
+ * Sub navigation menu button
+ *
+ */
+ .miz-sub-navigation__menu-button {
+	 margin: 1rem 0 1rem;
+	 width: 100%;
+	 text-align: left !important;
+
+	 @include media-breakpoint-up(md) {
+		 display: none !important;
+	 }
+ }
+
+.miz-sub-navigation__nav {
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: block;
+
+    > .miz-nav__list {
+      @include miz-make-flex-row($flex-grow: 0);
+
+      flex-wrap: wrap;
+
+      .miz-nav__link + .miz-nav__list .miz-nav__link {
+        padding-left: $miz-space-default;
+      }
+    }
+  }
+
+	&.expand {
+		display: block;
+	}
+}
+
 .miz-sub-nav {
   @include miz-make-flex-column;
 

@@ -39,8 +39,8 @@
 
 			<!-- wp:mizzou/button-group {"layout":{"type":"flex","justifyContent":"center"}} -->
 			<div class="wp-block-mizzou-button-group miz-button-group">
-				<!-- wp:mizzou/button {"secondary":true,"branded":true} -->
-				<a class="miz-button miz-button--brand miz-button--secondary"></a>
+				<!-- wp:mizzou/button {"branded":true} -->
+				<a class="miz-button miz-button--brand wp-block-mizzou-button"></a>
 				<!-- /wp:mizzou/button -->
 			</div>
 			<!-- /wp:mizzou/button-group -->
