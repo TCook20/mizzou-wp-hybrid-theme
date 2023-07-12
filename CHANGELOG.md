@@ -2,6 +2,21 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.4.17
+
+### Adds
+
+-   Sub Navigation: Styling added for drawer on mobile
+
+### Changes
+
+-   Patterns: Updated for changes to custom blocks
+-   Breadcrumbs: Add padding
+
+### Removes
+
+-   `getMenu` function removed in favor of `Timber\Menu`
+
 ## 0.4.16
 
 ### Fixes

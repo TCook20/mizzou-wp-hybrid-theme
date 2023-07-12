@@ -384,9 +384,9 @@ class MizzouHybridBase extends MizzouBlocks {
 		// Site specific configuration options.
 
 		// Navigation.
-		$ary_context['site']->primary_navigation  = $this->getMenu( 'primary-navigation' );
-		$ary_context['site']->footer_navigation   = $this->getMenu( 'footer-navigation' );
-		$ary_context['site']->tactical_navigation = $this->getMenu( 'tactical-navigation' );
+		$ary_context['site']->primary_navigation  = new Timber\Menu( 'primary-navigation' );
+		$ary_context['site']->footer_navigation   = new Timber\Menu( 'footer-navigation' );
+		$ary_context['site']->tactical_navigation = new Timber\Menu( 'tactical-navigation' );
 
 		// Options.
 		$ary_context['option'] = get_fields( 'option' );
@@ -837,34 +837,6 @@ class MizzouHybridBase extends MizzouBlocks {
 		register_nav_menu( 'primary-navigation', __( 'Primary Navigation' ) );
 		register_nav_menu( 'tactical-navigation', __( 'Tactical Navigation' ) );
 		register_nav_menu( 'footer-navigation', __( 'Footer Navigation' ) );
-	}
-
-	/**
-	 * Get menu title and items
-	 *
-	 * @param string $str_menu_name Name of menu.
-	 * @return array Associative array with the following properties:
-	 *      - (string) name Name of the menu or empty string.
-	 *      - (array) items Collection of Timber\MenuItem objects or empty array.
-	 */
-	public static function getMenu( $str_menu_name ) {
-		$str_menu_title = '';
-		$ary_menu_items = array();
-
-		if ( is_nav_menu( $str_menu_name ) ) {
-			$obj_menu       = new Timber\Menu( $str_menu_name );
-			$str_menu_title = $obj_menu->title;
-			$ary_menu_items = $obj_menu->get_items();
-		} elseif ( has_nav_menu( $str_menu_name ) ) {
-			$obj_menu       = new Timber\Menu( $str_menu_name );
-			$str_menu_title = $obj_menu->title;
-			$ary_menu_items = $obj_menu->get_items();
-		}
-
-		return array(
-			'name'  => $str_menu_title,
-			'items' => $ary_menu_items,
-		);
 	}
 
 	/**

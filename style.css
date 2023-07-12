@@ -4,7 +4,7 @@
    Author:       Travis Cook (cooktw@missouri.edu), Digital Service, University of Missouri
    Author URI:   https://missouri.edu/
    Description:  Default Mizzou Hybrid WordPress Theme.
-   Version:      0.4.16
+   Version:      0.4.17
    Text Domain:  miz-hybrid-base
    Tags:         full-site-editing, custom-colors, featured-images, editor-style
  */
@@ -357,6 +357,10 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   top: 0;
 }
 
+.miz-breadcrumbs {
+  padding: 1rem 0 1rem;
+}
+
 .miz-primary-navigation__sub-nav-list.show {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
@@ -364,6 +368,46 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
   z-index: 20;
   background-color: #F0F0F0;
   box-shadow: 0.125rem 0.25rem 0.25rem rgba(204, 204, 204, 0.5), -0.125rem 0.25rem 0.25rem rgba(204, 204, 204, 0.5);
+}
+
+/**
+ *
+ * Sub navigation menu button
+ *
+ */
+.miz-sub-navigation__menu-button {
+  margin: 1rem 0 1rem;
+  width: 100%;
+  text-align: left !important;
+}
+@media (min-width: 768px) {
+  .miz-sub-navigation__menu-button {
+    display: none !important;
+  }
+}
+
+.miz-sub-navigation__nav {
+  display: none;
+}
+@media (min-width: 768px) {
+  .miz-sub-navigation__nav {
+    display: block;
+  }
+  .miz-sub-navigation__nav > .miz-nav__list {
+    /* stylelint-disable-next-line */
+    display: flex;
+    flex-flow: row nowrap;
+    flex-wrap: wrap;
+  }
+  .miz-sub-navigation__nav > .miz-nav__list > * {
+    flex: 0 1 auto;
+  }
+  .miz-sub-navigation__nav > .miz-nav__list .miz-nav__link + .miz-nav__list .miz-nav__link {
+    padding-left: 1rem;
+  }
+}
+.miz-sub-navigation__nav.expand {
+  display: block;
 }
 
 .miz-sub-nav {
@@ -479,6 +523,15 @@ body.editor-styles-wrapper.admin-color-fresh.wp-embed-responsive {
 .miz-sub-nav__expand-button.collapsed:hover::after {
   transform: rotate(180deg);
   transition-delay: 0.15s;
+}
+
+.miz-main-grid__article {
+  order: 2;
+}
+@media (min-width: 768px) {
+  .miz-main-grid__article {
+    order: initial;
+  }
 }
 
 .miz-page-header--article .miz-article__blurb {

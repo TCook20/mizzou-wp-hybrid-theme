@@ -17,53 +17,51 @@
 
 ?>
 
-<!-- wp:group {"lock":{"move":true},"className":"miz-header","tagName":"header","style":{"spacing":{"blockGap":"0rem"}}} -->
-<header class="wp-block-group miz-header">
-	<!-- wp:group {"lock":{"move":true,"remove":true},"className":"miz-fill\u002d\u002dblack","style":{"spacing":{"blockGap":"0rem"}}} -->
-	<div class="wp-block-group miz-fill--black">
-		<!-- wp:group {"className":"miz-container","style":{"spacing":{"blockGap":"0rem"}}} -->
-		<div class="wp-block-group miz-container">
+<!-- wp:mizzou/header {"title":"<?php echo get_bloginfo( 'name' ); ?>","url":"<?php echo get_bloginfo( 'url' ); ?>"} -->
+<header class="miz-header wp-block-mizzou-header">
+	<!-- wp:mizzou/header-section {"fillColor":"black"} -->
+	<div class="wp-block-mizzou-header-section miz-fill--black">
+		<div class="miz-container">
 			<!-- wp:mizzou/ribbon -->
-			<div class="miz-ribbon">
-				<div class="miz-ribbon__signature">
+			<div class="miz-ribbon wp-block-mizzou-ribbon">
+				<!-- wp:mizzou/ribbon-section {"className":"miz-ribbon__signature"} -->
+				<div class="wp-block-mizzou-ribbon-section miz-ribbon__signature">
+					<!-- wp:mizzou/signature {"reverse":true} -->
 					<div class="mu-sig-24 reverse">
 						<p class="logo"><a href="https://missouri.edu">MU Logo</a></p>
 						<h1 class="wordmark"><a href="https://missouri.edu">University of Missouri</a></h1>
 					</div>
+					<!-- /wp:mizzou/signature -->
 				</div>
-				<div class="miz-ribbon__search">
-					<form action="/search/" method="get" class="miz-input-group">
-						<label for="search-input" class="miz-label--hidden">Search</label><input type="text" class="miz-input" id="search-input" placeholder="Search this site" name="q"/>
-						<button class="miz-button miz-button--primary miz-button--small miz-button--icon miz-button--square-sm miz-input-group__button">
-							<i class="miz-icon material-icons miz-icon--button miz-icon--md">search</i>
-						</button>
-					</form>
+				<!-- /wp:mizzou/ribbon-section -->
+
+				<!-- wp:mizzou/ribbon-section {"className":"miz-ribbon__search"} -->
+				<div class="wp-block-mizzou-ribbon-section miz-ribbon__search">
+					<!-- wp:mizzou/search -->
+					<form action="/search/" method="get" class="miz-input-group"><label for="search-input" class="miz-label--hidden">Search</label><input type="text" class="miz-input" id="search-input" placeholder="Search this site" name="q"/><button class="miz-button miz-button--primary miz-button--small miz-button--icon miz-button--square-sm miz-input-group__button"><i class="miz-icon material-icons miz-icon--button miz-icon--md">search</i></button></form>
+					<!-- /wp:mizzou/search -->
 				</div>
+				<!-- /wp:mizzou/ribbon-section -->
 			</div>
 			<!-- /wp:mizzou/ribbon -->
 		</div>
-		<!-- /wp:group -->
 	</div>
-	<!-- /wp:group -->
+	<!-- /wp:mizzou/header-section -->
 
-	<!-- wp:group {"lock":{"move":true,"remove":true},"className":"miz-fill\u002d\u002dwhite","style":{"spacing":{"blockGap":"0rem"}}} -->
-	<div class="wp-block-group miz-fill--white">
-		<!-- wp:group {"className":"miz-container","style":{"spacing":{"blockGap":"0rem"}}} -->
-		<div class="wp-block-group miz-container">
-			<!-- wp:mizzou/masthead {"title":"<?php echo get_bloginfo( 'name' ); ?>","link":"<?php echo get_bloginfo( 'url' ); ?>", "subtitle":"<?php echo get_bloginfo( 'description' ); ?>"} /-->
+	<!-- wp:mizzou/header-section {"fillColor":"white"} -->
+	<div class="wp-block-mizzou-header-section miz-fill--white">
+		<div class="miz-container">
+			<!-- wp:mizzou/masthead {"title":"<?php echo get_bloginfo( 'name' ); ?>","link":"<?php echo get_bloginfo( 'url' ); ?>"} /-->
 		</div>
-		<!-- /wp:group -->
 	</div>
-	<!-- /wp:group -->
+	<!-- /wp:mizzou/header-section -->
 
-	<!-- wp:group {"lock":{"move":true,"remove":true},"className":"miz-fill\u002d\u002dgold","style":{"spacing":{"blockGap":"0rem"}}} -->
-	<div class="wp-block-group miz-fill--gold">
-		<!-- wp:group {"className":"miz-container","style":{"spacing":{"blockGap":"0rem"}}} -->
-		<div class="wp-block-group miz-container">
-			<!-- wp:mizzou/primary-navigation {"name":"primary"} /-->
+	<!-- wp:mizzou/header-section {"fillColor":"gold"} -->
+	<div class="wp-block-mizzou-header-section miz-fill--gold">
+		<div class="miz-container">
+			<!-- wp:mizzou/primary-navigation /-->
 		</div>
-		<!-- /wp:group -->
 	</div>
-	<!-- /wp:group -->
+	<!-- /wp:mizzou/header-section -->
 </header>
-<!-- /wp:group -->
+<!-- /wp:mizzou/header -->
