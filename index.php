@@ -22,14 +22,8 @@ $ary_context['page']['current_page'] = $ary_context['site']->base_url;
 // Body class.
 $ary_context['page']['body_class'] = 'index';
 
-// Setup standard news parameters.
-$ary_news_params = array(
-	'posts_per_page' => -1,
-	'orderby'        => 'date',
-);
-
 // News.
-$ary_context['news'] = Timber::get_posts( $ary_news_params );
+$ary_context['posts'] = new Timber\PostQuery();
 
 // Render view.
 Timber::render( array( 'site-index.twig', 'index.twig' ), $ary_context );

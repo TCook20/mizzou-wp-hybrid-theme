@@ -2,6 +2,21 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.0
+
+### Adds
+
+-   `page`: Pulled from `singular` for Page post type
+-   `single`: Pulled from `singular` for Post (News) post type
+-   Nav Menu: Custom Field for ACF
+
+### Changes
+
+-   `functions`:
+    -   Refactor metadata in wp_head to use `Timber\Helper` and `Timber\URLHelper` methods
+    -   Theme supports pulled from `inc/theme-supports.php`
+-   `singular`: Simplified for use with custom post types
+
 ## 0.4.17
 
 ### Adds

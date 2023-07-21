@@ -14,45 +14,31 @@
 $ary_context         = Timber::context();
 $ary_context['page'] = new Timber\Post();
 
-// Collect parent links.
-$ary_parents = array();
-$obj_parent  = $ary_context['page']->parent;
-while ( $obj_parent ) {
-	if ( $obj_parent ) {
-		$ary_parents[] = $obj_parent->link;
-		$obj_parent    = $obj_parent->parent;
-	}
-}
-$ary_context['page']->parent_pages = $ary_parents;
-
 // Sub-navigation.
 if ( ( isset( $ary_context['page']->sub_navigation ) ) && ( false !== $ary_context['page']->sub_navigation ) ) {
 	$ary_context['page']->sub_navigation = new Timber\Menu( $ary_context['page']->sub_navigation );
 }
 
-// Page or post.
-if ( ( isset( $ary_context['page']->post_type ) ) && ( 'page' !== $ary_context['page']->post_type || 'post' !== $ary_context['page']->post_type ) ) {
-	$str_template_prefix = 'single-' . $ary_context['page']->post_type;
+$str_template_prefix = 'single-' . $ary_context['page']->post_type;
 
-	// Map existing Timber option for permalink to alias.
-	$ary_context['page']->current_page = $ary_context['page']->link;
-}
+// Map existing Timber option for permalink to alias.
+$ary_context['page']->current_page = $ary_context['page']->link;
 
 // Create template hierarchy (will load first template found in the list).
 $ary_templates = array();
 
 // Custom template.
 if ( isset( $ary_context['page']->slug ) ) {
-	$ary_templates[] = $ary_context['page']->post_type . '.twig';
-	$ary_templates[] = $ary_context['page']->post_type . '-' . $ary_context['page']->slug . '.twig';
+	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->slug . '.twig';
 }
 
 // Custom parent template.
 if ( isset( $ary_context['page']->parent->slug ) ) {
-	$ary_templates[] = $ary_context['page']->post_type . '-' . $ary_context['page']->parent->slug . '.twig';
+	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->parent->slug . '.twig';
 }
 
 // Default.
+$ary_templates[] = $ary_context['page']->post_type . '.twig';
 $ary_templates[] = $str_template_prefix . '.twig';
 
 // Render view.

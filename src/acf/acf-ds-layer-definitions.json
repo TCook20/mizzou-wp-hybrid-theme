@@ -1129,11 +1129,11 @@
 				"append": ""
 			},
 			{
-				"key": "field_642300fb06a7c",
-				"label": "News Cards",
-				"name": "cards",
+				"key": "field_64b7d43686540",
+				"label": "Card Selection",
+				"name": "dynamic_cards",
 				"aria-label": "",
-				"type": "relationship",
+				"type": "true_false",
 				"instructions": "",
 				"required": 0,
 				"conditional_logic": 0,
@@ -1142,7 +1142,65 @@
 					"class": "",
 					"id": ""
 				},
+				"message": "Auto-select most recent news (posts)",
+				"default_value": 0,
+				"ui": 0,
+				"ui_on_text": "",
+				"ui_off_text": ""
+			},
+			{
+				"key": "field_64b7d4c486541",
+				"label": "Number of News Stories",
+				"name": "number_cards",
+				"aria-label": "",
+				"type": "range",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": [
+					[
+						{
+							"field": "field_64b7d43686540",
+							"operator": "==",
+							"value": "1"
+						}
+					]
+				],
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"default_value": 3,
+				"min": "1",
+				"max": "4",
+				"step": "",
+				"prepend": "",
+				"append": ""
+			},
+			{
+				"key": "field_642300fb06a7c",
+				"label": "News Cards",
+				"name": "cards",
+				"aria-label": "",
+				"type": "relationship",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": [
+					[
+						{
+							"field": "field_64b7d43686540",
+							"operator": "!=",
+							"value": "1"
+						}
+					]
+				],
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
 				"post_type": "",
+				"post_status": "",
 				"taxonomy": "",
 				"filters": ["search", "post_type", "taxonomy"],
 				"return_format": "object",

@@ -152,11 +152,11 @@
 {% endblock body %}
 
 {% block foot %}
-  {% embed '@miz/components/meta/foot/foot.twig' %}
+  {% embed '@miz/components/meta/foot/foot.twig' with {
+		foot_code: block('foot_code')}
+	%}
     {% block foot_block %}
       {{ parent() }}
-
-      {{ function('wp_footer') }}
     {% endblock foot_block %}
   {% endembed %}
 {% endblock foot %}
