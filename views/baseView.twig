@@ -22,44 +22,6 @@
 
 {% set bodyOptions = { 'html_id': page.body_id, 'html_class': page.body_class } %}
 
-{% set metaData = {
-    'title': page.title,
-    'name': site.name,
-    'short_name': option.short_name,
-    'description': page.preview ?? site.description,
-    'encoding': 'utf-8',
-    'google': {
-        'analytics': option.google_analytics,
-        'cse': option.google_cse_id,
-        'tagManager': option.google_tag_manager_id,
-        'searchConsole': option.google_search_console
-    },
-    'icons': {
-        'color': option.site_icon_color ?? 'gold',
-        'apple': option.apple_mask_icon_color ?? 'black',
-        'ms': option.ms_tile_color ?? 'black',
-        'sprite': metaData.url.asset ~ '/images/miz-sprite.svg'
-    },
-    'image': page.thumbnail,
-    'language': site.language|default('en'),
-    'search': {
-        'enabled': site.search_enabled,
-        'field_name': site.search_field_name,
-        'path': site.search_path
-    },
-    'socialMedia': option.social_media,
-    'url': {
-        'asset': theme.parent.link ?? theme.link ~ '/',
-        'base': site.link,
-        'current': page.current_page,
-        'detected_hostname': site.detected_hostname,
-        'hostname': option.hostname,
-        'homepage': page.is_homepage
-    },
-    'version': theme.parent.version,
-    'viewport': site.viewport
-} %}
-
 {% set navigationOptions = {
   'enable': content_include_navigation|default(true),
   'class': navigation_modifier_class,
@@ -159,3 +121,7 @@
 		{{ parent() }}
 	{% endif %}
 {% endblock footer %}
+
+{% block foot_code %}
+	{{ function('wp_footer') }}
+{% endblock foot_code %}

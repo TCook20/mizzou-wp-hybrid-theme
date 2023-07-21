@@ -59,7 +59,7 @@ if ( is_day() ) {
 	$ary_templates[]            = 'archive-' . get_post_type() . '.twig';
 }
 
-$ary_context['news'] = new Timber\PostQuery();
+$ary_context['posts'] = new Timber\PostQuery();
 
 // Render view.
 $ary_templates[] = 'archive.twig';

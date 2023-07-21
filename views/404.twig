@@ -19,6 +19,11 @@
 
 <article class="miz-main-grid__article">
 	<p>Sorry! It doesn&#8217;t look like we were able to find that page.</p>
+
+	<p>{% include '@miz/components/input-group/search/search.twig' with {
+		"form": { "action": "/search/" }
+	} only %}</p>
+
 	<p><a href="{{ site.link }}">Return to Main Page</a></p>
 </article>
 {% endblock %}

@@ -26,6 +26,15 @@ if ( ! class_exists( 'Timber' ) ) {
 	);
 
 	return;
+} else {
+	// Adjust template location.
+	Timber::$dirname = array( 'views' );
+
+	/**
+	 * By default, Timber does NOT autoescape values. Want to enable Twig's autoescape?
+	 * No prob! Just set this value to true
+	 */
+	Timber::$autoescape = false;
 }
 
 /**
@@ -36,7 +45,7 @@ class MizzouHybridBase extends MizzouBlocks {
 	/** Add timber support. */
 	public function __construct() {
 		// Add configuration variables.
-		add_filter( 'timber_context', array( $this, 'siteConfiguration' ) );
+		add_filter( 'timber/context', array( $this, 'siteConfiguration' ) );
 
 		// Setup menu locations.
 		add_action( 'init', array( $this, 'customMenuLocation' ) );
@@ -59,9 +68,6 @@ class MizzouHybridBase extends MizzouBlocks {
 			}
 		);
 
-		// Adjust template location.
-		Timber::$dirname = array( 'views' );
-
 		add_filter(
 			'timber/loader/loader',
 			function( $loader ) {
@@ -72,48 +78,19 @@ class MizzouHybridBase extends MizzouBlocks {
 		);
 
 		// Remove unnecessary junk from wp_head.
-		remove_action( 'wp_head', 'rsd_link' );
 		remove_action( 'wp_head', 'wlwmanifest_link' );
 		remove_action( 'wp_head', 'wp_generator' );
-		remove_action( 'wp_head', 'rel_canonical' );
-		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 		remove_action( 'wp_head', 'feed_links', 2 );
 		remove_action( 'wp_head', 'feed_links_extra', 3 );
 		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
-		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+
+		// Add metadata to wp_head.
 		add_action( 'wp_head', array( $this, 'customMizHead' ) );
 		add_action( 'wp_head', array( $this, 'mizHeadOpenGraph' ) );
 		add_action( 'wp_head', array( $this, 'mizHeadTwitter' ) );
 		add_action( 'wp_head', array( $this, 'mizHeadGTM' ) );
 		add_action( 'wp_head', array( $this, 'mizHeadGCSE' ) );
 		add_action( 'wp_head', array( $this, 'mizHeadScripts' ) );
-
-		add_action(
-			'after_setup_theme',
-			function () {
-				// Add HTML5 support for gallery and caption shortcodes.
-				add_theme_support( 'html5', array( 'gallery', 'caption', 'style', 'script' ) );
-
-				// Add Responsive Embeds.
-				add_theme_support( 'responsive-embeds' );
-
-				// Add menu support.
-				add_theme_support( 'menus' );
-
-				// Add post thumbnail support and set size.
-				add_theme_support( 'post-thumbnails' );
-
-				// Theme Supports.
-				add_theme_support( 'automatic-feed-links' );
-				add_theme_support( 'block-templates' );
-				add_theme_support( 'editor-styles' );
-				add_theme_support( 'title-tag' );
-				add_theme_support( 'wp-block-styles' );
-			}
-		);
-
-		// Add Starter Pages.
-		add_action( 'after_switch_theme', array( $this, 'mizStarterPages' ) );
 
 		// Twig additions.
 		add_filter( 'timber/twig', array( $this, 'twigAdditions' ) );
@@ -150,11 +127,12 @@ class MizzouHybridBase extends MizzouBlocks {
 				wp_register_style( 'mizDS-base', get_template_directory_uri() . '/assets/css/miz.css', null, $ds_version );
 				wp_register_style( 'mizDS-brand', get_template_directory_uri() . '/assets/css/miz-brand.css', 'mizDS-base', $ds_version );
 				wp_register_style( 'miz-theme', get_template_directory_uri() . '/style.css', null, $theme->get( 'Version' ) );
-				// wp_enqueue_style( 'miz-light', get_template_directory_uri() . '/assets/css/light.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: no-preference), (prefers-color-scheme: light)' );
-				// wp_enqueue_style( 'miz-dark', get_template_directory_uri() . '/assets/css/dark.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: dark)' );
+				// wp_register_style( 'miz-light', get_template_directory_uri() . '/assets/css/light.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: no-preference), (prefers-color-scheme: light)' );
+				// wp_register_style( 'miz-dark', get_template_directory_uri() . '/assets/css/dark.css', null, $theme->get( 'Version' ), '(prefers-color-scheme: dark)' );
 
 				// Register Scripts.
 				wp_register_script( 'svg4everybody', 'https://jonneal.dev/svg4everybody/svg4everybody.min.js', array(), $theme->get( 'Version' ), false );
+				wp_register_script( 'svg', 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js', array(), '2.7.1', false );
 				wp_register_script( 'dropdownJS', get_template_directory_uri() . '/assets/js/dropdown.js', array(), $theme->get( 'Version' ), true );
 				wp_register_script( 'expandJS', get_template_directory_uri() . '/assets/js/expand.js', array(), $theme->get( 'Version' ), true );
 				wp_register_script( 'primaryNavJS', get_template_directory_uri() . '/assets/js/primaryNavigation.js', array(), $theme->get( 'Version' ), true );
@@ -170,8 +148,8 @@ class MizzouHybridBase extends MizzouBlocks {
 				wp_enqueue_style( 'mizDS-base' );
 				wp_enqueue_style( 'mizDS-brand' );
 
-				wp_enqueue_script( 'svg4everybody' );
-				wp_enqueue_script( 'svg', 'https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js', array(), '2.7.1', false );
+				// wp_enqueue_script( 'svg4everybody' );
+				// wp_enqueue_script( 'svg' );
 
 				if ( ! get_field( 'header_part', 'option' ) && wp_get_nav_menu_object( 'Primary' ) ) {
 					wp_enqueue_script( 'expandJS' );
@@ -185,18 +163,8 @@ class MizzouHybridBase extends MizzouBlocks {
 		add_editor_style( '/assets/css/miz.css' );
 		add_editor_style( '/assets/css/miz-brand.css' );
 
-		// Remove emoji support.
-		add_action( 'init', array( $this, 'disableEmoji' ) );
-
-		// Setup shortcodes.
-		add_shortcode( 'home_url', array( $this, 'homeURLShortCode' ) );
-		add_shortcode( 'menu', array( $this, 'menuShortCode' ) );
-
 		// Add SVG to mime types.
 		add_filter( 'upload_mimes', array( $this, 'customMimeTypes' ) );
-
-		// Media Filters.
-		add_filter( 'img_caption_shortcode_width', array( $this, '__return_zero' ) );
 
 		// Disable XML-RPC.
 		add_filter( 'xmlrpc_enabled', '__return_false' );
@@ -271,8 +239,10 @@ class MizzouHybridBase extends MizzouBlocks {
 		add_action(
 			'after_setup_theme',
 			function () {
+				// Disable remote block patterns.
 				add_filter( 'should_load_remote_block_patterns', '__return_false' );
 
+				// Add body class.
 				add_filter(
 					'body_class',
 					function ( $classes ) {
@@ -296,8 +266,6 @@ class MizzouHybridBase extends MizzouBlocks {
 		add_action(
 			'enqueue_block_editor_assets',
 			function () {
-				$theme = wp_get_theme( 'mizzou-block-theme' );
-
 				wp_enqueue_style( 'miz-theme' );
 				wp_enqueue_style( 'mizDS-base' );
 				wp_enqueue_style( 'mizDS-brand' );
@@ -306,6 +274,20 @@ class MizzouHybridBase extends MizzouBlocks {
 
 		// Set allowed blocks.
 		add_filter( 'allowed_block_types_all', array( $this, 'mizAllowedBlocks' ), 10, 2 );
+
+		// Load Theme Supports.
+		add_action(
+			'after_setup_theme',
+			function () {
+				$str_ds            = DIRECTORY_SEPARATOR;
+				$str_parent        = get_template_directory();
+				$str_file_location = $str_ds . 'inc' . $str_ds;
+				$str_filename      = 'theme-supports.php';
+				$str_file          = $str_parent . $str_file_location . $str_filename;
+
+				require_once $str_file;
+			}
+		);
 
 		// Last User Login.
 		add_action(
@@ -338,20 +320,6 @@ class MizzouHybridBase extends MizzouBlocks {
 			}
 		);
 
-		// TinyMCE Settings.
-		add_action(
-			'init',
-			function () {
-				$str_ds            = DIRECTORY_SEPARATOR;
-				$str_parent        = get_template_directory();
-				$str_file_location = $str_ds . 'inc' . $str_ds;
-				$str_filename      = 'tinymce.php';
-				$str_file          = $str_parent . $str_file_location . $str_filename;
-
-				require_once $str_file;
-			}
-		);
-
 		// Continue on.
 		// parent::__construct();
 	}
@@ -373,13 +341,9 @@ class MizzouHybridBase extends MizzouBlocks {
 		$ary_context['site']->baseURL = $ary_context['site']->url . '/';
 
 		// Standard configuration options.
-		$ary_context['site']->detected_hostname      = $_SERVER['HTTP_HOST'];
 		$ary_context['site']->search_action_path     = 'search';
-		$ary_context['site']->search_enabled         = true;
 		$ary_context['site']->search_field_name      = 'q';
 		$ary_context['site']->search_form_field_name = 'q';
-		$ary_context['site']->viewport               = 'width=device-width, initial-scale=1.0, shrink-to-fit=no';
-		$ary_context['site']->year                   = date( 'Y' );
 
 		// Site specific configuration options.
 
@@ -450,63 +414,6 @@ class MizzouHybridBase extends MizzouBlocks {
 		);
 		$admin_bar->remove_menu( 'comments' );
 		$admin_bar->remove_menu( 'site-editor' );
-	}
-
-	/**
-	 * Starter Content
-	 */
-	public function mizStarterPages() {
-		$starter_pages = array(
-			'home'     => array(
-				'post_type'    => 'page',
-				'post_name'    => 'home',
-				'post_title'   => 'Home',
-				'menu_order'   => -1,
-				'post_content' => '',
-			),
-			'calendar' => array(
-				'post_type'    => 'page',
-				'post_title'   => 'Calendar',
-				'menu_order'   => 0,
-				'post_content' => '<!-- wp:mizzou/events-collection {"count":10,"term":"research"} /-->',
-			),
-			'news'     => array(
-				'post_type'    => 'page',
-				'post_name'    => 'news',
-				'post_title'   => 'News',
-				'menu_order'   => 0,
-				'post_content' => '',
-			),
-			'search'   => array(
-				'post_type'    => 'page',
-				'post_name'    => 'search',
-				'post_title'   => 'Search',
-				'menu_order'   => 0,
-				'post_content' => '<!-- wp:html --><gcse:search gname="sitesearch" queryParameterName="q"></gcse:search><!-- /wp:html -->',
-			),
-		);
-
-		foreach ( $starter_pages as $starter_page ) {
-			if ( is_null( get_page_by_title( $starter_page['post_title'], OBJECT, $starter_page['post_type'] ) ) ) {
-				$ary_page_params = array(
-					'post_title'     => $starter_page['post_title'],
-					'post_status'    => 'publish',
-					'post_type'      => $starter_page['post_type'],
-					'menu_order'     => $starter_page['menu_order'],
-					'comment_status' => 'closed',
-					'ping_status'    => 'closed',
-					'post_content'   => $starter_page['post_content'],
-				);
-
-				wp_insert_post( $ary_page_params );
-			}
-		}
-
-		$homepage = get_page_by_title( 'Home', OBJECT, 'page' );
-		if ( $homepage ) {
-			update_option( 'show_on_front', 'page' );
-			update_option( 'page_on_front', $homepage->ID );
-		}
 	}
 
 	/**
@@ -617,40 +524,39 @@ class MizzouHybridBase extends MizzouBlocks {
 	 * Set up Custom Head
 	 */
 	public function customMizHead() {
-		// Base meta
+		// Base meta.
 		echo "<meta charset='UTF-8'>\n" .
 		"<meta http-equiv='x-ua-compatible' content='ie=edge'>\n" .
 		"<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>\n" .
-		"<meta name='format-detection' content='telephone=no'>\n" .
-		"<meta name='robots' content='index,follow'>";
+		"<meta name='format-detection' content='telephone=no'>\n";
 
 		// Add favicon.
-		echo ' <!-- Favicon -->' . "<link rel='shortcut icon' href='" . get_template_directory_uri() . "/assets/images/favicons/favicon.ico' />\n";
+		echo '<!-- Favicon -->' . "<link rel='shortcut icon' href='" . esc_url( get_template_directory_uri() . '/assets/images/favicons/favicon.ico' ) . "' />\n";
 
 		// Add in Meta Icons.
 		echo '<!-- Apple Touch Icons -->' .
-		"<link href='" . get_template_directory_uri() . "/assets/images/favicons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'/>\n" .
+		"<link href='" . esc_url( get_template_directory_uri() . '/assets/images/favicons/apple-touch-icon.png' ) . "' rel='apple-touch-icon-precomposed'/>\n" .
 		"<meta content='' name='apple-mobile-web-app-title'/>\n" .
-		"<link rel='mask-icon' href='" . get_template_directory_uri() . "/assets/images/favicons/mu-safari-icon.svg' color='black'>";
+		"<link rel='mask-icon' href='" . esc_url( get_template_directory_uri() . '/assets/images/favicons/mu-safari-icon.svg' ) . "' color='black'>";
 
 		echo '<!-- Microsoft Windows 8+ Tiles -->' .
 		"<meta content='' name='application-name'/>\n" .
-		"<meta content='" . get_template_directory_uri() . "/assets/images/favicons/apple-touch-icon.png' name='msapplication-TileImage'/>\n" .
+		"<meta content='" . esc_url( get_template_directory_uri() . '/assets/images/favicons/apple-touch-icon.png' ) . "' name='msapplication-TileImage'/>\n" .
 		"<meta content='#F1B82D' name='msapplication-TileColor'/>";
 
 		// Page Information.
 		if ( is_single() || is_page() ) {
 			if ( get_the_excerpt() ) {
-				echo "<meta name='description' content='" . htmlspecialchars( get_the_excerpt() ) . "'>";
+				echo "<meta name='description' content='" . esc_textarea( get_the_excerpt() ) . "'>";
 			} else {
-				echo "<meta name='description' content='" . htmlspecialchars( get_bloginfo( 'description' ) ) . "'>";
+				echo "<meta name='description' content='" . esc_attr( get_bloginfo( 'description' ) ) . "'>";
 			}
 		} elseif ( is_archive() ) {
 			if ( get_the_archive_description() ) {
-				echo "<meta name='description' content='" . htmlspecialchars( get_the_archive_description() ) . "'>";
+				echo "<meta name='description' content='" . esc_textarea( get_the_archive_description() ) . "'>";
 			}
 		} else {
-			echo "<meta name='description' content='" . htmlspecialchars( get_bloginfo( 'description' ) ) . "'>";
+			echo "<meta name='description' content='" . esc_attr( get_bloginfo( 'description' ) ) . "'>";
 		}
 	}
 
@@ -660,34 +566,31 @@ class MizzouHybridBase extends MizzouBlocks {
 	public function mizHeadOpenGraph() {
 		// Open Graph.
 		echo '<!-- Open Graph -->';
-		echo "<meta property='og:site_name' content='" . htmlspecialchars( get_bloginfo( 'name' ) ) . "' />";
-		if ( is_single() || is_page() ) {
-			echo "<meta property='og:url' content='" . get_the_permalink() . "' />";
-			echo "<meta property='og:title' content='" . htmlspecialchars( get_the_title() ) . "' />";
+		echo "<meta property='og:site_name' content='" . esc_attr( get_bloginfo( 'name' ) ) . "' />";
+		echo "<meta property='og:url' content='" . esc_attr( Timber\URLHelper::get_current_url() ) . "' />";
+		echo "<meta property='og:title' content='" . esc_attr( is_front_page() ? get_the_title() : Timber\Helper::get_wp_title() ) . "' />";
 
+		if ( is_single() || is_page() ) {
 			if ( get_the_excerpt() ) {
-				echo "<meta property='og:description' content='" . htmlspecialchars( get_the_excerpt() ) . "' />";
+				echo "<meta property='og:description' content='" . esc_textarea( get_the_excerpt() ) . "' />";
 			}
 		} elseif ( is_home() ) {
-			echo "<meta property='og:title' content='" . htmlspecialchars( get_queried_object()->post_title ) . "' />";
-			echo "<meta property='og:description' content='" . htmlspecialchars( get_queried_object()->post_excerpt ) . "' />";
+			echo "<meta property='og:description' content='" . esc_textarea( get_bloginfo( 'description' ) ) . "' />";
 		} elseif ( is_archive() ) {
-			echo "<meta property='og:url' content='" . htmlspecialchars( get_post_type_archive_link( get_queried_object()->name ) ) . "' />";
-			echo "<meta property='og:title' content='" . htmlspecialchars( get_queried_object()->labels->name ?? get_queried_object()->name ) . "' />";
 
 			if ( get_the_archive_description() ) {
-				echo "<meta property='og:description' content='" . htmlspecialchars( get_the_archive_description() ) . "' />";
+				echo "<meta property='og:description' content='" . esc_textarea( get_the_archive_description() ) . "' />";
 			}
 		}
 
 		if ( get_the_post_thumbnail() ) {
-			echo "<meta property='og:image:url' content='" . get_the_post_thumbnail_url( get_the_ID(), 'full' ) . "' />";
-			echo "<meta property='og:image:alt' content='" . get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) . "' />";
+			echo "<meta property='og:image:url' content='" . esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ) . "' />";
+			echo "<meta property='og:image:alt' content='" . esc_textarea( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . "' />";
 		} elseif ( get_option( 'options_social_media_image_default' ) ) {
-			echo "<meta property='og:image:url' content='" . wp_get_attachment_image_src( get_option( 'options_social_media_image_default' ), 'full' )[0] . "' />";
-			echo "<meta property='og:image:alt' content='" . get_post_meta( get_option( 'options_social_media_image_default' ), '_wp_attachment_image_alt', true ) . "' />";
+			echo "<meta property='og:image:url' content='" . esc_url( wp_get_attachment_image_src( get_option( 'options_social_media_image_default' ), 'full' )[0] ) . "' />";
+			echo "<meta property='og:image:alt' content='" . esc_textarea( get_post_meta( get_option( 'options_social_media_image_default' ), '_wp_attachment_image_alt', true ) ) . "' />";
 		} else {
-			echo "<meta property='og:image:url' content='" . get_template_directory_uri() . "/assets/images/social/twitter/shared-image.png' />";
+			echo "<meta property='og:image:url' content='" . esc_url( get_template_directory_uri() . '/assets/images/social/twitter/shared-image.png' ) . "' />";
 			echo "<meta property='og:image:alt' content='A University of Missouri website' />";
 		}
 		echo '<!-- End Open Graph -->';
@@ -700,31 +603,28 @@ class MizzouHybridBase extends MizzouBlocks {
 		echo '<!-- Twitter Cards -->';
 		echo "<meta property='twitter:card' content='summary' />";
 		echo "<meta property='twitter:site' content='@Mizzou' />";
-		if ( is_single() || is_page() ) {
-			echo "<meta property='twitter:title' content='" . htmlspecialchars( get_the_title() ) . "' />";
+		echo "<meta property='twitter:title' content='" . esc_attr( is_front_page() ? get_the_title() : Timber\Helper::get_wp_title() ) . "' />";
 
+		if ( is_single() || is_page() ) {
 			if ( get_the_excerpt() ) {
-				echo "<meta property='twitter:description' content='" . htmlspecialchars( get_the_excerpt() ) . "' />";
+				echo "<meta property='twitter:description' content='" . esc_textarea( get_the_excerpt() ) . "' />";
 			}
 		} elseif ( is_home() ) {
-			echo "<meta property='twitter:title' content='" . htmlspecialchars( get_queried_object()->post_title ) . "' />";
-			echo "<meta property='twitter:description' content='" . htmlspecialchars( get_queried_object()->post_excerpt ) . "' />";
+			echo "<meta property='twitter:description' content='" . esc_textarea( get_bloginfo( 'description' ) ) . "' />";
 		} elseif ( is_archive() ) {
-			echo "<meta property='twitter:title' content='" . htmlspecialchars( get_queried_object()->labels->name ?? get_queried_object()->name ) . "' />";
-
 			if ( get_the_archive_description() ) {
-				echo "<meta property='twitter:description' content='" . htmlspecialchars( get_the_archive_description() ) . "' />";
+				echo "<meta property='twitter:description' content='" . esc_textarea( get_the_archive_description() ) . "' />";
 			}
 		}
 
 		if ( get_the_post_thumbnail() ) {
-			echo "<meta property='twitter:image' content='" . get_the_post_thumbnail_url( get_the_ID(), 'full' ) . "' />";
-			echo "<meta property='twitter:image:alt' content='" . get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) . "' />";
+			echo "<meta property='twitter:image' content='" . esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ) . "' />";
+			echo "<meta property='twitter:image:alt' content='" . esc_textarea( get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) ) . "' />";
 		} elseif ( get_option( 'options_social_media_image_default' ) ) {
-			echo "<meta property='twitter:image' content='" . wp_get_attachment_image_src( get_option( 'options_social_media_image_default' ), 'full' )[0] . "' />";
-			echo "<meta property='twitter:image:alt' content='" . get_post_meta( get_option( 'options_social_media_image_default' ), '_wp_attachment_image_alt', true ) . "' />";
+			echo "<meta property='twitter:image' content='" . esc_url( wp_get_attachment_image_src( get_option( 'options_social_media_image_default' ), 'full' )[0] ) . "' />";
+			echo "<meta property='twitter:image:alt' content='" . esc_textarea( get_post_meta( get_option( 'options_social_media_image_default' ), '_wp_attachment_image_alt' ) ) . "' />";
 		} else {
-			echo "<meta property='twitter:image' content='" . get_template_directory_uri() . "/assets/images/social/twitter/shared-image.png' />";
+			echo "<meta property='twitter:image' content='" . esc_url( get_template_directory_uri() . '/assets/images/social/twitter/shared-image.png' ) . "' />";
 			echo "<meta property='twitter:image:alt' content='A University of Missouri website' />";
 		}
 		echo '<!-- End Twitter Cards -->';
@@ -736,7 +636,7 @@ class MizzouHybridBase extends MizzouBlocks {
 	public function mizHeadGTM() {
 		if ( get_option( 'options_google_tag_manager_id' ) ) {
 			echo '<!-- Google Tag Manager -->' . "\n" .
-			"<script>(function(w,d,s,l,i) {w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','" . get_option( 'options_google_tag_manager_id' ) . "' );</script>\n" .
+			"<script>(function(w,d,s,l,i) {w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','" . esc_attr( get_option( 'options_google_tag_manager_id' ) ) . "' );</script>\n" .
 			'<!-- End Google Tag Manager -->';
 		}
 	}
@@ -749,7 +649,7 @@ class MizzouHybridBase extends MizzouBlocks {
 			echo '<!-- Google Custom Search -->' . "\n" .
 			"<script>
                 ( function () {
-                    var cx = '" . get_option( 'options_google_cse_id' ) . "';
+                    var cx = '" . esc_attr( get_option( 'options_google_cse_id' ) ) . "';
                     var gcse = document.createElement( 'script' );
                     gcse.type = 'text/javascript';
                     gcse.async = true;
@@ -991,19 +891,6 @@ class MizzouHybridBase extends MizzouBlocks {
 	}
 
 	/**
-	 * Removes emoji support from WordPress 4.2+
-	 */
-	public function disableEmoji() {
-		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-		remove_action( 'wp_print_styles', 'print_emoji_styles' );
-		remove_action( 'admin_print_styles', 'print_emoji_styles' );
-		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-	}
-
-	/**
 	 * Setup custom taxonomies
 	 */
 	public function customTaxonomies() {}
@@ -1019,18 +906,6 @@ class MizzouHybridBase extends MizzouBlocks {
 				return $response;
 			}
 		);
-	}
-
-	/**
-	 * Enables a shortcode for the home URL
-	 *
-	 * Usage:
-	 * [home_url]
-	 *
-	 * @return string Home URL.
-	 */
-	public function homeURLShortCode() {
-		return get_bloginfo( 'url' );
 	}
 
 	/**
