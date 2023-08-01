@@ -1,13 +1,15 @@
 <?php
 /**
- * Title: Standard Header
- * Slug: mizzou/header-pattern
+ * Title: Site Header (Default)
+ * Slug: mizzou/site-header--default
+ * Description:
  * Block Types: core/template-part/header
  * Categories: header
  * Post Types: wp_template_part
+ * Inserter: yes
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber

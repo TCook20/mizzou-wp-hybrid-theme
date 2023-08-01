@@ -8,11 +8,10 @@
 			"email": "cooktw@missouri.edu"
 		}
 	],
-	"minimum-stability": "dev",
 	"require": {},
 	"require-dev": {
 		"phpcompatibility/php-compatibility": "dev-develop",
-		"phpcsstandards/phpcsutils": "^1.0@dev",
+		"phpcsstandards/phpcsutils": "^1.0",
 		"wp-coding-standards/wpcs": "^2.3"
 	},
 	"repositories": [
@@ -21,6 +20,11 @@
 			"url": "https://packages.missouri.edu/php/"
 		}
 	],
+	"support": {
+    "docs": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/wikis/home",
+		"issues": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/issues",
+    "source": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base"
+  },
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml --report-summary --report-source",
 		"lint": "phpcs --standard=phpcs.xml"

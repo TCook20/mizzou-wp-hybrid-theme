@@ -2,12 +2,15 @@
 /**
  * Title: 404 Page
  * Slug: mizzou/404-content
+ * Description:
  * Block Types: core/template-part
  * Categories: general
  * Keywords: error, 404
+ * Template Types: 404
+ * Inserter: no
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber

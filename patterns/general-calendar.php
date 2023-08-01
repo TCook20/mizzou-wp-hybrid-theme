@@ -1,13 +1,16 @@
 <?php
 /**
  * Title: Mizzou Calendar Events
- * Slug: mizzou/query-calendar
+ * Slug: mizzou/general-calendar
+ * Description: Display Events from the Mizzou Calendar.
  * Block Types: core/post-template
- * Categories: query
+ * Categories: general
  * Keywords: events, calendar
+ * Template Types: Calendar
+ * Inserter: yes
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber

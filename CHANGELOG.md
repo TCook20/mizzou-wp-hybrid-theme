@@ -2,6 +2,49 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.1
+
+### Adds
+
+-   Block Patterns (`patterns/`):
+    -   Big Message (Default)
+    -   Big Message (Dark Variant)
+    -   By the Numbers (Default)
+    -   Call to Action (Black Variant)
+    -   Call to Action (Gold Variant)
+    -   Call to Action (Image Variant)
+    -   Card Deck
+    -   Featured Events (Dynamic)
+    -   Featured News (Dynamic)
+    -   Gallery (2 Columns)
+    -   Gallery (2 Columns with Caption)
+    -   Gallery (2 Columns with Title & Caption)
+    -   Hero (Default)
+    -   Hero (Page Header Variant)
+    -   Page Header (Default)
+    -   Page Header (Branded Variant)
+    -   Page Header (Dark Branded Variant)
+    -   Page Header (Dark Variant)
+    -   Site Footer (Default)
+    -   Site Footer (Dark Variant)
+    -   Site Header (Default)
+    -   Site Header (Dark Variant)
+    -   Social (Black Variant)
+    -   Social (Gold Variant)
+    -   Stats (Black Variant)
+    -   Stats (Image Variant)
+
+### Changes
+
+-   `functions.php`: Allow Details (`core/details`) and Footnotes (`core/footnotes`) blocks
+-   `theme.json`: Remove color restrictions from blocks
+-   `page` and `single`: Template fallbacks modified
+
+### Removes
+
+-   `singular`: No longer used
+-   `single-post`: Preview removed from header
+
 ## 0.5.0
 
 ### Adds

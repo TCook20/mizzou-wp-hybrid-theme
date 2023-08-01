@@ -1,13 +1,15 @@
 <?php
 /**
- * Title: Standard Footer with Contact Card
- * Slug: mizzou/footer-pattern
+ * Title: Site Footer with Contact Card (Light Variant)
+ * Slug: mizzou/site-footer--light
+ * Description:
  * Block Types: core/template-part/footer
  * Categories: footer
  * Post Types: wp_template_part
+ * Inserter: yes
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber

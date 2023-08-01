@@ -428,6 +428,8 @@ class MizzouHybridBase extends MizzouBlocks {
 		$text_blocks = array(
 			'core/code',
 			'core/column',
+			'core/details',
+			'core/footnotes',
 			'core/freeform',
 			'core/heading',
 			'core/list',
@@ -499,6 +501,7 @@ class MizzouHybridBase extends MizzouBlocks {
 			'core/post-navigation-link',
 			'core/post-template',
 			'core/post-terms',
+			'core/post-time-to-read',
 			'core/post-title',
 			'core/query',
 			'core/query-no-results',
@@ -511,6 +514,7 @@ class MizzouHybridBase extends MizzouBlocks {
 			'core/site-logo',
 			'core/site-tagline',
 			'core/site-title',
+			'core/table-of-contents',
 			'core/template-part',
 			'core/term-description',
 			// 'core/post-comments-count', 'core/post-comments-form', 'core/post-comments-link', 'core/comment-author-name', 'core/comment-content', 'core/comment-date', 'core/comment-edit-link',
@@ -676,7 +680,7 @@ class MizzouHybridBase extends MizzouBlocks {
 	public function mizCustomPatternCategories() {
 		$block_pattern_categories = array(
 			'footer'  => array(
-				'label'         => __( 'Footer', 'miz-hybrid-base' ),
+				'label'         => __( 'Footers', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'general' => array(
@@ -684,23 +688,20 @@ class MizzouHybridBase extends MizzouBlocks {
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'header'  => array(
-				'label'         => __( 'Header', 'miz-hybrid-base' ),
+				'label'         => __( 'Headers', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'layout'  => array(
-				'label'         => __( 'Layout', 'miz-hybrid-base' ),
+				'label'         => __( 'Layouts', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 			'layer'   => array(
-				'label'         => __( 'Layer', 'miz-hybrid-base' ),
+				'label'         => __( 'Layers', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
+				'description'   => __( 'Full-width components', 'miz-hybrid-base' ),
 			),
-			'page'    => array(
-				'label'         => __( 'Page', 'miz-hybrid-base' ),
-				'categoryTypes' => array( 'mizzou' ),
-			),
-			'query'   => array(
-				'label'         => __( 'Query', 'miz-hybrid-base' ),
+			'pages'   => array(
+				'label'         => __( 'Pages', 'miz-hybrid-base' ),
 				'categoryTypes' => array( 'mizzou' ),
 			),
 		);

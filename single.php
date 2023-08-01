@@ -30,16 +30,22 @@ $ary_templates = array();
 // Custom template.
 if ( isset( $ary_context['page']->slug ) ) {
 	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->slug . '.twig';
+	$ary_templates[] = $ary_context['page']->post_type . '-' . $ary_context['page']->slug . '.twig';
+} elseif ( isset( $ary_context['page']->id ) ) {
+	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->id . '.twig';
+	$ary_templates[] = $ary_context['page']->post_type . '-' . $ary_context['page']->id . '.twig';
 }
 
 // Custom parent template.
 if ( isset( $ary_context['page']->parent->slug ) ) {
 	$ary_templates[] = $str_template_prefix . '-' . $ary_context['page']->parent->slug . '.twig';
+	$ary_templates[] = $ary_context['page']->post_type . '-' . $ary_context['page']->parent->slug . '.twig';
 }
 
 // Default.
 $ary_templates[] = $ary_context['page']->post_type . '.twig';
 $ary_templates[] = $str_template_prefix . '.twig';
+$ary_templates[] = 'single-page.twig';
 
 // Render view.
 Timber::render( $ary_templates, $ary_context );

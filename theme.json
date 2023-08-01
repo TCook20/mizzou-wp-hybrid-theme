@@ -5,78 +5,25 @@
 	"settings": {
 		"appearanceTools": true,
 		"blocks": {
-			"core/button": {
-				"border": {
-					"color": false,
-					"radius": false,
-					"style": false,
-					"width": false
-				},
-				"typography": {
-					"fontFamilies": [],
-					"fontSizes": []
-				}
-			},
-			"core/cover": {
-				"color": {
-					"custom": false,
-					"customGradient": false,
-					"duotone": [],
-					"gradients": []
-				}
-			},
 			"core/gallery": {
 				"color": {
-					"text": true,
-					"background": false
-				}
-			},
-			"core/group": {
-				"color": {
-					"background": true,
 					"text": true
-				},
-				"typography": {
-					"fontFamilies": [],
-					"fontSizes": [],
-					"fontStyle": false,
-					"fontWeight": false,
-					"textTransform": false
-				},
-				"spacing": {
-					"blockGap": null,
-					"margin": false,
-					"padding": false
 				}
 			},
 			"core/heading": {
 				"color": {
-					"palette": []
-				},
-				"typography": {
-					"fontSizes": []
+					"text": true
 				}
 			},
 			"core/navigation": {
 				"spacing": {
-					"blockGap": false,
-					"margin": false,
-					"padding": false,
 					"units": [ "rem" ]
-				},
-				"typography": {
-					"fontFamilies": [],
-					"fontSizes": [],
-					"fontStyle": false,
-					"fontWeight": false,
-					"textTransform": false
 				}
 			},
 			"core/paragraph": {
 				"color": {
-					"palette": []
+					"text": true
 				},
-				"custom": [],
 				"typography": {
 					"fontFamilies": [],
 					"fontSizes": [
@@ -120,21 +67,9 @@
 				}
 			}
 		},
-		"border": {
-			"color": false,
-			"radius": false,
-			"style": false,
-			"width": false
-		},
 		"color": {
-			"background": false,
 			"custom": false,
-			"customDuotone": false,
-			"customGradient": false,
 			"defaultPalette": false,
-			"duotone": [],
-			"gradients": [],
-			"link": false,
 			"palette": [
 				{
 					"color": "#222222",

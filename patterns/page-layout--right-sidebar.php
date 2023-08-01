@@ -1,14 +1,16 @@
 <?php
 /**
- * Title: Content with Right Sidebar
- * Slug: mizzou/content-with-right-sidebar
+ * Title: Page Layout with Right Sidebar
+ * Slug: mizzou/page-layout--right-sidebar
+ * Description:
+ * Categories: pages
  * Block Types: core/template-part
- * Categories: layout
  * Post Types: page
  * Keywords: layout, content, aside, sidebar
+ * Inserter: no
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber

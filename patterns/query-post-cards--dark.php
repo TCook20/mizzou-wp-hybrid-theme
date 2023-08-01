@@ -1,12 +1,14 @@
 <?php
 /**
- * Title: Mizzou News Card - Dark
+ * Title: Mizzou News Card (Dark Variant)
  * Slug: mizzou/query-news-card--dark
+ * Description:
  * Block Types: core/post-template
  * Categories: query
+ * Inserter: yes
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber
