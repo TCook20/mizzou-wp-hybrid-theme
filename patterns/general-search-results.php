@@ -2,12 +2,14 @@
 /**
  * Title: Google Custom Search Engine Results
  * Slug: mizzou/search-results
+ * Description:
  * Block Types: core/template-part
  * Categories: general
  * Keywords: google, search, results, gcse
+ * Inserter: no
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber

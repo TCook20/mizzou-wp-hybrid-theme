@@ -1,13 +1,15 @@
 <?php
 /**
- * Title: Card Deck with Title and Kicker
- * Slug: mizzou/layer-card-deck
+ * Title: Card Deck
+ * Slug: mizzou/card-deck
+ * Description:
  * Block Types: core/template
  * Categories: layer
  * Keywords: layer, cards
+ * Inserter: yes
  *
  * @package WordPress
- * @subpackage Mizzou Block Theme
+ * @subpackage Mizzou Hybrid Theme
  * @category theme
  * @category block pattern
  * @category Timber
@@ -17,17 +19,17 @@
 
 ?>
 
-<!-- wp:group {"tagName":"section","align":"full","className":"miz-layer miz-layer\u002d\u002dbrand miz-stack-sandwich\u002d\u002dxlmiz-decoration miz-decoration__plus\u002d\u002dtop-left miz-main-grid__full"} -->
-<section class="wp-block-group alignfull miz-layer miz-layer--brand miz-stack-sandwich--xlmiz-decoration miz-decoration__plus--top-left miz-main-grid__full">
+<!-- wp:group {"tagName":"section","align":"full","backgroundColor":"miz-white","className":"miz-layer miz-layer\u002d\u002dbrand miz-stack-sandwich\u002d\u002dxlmiz-decoration miz-decoration__plus\u002d\u002dtop-left miz-main-grid__full"} -->
+<section class="wp-block-group alignfull miz-layer miz-layer--brand miz-stack-sandwich--xlmiz-decoration miz-decoration__plus--top-left miz-main-grid__full has-miz-white-background-color has-background">
 	<!-- wp:group {"lock":{"move":false,"remove":false},"className":"miz-container"} -->
 	<div class="wp-block-group miz-container">
 		<!-- wp:group {"tagName":"header","templateLock":false,"lock":{"move":true,"remove":false},"className":"miz-layer__header miz-layer__header\u002d\u002dcenter","layout":{"type":"default"}} -->
 		<header class="wp-block-group miz-layer__header miz-layer__header--center">
-			<!-- wp:paragraph {"lock":{"move":true,"remove":false},"className":"miz-layer__kicker"} -->
+			<!-- wp:paragraph {"placeholder":"Add a kicker...","lock":{"move":true,"remove":false},"className":"miz-layer__kicker"} -->
 			<p class="miz-layer__kicker"></p>
 			<!-- /wp:paragraph -->
 
-			<!-- wp:heading {"lock":{"move":true,"remove":false},"className":"miz-layer__title"} -->
+			<!-- wp:heading {"placeholder":"Add a title...","lock":{"move":true,"remove":false},"className":"miz-layer__title"} -->
 			<h2 class="wp-block-heading miz-layer__title"></h2>
 			<!-- /wp:heading -->
 		</header>

@@ -27,10 +27,6 @@
         {% endif %}
 
         <h2 class="miz-page-header__title">{{ pageHeaderTitle }}</h2>
-
-				{% if page.preview.length(40).strip('<b><strong><em><i>').read_more(false) %}
-					<p class="miz-article__blurb">{{ page.preview.length(40).strip('<b><strong><em><i>').read_more(false) }}</p>
-				{% endif %}
     </div>
     {% endblock %}
 {% endembed %}
