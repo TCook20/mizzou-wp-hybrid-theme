@@ -75,15 +75,21 @@ class MizzouHybridBase extends MizzouBlocks {
 				$loader->addPath( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views', 'miz' );
 
 				// Add @components namespace.
-				$loader->addPath( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'components', 'components' );
+				if ( is_dir( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'components' ) ) {
+					$loader->addPath( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'components', 'components' );
+				}
 				$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'components', 'components' );
 
 				// Add @layers namespace.
-				$loader->addPath( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layers', 'layers' );
+				if ( is_dir( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layers' ) ) {
+					$loader->addPath( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layers', 'layers' );
+				}
 				$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layers', 'layers' );
 
 				// Add @parent namespace.
-				$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views', 'parent' );
+				if ( is_dir( get_template_directory() . DIRECTORY_SEPARATOR . 'views' ) ) {
+					$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views', 'parent' );
+				}
 
 				return $loader;
 			}
