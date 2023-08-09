@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.3
+
+### Changes
+
+-   `functions`: Add conditional to check for directory on Twig namespace
+
 ## 0.5.2
 
 ### Adds
