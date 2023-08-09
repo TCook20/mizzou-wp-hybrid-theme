@@ -14,12 +14,12 @@
 	{% if (posts) %}
 		<div id="news-collection" class="miz-card-deck miz-card-deck--2">
 		{% for Card in posts %}
-			{% include '/layers/card-news.twig' %}
+			{% include '@layers/card-news.twig' %}
 		{% endfor %}
 		</div>
 
 		{% if posts.pagination %}
-			{% include 'components/navs/pagination.twig' with { 'pagination_include_numbers': true, 'pagination': posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+			{% include '@components/navs/pagination.twig' with { 'pagination_include_numbers': true, 'pagination': posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
 		{% endif %}
 	{% endif %}
 </article>

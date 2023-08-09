@@ -21,7 +21,7 @@ if ( ! class_exists( 'Timber' ) ) {
 	add_action(
 		'admin_notices',
 		function() {
-			printf( '<div class="error"><p>Timber not activated. Make sure you <a href="%s">activate the Mizzou Blocks plugin</a>.</p></div>', esc_url( admin_url( 'plugins.php#mizzou-blocks' ) ) );
+			printf( '<div class="error"><p>Timber not activated. Make sure you <a href="%s">activate the Mizzou WordPress Blocks plugin</a>.</p></div>', esc_url( admin_url( 'plugins.php#mizzou-wordpress-blocks' ) ) );
 		}
 	);
 
@@ -71,8 +71,20 @@ class MizzouHybridBase extends MizzouBlocks {
 		add_filter(
 			'timber/loader/loader',
 			function( $loader ) {
-				$loader->addPath( __DIR__ . '/views', 'miz' );
-				$loader->addPath( get_template_directory() . '/views' ?? plugin_dir_path( __DIR__ ) . '/miz-wordpress-blocks/views', 'parent' );
+				// Add @miz namespace.
+				$loader->addPath( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'views', 'miz' );
+
+				// Add @components namespace.
+				$loader->addPath( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'components', 'components' );
+				$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'components', 'components' );
+
+				// Add @layers namespace.
+				$loader->addPath( get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layers', 'layers' );
+				$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layers', 'layers' );
+
+				// Add @parent namespace.
+				$loader->addPath( get_template_directory() . DIRECTORY_SEPARATOR . 'views', 'parent' );
+
 				return $loader;
 			}
 		);

@@ -106,11 +106,11 @@
         }
 			} %}
 
-			{% embed ['@miz/components/header.twig', 'components/header/header.twig'] ignore missing with header_options only %}
+			{% embed ['@miz/components/header.twig', '@components/header/header.twig'] ignore missing with header_options only %}
 				{% block navigation %}
 				<div class="miz-fill--gold">
 					<div class="miz-container">
-						{% include '@miz-block/primary-nav.twig' ignore missing with {
+						{% include '@blocks/primary-nav.twig' ignore missing with {
 							'nav_items': header_options.navigation.navigation_options.list.items
 						} %}
 					</div>
@@ -146,7 +146,7 @@
 				"theme": footer_theme
 			} %}
 
-			{% include 'components/footer/footer.twig' with footer_options %}
+			{% include '@components/footer/footer.twig' with footer_options %}
 		{% endblock %}
   </div>
 {% endblock body %}

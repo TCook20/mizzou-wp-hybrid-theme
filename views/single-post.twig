@@ -23,7 +23,7 @@
     {% block page_header %}
     <div class="miz-container">
         {% if page.terms('category') %}
-					<p class="miz-article__category">{% for category in page.terms('category') %}<a href="{{ category.link|raw }}">{{ category.name}}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
+			<p class="miz-article__category">{% for category in page.terms('category') %}<a href="{{ category.link|raw }}">{{ category.name}}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         {% endif %}
 
         <h2 class="miz-page-header__title">{{ pageHeaderTitle }}</h2>

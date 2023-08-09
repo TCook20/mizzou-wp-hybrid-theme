@@ -52,7 +52,7 @@
 {% endblock header %}
 
 {% block outdated_browser %}
-  {% include ['components/header/site-outdated-browser.twig', 'components/header/outdated-browser.twig'] ignore missing %}
+  {% include ['@components/header/outdated-browser.twig'] ignore missing %}
 {% endblock %}
 
 {% block skip_to_content %}
@@ -73,7 +73,7 @@
 
   {% block pre_content__layer_processing %}
 		{% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
-			{% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-pre') } %}
+			{% include 'flexgroups.twig' with {"Flexgroups" : page.meta('layout-pre') } %}
 		{% endif %}
 	{% endblock %}
 
@@ -109,7 +109,7 @@
 {% block post_content %}
   {% block post_content__layer_processing %}
     {% if page.meta('layout-post') is defined and page.meta('layout-post') is iterable %}
-      {% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-post') } %}
+      {% include 'flexgroups.twig' with {"Flexgroups" : page.meta('layout-post') } %}
     {% endif %}
   {% endblock %}
 {% endblock post_content %}

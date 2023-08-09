@@ -1,6 +1,6 @@
 
 {% if Flexgroups is defined %}
     {% for flexgroup in Flexgroups %}
-        {% include "./layers/#{flexgroup.acf_fc_layout}.twig" ignore missing %}
+        {% include "@layers/#{ flexgroup.acf_fc_layout }.twig" ignore missing %}
     {% endfor %}
 {% endif %}

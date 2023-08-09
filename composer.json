@@ -10,7 +10,8 @@
 	],
 	"require": {},
 	"require-dev": {
-		"phpcompatibility/php-compatibility": "dev-develop",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
 		"phpcsstandards/phpcsutils": "^1.0",
 		"wp-coding-standards/wpcs": "^2.3"
 	},

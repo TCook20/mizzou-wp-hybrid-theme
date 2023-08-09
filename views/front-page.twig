@@ -10,7 +10,7 @@
 {% extends ['single-page.twig'] %}
 
 {% if page.meta('layout-aside') %}
-    {% if page.get_field('aside_side') == 'left' %}
+    {% if page.meta('aside_side') == 'left' %}
         {% set page_aside_modifier_class = 'miz-main-grid--reverse' %}
     {% endif %}
 {% else %}
@@ -21,7 +21,7 @@
 
 {% block pre_content__layer_processing %}
     {% if page.meta('layout-pre') is defined and page.meta('layout-pre') is iterable %}
-        {% include 'flexgroups.twig' with { "Flexgroups" : page.get_field('layout-pre') } %}
+        {% include 'flexgroups.twig' with { "Flexgroups" : page.meta('layout-pre') } %}
     {% endif %}
 {% endblock %}
 
