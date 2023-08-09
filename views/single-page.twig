@@ -13,15 +13,13 @@
 
 {% extends ['baseView.twig', 'ds-base.twig'] %}
 
-{% if page.get_field('aside_side') == 'left' %}
+{% if page.meta('aside_side') == 'left' %}
   {% set page_main_modifier_class = 'miz-main-grid--reverse' %}
 {% endif %}
 
 {% block breadcrumbs %}
 	{% if option.include_breadcrumbs %}
-	<div class="miz-container">
-			{% include 'components/navs/breadcrumbs.twig' %}
-	</div>
+		{% include '@components/navs/breadcrumbs.twig' %}
 	{% endif %}
 {% endblock %}
 
@@ -35,7 +33,7 @@
 
 {% if page.sub_navigation.items %}
 	{% block sidebar_nav %}
-		{% include '@miz-block/navigations/sub-navigation.twig' ignore missing with {
+		{% include '@blocks/navigations/sub-navigation.twig' ignore missing with {
 			'nav_items': page.sub_navigation.items
 		} %}
 	{% endblock sidebar_nav %}
@@ -44,7 +42,7 @@
 {% set post_content %}
   {% block post_content__layer_processing %}
     {% if page.meta('layout-post') is defined and page.meta('layout-post') is iterable %}
-      {% include 'flexgroups.twig' with {"Flexgroups" : page.get_field('layout-post') } %}
+      {% include 'flexgroups.twig' with {"Flexgroups" : page.meta('layout-post') } %}
     {% endif %}
   {% endblock %}
 {% endset %}

@@ -1,7 +1,0 @@
-.miz-main-grid__article {
-	order: 2;
-
-	@include media-breakpoint-up(md) {
-		order: initial;
-	}
-}

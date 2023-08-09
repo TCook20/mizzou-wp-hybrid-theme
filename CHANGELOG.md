@@ -2,6 +2,21 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.2
+
+### Adds
+
+-   `@components` twig namespace (`views/components`)
+-   `@layers` twig namespace (`views/layers`)
+
+### Fixes
+
+-   `get_field` changed to `meta` in Twig
+
+### Removes
+
+-   (Style) Mobile sub navigation position reverted
+
 ## 0.5.1
 
 ### Adds

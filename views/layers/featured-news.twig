@@ -36,7 +36,7 @@
             {% if featNewsLayer.content is defined and featNewsLayer.content is iterable %}
                 <div class="{{ featNewsLayer.classes.deck }}">
 					{% for Card in featNewsLayer.content %}
-						{% include '/layers/card-news.twig' %}
+						{% include '@layers/card-news.twig' %}
 					{% endfor %}
 				</div>
             {% endif %}
