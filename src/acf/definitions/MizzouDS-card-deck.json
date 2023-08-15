@@ -1,0 +1,311 @@
+[
+	{
+		"key": "group_6447ce2b83fd3",
+		"title": "MizzouDS-card-deck",
+		"fields": [
+			{
+				"key": "field_64230d187c9b8",
+				"label": "Title",
+				"name": "title",
+				"aria-label": "",
+				"type": "text",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"default_value": "",
+				"maxlength": "",
+				"placeholder": "",
+				"prepend": "",
+				"append": ""
+			},
+			{
+				"key": "field_64230d457c9b9",
+				"label": "Content",
+				"name": "content",
+				"aria-label": "",
+				"type": "textarea",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"default_value": "",
+				"maxlength": "",
+				"rows": "",
+				"placeholder": "",
+				"new_lines": "wpautop"
+			},
+			{
+				"key": "field_64230d5a7c9ba",
+				"label": "Card Deck",
+				"name": "cards",
+				"aria-label": "",
+				"type": "repeater",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"layout": "row",
+				"pagination": 0,
+				"min": 0,
+				"max": 0,
+				"collapsed": "field_64230d6f7c9bb",
+				"button_label": "Add Card",
+				"rows_per_page": 20,
+				"sub_fields": [
+					{
+						"key": "field_64230dad7c9bf",
+						"label": "Image",
+						"name": "image",
+						"aria-label": "",
+						"type": "image",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"return_format": "array",
+						"library": "all",
+						"min_width": "",
+						"min_height": "",
+						"min_size": "",
+						"max_width": "",
+						"max_height": "",
+						"max_size": "",
+						"mime_types": "",
+						"preview_size": "medium",
+						"parent_repeater": "field_64230d5a7c9ba"
+					},
+					{
+						"key": "field_64230d6f7c9bb",
+						"label": "Title",
+						"name": "title",
+						"aria-label": "",
+						"type": "text",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"default_value": "",
+						"maxlength": "",
+						"placeholder": "",
+						"prepend": "",
+						"append": "",
+						"parent_repeater": "field_64230d5a7c9ba"
+					},
+					{
+						"key": "field_64230d857c9bc",
+						"label": "Content",
+						"name": "content",
+						"aria-label": "",
+						"type": "text",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"default_value": "",
+						"maxlength": "",
+						"placeholder": "",
+						"prepend": "",
+						"append": "",
+						"parent_repeater": "field_64230d5a7c9ba"
+					},
+					{
+						"key": "field_64230d8c7c9bd",
+						"label": "Links",
+						"name": "links",
+						"aria-label": "",
+						"type": "repeater",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"layout": "row",
+						"pagination": 0,
+						"min": 0,
+						"max": 3,
+						"collapsed": "",
+						"button_label": "Add Link",
+						"rows_per_page": 20,
+						"parent_repeater": "field_64230d5a7c9ba",
+						"sub_fields": [
+							{
+								"key": "field_64230d937c9be",
+								"label": "link",
+								"name": "link",
+								"aria-label": "",
+								"type": "link",
+								"instructions": "",
+								"required": 0,
+								"conditional_logic": 0,
+								"wrapper": {
+									"width": "",
+									"class": "",
+									"id": ""
+								},
+								"return_format": "array",
+								"parent_repeater": "field_64230d8c7c9bd"
+							}
+						]
+					}
+				]
+			},
+			{
+				"key": "field_64230dca7c9c0",
+				"label": "Button",
+				"name": "button",
+				"aria-label": "",
+				"type": "link",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"return_format": "array"
+			},
+			{
+				"key": "field_64230ddb7c9c1",
+				"label": "Appearance",
+				"name": "displayOptions",
+				"aria-label": "",
+				"type": "group",
+				"instructions": "",
+				"required": 0,
+				"conditional_logic": 0,
+				"wrapper": {
+					"width": "",
+					"class": "",
+					"id": ""
+				},
+				"layout": "row",
+				"sub_fields": [
+					{
+						"key": "field_642335ceaae0f",
+						"label": "Layer Background",
+						"name": "layer_background",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"miz-black-100": "Black 100",
+							"miz-white": "White"
+						},
+						"default_value": "",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					},
+					{
+						"key": "field_64230def7c9c2",
+						"label": "Card Theme",
+						"name": "theme",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": 0,
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"light": "Light",
+							"dark": "Dark"
+						},
+						"default_value": "",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					},
+					{
+						"key": "field_6423362faae10",
+						"label": "Card Background",
+						"name": "card_background",
+						"aria-label": "",
+						"type": "button_group",
+						"instructions": "",
+						"required": 0,
+						"conditional_logic": [
+							[
+								{
+									"field": "field_64230def7c9c2",
+									"operator": "==",
+									"value": "light"
+								}
+							]
+						],
+						"wrapper": {
+							"width": "",
+							"class": "",
+							"id": ""
+						},
+						"choices": {
+							"miz-black-100": "Black 100",
+							"miz-white": "White"
+						},
+						"default_value": "white",
+						"return_format": "value",
+						"allow_null": 0,
+						"layout": "horizontal"
+					}
+				]
+			}
+		],
+		"location": [
+			[
+				{
+					"param": "post_type",
+					"operator": "==",
+					"value": "acf-field-group"
+				}
+			]
+		],
+		"menu_order": 0,
+		"position": "normal",
+		"style": "default",
+		"label_placement": "top",
+		"instruction_placement": "label",
+		"hide_on_screen": "",
+		"active": true,
+		"description": "",
+		"show_in_rest": 0
+	}
+]

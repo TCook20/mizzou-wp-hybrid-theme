@@ -2,6 +2,17 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.4
+
+### Adds
+
+-   `@layers/card-deck`: Card Deck Layer. Supports Title, Content, Card Deck and Button
+
+### Changes
+
+-   `src/acf`: Layer Definitions split out to separate files
+-   `page`: Add conditional for sub navigation field
+
 ## 0.5.3
 
 ### Changes

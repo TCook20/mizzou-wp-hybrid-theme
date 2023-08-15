@@ -1,0 +1,237 @@
+[
+    {
+        "key": "group_6422fdbc26190",
+        "title": "MizzouDS-big-message",
+        "fields": [
+            {
+                "key": "field_6422fdbcbe796",
+                "label": "Title",
+                "name": "title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6422fdccbe797",
+                "label": "Message",
+                "name": "message",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_6422fddfbe798",
+                "label": "Buttons",
+                "name": "buttons",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 3,
+                "collapsed": "",
+                "button_label": "Add Button",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_6422fdefbe799",
+                        "label": "Button",
+                        "name": "button",
+                        "aria-label": "",
+                        "type": "link",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "parent_repeater": "field_6422fddfbe798"
+                    }
+                ]
+            },
+            {
+                "key": "field_64232c7fd1cad",
+                "label": "Appearance",
+                "name": "displayOptions",
+                "aria-label": "",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "row",
+                "sub_fields": [
+                    {
+                        "key": "field_64248cf26bd04",
+                        "label": "Layer Background Clone",
+                        "name": "layer_background_clone",
+                        "aria-label": "",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_64248336fd14b",
+                            "field_6424837bfd14c",
+                            "field_646b6e2d0299d"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    },
+                    {
+                        "key": "field_64d502b05a371",
+                        "label": "Content Background Clone",
+                        "name": "content_background_clone",
+                        "aria-label": "",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_642483c7fd14d"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    },
+                    {
+                        "key": "field_645ba155b0c44",
+                        "label": "Button Style",
+                        "name": "button_style",
+                        "aria-label": "",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "primary": "Primary Branded",
+                            "secondary": "Secondary Branded"
+                        },
+                        "default_value": "primary",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "layout": "horizontal"
+                    },
+                    {
+                        "key": "field_645ba1d67b16b",
+                        "label": "Corner Decoration",
+                        "name": "include_corner_decoration",
+                        "aria-label": "",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "Include Gold Decoration in Top Left Corner",
+                        "default_value": 0,
+                        "ui": 0,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    },
+                    {
+                        "key": "field_6423300c17512",
+                        "label": "Plus Decoration Clone",
+                        "name": "plus_decoration_clone",
+                        "aria-label": "",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_64232d4fb3cc0",
+                            "field_64232d75b3cc1"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+					"param": "post_type",
+					"operator": "==",
+					"value": "acf-field-group"
+				}
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]

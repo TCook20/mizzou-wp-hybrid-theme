@@ -1,0 +1,210 @@
+[
+    {
+        "key": "group_6422ffabdf21c",
+        "title": "MizzouDS-events",
+        "fields": [
+            {
+                "key": "field_6422ffac12241",
+                "label": "Title",
+                "name": "title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6422ffbf12242",
+                "label": "Events Options",
+                "name": "eventsOptions",
+                "aria-label": "",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "row",
+                "sub_fields": [
+                    {
+                        "key": "field_6422ffe412243",
+                        "label": "Number of Events",
+                        "name": "number_of_events",
+                        "aria-label": "",
+                        "type": "range",
+                        "instructions": "Choose the number of events you wish to have appear",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": 3,
+                        "min": 1,
+                        "max": 4,
+                        "step": 1,
+                        "prepend": "",
+                        "append": ""
+                    },
+                    {
+                        "key": "field_6423001412244",
+                        "label": "How to Filter Calendar Results",
+                        "name": "method",
+                        "aria-label": "",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "search": "Search",
+                            "department": "Department",
+                            "type": "Type",
+                            "keyword": "Keyword"
+                        },
+                        "default_value": "search",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "layout": "horizontal"
+                    },
+                    {
+                        "key": "field_6423007612245",
+                        "label": "Term",
+                        "name": "term",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "<p>If you selected <strong>Department<\/strong> previously then this field will have the group_id. If you selected <strong>Type<\/strong> earlier then this field will have the Event Type.<\/p>\r\n\t<p>If you selected either <strong>Type<\/strong> or <strong>Keyword<\/strong> then this field can accept multiple values separated by a single space.<\/p>",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_6423009912246",
+                "label": "More Events Link",
+                "name": "button",
+                "aria-label": "",
+                "type": "link",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array"
+            },
+            {
+                "key": "field_64233062c6c88",
+                "label": "Appearance",
+                "name": "displayOptions",
+                "aria-label": "",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "row",
+                "sub_fields": [
+                    {
+                        "key": "field_645bd3cff1531",
+                        "label": "Layer Background",
+                        "name": "layer_background",
+                        "aria-label": "",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "white": "White",
+                            "black-100": "Black 100"
+                        },
+                        "default_value": "white",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "layout": "horizontal"
+                    },
+                    {
+                        "key": "field_6423306cc6c89",
+                        "label": "Plus Decoration Clone",
+                        "name": "plus_decoration_clone",
+                        "aria-label": "",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_64232d4fb3cc0",
+                            "field_64232d75b3cc1"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "acf-field-group"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]

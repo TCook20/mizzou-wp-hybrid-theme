@@ -1,0 +1,361 @@
+[
+    {
+        "key": "group_64230329f0255",
+        "title": "MizzouDS-split-layout",
+        "fields": [
+            {
+                "key": "field_642303c2db9d8",
+                "label": "Title",
+                "name": "title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_642303cbdb9d9",
+                "label": "Kicker",
+                "name": "kicker",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_642303f4db9db",
+                "label": "Message",
+                "name": "message",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 0,
+                "delay": 0
+            },
+            {
+                "key": "field_6423040cdb9dc",
+                "label": "Buttons",
+                "name": "buttons",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 2,
+                "collapsed": "",
+                "button_label": "Add Button",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_64230416db9dd",
+                        "label": "Button",
+                        "name": "button",
+                        "aria-label": "",
+                        "type": "link",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "parent_repeater": "field_6423040cdb9dc"
+                    }
+                ]
+            },
+            {
+                "key": "field_6447cc1c5d161",
+                "label": "Media Type",
+                "name": "mediaType",
+                "aria-label": "",
+                "type": "button_group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "image": "Image",
+                    "video": "Video"
+                },
+                "default_value": "",
+                "return_format": "value",
+                "allow_null": 0,
+                "layout": "horizontal"
+            },
+            {
+                "key": "field_642303dddb9da",
+                "label": "Image",
+                "name": "image",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "<p><strong>Recommended Aspect Ratio<\/strong> 4:3<\/p>\r\n<p><strong>Recommended Minimum Height<\/strong> 516px<br\/><strong>Recommended Minimum Width<\/strong> 688px<\/p>",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_6447cc1c5d161",
+                            "operator": "==",
+                            "value": "image"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_6447cd1eaa704",
+                "label": "Video",
+                "name": "video",
+                "aria-label": "",
+                "type": "group",
+                "instructions": "Will display in 16:9 aspect ratio",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_6447cc1c5d161",
+                            "operator": "==",
+                            "value": "video"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "sub_fields": [
+                    {
+                        "key": "field_6447cdb81fb35",
+                        "label": "Video Title",
+                        "name": "title",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": ""
+                    },
+                    {
+                        "key": "field_6447cdc21fb36",
+                        "label": "Video ID",
+                        "name": "id",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "Found in the URL of the video after <code>https:\/\/youtube.com\/watch?v=<\/code>",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_6423032adb9d4",
+                "label": "Appearance",
+                "name": "displayOptions",
+                "aria-label": "",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "row",
+                "sub_fields": [
+                    {
+                        "key": "field_6423039bdb9d7",
+                        "label": "Layout Media Location",
+                        "name": "media_align",
+                        "aria-label": "",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "left": "Left",
+                            "right": "Right"
+                        },
+                        "default_value": "left",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "layout": "horizontal"
+                    },
+                    {
+                        "key": "field_64230346db9d5",
+                        "label": "Variant",
+                        "name": "variant",
+                        "aria-label": "",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "level": "Level",
+                            "offset": "Offset"
+                        },
+                        "default_value": "level",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "layout": "horizontal"
+                    },
+                    {
+                        "key": "field_64248e5e2b9ea",
+                        "label": "Layer Background Clone",
+                        "name": "layer_background_clone",
+                        "aria-label": "",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "field_64248336fd14b",
+                            "field_6424837bfd14c",
+                            "field_646b6e2d0299d"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    },
+                    {
+                        "key": "field_642324c747a9c",
+                        "label": "Content Background",
+                        "name": "content_background",
+                        "aria-label": "",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "light": "Light",
+                            "dark": "Dark",
+                            "transparent": "Transparent"
+                        },
+                        "default_value": "light",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "layout": "horizontal"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "acf-field-group"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]

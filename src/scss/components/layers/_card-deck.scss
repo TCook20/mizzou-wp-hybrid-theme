@@ -1,0 +1,14 @@
+.miz-card-deck-layer {
+	.miz-card-deck-layer__content {
+		margin-top: 2rem;
+	}
+
+	.miz-card__image-container {
+		margin-bottom: 0;
+
+		.miz-card__image {
+			height: 200px;
+			object-fit: cover;
+		}
+	}
+}

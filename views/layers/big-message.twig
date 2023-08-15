@@ -38,6 +38,14 @@
 	{% endif %}
 {% endif %}
 
+{% if flexgroup.displayOptions.content_background == 'miz-black-100' %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--black-100', 'miz-text--black']) %}
+{% elseif flexgroup.displayOptions.content_background == 'miz-black' %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--black']) %}
+{% else %}
+	{% set frameClasses = frameClasses|merge(['miz-fill--white']) %}
+{% endif %}
+
 {% if flexgroup.displayOptions.button_style == 'primary' %}
 	{% set buttonClass = buttonClass|merge(['miz-button--primary']) %}
 {% elseif flexgroup.displayOptions.button_style == 'secondary' %}
