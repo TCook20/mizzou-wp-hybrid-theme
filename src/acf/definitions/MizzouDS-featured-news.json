@@ -1,0 +1,149 @@
+[
+    {
+        "key": "group_642300bdc27f5",
+        "title": "MizzouDS-featured-news",
+        "fields": [
+            {
+                "key": "field_642300bd06a7b",
+                "label": "Header Title",
+                "name": "title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_64b7d43686540",
+                "label": "Card Selection",
+                "name": "dynamic_cards",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Auto-select most recent news (posts)",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_64b7d4c486541",
+                "label": "Number of News Stories",
+                "name": "number_cards",
+                "aria-label": "",
+                "type": "range",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_64b7d43686540",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 3,
+                "min": 1,
+                "max": 4,
+                "step": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_642300fb06a7c",
+                "label": "News Cards",
+                "name": "cards",
+                "aria-label": "",
+                "type": "relationship",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_64b7d43686540",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": "",
+                "post_status": "",
+                "taxonomy": "",
+                "filters": [
+                    "search",
+                    "post_type",
+                    "taxonomy"
+                ],
+                "return_format": "object",
+                "min": "",
+                "max": 4,
+                "elements": [
+                    "featured_image"
+                ],
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_6423013606a7d",
+                "label": "Read More Button",
+                "name": "button",
+                "aria-label": "",
+                "type": "link",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "acf-field-group"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    }
+]

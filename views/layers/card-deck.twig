@@ -1,0 +1,94 @@
+{% from "@miz/components/card/card.twig" import Card as mizCard %}
+
+{% set sectionClasses = ['miz-layer', 'miz-layer--brand', 'miz-stack-sandwich--xs', 'miz-card-deck-layer'] %}
+{% if flexgroup.displayOptions.layer_background == 'miz-black-100' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--black-100']) %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--black']) %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--white']) %}
+{% else %}
+{% endif %}
+
+{% set cardClasses = ['miz-card', 'miz-card--brand'] %}
+{% if flexgroup.displayOptions.theme == 'dark' %}
+	{% set cardClasses = cardClasses|merge(['miz-card--dark']) %}
+{% endif %}
+
+{% set cardBodyClasses = '' %}
+{% if flexgroup.displayOptions.theme == 'light' %}
+	{% if flexgroup.displayOptions.card_background == 'miz-black-100' %}
+		{% set cardBodyClasses = 'miz-fill--black-100' %}
+	{% endif %}
+{% endif %}
+
+{# Set Variables #}
+{% set cardGroupLayer = {
+	'title': flexgroup.title,
+	'button': flexgroup.button,
+	'content': flexgroup.content,
+	'cards': flexgroup.cards,
+	'displayOptions': flexgroup.displayOptions,
+	'classes': {
+		'section': sectionClasses|join(' '),
+		'card': cardClasses|join(' ')
+	}
+} %}
+
+<section class="{{ cardGroupLayer.classes.section }}">
+	<div class="miz-container">
+		{% if cardGroupLayer.title %}
+		<header class="miz-layer__header">
+			<h2 class="miz-layer__title">{{ cardGroupLayer.title }}</h2>
+
+			{% if cardGroupLayer.content %}
+				{{ cardGroupLayer.content }}
+			{% endif %}
+		</header>
+		{% endif %}
+
+		<div class="miz-layer__content miz-card-deck-layer__content">
+			{% if cardGroupLayer.cards %}
+			<div class="miz-card-deck{% if (cardGroupLayer.cards|length >= 3) %} miz-card-deck--3{% endif %}">
+				{% for card in cardGroupLayer.cards %}
+					<div class="{{ cardGroupLayer.classes.card }}">
+						{% if card.image %}
+						<figure class="miz-card__image-container">
+							<img class="miz-card__image" src="{{ Image(card.image).src }}" alt="{{ Image(card.image).alt }}" />
+						</figure>
+						{% endif %}
+
+						<div class="miz-card__body{% if cardBodyClasses != '' %} {{ cardBodyClasses }}{% endif %}">
+							{% if card.title %}
+							<h2 class="miz-card__title miz-card__title--mark">{{ card.title }}</h2>
+							{% endif %}
+
+							{% if card.content %}
+							<p class="miz-card__text">{{ card.content }}</p>
+							{% endif %}
+						</div>
+
+						{% if card.links %}
+						<div class="miz-card__footer{% if cardBodyClasses != '' %} {{ cardBodyClasses }}{% endif %}">
+							<div class="miz-card__links miz-card__links--stack">
+								{% for link in card.links %}
+									<a href="{{ link.link.url ?? link.url }}" class="miz-card__link">{{ link.link.title ?? link.title }}</a>
+								{% endfor %}
+							</div>
+						</div>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+
+			{% if cardGroupLayer.button is defined and cardGroupLayer.button is iterable %}
+				{% from "@miz/components/button/button.twig" import AnchorButton as anchorButton %}
+						<div class="miz-layer__content--center">
+								{% set ButtonOptions = { "class": "miz-button miz-button--secondary miz-button--brand", "text": cardGroupLayer.button.title, 'href': cardGroupLayer.button.url }  %}
+								{{ anchorButton( ButtonOptions ) }}
+						</div>
+			{% endif %}
+		</div>
+	</div>
+</section>

@@ -21,6 +21,8 @@
 	{% set sectionClasses = sectionClasses|merge(['miz-fill--black-100']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-black' %}
 	{% set sectionClasses = sectionClasses|merge(['miz-fill--black']) %}
+{% elseif flexgroup.displayOptions.layer_background == 'miz-gold' %}
+	{% set sectionClasses = sectionClasses|merge(['miz-fill--gold']) %}
 {% elseif flexgroup.displayOptions.layer_background == 'miz-white' %}
 	{% set sectionClasses = sectionClasses|merge(['miz-fill--white']) %}
 {% else %}
