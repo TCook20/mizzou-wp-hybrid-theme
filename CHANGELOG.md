@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.5
+
+### Changes
+
+-   Template Parts: Updated to use block patterns.
+
 ## 0.5.4
 
 ### Adds
