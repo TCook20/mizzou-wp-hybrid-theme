@@ -6,7 +6,16 @@
 
 ### Changes
 
--   Template Parts: Updated to use block patterns.
+-   `inc/acf/acf-settings`: Adds conditional to check base and child themes for definitions
+-   `inc/acf/group-definitions` renamed to `inc/acf/definitions`
+-   `inc/acf/definitions/acf-miz-wp-base-settings`: Legacy search settings moved to group
+-   `parts/`:
+    -   `footer`: Updated to use block patterns (defaults to light theme)
+    -   `header`: Updated to use block patterns
+
+### Removes
+
+-   `inc/acf/bidirectional-relationship`: No longer needed. Can be setup within ACF with v6.2
 
 ## 0.5.4
 
