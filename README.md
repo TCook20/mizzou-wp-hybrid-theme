@@ -42,6 +42,9 @@ Table of Contents
 │   └── images/
 │   └── js/ <-- For compiled js
 ├── inc/
+│   └── acf/
+|	    └── definitions/ <-- Auto-imported definitions
+|	    └── fields/ <-- Custom ACF fields
 ├── parts/ <-- For WordPress Full Site Editing Template Parts
 ├── patterns/ <-- For WordPress Block Patterns
 ├── src/ <-- Main source files

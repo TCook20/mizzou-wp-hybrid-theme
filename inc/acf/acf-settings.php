@@ -44,15 +44,31 @@ if ( class_exists( 'ACF' ) ) {
 
 	$ary_acf_fields_import = array();
 	$str_ds                = DIRECTORY_SEPARATOR;
-	$str_theme             = get_template_directory( __FILE__ );
-	$str_import_folder     = 'group-definitions';
+	$str_import_folder     = 'definitions';
 
-	foreach ( array_filter( glob( $str_theme . $str_ds . 'inc' . $str_ds . 'acf' . $str_ds . $str_import_folder . $str_ds . '*.php' ), 'is_file' ) as $file ) {
-		// $ary_acf_fields_import[] = $file;
-		require_once $file;
+	$str_definition_location = $str_ds . 'inc' . $str_ds . 'acf' . $str_ds . $str_import_folder . $str_ds;
+	$str_parent              = get_template_directory();
+	$str_maybe_child         = get_stylesheet_directory();
+	if ( $str_maybe_child !== $str_parent ) {
+		$str_child = $str_maybe_child;
+	}
+
+	$ary_dirs = array( $str_parent . $str_definition_location );
+	if ( isset( $str_child ) && file_exists( $str_child . $str_definition_location ) ) {
+		$ary_dirs[] = $str_child . $str_definition_location;
+	}
+
+	// load all of the acf field definition files.
+	foreach ( $ary_dirs as $str_dir ) {
+		foreach ( scandir( $str_dir ) as $str_file ) {
+			$str_file = $str_dir . $str_file;
+			if ( is_file( $str_file ) ) {
+				require_once $str_file;
+			}
+		}
 	}
 
 	// Add Nav Menu Field.
-	$nav_menu_field = $str_theme . $str_ds . 'inc' . $str_ds . 'acf' . $str_ds . 'fields' . $str_ds . 'class-acf-field-nav-menu.php';
+	$nav_menu_field = $str_parent . $str_ds . 'inc' . $str_ds . 'acf' . $str_ds . 'fields' . $str_ds . 'class-acf-field-nav-menu.php';
 	include_once $nav_menu_field;
 }

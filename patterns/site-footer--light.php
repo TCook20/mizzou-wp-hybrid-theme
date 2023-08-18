@@ -17,6 +17,14 @@
  * @copyright 2022 Curators of the University of Missouri
  */
 
+$card_title     = get_field( 'footer_contact_card_title', 'option' ) ? get_field( 'footer_contact_card_title', 'option' ) : 'Contact Us';
+$site_name      = get_bloginfo( 'name' );
+$email          = get_field( 'contact_email_contact_email_address', 'option' ) ? get_field( 'contact_email_contact_email_address', 'option' ) : '';
+$street_address = get_field( 'contact_address_address_street', 'option' ) ? get_field( 'contact_address_address_street', 'option' ) : '';
+$city           = get_field( 'contact_address_address_locality', 'option' ) ? get_field( 'contact_address_address_locality', 'option' ) : 'Columbia';
+$state          = get_field( 'contact_address_address_region', 'option' ) ? get_field( 'contact_address_address_region', 'option' ) : 'MO';
+$zip_code       = get_field( 'contact_address_address_postal_code', 'option' ) ? get_field( 'contact_address_address_postal_code', 'option' ) : '65211';
+$phone          = get_field( 'contact_telephone', 'option' ) ? get_field( 'contact_telephone', 'option' ) : '';
 ?>
 
 <!-- wp:mizzou/footer -->
@@ -40,12 +48,26 @@
 	<div class="miz-footer__layer">
 		<div class="miz-container">
 			<div class="wp-block-mizzou-footer-section miz-footer__information">
-				<!-- wp:mizzou/contact-card {"title":"Contact Us", "subtitle": "<?php echo get_bloginfo( 'name' ); ?>","theme":"light"} -->
+				<!-- wp:mizzou/contact-card {"theme": "light", "title": "<?php echo $card_title; ?>", "subtitle": "<?php echo $site_name; ?>", "email": "<?php echo $email; ?>", "phone": "<?php echo $phone; ?>", "address":{ "street": "<?php echo $street_address; ?>", "locality": "<?php echo $city; ?>", "region": "<?php echo $state; ?>", "postalCode": "<?php echo $zip_code; ?>"}} -->
 				<div class="miz-card miz-contact-card">
 					<div class="miz-card__body">
-						<h2 class="miz-card__title">Contact Us</h2>
-						<h3 class="miz-card__subtitle"><?php echo get_bloginfo( 'name' ); ?></h3>
-						<address class="miz-card__address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><p itemprop="streetAddress">228 Heinkel Building</p><p><span itemprop="addressLocality">Columbia</span>, <span itemprop="addressRegion">MO</span> <span itemprop="postalCode">65211</span></p></address>
+						<h2 class="miz-card__title"><?php echo $card_title; ?></h2>
+						<h3 class="miz-card__subtitle"><?php echo $site_name; ?></h3>
+						<address class="miz-card__address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+							<p itemprop="streetAddress"><?php echo $street_address; ?></p>
+							<p>
+								<span itemprop="addressLocality"><?php echo $city; ?></span>,
+								<span itemprop="addressRegion"><?php echo $state; ?></span>
+								<span itemprop="postalCode"><?php echo $zip_code; ?></span>
+							</p>
+						</address>
+						<?php if ( $email ) : ?>
+						<p class="miz-card__text"><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></p>
+						<?php endif; ?>
+
+						<?php if ( $phone ) : ?>
+						<p class="miz-card__text"><strong>Phone:</strong> <?php echo $phone; ?></p>
+						<?php endif; ?>
 					</div>
 				</div>
 				<!-- /wp:mizzou/contact-card -->
