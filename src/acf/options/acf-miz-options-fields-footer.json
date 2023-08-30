@@ -1,0 +1,92 @@
+[
+    {
+        "key": "group_5f1f37b55e282",
+        "title": "Footer Settings",
+        "fields": [
+            {
+                "key": "field_5f1f37bb9c806",
+                "label": "Theme",
+                "name": "footer_theme",
+                "aria-label": "",
+                "type": "button_group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "dark": "Dark",
+                    "light": "Light"
+                },
+                "default_value": "dark",
+                "return_format": "value",
+                "allow_null": 0,
+                "layout": "horizontal"
+            },
+            {
+                "key": "field_contact_card_title",
+                "label": "Name",
+                "name": "footer_contact_card_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Header for Contact Card",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Contact us",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_5f1f3c139d93d",
+                "label": "Schema",
+                "name": "footer_schema",
+                "aria-label": "",
+                "type": "button_group",
+                "instructions": "Enable schema information for SEO optimization on footer contacts?",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "true": "Yes",
+                    "false": "No"
+                },
+                "default_value": "false",
+                "return_format": "value",
+                "allow_null": 0,
+                "layout": "horizontal"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "footer-settings"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 1
+    }
+]

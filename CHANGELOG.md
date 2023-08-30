@@ -2,6 +2,17 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.6
+
+### Adds
+
+-   `site-header--compact`: Site header using mega menu
+-   JSON backups of theme settings fields
+
+### Changes
+
+-   Theme Settings PHP files renamed for consistency
+
 ## 0.5.5
 
 ### Changes

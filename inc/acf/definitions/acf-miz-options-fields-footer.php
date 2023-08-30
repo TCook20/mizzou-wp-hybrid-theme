@@ -8,7 +8,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_5f1f37b55e282',
-			'title'                 => 'Footer options',
+			'title'                 => 'Footer Settings',
 			'fields'                => array(
 				array(
 					'key'               => 'field_5f1f37bb9c806',

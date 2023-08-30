@@ -22,9 +22,9 @@
 		}
 	],
 	"support": {
-    "docs": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/wikis/home",
 		"issues": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/issues",
-    "source": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base"
+    "source": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base",
+		"wiki": "https://gitlab.com/university-of-missouri/mizzou-digital/wordpress/miz-hybrid-base/-/wikis/home"
   },
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml --report-summary --report-source",

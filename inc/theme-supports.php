@@ -100,3 +100,58 @@ add_theme_support(
 		),
 	)
 );
+
+add_action( 'after_switch_theme', 'mizStarterPages' );
+function mizStarterPages() {
+	$starter_pages = array(
+		'home'     => array(
+			'post_type'    => 'page',
+			'post_name'    => 'home',
+			'post_title'   => 'Home',
+			'menu_order'   => -1,
+			'post_content' => '',
+		),
+		'calendar' => array(
+			'post_type'    => 'page',
+			'post_title'   => 'Calendar',
+			'menu_order'   => 0,
+			'post_content' => '<!-- wp:mizzou/events-collection {"count":10,"term":"research"} /-->',
+		),
+		'news'     => array(
+			'post_type'    => 'page',
+			'post_name'    => 'news',
+			'post_title'   => 'News',
+			'menu_order'   => 0,
+			'post_content' => '',
+		),
+		'search'   => array(
+			'post_type'    => 'page',
+			'post_name'    => 'search',
+			'post_title'   => 'Search',
+			'menu_order'   => 0,
+			'post_content' => '<!-- wp:html --><gcse:search gname="sitesearch" queryParameterName="q"></gcse:search><!-- /wp:html -->',
+		),
+	);
+
+	foreach ( $starter_pages as $starter_page ) {
+		if ( is_null( get_page_by_title( $starter_page['post_title'], OBJECT, $starter_page['post_type'] ) ) ) {
+			$ary_page_params = array(
+				'post_title'     => $starter_page['post_title'],
+				'post_status'    => 'publish',
+				'post_type'      => $starter_page['post_type'],
+				'menu_order'     => $starter_page['menu_order'],
+				'comment_status' => 'closed',
+				'ping_status'    => 'closed',
+				'post_content'   => $starter_page['post_content'],
+			);
+
+			wp_insert_post( $ary_page_params );
+		}
+	}
+
+	$homepage = get_page_by_title( 'Home', OBJECT, 'page' );
+	if ( $homepage ) {
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $homepage->ID );
+	}
+}

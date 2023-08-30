@@ -4,7 +4,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_63c969570a009',
-			'title'                 => 'General',
+			'title'                 => 'General Settings',
 			'fields'                => array(
 				array(
 					'key'               => 'field_63c96957b6607',
@@ -71,7 +71,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_5f1b0c2f0b1e0',
-			'title'                 => 'Search',
+			'title'                 => 'Search Settings',
 			'fields'                => array(
 				array(
 					'key'               => 'field_5f1b0c9e8e61b',
@@ -317,7 +317,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 		acf_add_local_field_group(
 			array(
 				'key'                   => 'group_6407840da8b11',
-				'title'                 => 'Templating',
+				'title'                 => 'Template Settings',
 				'fields'                => array(
 					array(
 						'key'               => 'field_6407840d31137',
@@ -377,7 +377,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 				'hide_on_screen'        => '',
 				'active'                => true,
 				'description'           => '',
-				'show_in_rest'          => 0,
+				'show_in_rest'          => 1,
 			)
 		);
 endif;
