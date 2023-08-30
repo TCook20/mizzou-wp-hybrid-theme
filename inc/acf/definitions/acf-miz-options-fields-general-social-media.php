@@ -3,7 +3,7 @@ if ( function_exists( 'acf_add_local_field_group' ) ) :
 	acf_add_local_field_group(
 		array(
 			'key'                   => 'group_5f623f2e06d29',
-			'title'                 => 'Social Media',
+			'title'                 => 'Social Media Settings',
 			'fields'                => array(
 				array(
 					'key'               => 'field_5f623f6138a1d',

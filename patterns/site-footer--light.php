@@ -17,14 +17,14 @@
  * @copyright 2022 Curators of the University of Missouri
  */
 
-$card_title     = get_field( 'footer_contact_card_title', 'option' ) ? get_field( 'footer_contact_card_title', 'option' ) : 'Contact Us';
+$card_title     = get_option( 'footer_contact_card_title' ) ? get_option( 'footer_contact_card_title' ) : 'Contact Us';
 $site_name      = get_bloginfo( 'name' );
-$email          = get_field( 'contact_email_contact_email_address', 'option' ) ? get_field( 'contact_email_contact_email_address', 'option' ) : '';
-$street_address = get_field( 'contact_address_address_street', 'option' ) ? get_field( 'contact_address_address_street', 'option' ) : '';
-$city           = get_field( 'contact_address_address_locality', 'option' ) ? get_field( 'contact_address_address_locality', 'option' ) : 'Columbia';
-$state          = get_field( 'contact_address_address_region', 'option' ) ? get_field( 'contact_address_address_region', 'option' ) : 'MO';
-$zip_code       = get_field( 'contact_address_address_postal_code', 'option' ) ? get_field( 'contact_address_address_postal_code', 'option' ) : '65211';
-$phone          = get_field( 'contact_telephone', 'option' ) ? get_field( 'contact_telephone', 'option' ) : '';
+$email          = get_option( 'contact_email_contact_email_address' ) ? get_option( 'contact_email_contact_email_address' ) : '';
+$street_address = get_option( 'contact_address_address_street' ) ? get_option( 'contact_address_address_street' ) : '';
+$city           = get_option( 'contact_address_address_locality' ) ? get_option( 'contact_address_address_locality' ) : 'Columbia';
+$state          = get_option( 'contact_address_address_region' ) ? get_option( 'contact_address_address_region' ) : 'MO';
+$zip_code       = get_option( 'contact_address_address_postal_code' ) ? get_option( 'contact_address_address_postal_code' ) : '65211';
+$phone          = get_option( 'contact_telephone' ) ? get_option( 'contact_telephone' ) : '';
 ?>
 
 <!-- wp:mizzou/footer -->
