@@ -1,6 +1,6 @@
-# Mizzou Base Theme
+# Mizzou Hybrid Base Theme
 
-This is the base theme used by University of Missouri sites. The theme has support for WordPress Full Site Editing (FSE) features as well as PHP templating via Timber.
+> This is the base theme used by University of Missouri sites. The theme has support for WordPress Full Site Editing (FSE) features as well as PHP templating via Timber.
 
 Table of Contents
 

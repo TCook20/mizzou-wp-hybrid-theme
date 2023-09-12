@@ -30,8 +30,6 @@ $ary_context['page']->parent_pages = $ary_parents;
 // Sub-navigation.
 if ( get_field( 'sub_navigation' ) ) {
 	$ary_context['page']->sub_navigation = new Timber\Menu( get_field( 'sub_navigation' ) );
-} elseif ( ( isset( $ary_context['page']->sub_navigation ) ) && ( false !== $ary_context['page']->sub_navigation ) ) {
-	$ary_context['page']->sub_navigation = new Timber\Menu( $ary_context['page']->sub_navigation );
 }
 
 $str_template_prefix = 'single-page';
