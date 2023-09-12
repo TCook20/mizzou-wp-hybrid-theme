@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.7
+
+### Removes
+
+-   `page`: Conditional to check for setting `$ary_content['page']->sub_navigation`
+
 ## 0.5.6
 
 ### Adds
