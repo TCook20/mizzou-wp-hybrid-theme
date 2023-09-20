@@ -2,6 +2,12 @@
 
 > All notable changes to this project will be documented in this file.
 
+## 0.5.8
+
+### Removes
+
+-   `functions`: Removes disallowing of documents mime types
+
 ## 0.5.7
 
 ### Removes
