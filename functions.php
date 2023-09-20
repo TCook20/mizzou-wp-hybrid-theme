@@ -937,17 +937,17 @@ class MizzouHybridBase extends MizzouBlocks {
 		$ary_mime_types['svg'] = 'image/svg+xml';
 
 		// Disallow file types.
-		unset( $ary_mime_types['csv'] );
-		unset( $ary_mime_types['doc'] );
-		unset( $ary_mime_types['docx'] );
-		unset( $ary_mime_types['ppt'] );
-		unset( $ary_mime_types['pptx'] );
-		unset( $ary_mime_types['pps'] );
-		unset( $ary_mime_types['ppsx'] );
-		unset( $ary_mime_types['odt'] );
-		unset( $ary_mime_types['pdf'] );
-		unset( $ary_mime_types['xls'] );
-		unset( $ary_mime_types['xlsx'] );
+		// unset( $ary_mime_types['csv'] );
+		// unset( $ary_mime_types['doc'] );
+		// unset( $ary_mime_types['docx'] );
+		// unset( $ary_mime_types['ppt'] );
+		// unset( $ary_mime_types['pptx'] );
+		// unset( $ary_mime_types['pps'] );
+		// unset( $ary_mime_types['ppsx'] );
+		// unset( $ary_mime_types['odt'] );
+		// unset( $ary_mime_types['pdf'] );
+		// unset( $ary_mime_types['xls'] );
+		// unset( $ary_mime_types['xlsx'] );
 
 		return $ary_mime_types;
 	}

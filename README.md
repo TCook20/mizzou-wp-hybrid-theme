@@ -6,22 +6,22 @@ Table of Contents
 
 -   [Features](#features)
 -   [Notes](#notes)
--   [Theme Structure](#structure)
--   [Tasks & Scripts](#tasks-scripts)
--   [Custom Post Types](#cpt)
+-   [Theme Structure](#theme-structure)
 -   [Dependencies](#dependencies)
--   [Recent updates](#updates)
 -   [Roadmap](#roadmap)
--   [Releases](#releases)
+-   [Development](#development)
+    -   [Tasks & Scripts](#tasks-scripts)
+-   [Recent Updates](#recent-updates)
+-   [Versioning](#versioning)
 -   [Authors](#authors)
 
-## [Features](#features)
+## Features
 
 -   Light/Dark Mode Support: utilizes prefers-color-scheme (available in theme settings)
 -   Link to Web Request Form in WordPress Admin bar
 -   Ability to use header and footer template parts from WordPress Editor
 
-## [Notes](#notes)
+## Notes
 
 -   The theme uses the Wordpress composer package Timber to allow us to use the templating engine Twig, found in the Mizzou Blocks plugin. The site _will not_ work without this plugin.
 -   Post Types
@@ -35,7 +35,8 @@ Table of Contents
     -   Tactical: Header ribbon
     -   Footer (limited support)
 
-## [Theme Structure](#structure)
+## Theme Structure
+
 ```
 ├── assets/
 │   └── css/ <-- For compiled styles other than style.css
@@ -74,33 +75,35 @@ Table of Contents
 └── yarn.lock
 ```
 
-## [Tasks & Scripts](#tasks-scripts)
-
-- `npm run styles` or `yarn styles`
-- `npm run build` or `yarn build`
-- `npm run watch` or `yarn watch`
-- `npm run lint:js` or `yarn lint:js`
-- `npm run lint:style` or `yarn lint:style`
-- `npm run lint:pkg-json` or `yarn lint:pkg-json`
-- `npm run format:js` or `yarn format:js`
-
-## [Recent updates](#updates)
-
--   [Releases][hybrid-base-theme-releases]
--   [Changelog][hybrid-base-theme-changelog]
-
-## [Dependencies](#dependencies)
+## Dependencies
 
 -   [Mizzou WordPress Blocks plugin][miz-wordpress-blocks]
 -   [Timber][timber]
 -   [Advanced Custom Fields Pro][acf-pro]
 -   [Mizzou Design System][miz-ds]
 
-## [Versioning](#versions)
+## Development
+
+### Tasks & Scripts
+
+-   `yarn styles`
+-   `yarn build`
+-   `yarn watch`
+-   `yarn lint:js`
+-   `yarn lint:style`
+-   `yarn lint:pkg-json`
+-   `yarn format:js`
+
+## Recent updates
+
+-   [Releases][hybrid-base-theme-releases]
+-   [Changelog][hybrid-base-theme-changelog]
+
+## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository][hybrid-base-theme-tags].
 
-## [Authors](#authors)
+## Authors
 
 -   **Travis Cook** - [cooktw](https://gitlab.com/cooktw)
 
